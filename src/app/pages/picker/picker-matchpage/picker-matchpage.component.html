@@ -1,3 +1,55 @@
-<div class="page">
-
+<div class="wrapper">
+  <h1 class="page-title">Matchroom {{ matchId }}</h1>
+  <div class="page">
+    <div class="team">
+      <h1>{{ teamName1 }}</h1>
+      <app-card>
+        <div class="team-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Map</th>
+                <th>Map Name</th>
+                <th>Combined Matches</th>
+                <th>Avg. Winrate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let stats of mapStatsTeam1.mapStats">
+                <td><img [src]="getMapPreview(stats.name)" [alt]="stats.name" class="object-contain h-16"></td>
+                <td>{{ stats.name }}</td>
+                <td>{{ stats.matches }}</td>
+                <td>{{ stats.rate }}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </app-card>
+    </div>
+    <div class="team">
+      <h1>{{ teamName2 }}</h1>
+      <app-card>
+        <div class="team-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Map</th>
+                <th>Map Name</th>
+                <th>Combined Matches</th>
+                <th>Avg. Winrate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let stats of mapStatsTeam2.mapStats">
+                <td><img [src]="getMapPreview(stats.name)" [alt]="stats.name" class="object-contain h-16"></td>
+                <td>{{ stats.name }}</td>
+                <td>{{ stats.matches }}</td>
+                <td>{{ stats.rate }}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </app-card>
+    </div>
+  </div>
 </div>
