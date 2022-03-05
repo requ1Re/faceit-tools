@@ -1,1 +1,14 @@
-<p>picker-dashboard works!</p>
+<div class="page">
+  <h1 class="mb-5">FACEIT MAP PICKER</h1>
+  <app-card class="w-full md:w-2/4">
+    <div class="input">
+      <input type="text" placeholder="Match URL" (input)="handleInput($event)">
+      <button class="w-12 hover:bg-gray-600 hover:rounded-tr hover:rounded-br" (click)="navigateToMatch()">
+        <fa-icon [icon]="faChevronRight"></fa-icon>
+      </button>
+    </div>
+    <div class="alert" *ngIf="error">
+      Invalid match URL. <br><br>URL must match https://www.faceit.com/[language]/csgo/room/[matchId]
+    </div>
+  </app-card>
+</div>

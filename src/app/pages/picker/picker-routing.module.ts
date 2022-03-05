@@ -4,8 +4,11 @@ import { PickerDashboardComponent } from './picker-dashboard/picker-dashboard.co
 import { PickerMatchpageComponent } from './picker-matchpage/picker-matchpage.component';
 
 const routes: Routes = [
-  { path: '', component: PickerDashboardComponent },
-  { path: '/match/:matchId', component: PickerMatchpageComponent }
+  {
+    path: '',
+    component: PickerDashboardComponent,
+  },
+  { path: 'match/:matchId', component: PickerMatchpageComponent },
 ];
 
 @NgModule({
