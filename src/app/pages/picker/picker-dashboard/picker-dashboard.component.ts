@@ -7,10 +7,11 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./picker-dashboard.component.css'],
 })
 export class PickerDashboardComponent implements OnInit {
-  minLength = 32;
+  readonly INPUT_MIN_LENGTH = 32;
+  readonly FACEIT_MATCH_PAGE_REGEX = /https\:\/\/www.faceit.com\/(.*)\/csgo\/room\//i;
 
   error = false;
-  matchId: string = '';
+  matchURL: string = 'https://www.faceit.com/en/csgo/room/1-64a9c86e-05c7-4ecf-b3bf-d5443c3f8609';
 
   faChevronRight = faChevronRight;
 
@@ -19,22 +20,24 @@ export class PickerDashboardComponent implements OnInit {
   ngOnInit(): void {}
 
   handleInput(event: any) {
-    const regex = /https\:\/\/www.faceit.com\/(.*)\/csgo\/room\//;
     const val = event.target.value ?? '';
+    this.error = !this.isInputValid(val);
+  }
 
-    if (val.length > this.minLength) {
-      if (val.match(regex)) {
-        this.matchId = val.replace(regex, '');
-        this.error = false;
-      } else {
-        this.error = true;
-      }
-    }
+  isInputValid(input: string) {
+    return (
+      input.length > this.INPUT_MIN_LENGTH &&
+      input.match(this.FACEIT_MATCH_PAGE_REGEX) !== null
+    );
+  }
+
+  getFormattedInput(input: string){
+    return input.replace(this.FACEIT_MATCH_PAGE_REGEX, '');
   }
 
   navigateToMatch() {
     if (!this.error) {
-      this.router.navigate(['match', this.matchId], { relativeTo: this.route });
+      this.router.navigate(['match', this.getFormattedInput(this.matchURL)], { relativeTo: this.route });
     }
   }
 }
