@@ -2,4 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'assets/css/styles.colors.css';
+html {
+  @apply bg-gray-800;
+}
