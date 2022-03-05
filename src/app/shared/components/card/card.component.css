@@ -1,0 +1,3 @@
+.card {
+  @apply bg-gray-700 rounded-lg p-5;
+}
