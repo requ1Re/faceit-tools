@@ -7,7 +7,12 @@
   <h1 class="page-title">
     {{ matchRoomData.competition_name}} / {{ getTeamName(0) }} vs. {{ getTeamName(1) }}
   </h1>
-  <div class="page">
+  <div class="detail-button">
+    <button (click)="toggleDetailedView()">
+      <fa-icon [icon]="faList"></fa-icon> {{ detailedView ? 'Hide' : 'Show' }} detailed view
+    </button>
+  </div>
+  <div class="page" *ngIf="!detailedView; else detailedViewTemplate">
     <div class="team" *ngFor="let team of teamMapStats; index as i">
       <img [src]="getTeam(i).avatar" class="ml-auto mr-auto rounded-full h-12 w-12">
       <h1>{{ getTeamName(i) }}</h1>
@@ -37,4 +42,32 @@
       </app-card>
     </div>
   </div>
+  <ng-template #detailedViewTemplate>
+    <div class="page">
+      <div class="team" *ngFor="let team of teamMapStats; index as i">
+        <img [src]="getTeam(i).avatar" class="ml-auto mr-auto rounded-full h-12 w-12">
+        <h1>{{ getTeamName(i) }}</h1>
+        <app-card>
+          <div class="team-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Map</th>
+                  <th *ngFor="let player of team.playerMapStats">{{ player.name }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let map of getMaps()">
+                  <td>{{ map }}</td>
+                  <td *ngFor="let playerStats of team.playerMapStats"
+                    [style.backgroundColor]="getBackgroundColor(getPlayerWinrateForMap(playerStats, map))">{{
+                    getPlayerWinrateForMap(playerStats, map) }}% ({{ getPlayerWinsForMap(playerStats, map) }}/{{ getPlayerMatchesForMap(playerStats, map) }})</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </app-card>
+      </div>
+    </div>
+  </ng-template>
 </div>

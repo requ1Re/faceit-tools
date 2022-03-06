@@ -6,6 +6,7 @@ export interface TeamMapStats {
 }
 
 export interface PlayerMapStats {
+  name: string;
   mapStats: MapStats[]
 }
 

@@ -4,14 +4,17 @@
 .back {
   @apply flex justify-center mb-5;
 }
-.back button {
+.detail-button {
+  @apply flex justify-center mt-5;
+}
+button {
   @apply text-white p-2 bg-gray-800 hover:bg-gray-700 w-fit rounded;
 }
 .page-title {
   @apply text-4xl text-white text-center;
 }
 .page {
-  @apply mt-5 grid grid-cols-1 md:grid-cols-2 gap-5
+  @apply grid grid-cols-1 md:grid-cols-2 gap-5
 }
 .team {
   @apply mt-5;

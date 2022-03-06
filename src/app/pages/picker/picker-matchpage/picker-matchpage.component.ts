@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faList } from '@fortawesome/free-solid-svg-icons';
 import { Observable, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/components/base/base.component';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
+import { MapPool } from 'src/app/shared/models/MapPool';
 import {
   getDefaultMapStats,
+  PlayerMapStats,
   TeamMapStats,
 } from 'src/app/shared/models/MapStats';
 import { ApiService } from 'src/app/shared/services/api.service';
@@ -16,11 +18,14 @@ import { ApiService } from 'src/app/shared/services/api.service';
 })
 export class PickerMatchpageComponent extends BaseComponent implements OnInit {
   faArrowLeft = faArrowLeft;
+  faList = faList;
 
   matchId = '';
   matchRoomData: FaceIT.Match.Matchroom;
 
   teamMapStats: TeamMapStats[] = [];
+
+  detailedView = false;
 
   constructor(
     private router: Router,
@@ -79,32 +84,77 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
   }
 
   handlePlayerStats(data: FaceIT.Player.PlayerStats, teamId: number) {
-    const mapStats = data.segments.filter(
+    const mapStatsSegments = data.segments.filter(
       (s) => s.mode === '5v5' && s.type === 'Map'
     );
 
-    mapStats.forEach((v) => {
-      const mapStats = this.teamMapStats[teamId].combinedMapStats;
+    const mapStats = this.teamMapStats[teamId];
 
-      const item = mapStats.find(
-        (m) => m.name.toUpperCase() === v.label.replace('de_', '').toUpperCase() // remove de_ from Mapname and compare in uppercase
+    const playerIndex = mapStats.playerMapStats.length;
+    mapStats.playerMapStats[playerIndex] = {
+      name: this.getPlayerNameById(data.player_id) ?? data.player_id,
+      mapStats: []
+    };
+
+    for(let i = 0; i < mapStatsSegments.length; i++){
+      const mapStatsSegment = mapStatsSegments[i];
+      const combinedMapStats = mapStats.combinedMapStats;
+
+      const combinedMapStat = combinedMapStats.find(
+        (m) => m.name.toUpperCase() === mapStatsSegment.label.replace('de_', '').toUpperCase() // remove de_ from Mapname and compare in uppercase
       );
 
-      if (item) {
-        item.matches += +v.stats.Matches;
-        item.wins += +v.stats.Wins;
-        item.losses = item.matches - item.wins;
+      if (combinedMapStat) {
+        combinedMapStat.matches += +mapStatsSegment.stats.Matches;
+        combinedMapStat.wins += +mapStatsSegment.stats.Wins;
+        combinedMapStat.losses = combinedMapStat.matches - combinedMapStat.wins;
 
-        item.rate = Math.round((item.wins / item.matches) * 100 * 100) / 100;
+        combinedMapStat.rate = Math.round((combinedMapStat.wins / combinedMapStat.matches) * 100 * 100) / 100;
+
+        mapStats.playerMapStats[playerIndex].mapStats.push({
+          name: combinedMapStat.name,
+          matches: +mapStatsSegment.stats.Matches,
+          losses: +mapStatsSegment.stats.Matches - +mapStatsSegment.stats.Wins,
+          wins: +mapStatsSegment.stats.Wins,
+          rate: +mapStatsSegment.stats['Win Rate %']
+        });
       }
 
+
       this.sortMapStats();
-    });
+    }
   }
 
-  sortMapStats() {
-    this.teamMapStats[0].combinedMapStats.sort((a, b) => b.rate - a.rate);
-    this.teamMapStats[1].combinedMapStats.sort((a, b) => b.rate - a.rate);
+  sortMapStats(sortByWinrate = true) {
+    if(sortByWinrate){
+      this.teamMapStats[0].combinedMapStats.sort((a, b) => b.rate - a.rate);
+      this.teamMapStats[1].combinedMapStats.sort((a, b) => b.rate - a.rate);
+    }else{
+      this.teamMapStats[0].combinedMapStats.sort((a, b) => a.name.localeCompare(b.name));
+      this.teamMapStats[1].combinedMapStats.sort((a, b) => a.name.localeCompare(b.name));
+    }
+  }
+
+  toggleDetailedView(){
+    this.detailedView = !this.detailedView;
+    this.sortMapStats(!this.detailedView);
+  }
+
+  navigateBack() {
+    this.router.navigate(['/']);
+  }
+
+  /*
+  Getter
+  */
+  getPlayerNameById(playerId: string){
+    const findTeam1 = this.matchRoomData.teams.faction1.roster.find(
+      (player) => player.player_id === playerId
+    );
+    const findTeam2 = this.matchRoomData.teams.faction2.roster.find(
+      (player) => player.player_id === playerId
+    );
+    return findTeam1 ? findTeam1.nickname : findTeam2 ? findTeam2.nickname : null;
   }
 
   getTeam(teamId: number) {
@@ -125,7 +175,23 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
     return winRate >= 50 ? 'rgb(34, 197, 94)' : 'rgb(239, 68, 68)';
   }
 
-  navigateBack() {
-    this.router.navigate(['/']);
+  getMaps(){
+    return Object.values(MapPool).filter((v) => typeof v === "string");
+  }
+
+  getPlayerWinrateForMap(playerStats: PlayerMapStats, map: MapPool){
+    return this.getPlayerStatsForMap(playerStats, map)?.rate ?? 0;
+  }
+
+  getPlayerWinsForMap(playerStats: PlayerMapStats, map: MapPool){
+    return this.getPlayerStatsForMap(playerStats, map)?.wins ?? 0;
+  }
+
+  getPlayerMatchesForMap(playerStats: PlayerMapStats, map: MapPool){
+    return this.getPlayerStatsForMap(playerStats, map)?.matches ?? 0;
+  }
+
+  getPlayerStatsForMap(playerStats: PlayerMapStats, map: MapPool){
+    return playerStats.mapStats.find((s) => s.name === map.toString());
   }
 }
