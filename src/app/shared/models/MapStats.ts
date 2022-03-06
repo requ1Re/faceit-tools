@@ -8,6 +8,7 @@ export interface MapStats {
   name: string;
   matches: number;
   wins: number;
+  losses: number;
   rate: number;
 }
 
@@ -17,6 +18,7 @@ export function getDefaultMapStats(): MapStats[] {
       name: map.toString(),
       matches: 0,
       wins: 0,
+      losses: 0,
       rate: 0
     };
   });

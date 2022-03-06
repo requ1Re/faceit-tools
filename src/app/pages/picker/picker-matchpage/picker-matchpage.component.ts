@@ -108,6 +108,7 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
       if (item) {
         item.matches += Number(v.stats.Matches);
         item.wins += Number(v.stats.Wins);
+        item.losses = (item.matches - item.wins);
 
         item.rate = Math.round((item.wins / item.matches) * 100 * 100) / 100;
       }
@@ -123,6 +124,10 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
 
   getMapPreview(map: string) {
     return 'assets/img/previews/de_' + map.toLowerCase() + '.jpg';
+  }
+
+  getBackgroundColor(winRate: number){
+    return winRate >= 50 ? 'rgb(34, 197, 94)' : 'rgb(239, 68, 68)';
   }
 
   navigateBack() {

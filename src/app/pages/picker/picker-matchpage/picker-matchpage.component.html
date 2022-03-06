@@ -15,16 +15,18 @@
               <tr>
                 <th>Map</th>
                 <th>Map Name</th>
-                <th>Combined Matches</th>
-                <th>Avg. Winrate</th>
+                <th>Combined Matches / Wins / Losses</th>
+                <th>Overall Winrate</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let stats of mapStatsTeam1.mapStats">
                 <td><img [src]="getMapPreview(stats.name)" [alt]="stats.name" class="object-contain h-16"></td>
                 <td>{{ stats.name }}</td>
-                <td>{{ stats.matches }}</td>
-                <td>{{ stats.rate }}%</td>
+                <td>{{ stats.matches }} / <span class="text-green-500">{{ stats.wins }}</span> / <span
+                    class="text-red-500">{{ stats.losses
+                    }}</span></td>
+                <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ stats.rate }}%</td>
               </tr>
             </tbody>
           </table>
@@ -40,16 +42,17 @@
               <tr>
                 <th>Map</th>
                 <th>Map Name</th>
-                <th>Combined Matches</th>
-                <th>Avg. Winrate</th>
+                <th>Combined Matches / Wins / Losses</th>
+                <th>Overall Winrate</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let stats of mapStatsTeam2.mapStats">
                 <td><img [src]="getMapPreview(stats.name)" [alt]="stats.name" class="object-contain h-16"></td>
                 <td>{{ stats.name }}</td>
-                <td>{{ stats.matches }}</td>
-                <td>{{ stats.rate }}%</td>
+                <td>{{ stats.matches }} / <span class="text-green-500">{{ stats.wins }}</span> / <span
+                    class="text-red-500">{{ stats.losses }}</span></td>
+                <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ stats.rate }}%</td>
               </tr>
             </tbody>
           </table>
