@@ -1,4 +1,9 @@
 <div class="wrapper">
+  <div class="back">
+    <button (click)="navigateBack()">
+      <fa-icon [icon]="faArrowLeft"></fa-icon> Go back
+    </button>
+  </div>
   <h1 class="page-title">Matchroom {{ matchId }}</h1>
   <div class="page">
     <div class="team">

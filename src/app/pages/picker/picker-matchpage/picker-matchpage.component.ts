@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { DEFAULT_MAP_STATS, TeamMapStats } from 'src/app/shared/models/MapStats';
 
 @Component({
@@ -7,6 +8,8 @@ import { DEFAULT_MAP_STATS, TeamMapStats } from 'src/app/shared/models/MapStats'
   styleUrls: ['./picker-matchpage.component.css']
 })
 export class PickerMatchpageComponent implements OnInit {
+
+  faArrowLeft = faArrowLeft;
 
   matchId = "";
 
@@ -16,7 +19,7 @@ export class PickerMatchpageComponent implements OnInit {
   mapStatsTeam1: TeamMapStats = DEFAULT_MAP_STATS;
   mapStatsTeam2: TeamMapStats = DEFAULT_MAP_STATS;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.matchId = this.route.snapshot.paramMap.get("matchId") ?? '';
@@ -24,5 +27,9 @@ export class PickerMatchpageComponent implements OnInit {
 
   getMapPreview(map: string){
     return "assets/img/previews/de_" + map.toLowerCase() + ".jpg";
+  }
+
+  navigateBack(){
+    this.router.navigate(['/']);
   }
 }

@@ -1,6 +1,12 @@
 .wrapper {
   @apply p-5;
 }
+.back {
+  @apply flex justify-center mb-5;
+}
+.back button {
+  @apply text-white p-2 bg-gray-700 hover:bg-gray-600 w-fit rounded;
+}
 .page-title {
   @apply text-4xl text-white text-center;
 }
