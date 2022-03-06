@@ -31,9 +31,8 @@
               <tr *ngFor="let stats of team.combinedMapStats">
                 <td><img [src]="getMapPreview(stats.name)" [alt]="stats.name" class="object-contain h-16"></td>
                 <td>{{ stats.name }}</td>
-                <td>{{ stats.matches }} / <span class="text-green-500">{{ stats.wins }}</span> / <span
-                    class="text-red-500">{{ stats.losses
-                    }}</span></td>
+                <td><span class="text-green-500">{{ stats.wins }}</span> / <span class="text-red-500">{{ stats.losses
+                    }}</span> / {{ stats.matches }}</td>
                 <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ stats.rate }}%</td>
               </tr>
             </tbody>
@@ -59,9 +58,13 @@
               <tbody>
                 <tr *ngFor="let map of getMaps()">
                   <td>{{ map }}</td>
-                  <td *ngFor="let playerStats of team.playerMapStats"
-                    [style.backgroundColor]="getBackgroundColor(getPlayerWinrateForMap(playerStats, map))">{{
-                    getPlayerWinrateForMap(playerStats, map) }}% ({{ getPlayerWinsForMap(playerStats, map) }}/{{ getPlayerMatchesForMap(playerStats, map) }})</td>
+                  <td *ngFor="let playerStats of team.playerMapStats">
+                    <span class="text-xl" [style.color]="getBackgroundColor(getPlayerWinrateForMap(playerStats, map))">{{
+                      getPlayerWinrateForMap(playerStats, map) }}%</span><br>(<span class="text-green-500">{{
+                      getPlayerWinsForMap(playerStats, map) }}</span> / <span class="text-red-500">{{
+                      getPlayerLossesForMap(playerStats, map) }}</span> / {{ getPlayerMatchesForMap(playerStats, map)
+                    }})
+                  </td>
                 </tr>
               </tbody>
             </table>

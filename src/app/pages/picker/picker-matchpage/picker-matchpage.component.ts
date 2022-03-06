@@ -183,6 +183,10 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
     return this.getPlayerStatsForMap(playerStats, map)?.rate ?? 0;
   }
 
+  getPlayerLossesForMap(playerStats: PlayerMapStats, map: MapPool){
+    return this.getPlayerStatsForMap(playerStats, map)?.losses ?? 0;
+  }
+
   getPlayerWinsForMap(playerStats: PlayerMapStats, map: MapPool){
     return this.getPlayerStatsForMap(playerStats, map)?.wins ?? 0;
   }
