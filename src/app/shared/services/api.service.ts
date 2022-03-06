@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { FaceIT } from '../models/FaceIT';
 
 @Injectable()
 export class ApiService {
-  readonly FACEIT_API_KEY = '';
+  readonly FACEIT_API_KEY = environment.faceitApiKey;
   readonly HEADERS = {
     Authorization: 'Bearer ' + this.FACEIT_API_KEY,
   };

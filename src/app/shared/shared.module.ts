@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApiService } from './services/api.service';
+import { BaseComponent } from './components/base/base.component';
 
 @NgModule({
   declarations: [
-    CardComponent
+    CardComponent,
+    BaseComponent
   ],
   imports: [
     CommonModule,

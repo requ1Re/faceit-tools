@@ -22,6 +22,9 @@ export class PickerDashboardComponent implements OnInit {
   handleInput(event: any) {
     const val = event.target.value ?? '';
     this.error = !this.isInputValid(val);
+    if(!this.error){
+      this.matchURL = val;
+    }
   }
 
   isInputValid(input: string) {
