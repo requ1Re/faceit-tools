@@ -1,7 +1,12 @@
 import { MapPool } from "./MapPool";
 
 export interface TeamMapStats {
-  mapStats: MapStats[];
+  combinedMapStats: MapStats[];
+  playerMapStats: PlayerMapStats[];
+}
+
+export interface PlayerMapStats {
+  mapStats: MapStats[]
 }
 
 export interface MapStats {

@@ -1,13 +1,16 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="matchRoomData">
   <div class="back">
     <button (click)="navigateBack()">
       <fa-icon [icon]="faArrowLeft"></fa-icon> Go back
     </button>
   </div>
-  <h1 class="page-title">Matchroom {{ matchId }}</h1>
+  <h1 class="page-title">
+    {{ matchRoomData.competition_name}} / {{ getTeamName(0) }} vs. {{ getTeamName(1) }}
+  </h1>
   <div class="page">
-    <div class="team">
-      <h1>{{ teamName1 }}</h1>
+    <div class="team" *ngFor="let team of teamMapStats; index as i">
+      <img [src]="getTeam(i).avatar" class="ml-auto mr-auto rounded-full h-12 w-12">
+      <h1>{{ getTeamName(i) }}</h1>
       <app-card>
         <div class="team-card">
           <table>
@@ -20,38 +23,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let stats of mapStatsTeam1.mapStats">
+              <tr *ngFor="let stats of team.combinedMapStats">
                 <td><img [src]="getMapPreview(stats.name)" [alt]="stats.name" class="object-contain h-16"></td>
                 <td>{{ stats.name }}</td>
                 <td>{{ stats.matches }} / <span class="text-green-500">{{ stats.wins }}</span> / <span
                     class="text-red-500">{{ stats.losses
                     }}</span></td>
-                <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ stats.rate }}%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </app-card>
-    </div>
-    <div class="team">
-      <h1>{{ teamName2 }}</h1>
-      <app-card>
-        <div class="team-card">
-          <table>
-            <thead>
-              <tr>
-                <th>Map</th>
-                <th>Map Name</th>
-                <th>Combined Matches / Wins / Losses</th>
-                <th>Overall Winrate</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let stats of mapStatsTeam2.mapStats">
-                <td><img [src]="getMapPreview(stats.name)" [alt]="stats.name" class="object-contain h-16"></td>
-                <td>{{ stats.name }}</td>
-                <td>{{ stats.matches }} / <span class="text-green-500">{{ stats.wins }}</span> / <span
-                    class="text-red-500">{{ stats.losses }}</span></td>
                 <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ stats.rate }}%</td>
               </tr>
             </tbody>
