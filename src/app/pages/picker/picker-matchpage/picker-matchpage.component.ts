@@ -171,6 +171,10 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
     return 'assets/img/previews/de_' + map.toLowerCase() + '.jpg';
   }
 
+  getTeamAvatar(team: FaceIT.Match.Faction){
+    return team.avatar ? team.avatar : 'assets/img/steam_default.png';
+  }
+
   getBackgroundColor(winRate: number) {
     return winRate >= 50 ? 'rgb(34, 197, 94)' : 'rgb(239, 68, 68)';
   }

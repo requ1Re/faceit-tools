@@ -14,7 +14,7 @@
   </div>
   <div class="page" *ngIf="!detailedView; else detailedViewTemplate">
     <div class="team" *ngFor="let team of teamMapStats; index as i">
-      <img [src]="getTeam(i).avatar" class="ml-auto mr-auto rounded-full h-12 w-12">
+      <img [src]="getTeamAvatar(getTeam(i))" class="ml-auto mr-auto rounded-full h-12 w-12">
       <h1>{{ getTeamName(i) }}</h1>
       <app-card>
         <div class="team-card">
@@ -44,7 +44,7 @@
   <ng-template #detailedViewTemplate>
     <div class="page">
       <div class="team" *ngFor="let team of teamMapStats; index as i">
-        <img [src]="getTeam(i).avatar" class="ml-auto mr-auto rounded-full h-12 w-12">
+        <img [src]="getTeamAvatar(getTeam(i))" class="ml-auto mr-auto rounded-full h-12 w-12">
         <h1>{{ getTeamName(i) }}</h1>
         <app-card>
           <div class="team-card">
