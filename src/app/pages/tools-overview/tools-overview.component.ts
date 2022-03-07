@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-type Tool = {
-  id: number;
-  name: string;
-  route: string;
-};
+import { Config, ConfigUtil } from 'src/app/shared/utils/ConfigUtil';
 
 @Component({
   templateUrl: './tools-overview.component.html',
@@ -13,9 +8,7 @@ type Tool = {
 })
 export class ToolsOverviewComponent implements OnInit {
 
-  tools: Tool[] = [
-    { id: 0, name: 'Map Picker', route: 'picker' }
-  ];
+  tools: Config.Tool[] = ConfigUtil.CONFIG.tools;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 

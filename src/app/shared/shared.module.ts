@@ -5,22 +5,27 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApiService } from './services/api.service';
 import { BaseComponent } from './components/base/base.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     CardComponent,
     BaseComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RouterModule
   ],
   exports: [
     CardComponent,
     FontAwesomeModule,
     BaseComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ],
   providers: [
     ApiService

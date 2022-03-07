@@ -1,0 +1,16 @@
+.header {
+  @apply bg-gray-800 text-white px-3 h-10 shadow-lg flex flex-row items-center;
+}
+.header .title {
+  @apply text-lg;
+}
+.header .nav {
+  @apply ml-5 h-full flex flex-row items-center space-x-2;
+}
+.header .nav .nav-item {
+  @apply h-full inline-flex justify-center items-center px-2;
+}
+.header .nav .nav-item.active,
+.header .nav .nav-item:hover {
+  @apply bg-gray-700;
+}
