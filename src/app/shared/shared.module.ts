@@ -4,11 +4,13 @@ import { CardComponent } from './components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApiService } from './services/api.service';
 import { BaseComponent } from './components/base/base.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     CardComponent,
-    BaseComponent
+    BaseComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,9 @@ import { BaseComponent } from './components/base/base.component';
   ],
   exports: [
     CardComponent,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BaseComponent,
+    FooterComponent
   ],
   providers: [
     ApiService
