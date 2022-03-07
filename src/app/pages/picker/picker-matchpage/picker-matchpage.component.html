@@ -1,9 +1,4 @@
 <div class="wrapper" *ngIf="matchRoomData">
-  <div class="back">
-    <button (click)="navigateBack()">
-      <fa-icon [icon]="faArrowLeft"></fa-icon> Go back
-    </button>
-  </div>
   <h1 class="page-title">
     {{ matchRoomData.competition_name}} / {{ getTeamName(0) }} vs. {{ getTeamName(1) }}
   </h1>

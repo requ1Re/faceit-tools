@@ -140,10 +140,6 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
     this.sortMapStats(!this.detailedView);
   }
 
-  navigateBack() {
-    this.router.navigate(['/']);
-  }
-
   /*
   Getter
   */
