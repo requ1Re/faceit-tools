@@ -11,7 +11,7 @@ export class PickerDashboardComponent implements OnInit {
   readonly FACEIT_MATCH_PAGE_REGEX = /https\:\/\/www.faceit.com\/(.*)\/csgo\/room\//i;
 
   error = false;
-  matchURL: string = 'https://www.faceit.com/en/csgo/room/1-64a9c86e-05c7-4ecf-b3bf-d5443c3f8609';
+  matchURL: string = '';
 
   faChevronRight = faChevronRight;
 

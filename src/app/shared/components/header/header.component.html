@@ -1,6 +1,9 @@
 <div class="header">
   <div class="title">
-    <a href="/">FACEIT Tools</a>
+    <a href="/" class="flex items-center">
+      <img src="assets/img/faceit-tools-logo-1x.png" alt="FaceIT Tools Logo" class="h-6 mr-2">
+      FACEIT Tools
+    </a>
   </div>
   <div class="nav">
     <a *ngFor="let tool of tools" [routerLink]="tool.route" routerLinkActive="active" class="nav-item">{{ tool.name }}</a>
