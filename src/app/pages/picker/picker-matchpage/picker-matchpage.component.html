@@ -19,7 +19,7 @@
                 <th>Map</th>
                 <th>Map Name</th>
                 <th>Combined Matches / Wins / Losses</th>
-                <th>Overall Winrate</th>
+                <th>Winrate</th>
               </tr>
             </thead>
             <tbody>
@@ -28,13 +28,14 @@
                 <td>{{ stats.name }}</td>
                 <td><span class="text-green-500">{{ stats.wins }}</span> / <span class="text-red-500">{{ stats.losses
                     }}</span> / {{ stats.matches }}</td>
-                <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ stats.rate }}%</td>
+                <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ getRoundedNumber(stats.rate) }}%</td>
               </tr>
             </tbody>
           </table>
         </div>
       </app-card>
     </div>
+    <p class="text-gray-400">Winrate is calculated using the weighted arithmetic mean. Each player's influence on the winrate is weighted by his or her matches.</p>
   </div>
   <ng-template #detailedViewTemplate>
     <div class="page">

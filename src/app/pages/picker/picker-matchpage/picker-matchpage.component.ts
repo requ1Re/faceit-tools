@@ -89,6 +89,7 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
     );
 
     const mapStats = this.teamMapStats[teamId];
+    const combinedMapStats = mapStats.combinedMapStats;
 
     const playerIndex = mapStats.playerMapStats.length;
     mapStats.playerMapStats[playerIndex] = {
@@ -98,7 +99,6 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
 
     for(let i = 0; i < mapStatsSegments.length; i++){
       const mapStatsSegment = mapStatsSegments[i];
-      const combinedMapStats = mapStats.combinedMapStats;
 
       const combinedMapStat = combinedMapStats.find(
         (m) => m.name.toUpperCase() === mapStatsSegment.label.replace('de_', '').toUpperCase() // remove de_ from Mapname and compare in uppercase
@@ -120,8 +120,36 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
         });
       }
 
-
       this.sortMapStats();
+    }
+
+    this.calculateWeightedAverage();
+  }
+
+  calculateWeightedAverage(){
+    // https://en.wikipedia.org/wiki/Weighted_arithmetic_mean
+    for(let teamIndex = 0; teamIndex < this.teamMapStats.length; teamIndex++){
+      const team = this.teamMapStats[teamIndex];
+      for(let mapIndex = 0; mapIndex < this.getMaps().length; mapIndex++){
+        const map = this.getMaps()[mapIndex];
+        let mapSumWeight = 0;
+        let mapSum = 0;
+
+        for(let playerIndex = 0; playerIndex < team.playerMapStats.length; playerIndex++){
+          const playerStats = team.playerMapStats[playerIndex];
+
+          const playerStatsForMap = playerStats.mapStats.find((m) => m.name === map);
+          if(playerStatsForMap){
+            mapSumWeight += playerStatsForMap.rate * playerStatsForMap.matches;
+            mapSum += playerStatsForMap.matches;
+          }
+        }
+
+        const teamStatsForMap = team.combinedMapStats.find((m) => m.name === map);
+        if(teamStatsForMap){
+          teamStatsForMap.rate = mapSumWeight / mapSum;
+        }
+      }
     }
   }
 
@@ -143,6 +171,9 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
   /*
   Getter
   */
+  getRoundedNumber(number: number){
+    return Math.round((number + Number.EPSILON) * 100) / 100
+  }
   getPlayerNameById(playerId: string){
     const findTeam1 = this.matchRoomData.teams.faction1.roster.find(
       (player) => player.player_id === playerId
