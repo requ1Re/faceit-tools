@@ -39,7 +39,7 @@ export class PickerDashboardComponent implements OnInit {
   }
 
   navigateToMatch() {
-    if (!this.error) {
+    if (this.isInputValid(this.matchURL)) {
       this.router.navigate(['match', this.getFormattedInput(this.matchURL)], { relativeTo: this.route });
     }
   }

@@ -3,7 +3,7 @@
   <h1 class="mb-5 mt-5">FACEIT Map Picker</h1>
   <app-card class="w-full md:w-2/4">
     <div class="input">
-      <input type="text" placeholder="Match URL" [value]="matchURL" (input)="handleInput($event)">
+      <input type="text" placeholder="Match URL" [value]="matchURL" (keyup.enter)="navigateToMatch()" (input)="handleInput($event)">
       <button class="w-12 hover:bg-gray-700 hover:rounded-tr hover:rounded-br" (click)="navigateToMatch()">
         <fa-icon [icon]="faChevronRight"></fa-icon>
       </button>
