@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'FACEIT Map Picker';
+  title = 'FACEIT Tools';
 
   ngOnInit(): void {
     document.title = this.title;

@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
+import { ToolsOverviewComponent } from './pages/tools-overview/tools-overview.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToolsOverviewComponent
   ],
   imports: [
     BrowserModule,

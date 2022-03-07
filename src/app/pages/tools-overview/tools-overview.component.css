@@ -1,0 +1,19 @@
+.wrapper {
+  @apply h-full flex flex-col justify-center items-center;
+}
+.tools {
+  @apply w-full mt-10 flex flex-row justify-center space-x-5;
+}
+.wrapper h1 {
+  @apply text-5xl text-white;
+}
+.tool {
+  @apply h-20 w-60;
+}
+.tool-card {
+  cursor: pointer;
+  @apply p-5 text-center;
+}
+.tool-card:hover {
+  @apply bg-gray-700 rounded;
+}
