@@ -18,7 +18,7 @@
               <tr>
                 <th>Map</th>
                 <th>Map Name</th>
-                <th>Combined Matches / Wins / Losses</th>
+                <th>Wins / Losses / Matches</th>
                 <th>Winrate *</th>
               </tr>
             </thead>
@@ -35,7 +35,10 @@
         </div>
       </app-card>
     </div>
-    <p class="text-gray-400 text-center md:col-span-2">* Winrate is calculated using the weighted winrate of each player on a team. Each player's influence on the winrate is weighted by played matches. Less played matches = less influence. This should be the most accurate possible way of representing a team's winrate on a specific map.</p>
+    <p class="text-gray-400 text-center md:col-span-2">
+      * Winrate is calculated using the weighted winrate of each player on a team.<br>
+      Each player's influence on the winrate is weighted by played matches. Less played matches = less influence.<br>
+      This should be the most accurate possible way of representing a team's winrate on a specific map.</p>
   </div>
   <ng-template #detailedViewTemplate>
     <div class="page">

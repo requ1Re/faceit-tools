@@ -17,7 +17,7 @@ button {
   @apply grid grid-cols-1 md:grid-cols-2 gap-5
 }
 .team {
-  @apply mt-5;
+  @apply mt-5 md:mt-0;
 }
 .team h1 {
   @apply text-3xl mb-5 text-white text-center;
