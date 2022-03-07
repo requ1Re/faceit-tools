@@ -116,7 +116,7 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
           matches: +mapStatsSegment.stats.Matches,
           losses: +mapStatsSegment.stats.Matches - +mapStatsSegment.stats.Wins,
           wins: +mapStatsSegment.stats.Wins,
-          rate: +mapStatsSegment.stats['Win Rate %']
+          rate: this.getRoundedNumber(+mapStatsSegment.stats.Wins / +mapStatsSegment.stats.Matches * 100)
         });
       }
 
