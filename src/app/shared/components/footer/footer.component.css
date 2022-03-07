@@ -1,6 +1,6 @@
 .footer {
   position: relative;
-  @apply bg-gray-800 text-white px-3 h-10 flex flex-col justify-center;
+  @apply bg-gray-800 text-white px-3 py-3 min-h-fit flex flex-col justify-center;
 }
 /* Rotate Drop Shadow */
 .footer::before {
@@ -16,6 +16,5 @@
   transform: rotate(180deg);
 }
 .disclaimer {
-  display: flex;
-  justify-content: space-between;
+  @apply flex flex-col space-y-3 md:flex-row md:space-y-0 md:justify-between;
 }

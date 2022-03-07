@@ -1,5 +1,5 @@
 .header {
-  @apply bg-gray-800 text-white px-3 h-10 shadow-lg flex flex-row items-center;
+  @apply bg-gray-800 text-white px-3 h-12 shadow-lg flex flex-row items-center;
 }
 .header .title {
   @apply text-lg;

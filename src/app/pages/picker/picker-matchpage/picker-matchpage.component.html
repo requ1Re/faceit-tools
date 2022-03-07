@@ -24,7 +24,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let stats of team.combinedMapStats">
-                <td><img [src]="getMapPreview(stats.name)" [alt]="stats.name" class="object-contain h-16"></td>
+                <td><img [src]="getMapPreview(stats.name)" [alt]="stats.name" class="object-contain h-12"></td>
                 <td>{{ stats.name }}</td>
                 <td><span class="text-green-500">{{ stats.wins }}</span> / <span class="text-red-500">{{ stats.losses
                     }}</span> / {{ stats.matches }}</td>
