@@ -1,5 +1,19 @@
 .footer {
-  @apply bg-gray-800 text-white px-3 h-10 shadow-lg flex flex-col justify-center;
+  position: relative;
+  @apply bg-gray-800 text-white px-3 h-10 flex flex-col justify-center;
+}
+/* Rotate Drop Shadow */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+
+  @apply shadow-lg;
+  transform: rotate(180deg);
 }
 .disclaimer {
   display: flex;

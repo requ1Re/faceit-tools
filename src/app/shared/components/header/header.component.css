@@ -5,7 +5,10 @@
   @apply text-lg;
 }
 .header .nav {
-  @apply ml-5 h-full flex flex-row items-center space-x-2;
+  @apply ml-3 h-full flex flex-row items-center space-x-2;
+}
+.header .nav a {
+  cursor: pointer;
 }
 .header .nav .nav-item {
   @apply h-full inline-flex justify-center items-center px-2;

@@ -3,6 +3,6 @@
     <a href="/">FACEIT Tools</a>
   </div>
   <div class="nav">
-    <a *ngFor="let tool of tools" [routerLink]="tool.route" class="nav-item">{{ tool.name }}</a>
+    <a *ngFor="let tool of tools" [routerLink]="tool.route" routerLinkActive="active" class="nav-item">{{ tool.name }}</a>
   </div>
 </div>
