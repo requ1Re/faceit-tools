@@ -66,6 +66,7 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
 
   handleMatchroomData(data: FaceIT.Match.Matchroom) {
     this.matchRoomData = data;
+    document.title = `Map Picker - ${data.teams.faction1.name} vs. ${data.teams.faction2.name}`;
 
     for (let teamIndex = 0; teamIndex < this.teamMapStats.length; teamIndex++) {
       const roster = this.getTeam(teamIndex).roster;

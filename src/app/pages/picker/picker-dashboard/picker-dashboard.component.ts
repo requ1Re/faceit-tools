@@ -17,7 +17,9 @@ export class PickerDashboardComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    document.title = "FACEIT Tools - Map Picker"
+  }
 
   handleInput(event: any) {
     const val = event.target.value ?? '';
