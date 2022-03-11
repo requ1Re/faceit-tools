@@ -14,7 +14,8 @@ export class ConfigUtil {
 
   static readonly CONFIG: Config.AppConfig = {
     tools: [
-      { id: 0, name: 'Map Picker', route: '/tools/picker' }
+      { id: 0, name: 'Map Picker', route: '/tools/picker' },
+      { id: 1, name: 'Account Finder', route: '/tools/finder' }
     ]
   }
 

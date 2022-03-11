@@ -1,0 +1,16 @@
+<div class="page">
+  <img class="col-span-4" src="assets/img/icons/account-finder.png" alt="Account Finder Tool Logo">
+  <h1 class="mb-5 mt-5">FACEIT Account Finder</h1>
+  <app-card class="w-full md:w-2/4">
+    <div class="input">
+      <input type="text" placeholder="Steam Account Name/Profile URL/Vanity URL" [value]="steamAccountNameOrURI"
+        (keyup.enter)="navigateToMatch()" (input)="handleInput($event)">
+      <button class="w-12 hover:bg-gray-700 hover:rounded-tr hover:rounded-br" (click)="navigateToMatch()">
+        <fa-icon [icon]="faChevronRight"></fa-icon>
+      </button>
+    </div>
+    <div class="alert" *ngIf="error">
+      Invalid match URL. <br><br>URL must match https://www.faceit.com/[language]/csgo/room/[matchId]
+    </div>
+  </app-card>
+</div>
