@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './pages/system/not-found/not-found.component';
 import { ToolsOverviewComponent } from './pages/tools-overview/tools-overview.component';
 
 const routes: Routes = [
@@ -36,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'tools',
+    component: NotFoundComponent
   },
 ];
 

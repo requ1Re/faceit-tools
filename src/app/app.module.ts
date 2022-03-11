@@ -7,11 +7,13 @@ import { SharedModule } from './shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { ToolsOverviewComponent } from './pages/tools-overview/tools-overview.component';
+import { NotFoundComponent } from './pages/system/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToolsOverviewComponent
+    ToolsOverviewComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

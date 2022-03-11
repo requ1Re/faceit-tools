@@ -1,0 +1,9 @@
+.page {
+  @apply h-full flex flex-col items-center justify-center;
+}
+h1 {
+  @apply text-5xl text-white;
+}
+h3 {
+  @apply text-white;
+}
