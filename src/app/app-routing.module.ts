@@ -27,7 +27,16 @@ const routes: Routes = [
             (m) => m.AccountFinderModule
           ),
       },
+      {
+        path: 'stats',
+        loadChildren: () =>
+          import('./pages/stats/stats.module').then((m) => m.StatsModule),
+      },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: 'tools',
   },
 ];
 

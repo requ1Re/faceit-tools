@@ -8,7 +8,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 })
 export class AccountFinderDashboardComponent implements OnInit {
   readonly INPUT_MIN_LENGTH = 32;
-  readonly FACEIT_MATCH_PAGE_REGEX = /https\:\/\/www.faceit.com\/(.*)\/csgo\/room\//i;
+  readonly STEAM_URL_REGEX = /https\:\/\/www.faceit.com\/(.*)\/csgo\/room\//i;
 
   error = false;
   steamAccountNameOrURI: string = '';
@@ -32,12 +32,12 @@ export class AccountFinderDashboardComponent implements OnInit {
   isInputValid(input: string) {
     return (
       input.length > this.INPUT_MIN_LENGTH &&
-      input.match(this.FACEIT_MATCH_PAGE_REGEX) !== null
+      input.match(this.STEAM_URL_REGEX) !== null
     );
   }
 
   getFormattedInput(input: string){
-    return input.replace(this.FACEIT_MATCH_PAGE_REGEX, '');
+    return input.replace(this.STEAM_URL_REGEX, '');
   }
 
   navigateToMatch() {
