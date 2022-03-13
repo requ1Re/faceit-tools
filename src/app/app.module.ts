@@ -5,24 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToolsOverviewComponent } from './pages/tools-overview/tools-overview.component';
 import { NotFoundComponent } from './pages/system/not-found/not-found.component';
+import { ErrorInterceptor } from './shared/services/error.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ToolsOverviewComponent,
-    NotFoundComponent
-  ],
+  declarations: [AppComponent, ToolsOverviewComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

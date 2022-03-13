@@ -54,7 +54,6 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
   }
 
   loadData() {
-    this.api.getMatchRoom(this.matchId);
     this.registerSubscription(
       this.api.getMatchRoom(this.matchId).subscribe((data) => {
         if (data) {

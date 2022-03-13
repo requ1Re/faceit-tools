@@ -14,3 +14,6 @@
 .footer-wrapper {
   z-index: 2;
 }
+.error {
+  @apply px-3 py-2 bg-red-600 text-white;
+}

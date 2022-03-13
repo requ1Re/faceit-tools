@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { ToolInputComponent } from './components/tool-input/tool-input.component';
+import { ErrorService } from './services/error.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ToolInputComponent } from './components/tool-input/tool-input.component
     ToolInputComponent
   ],
   providers: [
-    ApiService
+    ApiService,
+    ErrorService
   ]
 })
 export class SharedModule { }

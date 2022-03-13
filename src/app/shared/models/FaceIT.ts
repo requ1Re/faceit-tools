@@ -156,4 +156,48 @@ export namespace FaceIT {
       Map = 'Map',
     }
   }
+
+  /*
+  Player Stats (/players/?nickname={nickname}&game=csgo)
+  */
+  export namespace PlayerOverview {
+    export interface Player {
+      player_id: string;
+      nickname: string;
+      avatar: string;
+      country: string;
+      cover_image: string;
+      platforms: Platforms;
+      games: { [key: string]: Game };
+      settings: Settings;
+      friends_ids: string[];
+      new_steam_id: string;
+      steam_id_64: string;
+      steam_nickname: string;
+      memberships: string[];
+      faceit_url: string;
+      membership_type: string;
+      cover_featured_image: string;
+      infractions: {};
+    }
+
+    export interface Game {
+      region: string;
+      game_player_id: string;
+      skill_level: number;
+      faceit_elo: number;
+      game_player_name: string;
+      skill_level_label: string;
+      regions: {};
+      game_profile_id: string;
+    }
+
+    export interface Platforms {
+      steam: string;
+    }
+
+    export interface Settings {
+      language: string;
+    }
+  }
 }

@@ -1,51 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faChevronRight, faUser } from '@fortawesome/free-solid-svg-icons';
+import { catchError, of, tap } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/components/base/base.component';
+import { ApiService } from 'src/app/shared/services/api.service';
+import { ErrorService } from 'src/app/shared/services/error.service';
 
 @Component({
   templateUrl: './stats-dashboard.component.html',
-  styleUrls: ['./stats-dashboard.component.css']
+  styleUrls: ['./stats-dashboard.component.css'],
 })
-export class StatsDashboardComponent implements OnInit {
-  readonly INPUT_MIN_LENGTH = 32;
-  readonly FACEIT_MATCH_PAGE_REGEX = /https\:\/\/www.faceit.com\/(.*)\/csgo\/room\//i;
-
-  errorText = "Invalid match URL. <br><br>URL must match https://www.faceit.com/[language]/csgo/room/[matchId]"
+export class StatsDashboardComponent extends BaseComponent implements OnInit {
+  errorText = 'User could not be found. Please check you input and try again.';
   error = false;
 
-  matchURL: string = '';
+  username: string = '';
 
   faChevronRight = faChevronRight;
 
   faUser = faUser;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private api: ApiService
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    document.title = "FACEIT Tools - Map Picker"
+    document.title = 'FACEIT Tools - Statistics';
   }
 
   handleInput(val: string) {
-    this.error = !this.isInputValid(val);
-    if(!this.error){
-      this.matchURL = val;
-    }
-  }
-
-  isInputValid(input: string) {
-    return (
-      input.length > this.INPUT_MIN_LENGTH &&
-      input.match(this.FACEIT_MATCH_PAGE_REGEX) !== null
-    );
-  }
-
-  getFormattedInput(input: string){
-    return input.replace(this.FACEIT_MATCH_PAGE_REGEX, '');
+    this.error = false;
+    this.username = val;
   }
 
   navigateToStats() {
-    if (this.isInputValid(this.matchURL)) {
-      this.router.navigate(['stats', this.getFormattedInput(this.matchURL)], { relativeTo: this.route });
-    }
+    this.registerSubscription(
+      this.api.getPlayerStatsByName(this.username).subscribe({
+        next: (data) => {
+          this.router.navigate(['player', data.player_id], {
+            relativeTo: this.route,
+          });
+        },
+        error: (e) => {
+          this.error = true;
+        },
+      })
+    );
   }
 }
