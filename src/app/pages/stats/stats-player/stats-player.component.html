@@ -1,1 +1,9 @@
-<p>stats-player works!</p>
+<div class="wrapper" *ngIf="(playerOverviewData$ | async) as playerOverviewData">
+  <div class="page" *ngIf="(playerStatsData$ | async) as playerStatsData">
+    <div class="head">
+      <img [src]="playerOverviewData.avatar" class="rounded-full h-40" alt="Avatar">
+      <h1>{{ playerOverviewData.nickname }}</h1>
+      <app-elo-display class="w-2/3" [elo]="playerOverviewData.games['csgo'].faceit_elo"></app-elo-display>
+    </div>
+  </div>
+</div>

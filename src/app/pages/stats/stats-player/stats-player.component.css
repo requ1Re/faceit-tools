@@ -1,0 +1,9 @@
+.page {
+  @apply w-full h-full flex flex-col items-center justify-center p-5;
+}
+.head {
+  @apply w-full flex flex-col items-center space-y-2 text-white;
+}
+.head h1 {
+  @apply text-3xl;
+}

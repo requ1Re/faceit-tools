@@ -41,7 +41,7 @@ export class StatsDashboardComponent extends BaseComponent implements OnInit {
     this.registerSubscription(
       this.api.getPlayerStatsByName(this.username).subscribe({
         next: (data) => {
-          this.router.navigate(['player', data.player_id], {
+          this.router.navigate(['player', data.player_id, this.username], {
             relativeTo: this.route,
           });
         },

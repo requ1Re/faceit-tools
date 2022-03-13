@@ -6,7 +6,7 @@ import { StatsPlayerComponent } from './stats-player/stats-player.component';
 const routes: Routes = [
   { path: '', component: StatsDashboardComponent },
   {
-    path: 'player/:playerId',
+    path: 'player/:playerId/:playerName',
     component: StatsPlayerComponent,
   },
 ];
