@@ -15,7 +15,7 @@ export class EloDisplayComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getPercentage(){
+  getPercentageTo2000Elo(){
     const percent = this.elo / 2000 * 100;
     return percent > 100 ? 100 : percent;
   }
