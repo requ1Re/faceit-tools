@@ -7,13 +7,15 @@ import { BaseComponent } from './components/base/base.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
+import { ToolInputComponent } from './components/tool-input/tool-input.component';
 
 @NgModule({
   declarations: [
     CardComponent,
     BaseComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    ToolInputComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { RouterModule } from '@angular/router';
     FontAwesomeModule,
     BaseComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    ToolInputComponent
   ],
   providers: [
     ApiService

@@ -11,6 +11,8 @@ export class AccountFinderDashboardComponent implements OnInit {
   readonly STEAM_URL_REGEX = /https\:\/\/www.faceit.com\/(.*)\/csgo\/room\//i;
 
   error = false;
+  errorText = "";
+
   steamAccountNameOrURI: string = '';
 
   faChevronRight = faChevronRight;
@@ -21,8 +23,7 @@ export class AccountFinderDashboardComponent implements OnInit {
     document.title = "FACEIT Tools - Account Finder"
   }
 
-  handleInput(event: any) {
-    const val = event.target.value ?? '';
+  handleInput(val: string) {
     this.error = !this.isInputValid(val);
     if(!this.error){
       this.steamAccountNameOrURI = val;
@@ -40,7 +41,7 @@ export class AccountFinderDashboardComponent implements OnInit {
     return input.replace(this.STEAM_URL_REGEX, '');
   }
 
-  navigateToMatch() {
+  navigateToMatch(): void {
     if (this.isInputValid(this.steamAccountNameOrURI)) {
       this.router.navigate(['match', this.getFormattedInput(this.steamAccountNameOrURI)], { relativeTo: this.route });
     }

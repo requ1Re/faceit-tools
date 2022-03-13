@@ -1,15 +1,4 @@
-<div class="page">
-  <img class="col-span-4" src="assets/img/icons/map-picker.png" alt="Map Picker Tool Logo">
-  <h1 class="mb-5 mt-5">FACEIT Map Picker</h1>
-  <app-card class="w-full md:w-2/4">
-    <div class="input">
-      <input type="text" placeholder="Match URL" [value]="matchURL" (keyup.enter)="navigateToMatch()" (input)="handleInput($event)">
-      <button class="w-12 hover:bg-gray-700 hover:rounded-tr hover:rounded-br" (click)="navigateToMatch()">
-        <fa-icon [icon]="faChevronRight"></fa-icon>
-      </button>
-    </div>
-    <div class="alert" *ngIf="error">
-      Invalid match URL. <br><br>URL must match https://www.faceit.com/[language]/csgo/room/[matchId]
-    </div>
-  </app-card>
-</div>
+<app-tool-input toolName="FACEIT Map Picker" logoImageURL="assets/img/icons/map-picker.png"
+  (onSubmit)="navigateToMatch()" (onValueChange)="handleInput($event)"
+  placeholder="Match URL" [isErroneous]="error" [errorText]="errorText">
+</app-tool-input>

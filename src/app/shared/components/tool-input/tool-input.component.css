@@ -1,0 +1,19 @@
+.page {
+  @apply h-full flex flex-col items-center justify-center;
+}
+h1 {
+  @apply text-5xl text-white;
+}
+.input {
+  @apply flex justify-between;
+}
+input {
+  @apply text-lg w-full p-5;
+  background: none;
+}
+input:focus {
+  outline: none;
+}
+.alert {
+  @apply bg-red-600 p-2 rounded-bl rounded-br;
+}

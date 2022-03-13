@@ -1,0 +1,16 @@
+<div class="page">
+  <img class="col-span-4" [src]="logoImageURL" [alt]="toolName">
+  <h1 class="mb-5 mt-5">{{ toolName }}</h1>
+  <app-card class="w-full md:w-2/4">
+    <div class="input">
+      <input type="text" [placeholder]="placeholder" [value]="_value" (keyup.enter)="submit()"
+        (input)="handleInput($event)">
+      <button class="w-12 hover:bg-gray-700 hover:rounded-tr hover:rounded-br" (click)="submit()">
+        <fa-icon [icon]="faChevronRight"></fa-icon>
+      </button>
+    </div>
+    <div class="alert" *ngIf="isErroneous" [innerHTML]="errorText">
+
+    </div>
+  </app-card>
+</div>

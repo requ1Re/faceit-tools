@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { StatsRoutingModule } from './stats-routing.module';
 import { StatsComponent } from './stats.component';
+import { StatsDashboardComponent } from './stats-dashboard/stats-dashboard.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    StatsComponent
+    StatsComponent,
+    StatsDashboardComponent
   ],
   imports: [
     CommonModule,
-    StatsRoutingModule
+    StatsRoutingModule,
+    SharedModule
   ]
 })
 export class StatsModule { }

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  templateUrl: './picker-dashboard.component.html',
-  styleUrls: ['./picker-dashboard.component.css'],
+  templateUrl: './stats-dashboard.component.html',
+  styleUrls: ['./stats-dashboard.component.css']
 })
-export class PickerDashboardComponent implements OnInit {
+export class StatsDashboardComponent implements OnInit {
   readonly INPUT_MIN_LENGTH = 32;
   readonly FACEIT_MATCH_PAGE_REGEX = /https\:\/\/www.faceit.com\/(.*)\/csgo\/room\//i;
 
@@ -41,9 +41,9 @@ export class PickerDashboardComponent implements OnInit {
     return input.replace(this.FACEIT_MATCH_PAGE_REGEX, '');
   }
 
-  navigateToMatch() {
+  navigateToStats() {
     if (this.isInputValid(this.matchURL)) {
-      this.router.navigate(['match', this.getFormattedInput(this.matchURL)], { relativeTo: this.route });
+      this.router.navigate(['stats', this.getFormattedInput(this.matchURL)], { relativeTo: this.route });
     }
   }
 }
