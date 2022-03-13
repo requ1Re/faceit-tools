@@ -1,9 +1,19 @@
+.wrapper {
+  @apply w-full h-full flex items-center justify-center;
+}
 .page {
-  @apply w-full h-full flex flex-col items-center justify-center p-5;
+  @apply w-2/3 flex flex-col items-center justify-center p-5;
 }
 .head {
-  @apply w-full flex flex-col items-center space-y-2 text-white;
+  @apply w-full rounded-tl rounded-tr bg-cover;
+}
+.head .content {
+  @apply w-full rounded-tl rounded-tr flex items-center space-x-2 text-white p-5 backdrop-blur-sm bg-gray-800/50;
 }
 .head h1 {
   @apply text-3xl;
+}
+
+.stats {
+  @apply w-full grid grid-cols-4;
 }

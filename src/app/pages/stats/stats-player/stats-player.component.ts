@@ -38,4 +38,8 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
     this.playerOverviewData$ = this.api.getPlayerStatsByName(this.playerName);
     this.playerStatsData$ = this.api.getPlayerStats(this.playerId);
   }
+
+  getRecentResults(data: FaceIT.Player.PlayerStats){
+    return data.lifetime['Recent Results'].map((r) => r == '1' ? 'W' : 'L').join(' ');
+  }
 }

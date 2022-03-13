@@ -1,9 +1,26 @@
 <div class="wrapper" *ngIf="(playerOverviewData$ | async) as playerOverviewData">
   <div class="page" *ngIf="(playerStatsData$ | async) as playerStatsData">
-    <div class="head">
-      <img [src]="playerOverviewData.avatar" class="rounded-full h-40" alt="Avatar">
-      <h1>{{ playerOverviewData.nickname }}</h1>
-      <app-elo-display class="w-2/3" [elo]="playerOverviewData.games['csgo'].faceit_elo"></app-elo-display>
+    <div class="head" [style.backgroundImage]="'url(\'' + playerOverviewData.cover_image +'\')'">
+      <div class="content">
+        <img [src]="playerOverviewData.avatar" class="rounded-full h-20" alt="Avatar">
+        <h1>{{ playerOverviewData.nickname }}</h1>
+      </div>
     </div>
+    <app-elo-display class="w-full" [elo]="playerOverviewData.games['csgo'].faceit_elo"></app-elo-display>
+
+    <app-card class="w-full mt-5">
+      <div class="stats">
+        <app-stat-display name="LEVEL"
+          [value]="playerOverviewData.games['csgo'].skill_level + ' (' + playerOverviewData.games['csgo'].faceit_elo + ')'">
+        </app-stat-display>
+        <app-stat-display name="MATCHES" [value]="playerStatsData.lifetime.Matches"></app-stat-display>
+        <app-stat-display name="WIN RATE" [value]="playerStatsData.lifetime['Win Rate %'] + '%'"></app-stat-display>
+        <app-stat-display name="AVG. K/D" [value]="playerStatsData.lifetime['Average K/D Ratio']"></app-stat-display>
+        <app-stat-display name="RECENT RESULTS" [value]="getRecentResults(playerStatsData)"></app-stat-display>
+        <app-stat-display name="CURRENT WIN STREAK" [value]="playerStatsData.lifetime['Current Win Streak']"></app-stat-display>
+        <app-stat-display name="LONGEST WIN STREAK" [value]="playerStatsData.lifetime['Longest Win Streak']"></app-stat-display>
+        <app-stat-display name="AVG. HEADSHOT" [value]="playerStatsData.lifetime['Average Headshots %'] + '%'"></app-stat-display>
+      </div>
+    </app-card>
   </div>
 </div>
