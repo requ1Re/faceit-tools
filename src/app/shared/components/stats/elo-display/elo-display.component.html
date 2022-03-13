@@ -1,0 +1,74 @@
+<app-card>
+  <div class="flex w-full">
+    <div class="rank-display-part-1">
+      <div class="flex">
+        <div class="rank-wrapper" style="width: 40%">
+          <svg class="rank">
+            <use xlink:href="assets/img/icons/levels/1.svg#level1"></use>
+          </svg>
+          <div class="rank-text">1 – 800</div>
+        </div>
+        <div class="rank-wrapper" style="width: 7.5%">
+          <svg class="rank">
+            <use xlink:href="assets/img/icons/levels/2.svg#level2"></use>
+          </svg>
+          <div class="rank-text">801 – 950</div>
+        </div>
+        <div class="rank-wrapper" style="width: 7.5%">
+          <svg class="rank">
+            <use xlink:href="assets/img/icons/levels/3.svg#level3"></use>
+          </svg>
+          <div class="rank-text">951 – 1100</div>
+        </div>
+        <div class="rank-wrapper" style="width: 7.5%">
+          <svg class="rank">
+            <use xlink:href="assets/img/icons/levels/4.svg#level4"></use>
+          </svg>
+          <div class="rank-text">1101 – 1250</div>
+        </div>
+        <div class="rank-wrapper" style="width: 7.5%">
+          <svg class="rank">
+            <use xlink:href="assets/img/icons/levels/5.svg#level5"></use>
+          </svg>
+          <div class="rank-text">1251 – 1400</div>
+        </div>
+        <div class="rank-wrapper" style="width: 7.5%">
+          <svg class="rank">
+            <use xlink:href="assets/img/icons/levels/6.svg#level6"></use>
+          </svg>
+          <div class="rank-text">1401 – 1550</div>
+        </div>
+        <div class="rank-wrapper" style="width: 7.5%">
+          <svg class="rank">
+            <use xlink:href="assets/img/icons/levels/7.svg#level7"></use>
+          </svg>
+          <div class="rank-text">1551 – 1700</div>
+        </div>
+        <div class="rank-wrapper" style="width: 7.5%">
+          <svg class="rank">
+            <use xlink:href="assets/img/icons/levels/8.svg#level8"></use>
+          </svg>
+          <div class="rank-text">1701 – 1850</div>
+        </div>
+        <div class="rank-wrapper" style="width: 7.5%">
+          <svg class="rank">
+            <use xlink:href="assets/img/icons/levels/9.svg#level9"></use>
+          </svg>
+          <div class="rank-text">1851 – 2000</div>
+        </div>
+      </div>
+      <div class="line-wrapper">
+        <div [style.width]="getPercentage() + '%'" class="line"></div>
+      </div>
+    </div>
+    <div class="rank-display-part-2">
+      <div class="rank-wrapper no-border" style="width: 100%">
+        <svg class="rank">
+          <use xlink:href="assets/img/icons/levels/10.svg#level10"></use>
+        </svg>
+        <div class="rank-text">2001 – ∞</div>
+      </div>
+      <div style="width: 100%; height: 4px;" class="line-wrapper" [class.line]="getPercentage() === 100"></div>
+    </div>
+  </div>
+</app-card>

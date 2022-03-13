@@ -1,0 +1,30 @@
+.rank-display-part-1 {
+  width: 92%;
+}
+.rank-display-part-2 {
+  width: 8%;
+}
+.rank-wrapper {
+  text-align: center;
+  padding: 10px 0px;
+}
+.rank-wrapper:not(.no-border) {
+  @apply border-r border-r-gray-700;
+}
+.rank {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+}
+.rank-text {
+  margin-top: 2px;
+  font-size: 12px;
+}
+.line-wrapper {
+  height: 4px;
+  @apply bg-gray-700;
+}
+.line {
+  height: 100%;
+  background: var(--faceit-primary);
+}

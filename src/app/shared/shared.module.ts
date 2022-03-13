@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { ToolInputComponent } from './components/tool-input/tool-input.component';
 import { ErrorService } from './services/error.service';
+import { EloDisplayComponent } from './components/stats/elo-display/elo-display.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ErrorService } from './services/error.service';
     BaseComponent,
     FooterComponent,
     HeaderComponent,
-    ToolInputComponent
+    ToolInputComponent,
+    EloDisplayComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { ErrorService } from './services/error.service';
     BaseComponent,
     FooterComponent,
     HeaderComponent,
-    ToolInputComponent
+    ToolInputComponent,
+    EloDisplayComponent
   ],
   providers: [
     ApiService,
