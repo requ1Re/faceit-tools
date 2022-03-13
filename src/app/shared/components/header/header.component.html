@@ -7,7 +7,7 @@
   </div>
   <div class="nav">
     <a *ngFor="let tool of tools" [routerLink]="tool.route" routerLinkActive="active" class="nav-item">
-      <fa-icon [icon]="tool.icon" class="mr-2"></fa-icon> {{ tool.name }}
+      <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon> <span class="hidden md:block">{{ tool.name }}</span>
     </a>
   </div>
 </div>

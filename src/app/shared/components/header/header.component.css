@@ -1,18 +1,18 @@
 .header {
-  @apply bg-gray-800 px-3 h-12 shadow-lg flex flex-row items-center;
+  @apply bg-gray-800 px-3 h-auto shadow-lg flex flex-col items-center md:flex-row md:h-12;
   color: var(--faceit-primary-white);
 }
 .header .title {
-  @apply text-lg;
+  @apply text-lg mt-3 md:mt-0;
 }
 .header .nav {
-  @apply ml-3 h-full flex flex-row items-center space-x-1;
+  @apply ml-3 h-full flex flex-row items-center space-x-1 mt-3 md:mt-0;
 }
 .header .nav a {
   cursor: pointer;
 }
 .header .nav .nav-item {
-  @apply h-full inline-flex justify-center items-center px-3 border-b-2 border-transparent;
+  @apply h-10 inline-flex justify-center items-center px-3 border-b-2 border-transparent md:h-full;
 }
 .header .nav .nav-item.active,
 .header .nav .nav-item:hover {
