@@ -2,18 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faAddressBook, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
+enum SteamInputType {
+  ACCOUNT_NAME,
+  STEAM_ID,
+  PROFILE_URL,
+  VANITY_URL
+}
+
 @Component({
   templateUrl: './account-finder-dashboard.component.html',
   styleUrls: ['./account-finder-dashboard.component.css']
 })
 export class AccountFinderDashboardComponent implements OnInit {
-  readonly INPUT_MIN_LENGTH = 32;
-  readonly STEAM_URL_REGEX = /https\:\/\/www.faceit.com\/(.*)\/csgo\/room\//i;
+  /*
+  Notes:
+  - Resolve Vanity URL: http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=[key]&vanityurl=[strippedVanityURL]
+  - Find FACEIT User by SteamID: https://open.faceit.com/data/v4/players?game=csgo&game_player_id=[STEAMID]
+  */
+
+
+  readonly REGEX_PROFILE_URL = /^(http(s)?:\/\/)((www\.)?[steamcommunity]+\.)+[\w-]+(\/profiles\/7656[0-9]{13}\/?)$/gim;
+  readonly REGEX_VANITY_URL = /^(http(s)?:\/\/)((www\.)?[steamcommunity]+\.)+[\w-]+(\/id\/(.*)\/?)$/gim;
+  readonly REGEX_STEAM_ID = /7656[0-9]{13}/
 
   error = false;
   errorText = "";
 
   steamAccountNameOrURI: string = '';
+  inputType: SteamInputType;
 
   faChevronRight = faChevronRight;
   faAddressBook = faAddressBook;
@@ -25,26 +41,20 @@ export class AccountFinderDashboardComponent implements OnInit {
   }
 
   handleInput(val: string) {
-    this.error = !this.isInputValid(val);
-    if(!this.error){
-      this.steamAccountNameOrURI = val;
+    this.steamAccountNameOrURI = val;
+
+    if(val.match(this.REGEX_PROFILE_URL)){
+      this.inputType = SteamInputType.PROFILE_URL;
+    }else if(val.match(this.REGEX_VANITY_URL)){
+      this.inputType = SteamInputType.VANITY_URL;
+    }else if(val.match(this.REGEX_STEAM_ID)){
+      this.inputType = SteamInputType.STEAM_ID;
+    }else{
+      this.inputType = SteamInputType.ACCOUNT_NAME;
     }
-  }
-
-  isInputValid(input: string) {
-    return (
-      input.length > this.INPUT_MIN_LENGTH &&
-      input.match(this.STEAM_URL_REGEX) !== null
-    );
-  }
-
-  getFormattedInput(input: string){
-    return input.replace(this.STEAM_URL_REGEX, '');
   }
 
   navigateToMatch(): void {
-    if (this.isInputValid(this.steamAccountNameOrURI)) {
-      this.router.navigate(['match', this.getFormattedInput(this.steamAccountNameOrURI)], { relativeTo: this.route });
-    }
+    // this.router.navigate(['match', this.getFormattedInput(this.steamAccountNameOrURI)], { relativeTo: this.route });
   }
 }
