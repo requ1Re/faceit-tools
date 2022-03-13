@@ -1,8 +1,8 @@
 .wrapper {
-  @apply w-full h-full flex items-center justify-center;
+  @apply w-full h-full flex items-start justify-center;
 }
 .page {
-  @apply w-2/3 flex flex-col items-center justify-center p-5;
+  @apply w-full md:w-2/3 flex flex-col items-center justify-center p-5;
 }
 .head {
   @apply w-full rounded-tl rounded-tr bg-cover;
@@ -15,5 +15,5 @@
 }
 
 .stats {
-  @apply w-full grid grid-cols-4;
+  @apply w-full mt-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-2;
 }
