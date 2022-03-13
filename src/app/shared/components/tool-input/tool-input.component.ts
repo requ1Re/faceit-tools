@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-tool-input',
@@ -14,7 +14,7 @@ export class ToolInputComponent implements OnInit {
   placeholder: string;
 
   @Input()
-  logoImageURL: string;
+  icon: IconDefinition;
 
   @Input()
   isErroneous: boolean = false;

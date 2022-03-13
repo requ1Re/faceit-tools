@@ -4,6 +4,9 @@
 h1 {
   @apply text-5xl text-white;
 }
+.icon {
+  color: var(--faceit-primary)
+}
 .input {
   @apply flex justify-between;
 }

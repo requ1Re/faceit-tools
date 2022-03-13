@@ -1,19 +1,24 @@
 .header {
-  @apply bg-gray-800 text-white px-3 h-12 shadow-lg flex flex-row items-center;
+  @apply bg-gray-800 px-3 h-12 shadow-lg flex flex-row items-center;
+  color: var(--faceit-primary-white);
 }
 .header .title {
   @apply text-lg;
 }
 .header .nav {
-  @apply ml-3 h-full flex flex-row items-center space-x-2;
+  @apply ml-3 h-full flex flex-row items-center space-x-1;
 }
 .header .nav a {
   cursor: pointer;
 }
 .header .nav .nav-item {
-  @apply h-full inline-flex justify-center items-center px-2;
+  @apply h-full inline-flex justify-center items-center px-3 border-b-2 border-transparent;
 }
 .header .nav .nav-item.active,
 .header .nav .nav-item:hover {
-  @apply bg-gray-700;
+  color: var(--faceit-primary);
+  border-bottom: 2px solid var(--faceit-primary);
+}
+.icon {
+  color: var(--faceit-primary);
 }

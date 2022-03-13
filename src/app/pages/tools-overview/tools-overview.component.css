@@ -17,3 +17,6 @@
 .tool-card:hover {
   @apply bg-gray-700 rounded;
 }
+.icon {
+  color: var(--faceit-primary);
+}

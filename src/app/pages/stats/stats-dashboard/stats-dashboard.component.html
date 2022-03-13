@@ -1,4 +1,4 @@
-<app-tool-input toolName="FACEIT Stats" logoImageURL="assets/img/icons/stats.png"
+<app-tool-input toolName="FACEIT Stats" [icon]="faUser"
   (onSubmit)="navigateToStats()" (onValueChange)="handleInput($event)"
   placeholder="FACEIT User Name" [isErroneous]="error" [errorText]="errorText">
 </app-tool-input>

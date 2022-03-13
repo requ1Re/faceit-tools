@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './account-finder-dashboard.component.html',
@@ -16,6 +16,7 @@ export class AccountFinderDashboardComponent implements OnInit {
   steamAccountNameOrURI: string = '';
 
   faChevronRight = faChevronRight;
+  faAddressBook = faAddressBook;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 

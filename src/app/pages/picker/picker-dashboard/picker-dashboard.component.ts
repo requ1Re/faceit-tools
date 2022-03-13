@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './picker-dashboard.component.html',
@@ -16,6 +16,8 @@ export class PickerDashboardComponent implements OnInit {
   matchURL: string = '';
 
   faChevronRight = faChevronRight;
+
+  faMapMarkedAlt = faMapMarkedAlt;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './stats-dashboard.component.html',
@@ -16,6 +16,8 @@ export class StatsDashboardComponent implements OnInit {
   matchURL: string = '';
 
   faChevronRight = faChevronRight;
+
+  faUser = faUser;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 

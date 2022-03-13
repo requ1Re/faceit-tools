@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faToolbox } from '@fortawesome/free-solid-svg-icons';
 import { Config, ConfigUtil } from 'src/app/shared/utils/ConfigUtil';
 
 @Component({
@@ -9,6 +10,8 @@ import { Config, ConfigUtil } from 'src/app/shared/utils/ConfigUtil';
 export class ToolsOverviewComponent implements OnInit {
 
   tools: Config.Tool[] = ConfigUtil.CONFIG.tools;
+
+  faToolbox = faToolbox;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 

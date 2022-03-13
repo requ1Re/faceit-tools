@@ -1,4 +1,3 @@
-<app-tool-input toolName="FACEIT Map Picker" logoImageURL="assets/img/icons/map-picker.png"
-  (onSubmit)="navigateToMatch()" (onValueChange)="handleInput($event)"
-  placeholder="Match URL" [isErroneous]="error" [errorText]="errorText">
+<app-tool-input toolName="FACEIT Map Picker" [icon]="faMapMarkedAlt" (onSubmit)="navigateToMatch()"
+  (onValueChange)="handleInput($event)" placeholder="Match URL" [isErroneous]="error" [errorText]="errorText">
 </app-tool-input>
