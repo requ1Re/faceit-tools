@@ -5,7 +5,7 @@
     <div class="input">
       <input type="text" [placeholder]="placeholder" [value]="_value" (keyup.enter)="submit()"
         (input)="handleInput($event)">
-      <button class="w-12 hover:bg-gray-700 hover:rounded-tr hover:rounded-br" (click)="submit()">
+      <button class="w-12 hover:bg-gray-700 hover:rounded-tr hover:rounded-br" (click)="submit()" [disabled]="disableSubmit">
         <fa-icon [icon]="faChevronRight"></fa-icon>
       </button>
     </div>

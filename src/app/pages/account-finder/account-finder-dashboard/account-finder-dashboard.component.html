@@ -1,4 +1,4 @@
 <app-tool-input toolName="FACEIT Account Finder" [icon]="faAddressBook"
-  (onSubmit)="navigateToMatch()" (onValueChange)="handleInput($event)"
-  placeholder="Steam Account Name/Profile URL/Vanity URL" [isErroneous]="error" [errorText]="errorText">
+  (onSubmit)="navigateToUser()" (onValueChange)="handleInput($event)"
+  placeholder="Steam Account Name/Profile URL/Vanity URL" [isErroneous]="error" [errorText]="errorText" [disableSubmit]="loading">
 </app-tool-input>

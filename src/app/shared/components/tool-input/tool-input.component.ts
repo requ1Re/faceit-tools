@@ -22,6 +22,9 @@ export class ToolInputComponent implements OnInit {
   @Input()
   errorText: string = "";
 
+  @Input()
+  disableSubmit = false;
+
   @Output()
   onValueChange = new EventEmitter<string>();
 
@@ -47,6 +50,8 @@ export class ToolInputComponent implements OnInit {
   }
 
   submit(){
-    this.onSubmit.emit();
+    if(!this.disableSubmit){
+      this.onSubmit.emit();
+    }
   }
 }

@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Backend } from '../models/Backend';
 import { FaceIT } from '../models/FaceIT';
 
 @Injectable()
 export class ApiService {
   readonly FACEIT_API_KEY = environment['FACEIT_API_KEY'];
+  readonly BACKEND_API_URL = environment['API_URL'];
+
   readonly HEADERS = {
     Authorization: 'Bearer ' + this.FACEIT_API_KEY,
   };
@@ -34,6 +37,15 @@ export class ApiService {
   }
 
   resolveVanityURL(vanityURL: string){
+    return this.http.get<Backend.ResolveVanityURLResponse>(
+      `${this.BACKEND_API_URL}/resolve/${vanityURL}`
+    );
+  }
 
+  findFACEITAccountBySteamID(steamId: string){
+    return this.http.get<FaceIT.PlayerOverview.Player>(
+      'https://open.faceit.com/data/v4/players?game_player_id=' + steamId + '&game=csgo',
+      { headers: this.HEADERS }
+    );
   }
 }
