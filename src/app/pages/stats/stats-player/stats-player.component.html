@@ -1,3 +1,5 @@
+<app-loading-spinner *ngIf="(!(playerOverviewData$ | async) || !(playerStatsData$ | async)) && !error"></app-loading-spinner>
+
 <div class="wrapper" *ngIf="(playerOverviewData$ | async) as playerOverviewData">
   <div class="page" *ngIf="(playerStatsData$ | async) as playerStatsData">
     <div class="disclaimer">

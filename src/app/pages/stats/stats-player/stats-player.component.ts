@@ -20,6 +20,8 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
   playerOverviewData$: Observable<FaceIT.PlayerOverview.Player>;
   playerStatsData$: Observable<FaceIT.Player.PlayerStats>;
 
+  error = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -35,6 +37,12 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
         this.playerId = params.get('playerId') ?? '';
         this.playerName = params.get('playerName') ?? '';
         this.loadData();
+      })
+    );
+
+    this.registerSubscription(
+      this.errorService.errorObj.subscribe((errorObj) => {
+        this.error = errorObj.error;
       })
     );
   }
