@@ -26,15 +26,31 @@
   width: 32px;
 }
 .avatar {
-  @apply rounded-full h-20 border-2;
+  @apply rounded-full h-20 border-2 mr-3;
   border-color: var(--faceit-primary);
 }
-.faceit-btn {
-  background-color: var(--faceit-primary);
-  @apply mt-5 w-full p-2 rounded cursor-pointer lg:mt-0 lg:w-auto;
+.socials {
+  @apply flex justify-center items-center w-full mt-5 space-x-2 lg:justify-start lg:w-auto lg:mt-0;
 }
-.faceit-btn:hover {
-  background-color: var(--faceit-secondary);
+.social-btn {
+  @apply flex justify-center items-center p-2 w-10 h-10 rounded-full cursor-pointer bg-gray-800;
+}
+.social-btn:hover {
+  @apply bg-gray-700 rounded w-auto;
+}
+.social-btn:hover .icon {
+  @apply mr-1;
+}
+.social-btn .text {
+  @apply hidden;
+}
+.social-btn:hover .text {
+  @apply inline-block;
+}
+.faceit-btn svg {
+  height: 16px;
+  width: 16px;
+  fill: white;
 }
 
 .disclaimer {

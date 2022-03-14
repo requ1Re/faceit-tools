@@ -22,9 +22,18 @@
             <span class="ml-2">{{ playerOverviewData.games['csgo'].faceit_elo }}</span>
           </div>
         </app-card>
-        <a class="faceit-btn" style="margin-left: auto" [href]="playerOverviewData.faceit_url.replace('{lang}', 'en')" target="_blank">
-          View Profile on FACEIT
-        </a>
+        <div class="socials" style="margin-left: auto">
+          <a class="social-btn faceit-btn" [href]="playerOverviewData.faceit_url.replace('{lang}', 'en')" target="_blank">
+            <svg class="icon">
+              <use xlink:href="assets/img/icons/faceit.svg#Layer_1"></use>
+            </svg>
+            <span class="text">View Profile on FACEIT</span>
+          </a>
+          <a class="social-btn" [href]="'https://steamcommunity.com/profiles/' + playerOverviewData.steam_id_64" target="_blank">
+            <fa-icon class="icon" [icon]="faSteam"></fa-icon>
+            <span class="text">View Profile on Steam</span>
+          </a>
+        </div>
       </div>
     </div>
     <app-elo-display class="w-full" [elo]="playerOverviewData.games['csgo'].faceit_elo"></app-elo-display>
