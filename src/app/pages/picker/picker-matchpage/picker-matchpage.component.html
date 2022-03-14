@@ -1,3 +1,5 @@
+<app-loading-spinner *ngIf="!matchRoomData && !error"></app-loading-spinner>
+
 <div class="wrapper" *ngIf="matchRoomData">
   <h1 class="page-title">
     {{ matchRoomData.competition_name}} / {{ getTeamName(0) }} vs. {{ getTeamName(1) }}

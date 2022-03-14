@@ -28,6 +28,8 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
 
   detailedView = false;
 
+  error = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -51,6 +53,13 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
       this.route.paramMap.subscribe((params) => {
         this.matchId = params.get('matchId') ?? '';
         this.loadData();
+      })
+    );
+
+
+    this.registerSubscription(
+      this.errorService.errorObj.subscribe((errorObj) => {
+        this.error = errorObj.error;
       })
     );
   }
