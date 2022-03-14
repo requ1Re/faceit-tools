@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faAddressBook, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { lastValueFrom } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/components/base/base.component';
 import { ApiService } from 'src/app/shared/services/api.service';
 
 enum SteamInputType {
@@ -15,7 +16,7 @@ enum SteamInputType {
   templateUrl: './account-finder-dashboard.component.html',
   styleUrls: ['./account-finder-dashboard.component.css']
 })
-export class AccountFinderDashboardComponent implements OnInit {
+export class AccountFinderDashboardComponent extends BaseComponent implements OnInit {
   /*
   Notes:
   - Resolve Vanity URL: http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=[key]&vanityurl=[strippedVanityURL]
@@ -28,7 +29,7 @@ export class AccountFinderDashboardComponent implements OnInit {
   readonly REGEX_STEAM_ID = /7656[0-9]{13}/
 
   error = false;
-  errorText = "";
+  errorText = "FACEIT Account could not be found.";
 
   loading = false;
 
@@ -39,7 +40,7 @@ export class AccountFinderDashboardComponent implements OnInit {
   faChevronRight = faChevronRight;
   faAddressBook = faAddressBook;
 
-  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService) { super(); }
 
   ngOnInit(): void {
     document.title = "FACEIT Tools - Account Finder"
@@ -108,12 +109,24 @@ export class AccountFinderDashboardComponent implements OnInit {
   }
 
   async navigateToUser() {
+    this.error = false;
+
     const steamId = await this.resolveSteamIDFromInput(this.steamAccountNameOrURI);
     if(steamId !== ""){
-      const faceit = await this.findFACEITAccount(steamId);
-      if(faceit){
-        this.router.navigate(['..', 'stats', 'player', faceit.player_id, faceit.nickname], { relativeTo: this.route });
-      }
+      this.registerSubscription(
+        this.api.findFACEITAccountBySteamID(steamId).subscribe({
+          next: (data) => {
+            this.router.navigate(['..', 'stats', 'player', data.player_id, data.nickname], { relativeTo: this.route });
+          },
+          error: (e) => {
+            this.errorText = "No FACEIT Account belonging to the specified Steam Account could be found.";
+            this.error = true;
+          },
+        })
+      );
+    }else{
+      this.errorText = "Steam Account could not be found.";
+      this.error = true;
     }
   }
 }
