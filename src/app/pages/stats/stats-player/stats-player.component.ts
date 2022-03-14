@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/components/base/base.component';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
@@ -10,6 +11,9 @@ import { ApiService } from 'src/app/shared/services/api.service';
   styleUrls: ['./stats-player.component.css'],
 })
 export class StatsPlayerComponent extends BaseComponent implements OnInit {
+
+  faExclamationTriangle = faExclamationTriangle;
+
   playerId = '';
   playerName = '';
 
