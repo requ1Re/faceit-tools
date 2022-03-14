@@ -1,11 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { FaceIT } from '../models/FaceIT';
 
 @Injectable()
 export class ApiService {
-  readonly FACEIT_API_KEY = environment.faceitApiKey;
+  readonly FACEIT_API_KEY = environment['FACEIT_API_KEY'];
   readonly HEADERS = {
     Authorization: 'Bearer ' + this.FACEIT_API_KEY,
   };
@@ -31,5 +31,9 @@ export class ApiService {
       'https://open.faceit.com/data/v4/players?nickname=' + playerName + '&game=csgo',
       { headers: this.HEADERS }
     );
+  }
+
+  resolveVanityURL(vanityURL: string){
+
   }
 }
