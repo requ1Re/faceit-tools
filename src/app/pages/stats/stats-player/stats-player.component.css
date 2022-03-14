@@ -5,10 +5,10 @@
   @apply w-full md:w-2/3 flex flex-col items-center justify-center p-5;
 }
 .head {
-  @apply w-full rounded-tl rounded-tr bg-cover;
+  @apply w-full rounded-tl rounded-tr bg-cover bg-center;
 }
 .head .content {
-  @apply w-full rounded-tl rounded-tr flex items-center space-x-2 text-white p-5 backdrop-blur-sm bg-gray-800/50;
+  @apply w-full rounded-tl rounded-tr flex flex-wrap items-center space-x-2 text-white p-5 backdrop-blur-sm bg-gray-800/50;
 }
 .head h1 {
   @apply text-3xl;
@@ -25,8 +25,19 @@
   height: 32px;
   width: 32px;
 }
-
+.avatar {
+  @apply rounded-full h-20 border-2;
+  border-color: var(--faceit-primary);
+}
+.faceit-btn {
+  background-color: var(--faceit-primary);
+  @apply mt-5 w-full p-2 rounded cursor-pointer lg:mt-0 lg:w-auto;
+}
+.faceit-btn:hover {
+  background-color: var(--faceit-secondary);
+}
 
 .disclaimer {
-  @apply w-full mb-5 px-3 py-2 bg-yellow-400 rounded;
+  @apply w-full mb-5 px-3 py-2 rounded text-white;
+  background-color: var(--faceit-primary);
 }

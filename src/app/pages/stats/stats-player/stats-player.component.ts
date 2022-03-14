@@ -57,4 +57,8 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
       .map((r) => (r == '1' ? 'W' : 'L'))
       .join(' ');
   }
+
+  getProfilePicture(data: FaceIT.PlayerOverview.Player){
+    return data.avatar ? data.avatar : 'assets/img/steam_default.png';
+  }
 }

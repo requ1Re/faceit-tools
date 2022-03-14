@@ -7,7 +7,7 @@
     </div>
     <div class="head" [style.backgroundImage]="'url(\'' + playerOverviewData.cover_image +'\')'">
       <div class="content">
-        <img [src]="playerOverviewData.avatar" class="rounded-full h-20" alt="Avatar">
+        <img [src]="getProfilePicture(playerOverviewData)" class="avatar" alt="Avatar">
         <div class="country" *ngIf="playerOverviewData.country.toLowerCase() as country">
           <svg>
             <use [attr.xlink:href]="'assets/img/icons/flags/' + country + '.svg#flag-icons-' + country"></use>
@@ -22,6 +22,9 @@
             <span class="ml-2">{{ playerOverviewData.games['csgo'].faceit_elo }}</span>
           </div>
         </app-card>
+        <a class="faceit-btn" style="margin-left: auto" [href]="playerOverviewData.faceit_url.replace('{lang}', 'en')" target="_blank">
+          View Profile on FACEIT
+        </a>
       </div>
     </div>
     <app-elo-display class="w-full" [elo]="playerOverviewData.games['csgo'].faceit_elo"></app-elo-display>
