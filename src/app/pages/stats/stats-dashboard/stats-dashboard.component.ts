@@ -23,13 +23,15 @@ export class StatsDashboardComponent extends BaseComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private api: ApiService
+    private api: ApiService,
+    private errorService: ErrorService
   ) {
     super();
   }
 
   ngOnInit(): void {
     document.title = 'FACEIT Tools - Statistics';
+    this.errorService.disableErrorDisplaying();
   }
 
   handleInput(val: string) {

@@ -9,6 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToolsOverviewComponent } from './pages/tools-overview/tools-overview.component';
 import { NotFoundComponent } from './pages/system/not-found/not-found.component';
 import { ErrorInterceptor } from './shared/services/error.interceptor';
+import { ErrorService } from './shared/services/error.service';
 
 @NgModule({
   declarations: [AppComponent, ToolsOverviewComponent, NotFoundComponent],
@@ -20,6 +21,7 @@ import { ErrorInterceptor } from './shared/services/error.interceptor';
     FontAwesomeModule,
   ],
   providers: [
+    ErrorService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

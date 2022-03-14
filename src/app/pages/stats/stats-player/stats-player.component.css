@@ -28,5 +28,5 @@
 
 
 .disclaimer {
-  @apply w-full mb-5 px-3 py-2 bg-yellow-400;
+  @apply w-full mb-5 px-3 py-2 bg-yellow-400 rounded;
 }

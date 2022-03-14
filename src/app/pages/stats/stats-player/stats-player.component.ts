@@ -5,13 +5,13 @@ import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/components/base/base.component';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { ErrorService } from 'src/app/shared/services/error.service';
 
 @Component({
   templateUrl: './stats-player.component.html',
   styleUrls: ['./stats-player.component.css'],
 })
 export class StatsPlayerComponent extends BaseComponent implements OnInit {
-
   faExclamationTriangle = faExclamationTriangle;
 
   playerId = '';
@@ -23,7 +23,8 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private api: ApiService
+    private api: ApiService,
+    private errorService: ErrorService
   ) {
     super();
   }
@@ -38,12 +39,14 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
     );
   }
 
-  loadData(){
+  loadData() {
     this.playerOverviewData$ = this.api.getPlayerStatsByName(this.playerName);
     this.playerStatsData$ = this.api.getPlayerStats(this.playerId);
   }
 
-  getRecentResults(data: FaceIT.Player.PlayerStats){
-    return data.lifetime['Recent Results'].map((r) => r == '1' ? 'W' : 'L').join(' ');
+  getRecentResults(data: FaceIT.Player.PlayerStats) {
+    return data.lifetime['Recent Results']
+      .map((r) => (r == '1' ? 'W' : 'L'))
+      .join(' ');
   }
 }

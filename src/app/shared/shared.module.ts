@@ -38,8 +38,7 @@ import { StatDisplayComponent } from './components/stats/stat-display/stat-displ
     StatDisplayComponent
   ],
   providers: [
-    ApiService,
-    ErrorService
+    ApiService
   ]
 })
 export class SharedModule { }

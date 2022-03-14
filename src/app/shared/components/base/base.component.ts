@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-base',

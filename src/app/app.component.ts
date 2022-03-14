@@ -11,7 +11,7 @@ import { ErrorService } from './shared/services/error.service';
 })
 export class AppComponent extends BaseComponent implements OnInit {
 
-  constructor(private errorService: ErrorService, private router: Router){ super(); }
+  constructor(private errorService: ErrorService, private router: Router) { super(); }
 
   faExclamationTriangle = faExclamationTriangle;
 
@@ -30,6 +30,7 @@ export class AppComponent extends BaseComponent implements OnInit {
 
     this.registerSubscription(this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd){
+        this.errorService.enableErrorDisplaying();
         this.errorService.hideError();
       }
     }))
