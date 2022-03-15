@@ -16,7 +16,6 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
   faSteam = faSteam;
 
-  playerId = '';
   playerName = '';
 
   playerOverviewData$: Observable<FaceIT.PlayerOverview.Player>;
@@ -36,7 +35,6 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.registerSubscription(
       this.route.paramMap.subscribe((params) => {
-        this.playerId = params.get('playerId') ?? '';
         this.playerName = params.get('playerName') ?? '';
         this.loadData();
       })
@@ -51,7 +49,11 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
 
   loadData() {
     this.playerOverviewData$ = this.api.getPlayerStatsByName(this.playerName);
-    this.playerStatsData$ = this.api.getPlayerStats(this.playerId);
+    this.registerSubscription(
+      this.playerOverviewData$.subscribe((data) => {
+        this.playerStatsData$ = this.api.getPlayerStats(data.player_id);
+      })
+    );
   }
 
   getRecentResults(data: FaceIT.Player.PlayerStats) {

@@ -5,8 +5,14 @@ import { StatsPlayerComponent } from './stats-player/stats-player.component';
 
 const routes: Routes = [
   { path: '', component: StatsDashboardComponent },
+  // Legacy
   {
     path: 'player/:playerId/:playerName',
+    redirectTo: 'player/:playerName',
+  },
+  // New
+  {
+    path: 'player/:playerName',
     component: StatsPlayerComponent,
   },
 ];
