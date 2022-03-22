@@ -3,7 +3,7 @@
   <h1 class="col-span-4">requiRe's FACEIT Tools</h1>
   <div class="tools">
     <app-card *ngFor="let tool of tools">
-      <div class="tool-card" (click)="gotoTool(tool.id)">
+      <div class="tool-card" (click)="gotoTool(tool.id)" *ngIf="!tool.external">
         {{ tool.name }}
       </div>
     </app-card>
