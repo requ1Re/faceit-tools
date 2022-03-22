@@ -6,8 +6,13 @@
     </a>
   </div>
   <div class="nav">
-    <a *ngFor="let tool of tools" [routerLink]="tool.route" routerLinkActive="active" class="nav-item">
-      <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon> <span class="hidden md:block">{{ tool.name }}</span>
-    </a>
+    <ng-template ngFor let-tool [ngForOf]="tools">
+      <a [routerLink]="tool.route" routerLinkActive="active" class="nav-item" *ngIf="!tool.external">
+        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon> <span class="hidden md:block">{{ tool.name }}</span>
+      </a>
+      <a [href]="tool.route" class="nav-item" *ngIf="tool.external" target="_blank">
+        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon> <span class="hidden md:block">{{ tool.name }}</span>
+      </a>
+    </ng-template>
   </div>
 </div>
