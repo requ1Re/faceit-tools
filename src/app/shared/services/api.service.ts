@@ -29,7 +29,7 @@ export class ApiService {
     );
   }
 
-  getPlayerStatsByName(playerName: string){
+  getPlayerOverviewByName(playerName: string){
     return this.http.get<FaceIT.PlayerOverview.Player>(
       'https://open.faceit.com/data/v4/players?nickname=' + playerName + '&game=csgo',
       { headers: this.HEADERS }

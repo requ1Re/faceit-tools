@@ -1,11 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { ErrorService } from '../../services/error.service';
+import { Directive, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-@Component({
-  selector: 'app-base',
-  template: '',
-})
+@Directive()
 export class BaseComponent implements OnDestroy {
   subscriptions: Subscription[] = [];
 

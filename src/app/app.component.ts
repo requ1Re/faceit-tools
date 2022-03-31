@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { BaseComponent } from './shared/components/base/base.component';
+import { BaseComponent } from './shared/components/base/base';
 import { ErrorService } from './shared/services/error.service';
 
 @Component({

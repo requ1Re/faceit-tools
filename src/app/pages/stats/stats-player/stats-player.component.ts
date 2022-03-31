@@ -1,27 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faSteam } from '@fortawesome/free-brands-svg-icons';
-import { faExclamationTriangle, faInfoCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { Actions } from '@ngrx/effects';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/components/base/base.component';
+import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
+import {
+  loadPlayerOverviewByNickname,
+  loadPlayerStatsByID,
+} from 'src/app/shared/store/stats/stats.actions';
+import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
+import {
+  getPlayerOverviews,
+  getPlayerStats,
+} from 'src/app/shared/store/stats/stats.selector';
 import { EloUtil } from 'src/app/shared/utils/EloUtil';
 
 @Component({
   templateUrl: './stats-player.component.html',
   styleUrls: ['./stats-player.component.css'],
 })
-export class StatsPlayerComponent extends BaseComponent implements OnInit {
+export class StatsPlayerComponent extends BaseComponentWithStatsStore {
   faInfoCircle = faInfoCircle;
 
   faSteam = faSteam;
 
   playerName = '';
+  playerId = '';
 
-  playerOverviewData$: Observable<FaceIT.PlayerOverview.Player>;
-  playerStatsData$: Observable<FaceIT.Player.PlayerStats>;
+  playerOverviews$: Observable<FaceIT.PlayerOverview.Player[]>;
+  playerStats$: Observable<FaceIT.Player.PlayerStats[]>;
+
+  playerOverviewData: FaceIT.PlayerOverview.Player | undefined;
+  playerStatsData: FaceIT.Player.PlayerStats | undefined;
 
   error = false;
 
@@ -29,12 +44,14 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private api: ApiService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    store: Store<StatsState>,
+    actions$: Actions
   ) {
-    super();
+    super(store, actions$);
   }
 
-  ngOnInit(): void {
+  init() {
     this.registerSubscription(
       this.route.paramMap.subscribe((params) => {
         this.playerName = params.get('playerName') ?? '';
@@ -47,20 +64,52 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
         this.error = errorObj.error;
       })
     );
-  }
 
-  loadData() {
-    this.playerOverviewData$ = this.api.getPlayerStatsByName(this.playerName);
+    this.playerOverviews$ = this.store.pipe(select(getPlayerOverviews));
+    this.playerStats$ = this.store.pipe(select(getPlayerStats));
+
     this.registerSubscription(
-      this.playerOverviewData$.subscribe((data) => {
-        this.playerStatsData$ = this.api.getPlayerStats(data.player_id);
+      this.playerOverviews$.subscribe((data) => {
+        this.playerOverviewData = data.find(
+          (playerOverview) => playerOverview.nickname === this.playerName
+        );
+        if (this.playerOverviewData) {
+          this.playerId = this.playerOverviewData.player_id;
+
+          this.hasPlayerStatsInStore(this.playerId).subscribe((hasInStore) => {
+            if (!hasInStore) {
+              this.store.dispatch(loadPlayerStatsByID({ id: this.playerId }));
+            }
+          });
+        }
+      })
+    );
+    this.registerSubscription(
+      this.playerStats$.subscribe((data) => {
+        this.playerStatsData = data.find(
+          (playerStatsData) => playerStatsData.player_id === this.playerId
+        );
       })
     );
   }
 
+  loadData() {
+    this.hasPlayerOverviewInStore(this.playerName).subscribe((hasInStore) => {
+      if (!hasInStore) {
+        this.store.dispatch(
+          loadPlayerOverviewByNickname({ nickname: this.playerName })
+        );
+      }
+    });
+  }
+
   getRecentResults(data: FaceIT.Player.PlayerStats) {
     return data.lifetime['Recent Results']
-      .map((r) => (r == '1' ? '<span class="text-green">W</span>' : '<span class="text-red">L</span>'))
+      .map((r) =>
+        r == '1'
+          ? '<span class="text-green">W</span>'
+          : '<span class="text-red">L</span>'
+      )
       .join(' ');
   }
 
@@ -71,13 +120,9 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
   getFormattedEloLong(skillLevel: number, elo: number) {
     const neededElo = EloUtil.getPlusMinusEloForNextLevel(skillLevel, elo);
     return `${elo} (<span class="text-red">↓ ${
-      neededElo.previousLevel
-        ? neededElo.previousLevel
-        : '-&infin;'
+      neededElo.previousLevel ? neededElo.previousLevel : '-&infin;'
     }</span> / <span class="text-green">↑ +${
-      neededElo.nextLevel
-        ? neededElo.nextLevel
-        : '&infin;'
+      neededElo.nextLevel ? neededElo.nextLevel : '&infin;'
     }</span>)`;
   }
 }

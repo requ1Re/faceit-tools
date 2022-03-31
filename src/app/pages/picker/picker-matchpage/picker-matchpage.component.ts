@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowLeft, faList } from '@fortawesome/free-solid-svg-icons';
 import { Observable, tap } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/components/base/base.component';
+import { BaseComponent } from 'src/app/shared/components/base/base';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { MapPool } from 'src/app/shared/models/MapPool';
 import {

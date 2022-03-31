@@ -1,7 +1,7 @@
-<app-loading-spinner *ngIf="(!(playerOverviewData$ | async) || !(playerStatsData$ | async)) && !error"></app-loading-spinner>
+<app-loading-spinner *ngIf="(!playerOverviewData || !playerStatsData) && !error"></app-loading-spinner>
 
-<div class="wrapper" *ngIf="(playerOverviewData$ | async) as playerOverviewData">
-  <div class="page" *ngIf="(playerStatsData$ | async) as playerStatsData">
+<div class="wrapper" *ngIf="playerOverviewData && playerStatsData">
+  <div class="page">
     <div class="head" [style.backgroundImage]="'url(\'' + playerOverviewData.cover_image +'\')'">
       <div class="content">
         <img [src]="getProfilePicture(playerOverviewData)" class="avatar" alt="Avatar">

@@ -10,6 +10,10 @@ import { ToolsOverviewComponent } from './pages/tools-overview/tools-overview.co
 import { NotFoundComponent } from './pages/system/not-found/not-found.component';
 import { ErrorInterceptor } from './shared/services/error.interceptor';
 import { ErrorService } from './shared/services/error.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AppStoreModule } from './shared/store/app-store.module';
 
 @NgModule({
   declarations: [AppComponent, ToolsOverviewComponent, NotFoundComponent],
@@ -19,6 +23,10 @@ import { ErrorService } from './shared/services/error.service';
     AppRoutingModule,
     SharedModule,
     FontAwesomeModule,
+    AppStoreModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [
     ErrorService,

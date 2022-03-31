@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faAddressBook, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { lastValueFrom } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/components/base/base.component';
+import { BaseComponent } from 'src/app/shared/components/base/base';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
 
