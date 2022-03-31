@@ -7,6 +7,7 @@ import { BaseComponent } from 'src/app/shared/components/base/base.component';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
+import { EloUtil } from 'src/app/shared/utils/EloUtil';
 
 @Component({
   templateUrl: './stats-player.component.html',
@@ -62,7 +63,20 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
       .join(' ');
   }
 
-  getProfilePicture(data: FaceIT.PlayerOverview.Player){
+  getProfilePicture(data: FaceIT.PlayerOverview.Player) {
     return data.avatar ? data.avatar : 'assets/img/steam_default.png';
+  }
+
+  getFormattedEloLong(skillLevel: number, elo: number) {
+    const neededElo = EloUtil.getPlusMinusEloForNextLevel(skillLevel, elo);
+    return `${elo} (<span class="text-red-600">↓ ${
+      neededElo.previousLevel
+        ? neededElo.previousLevel
+        : '-&infin;'
+    }</span> / <span class="text-green-600">↑ +${
+      neededElo.nextLevel
+        ? neededElo.nextLevel
+        : '&infin;'
+    }</span>)`;
   }
 }
