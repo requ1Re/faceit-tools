@@ -12,6 +12,7 @@ import { ErrorService } from './services/error.service';
 import { EloDisplayComponent } from './components/stats/elo-display/elo-display.component';
 import { StatDisplayComponent } from './components/stats/stat-display/stat-display.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     ToolInputComponent,
     EloDisplayComponent,
     StatDisplayComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     ToolInputComponent,
     EloDisplayComponent,
     StatDisplayComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AlertComponent
   ],
   providers: [
     ApiService

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faSteam } from '@fortawesome/free-brands-svg-icons';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle, faInfoCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/components/base/base.component';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
@@ -14,7 +14,8 @@ import { EloUtil } from 'src/app/shared/utils/EloUtil';
   styleUrls: ['./stats-player.component.css'],
 })
 export class StatsPlayerComponent extends BaseComponent implements OnInit {
-  faExclamationTriangle = faExclamationTriangle;
+  faInfoCircle = faInfoCircle;
+
   faSteam = faSteam;
 
   playerName = '';

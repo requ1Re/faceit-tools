@@ -52,8 +52,3 @@
   width: 16px;
   fill: white;
 }
-
-.disclaimer {
-  @apply w-full mt-5 px-3 py-2 rounded text-white;
-  background-color: var(--faceit-primary);
-}

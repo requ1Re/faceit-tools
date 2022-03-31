@@ -50,8 +50,6 @@
       <app-stat-display name="AVG. HEADSHOT" [value]="playerStatsData.lifetime['Average Headshots %'] + '%'">
       </app-stat-display>
     </div>
-    <div class="disclaimer">
-      <fa-icon [icon]="faExclamationTriangle"></fa-icon> Match History Coming Soon
-    </div>
+    <app-alert [icon]="faInfoCircle" class="w-full">Match History is coming soon</app-alert>
   </div>
 </div>
