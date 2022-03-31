@@ -2,6 +2,7 @@
   @apply p-2 flex flex-col justify-center text-white;
 }
 .wrapper .name {
+  color: var(--faceit-primary);
   border-color: var(--faceit-primary);
   @apply text-2xl border-b-2;
 }

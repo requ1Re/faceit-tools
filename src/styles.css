@@ -16,3 +16,9 @@ html, body {
   width: 100%;
 }
 
+.text-red {
+  @apply text-red-600;
+}
+.text-green {
+  @apply text-green-600;
+}

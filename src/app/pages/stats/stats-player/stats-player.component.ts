@@ -59,7 +59,7 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
 
   getRecentResults(data: FaceIT.Player.PlayerStats) {
     return data.lifetime['Recent Results']
-      .map((r) => (r == '1' ? 'W' : 'L'))
+      .map((r) => (r == '1' ? '<span class="text-green">W</span>' : '<span class="text-red">L</span>'))
       .join(' ');
   }
 
@@ -69,11 +69,11 @@ export class StatsPlayerComponent extends BaseComponent implements OnInit {
 
   getFormattedEloLong(skillLevel: number, elo: number) {
     const neededElo = EloUtil.getPlusMinusEloForNextLevel(skillLevel, elo);
-    return `${elo} (<span class="text-red-600">↓ ${
+    return `${elo} (<span class="text-red">↓ ${
       neededElo.previousLevel
         ? neededElo.previousLevel
         : '-&infin;'
-    }</span> / <span class="text-green-600">↑ +${
+    }</span> / <span class="text-green">↑ +${
       neededElo.nextLevel
         ? neededElo.nextLevel
         : '&infin;'

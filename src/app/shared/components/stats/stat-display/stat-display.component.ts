@@ -11,7 +11,10 @@ export class StatDisplayComponent implements OnInit {
   name: string;
 
   @Input()
-  value: string|number;
+  value: string|number|undefined;
+
+  @Input()
+  valueHTML: string|undefined;
 
   constructor() { }
 
