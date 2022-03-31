@@ -2,8 +2,9 @@ import { Directive, OnInit } from '@angular/core';
 import { Actions } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
+import { FaceIT } from '../../models/FaceIT';
 import { StatsState } from '../../store/stats/stats.reducer';
-import { getStatsState } from '../../store/stats/stats.selector';
+import { getPlayerOverviews, getPlayerStats, getStatsState } from '../../store/stats/stats.selector';
 import { BaseComponent } from '../base/base';
 
 @Directive()
@@ -13,9 +14,22 @@ export abstract class BaseComponentWithStatsStore
 {
   statsState$: Observable<StatsState>;
 
+  playerOverviews$: Observable<FaceIT.PlayerOverview.Player[]>;
+  playerStats$: Observable<FaceIT.Player.PlayerStats[]>;
+
   constructor(public store: Store<StatsState>, public actions$: Actions) {
     super();
   }
+
+  ngOnInit(): void {
+    this.statsState$ = this.store.pipe(select(getStatsState));
+    this.playerOverviews$ = this.store.pipe(select(getPlayerOverviews));
+    this.playerStats$ = this.store.pipe(select(getPlayerStats));
+
+    this.init();
+  }
+
+  abstract init(): void;
 
   public hasPlayerOverviewInStore(nickname: string): Observable<boolean> {
     return this.statsState$.pipe(
@@ -43,11 +57,4 @@ export abstract class BaseComponentWithStatsStore
     );
   }
 
-  ngOnInit(): void {
-    this.statsState$ = this.store.pipe(select(getStatsState));
-
-    this.init();
-  }
-
-  abstract init(): void;
 }

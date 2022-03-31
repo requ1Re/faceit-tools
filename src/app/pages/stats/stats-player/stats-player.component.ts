@@ -32,9 +32,6 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
   playerName = '';
   playerId = '';
 
-  playerOverviews$: Observable<FaceIT.PlayerOverview.Player[]>;
-  playerStats$: Observable<FaceIT.Player.PlayerStats[]>;
-
   playerOverviewData: FaceIT.PlayerOverview.Player | undefined;
   playerStatsData: FaceIT.Player.PlayerStats | undefined;
 
@@ -64,9 +61,6 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
         this.error = errorObj.error;
       })
     );
-
-    this.playerOverviews$ = this.store.pipe(select(getPlayerOverviews));
-    this.playerStats$ = this.store.pipe(select(getPlayerStats));
 
     this.registerSubscription(
       this.playerOverviews$.subscribe((data) => {

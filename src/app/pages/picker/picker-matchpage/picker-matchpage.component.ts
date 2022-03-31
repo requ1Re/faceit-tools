@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowLeft, faList } from '@fortawesome/free-solid-svg-icons';
+import { Actions } from '@ngrx/effects';
+import { select, Store } from '@ngrx/store';
 import { Observable, tap } from 'rxjs';
+import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { BaseComponent } from 'src/app/shared/components/base/base';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { MapPool } from 'src/app/shared/models/MapPool';
@@ -12,12 +15,15 @@ import {
 } from 'src/app/shared/models/MapStats';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
+import { loadPlayerStatsByID } from 'src/app/shared/store/stats/stats.actions';
+import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
+import { getPlayerStats, getStatsState } from 'src/app/shared/store/stats/stats.selector';
 
 @Component({
   templateUrl: './picker-matchpage.component.html',
   styleUrls: ['./picker-matchpage.component.css'],
 })
-export class PickerMatchpageComponent extends BaseComponent implements OnInit {
+export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   faArrowLeft = faArrowLeft;
   faList = faList;
 
@@ -34,12 +40,14 @@ export class PickerMatchpageComponent extends BaseComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private api: ApiService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    store: Store<StatsState>,
+    actions$: Actions
   ) {
-    super();
+    super(store, actions$);
   }
 
-  ngOnInit(): void {
+  init() {
     this.teamMapStats[0] = {
       combinedMapStats: getDefaultMapStats(),
       playerMapStats: [],
