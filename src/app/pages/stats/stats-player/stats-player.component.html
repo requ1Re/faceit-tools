@@ -2,9 +2,6 @@
 
 <div class="wrapper" *ngIf="(playerOverviewData$ | async) as playerOverviewData">
   <div class="page" *ngIf="(playerStatsData$ | async) as playerStatsData">
-    <div class="disclaimer">
-      <fa-icon [icon]="faExclamationTriangle"></fa-icon> This page is still under construction and subject to change.
-    </div>
     <div class="head" [style.backgroundImage]="'url(\'' + playerOverviewData.cover_image +'\')'">
       <div class="content">
         <img [src]="getProfilePicture(playerOverviewData)" class="avatar" alt="Avatar">
@@ -52,6 +49,9 @@
       </app-stat-display>
       <app-stat-display name="AVG. HEADSHOT" [value]="playerStatsData.lifetime['Average Headshots %'] + '%'">
       </app-stat-display>
+    </div>
+    <div class="disclaimer">
+      <fa-icon [icon]="faExclamationTriangle"></fa-icon> Match History Coming Soon
     </div>
   </div>
 </div>
