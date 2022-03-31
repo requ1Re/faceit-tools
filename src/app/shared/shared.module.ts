@@ -8,7 +8,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { ToolInputComponent } from './components/tool-input/tool-input.component';
-import { ErrorService } from './services/error.service';
 import { EloDisplayComponent } from './components/stats/elo-display/elo-display.component';
 import { StatDisplayComponent } from './components/stats/stat-display/stat-display.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';

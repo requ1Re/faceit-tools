@@ -16,7 +16,7 @@
             <svg>
               <use [attr.xlink:href]="'assets/img/icons/levels/' + level + '.svg#level' + level"></use>
             </svg>
-            <span class="ml-2" [innerHTML]="getFormattedEloLong(level, playerOverviewData.games['csgo'].faceit_elo)"></span>
+            <span class="md:ml-2" [innerHTML]="getFormattedEloLong(level, playerOverviewData.games['csgo'].faceit_elo)"></span>
           </div>
         </app-card>
         <div class="socials" style="margin-left: auto">
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <app-elo-display class="w-full" [elo]="playerOverviewData.games['csgo'].faceit_elo"></app-elo-display>
+    <app-elo-display class="w-full hidden lg:block" [elo]="playerOverviewData.games['csgo'].faceit_elo"></app-elo-display>
 
     <div class="stats">
       <app-stat-display name="LEVEL"

@@ -8,7 +8,7 @@
   @apply w-full rounded-tl rounded-tr bg-cover bg-center;
 }
 .head .content {
-  @apply w-full rounded-tl rounded-tr flex flex-wrap items-center space-x-2 text-white p-5 backdrop-blur-sm bg-gray-800/50;
+  @apply w-full rounded-tl rounded-tr flex flex-col md:flex-row flex-wrap items-center md:space-x-2 text-white p-5 backdrop-blur-sm bg-gray-800/50;
 }
 .head h1 {
   @apply text-3xl;
@@ -26,7 +26,7 @@
   width: 32px;
 }
 .avatar {
-  @apply rounded-full h-20 border-2 mr-3;
+  @apply rounded-full h-20 border-2 md:mr-3;
   border-color: var(--faceit-primary);
 }
 .socials {
