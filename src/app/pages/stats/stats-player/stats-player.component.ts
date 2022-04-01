@@ -9,6 +9,7 @@ import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stat
 import { App } from 'src/app/shared/models/App';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { ErrorService } from 'src/app/shared/services/error.service';
+import { LogService } from 'src/app/shared/services/log.service';
 import {
   loadPlayerDetailsByNicknames,
   loadPlayerOverviewByNickname,
@@ -22,8 +23,9 @@ import { EloUtil } from 'src/app/shared/utils/EloUtil';
   styleUrls: ['./stats-player.component.css'],
 })
 export class StatsPlayerComponent extends BaseComponentWithStatsStore {
-  faInfoCircle = faInfoCircle;
+  pageName = 'StatsPlayer';
 
+  faInfoCircle = faInfoCircle;
   faSteam = faSteam;
 
   playerDetails: App.Player.Details[] = [];
@@ -38,6 +40,7 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
   constructor(
     private route: ActivatedRoute,
     private errorService: ErrorService,
+    private logService: LogService,
     store: Store<StatsState>,
     actions$: Actions
   ) {
@@ -52,7 +55,7 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
       ])
         .pipe(first())
         .subscribe((data) => {
-          console.log('[DEBUG] Got combined data, calling loadData', data);
+          this.logService.log(this.pageName, 'Got combined data, calling loadData', data);
 
           this.playerDetails = data[0];
           this.playerName = data[1].get('playerName') ?? '';

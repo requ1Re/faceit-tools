@@ -15,6 +15,7 @@ import {
 } from 'src/app/shared/models/MapStats';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
+import { LogService } from 'src/app/shared/services/log.service';
 import { loadPlayerDetailsByNicknames, loadPlayerStatsByIDs } from 'src/app/shared/store/stats/stats.actions';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
 
@@ -23,6 +24,8 @@ import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
   styleUrls: ['./picker-matchpage.component.css'],
 })
 export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
+  pageName = 'PickerMatchpage';
+
   faArrowLeft = faArrowLeft;
   faList = faList;
 
@@ -41,6 +44,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     private route: ActivatedRoute,
     private api: ApiService,
     private errorService: ErrorService,
+    private logService: LogService,
     store: Store<StatsState>,
     actions$: Actions
   ) {
@@ -60,7 +64,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
 
     this.registerSubscription(
       combineLatest([this.playerDetails$, this.route.paramMap]).pipe(first()).subscribe(data => {
-        console.log("[DEBUG] Got combined data, calling loadMatchRoom", data);
+        this.logService.log(this.pageName, "Got combined data, calling loadMatchRoom", data);
         this.playerDetails = data[0];
         this.matchId = data[1].get('matchId') ?? '';
         this.loadMatchRoom();
@@ -99,7 +103,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
         if(!find){
           nicknamesToLoad.push(player.nickname);
         }else{
-          console.log('[DEBUG] Got playerDetails from store for', player.player_id);
+          this.logService.log(this.pageName, 'Got playerDetails from store for', player.player_id);
           this.handlePlayerStats(find.stats, teamIndex);
         }
       }
@@ -111,7 +115,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
         this.playerDetails = playerDetails;
 
         diff.forEach((details) => {
-          console.log('[DEBUG] Got playerStats from API for', details.overview.player_id);
+          this.logService.log(this.pageName, 'Got playerStats from API for', details.overview.player_id);
           this.handlePlayerStats(details.stats, this.getTeamIdByPlayerId(details.overview.player_id));
         })
       })

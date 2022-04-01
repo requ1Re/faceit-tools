@@ -15,6 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppStoreModule } from './shared/store/app-store.module';
 import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.component';
+import { LogService } from './shared/services/log.service';
 
 @NgModule({
   declarations: [AppComponent, ToolsOverviewComponent, NotFoundComponent, SpriteWrapperComponent],
@@ -30,6 +31,7 @@ import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.componen
     StoreDevtoolsModule.instrument()
   ],
   providers: [
+    LogService,
     ErrorService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
