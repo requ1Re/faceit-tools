@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { faArrowLeft, faList } from '@fortawesome/free-solid-svg-icons';
 import { Actions } from '@ngrx/effects';
-import { select, Store } from '@ngrx/store';
-import { Observable, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { combineLatest, first } from 'rxjs';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
-import { BaseComponent } from 'src/app/shared/components/base/base';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { MapPool } from 'src/app/shared/models/MapPool';
 import {
@@ -15,9 +14,9 @@ import {
 } from 'src/app/shared/models/MapStats';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
-import { loadPlayerStatsByID } from 'src/app/shared/store/stats/stats.actions';
+import { loadPlayerStatsByIDs } from 'src/app/shared/store/stats/stats.actions';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
-import { getPlayerStats, getStatsState } from 'src/app/shared/store/stats/stats.selector';
+import { getPlayerStats } from 'src/app/shared/store/stats/stats.selector';
 
 @Component({
   templateUrl: './picker-matchpage.component.html',
@@ -30,6 +29,8 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   matchId = '';
   matchRoomData: FaceIT.Match.Matchroom;
 
+  playerStats: FaceIT.Player.PlayerStats[] = [];
+
   teamMapStats: TeamMapStats[] = [];
 
   detailedView = false;
@@ -37,7 +38,6 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   error = false;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private api: ApiService,
     private errorService: ErrorService,
@@ -57,10 +57,13 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
       playerMapStats: [],
     };
 
+
     this.registerSubscription(
-      this.route.paramMap.subscribe((params) => {
-        this.matchId = params.get('matchId') ?? '';
-        this.loadData();
+      combineLatest([this.playerStats$, this.route.paramMap]).pipe(first()).subscribe(data => {
+        console.log("[DEBUG] Got combined data, calling loadMatchRoom", data);
+        this.playerStats = data[0];
+        this.matchId = data[1].get('matchId') ?? '';
+        this.loadMatchRoom();
       })
     );
 
@@ -72,7 +75,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     );
   }
 
-  loadData() {
+  loadMatchRoom() {
     this.registerSubscription(
       this.api.getMatchRoom(this.matchId).subscribe((data) => {
         if (data) {
@@ -86,20 +89,35 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     this.matchRoomData = data;
     document.title = `Map Picker - ${data.teams.faction1.name} vs. ${data.teams.faction2.name}`;
 
+    let idsToLoad = [];
     for (let teamIndex = 0; teamIndex < this.teamMapStats.length; teamIndex++) {
       const roster = this.getTeam(teamIndex).roster;
       for (let playerIndex = 0; playerIndex < roster.length; playerIndex++) {
         const player = roster[playerIndex];
 
-        this.registerSubscription(
-          this.api.getPlayerStats(player.player_id).subscribe((playerStats) => {
-            if (playerStats) {
-              this.handlePlayerStats(playerStats, teamIndex);
-            }
-          })
-        );
+        const find = this.playerStats.find((stats) => stats.player_id === player.player_id)
+        if(!find){
+          idsToLoad.push(player.player_id);
+        }else{
+          console.log('[DEBUG] Got playerStats from store for', player.player_id);
+          this.handlePlayerStats(find, teamIndex);
+        }
       }
     }
+
+    this.registerSubscription(
+      this.playerStats$.subscribe(playerStats => {
+        const diff = playerStats.filter(item => this.playerStats.indexOf(item) < 0);
+        this.playerStats = playerStats;
+
+        diff.forEach((stats) => {
+          console.log('[DEBUG] Got playerStats from API for', stats.player_id);
+          this.handlePlayerStats(stats, this.getTeamIdByPlayerId(stats.player_id));
+        })
+      })
+    )
+
+    this.store.dispatch(loadPlayerStatsByIDs({ids: idsToLoad}));
   }
 
   handlePlayerStats(data: FaceIT.Player.PlayerStats, teamId: number) {
@@ -224,6 +242,12 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
       : findTeam2
       ? findTeam2.nickname
       : null;
+  }
+
+  getTeamIdByPlayerId(playerId: string){
+    return this.matchRoomData.teams.faction1.roster.find(
+      (player) => player.player_id === playerId
+    ) ? 0 : 1;
   }
 
   getTeam(teamId: number) {
