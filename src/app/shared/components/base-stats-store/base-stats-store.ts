@@ -1,10 +1,10 @@
 import { Directive, OnInit } from '@angular/core';
 import { Actions } from '@ngrx/effects';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { FaceIT } from '../../models/FaceIT';
+import { App } from '../../models/App';
 import { StatsState } from '../../store/stats/stats.reducer';
-import { getPlayerOverviews, getPlayerStats, getStatsState } from '../../store/stats/stats.selector';
+import { getPlayerDetails, getStatsState } from '../../store/stats/stats.selector';
 import { BaseComponent } from '../base/base';
 
 @Directive()
@@ -14,8 +14,7 @@ export abstract class BaseComponentWithStatsStore
 {
   statsState$: Observable<StatsState>;
 
-  playerOverviews$: Observable<FaceIT.PlayerOverview.Player[]>;
-  playerStats$: Observable<FaceIT.Player.PlayerStats[]>;
+  playerDetails$: Observable<App.Player.Details[]>;
 
   constructor(public store: Store<StatsState>, public actions$: Actions) {
     super();
@@ -23,38 +22,23 @@ export abstract class BaseComponentWithStatsStore
 
   ngOnInit(): void {
     this.statsState$ = this.store.select(getStatsState);
-    this.playerOverviews$ = this.store.select(getPlayerOverviews);
-    this.playerStats$ = this.store.select(getPlayerStats);
+    this.playerDetails$ = this.store.select(getPlayerDetails);
 
     this.init();
   }
 
   abstract init(): void;
 
-  public hasPlayerOverviewInStore(nickname: string): Observable<boolean> {
-    return this.statsState$.pipe(
-      map((state) =>
-        state.playerOverviews.find(
-          (playerOverview) => playerOverview.nickname === nickname
+  public hasPlayerDetailsInStore(nickname: string): Observable<boolean> {
+    return this.playerDetails$.pipe(
+      map((details) =>
+        details.find(
+          (details) => details.overview.nickname === nickname
         )
       ),
-      map((playerOverview) => {
-        return !!playerOverview;
+      map((foundDetails) => {
+        return !!foundDetails;
       })
     );
   }
-
-  public hasPlayerStatsInStore(playerId: string): Observable<boolean> {
-    return this.statsState$.pipe(
-      map((state) =>
-        state.playerStats.find(
-          (playerStats) => playerStats.player_id === playerId
-        )
-      ),
-      map((playerStats) => {
-        return !!playerStats;
-      })
-    );
-  }
-
 }

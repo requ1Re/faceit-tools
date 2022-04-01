@@ -8,15 +8,6 @@ export const getStatsState = createSelector(
   (state: StatsState) => state
 );
 
-export const getPlayerStats = createSelector(
-  statsState,
-  (state: StatsState) => state.playerStats
-);
-export const getPlayerOverviews = createSelector(
-  statsState,
-  (state: StatsState) => state.playerOverviews
-);
-
 export const getPlayerDetails = createSelector(
   statsState,
   (state: StatsState) => state.playerDetails

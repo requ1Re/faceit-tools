@@ -1,53 +1,62 @@
-<app-loading-spinner *ngIf="(!playerOverviewData || !playerStatsData) && !error"></app-loading-spinner>
+<app-loading-spinner *ngIf="!selectedPlayerDetails && !error"></app-loading-spinner>
 
-<div class="wrapper" *ngIf="playerOverviewData && playerStatsData">
+<div class="wrapper" *ngIf="selectedPlayerDetails">
   <div class="page">
-    <div class="head" [style.backgroundImage]="'url(\'' + playerOverviewData.cover_image +'\')'">
+    <div class="head" [style.backgroundImage]="'url(\'' + selectedPlayerDetails.overview.cover_image +'\')'">
       <div class="content">
-        <img [src]="getProfilePicture(playerOverviewData)" class="avatar" alt="Avatar">
-        <div class="country" *ngIf="playerOverviewData.country.toLowerCase() as country">
+        <img [src]="getProfilePicture(selectedPlayerDetails.overview)" class="avatar" alt="Avatar">
+        <div class="country" *ngIf="selectedPlayerDetails.overview.country.toLowerCase() as country">
           <svg>
             <use [attr.xlink:href]="'assets/img/icons/flags/' + country + '.svg#flag-icons-' + country"></use>
           </svg>
         </div>
-        <h1>{{ playerOverviewData.nickname }}</h1>
+        <h1>{{ selectedPlayerDetails.overview.nickname }}</h1>
         <app-card>
-          <div class="elo" *ngIf="playerOverviewData.games['csgo'].skill_level as level">
+          <div class="elo" *ngIf="selectedPlayerDetails.overview.games['csgo'].skill_level as level">
             <svg>
               <use [attr.xlink:href]="'assets/img/icons/levels/' + level + '.svg#level' + level"></use>
             </svg>
-            <span class="md:ml-2" [innerHTML]="getFormattedEloLong(level, playerOverviewData.games['csgo'].faceit_elo)"></span>
+            <span class="md:ml-2"
+              [innerHTML]="getFormattedEloLong(level, selectedPlayerDetails.overview.games['csgo'].faceit_elo)"></span>
           </div>
         </app-card>
         <div class="socials" style="margin-left: auto">
-          <a class="social-btn faceit-btn" [href]="playerOverviewData.faceit_url.replace('{lang}', 'en')" target="_blank">
+          <a class="social-btn faceit-btn" [href]="selectedPlayerDetails.overview.faceit_url.replace('{lang}', 'en')"
+            target="_blank">
             <svg class="icon">
               <use xlink:href="assets/img/icons/faceit.svg#Layer_1"></use>
             </svg>
             <span class="text">View Profile on FACEIT</span>
           </a>
-          <a class="social-btn" [href]="'https://steamcommunity.com/profiles/' + playerOverviewData.steam_id_64" target="_blank">
+          <a class="social-btn"
+            [href]="'https://steamcommunity.com/profiles/' + selectedPlayerDetails.overview.steam_id_64"
+            target="_blank">
             <fa-icon class="icon" [icon]="faSteam"></fa-icon>
             <span class="text">View Profile on Steam</span>
           </a>
         </div>
       </div>
     </div>
-    <app-elo-display class="w-full hidden lg:block" [elo]="playerOverviewData.games['csgo'].faceit_elo"></app-elo-display>
+    <app-elo-display class="w-full hidden lg:block" [elo]="selectedPlayerDetails.overview.games['csgo'].faceit_elo">
+    </app-elo-display>
 
     <div class="stats">
       <app-stat-display name="LEVEL"
-        [value]="playerOverviewData.games['csgo'].skill_level + ' (' + playerOverviewData.games['csgo'].faceit_elo + ')'">
+        [value]="selectedPlayerDetails.overview.games['csgo'].skill_level + ' (' + selectedPlayerDetails.overview.games['csgo'].faceit_elo + ')'">
       </app-stat-display>
-      <app-stat-display name="MATCHES" [value]="playerStatsData.lifetime.Matches"></app-stat-display>
-      <app-stat-display name="WIN RATE" [value]="playerStatsData.lifetime['Win Rate %'] + '%'"></app-stat-display>
-      <app-stat-display name="AVG. K/D" [value]="playerStatsData.lifetime['Average K/D Ratio']"></app-stat-display>
-      <app-stat-display name="RECENT RESULTS" [valueHTML]="getRecentResults(playerStatsData)"></app-stat-display>
-      <app-stat-display name="CURRENT WIN STREAK" [value]="playerStatsData.lifetime['Current Win Streak']">
+      <app-stat-display name="MATCHES" [value]="selectedPlayerDetails.stats.lifetime.Matches"></app-stat-display>
+      <app-stat-display name="WIN RATE" [value]="selectedPlayerDetails.stats.lifetime['Win Rate %'] + '%'">
       </app-stat-display>
-      <app-stat-display name="LONGEST WIN STREAK" [value]="playerStatsData.lifetime['Longest Win Streak']">
+      <app-stat-display name="AVG. K/D" [value]="selectedPlayerDetails.stats.lifetime['Average K/D Ratio']">
       </app-stat-display>
-      <app-stat-display name="AVG. HEADSHOT" [value]="playerStatsData.lifetime['Average Headshots %'] + '%'">
+      <app-stat-display name="RECENT RESULTS" [valueHTML]="getRecentResults(selectedPlayerDetails.stats)">
+      </app-stat-display>
+      <app-stat-display name="CURRENT WIN STREAK" [value]="selectedPlayerDetails.stats.lifetime['Current Win Streak']">
+      </app-stat-display>
+      <app-stat-display name="LONGEST WIN STREAK" [value]="selectedPlayerDetails.stats.lifetime['Longest Win Streak']">
+      </app-stat-display>
+      <app-stat-display name="AVG. HEADSHOT"
+        [value]="selectedPlayerDetails.stats.lifetime['Average Headshots %'] + '%'">
       </app-stat-display>
     </div>
     <app-alert [icon]="faInfoCircle" class="w-full">Match History is coming soon</app-alert>

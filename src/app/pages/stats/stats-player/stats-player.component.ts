@@ -6,9 +6,11 @@ import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, first } from 'rxjs';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
+import { App } from 'src/app/shared/models/App';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import {
+  loadPlayerDetailsByNicknames,
   loadPlayerOverviewByNickname,
   loadPlayerStatsByID,
 } from 'src/app/shared/store/stats/stats.actions';
@@ -24,14 +26,12 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
 
   faSteam = faSteam;
 
-  playerOverviews: FaceIT.PlayerOverview.Player[] = [];
-  playerStats: FaceIT.Player.PlayerStats[] = [];
+  playerDetails: App.Player.Details[] = [];
 
   playerName = '';
   playerId = '';
 
-  playerOverviewData: FaceIT.PlayerOverview.Player;
-  playerStatsData: FaceIT.Player.PlayerStats;
+  selectedPlayerDetails: App.Player.Details;
 
   error = false;
 
@@ -47,26 +47,24 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
   init() {
     this.registerSubscription(
       combineLatest([
-        this.playerOverviews$,
-        this.playerStats$,
+        this.playerDetails$,
         this.route.paramMap,
       ])
         .pipe(first())
         .subscribe((data) => {
           console.log('[DEBUG] Got combined data, calling loadData', data);
 
-          this.playerOverviews = data[0];
-          this.playerStats = data[1];
-          this.playerName = data[2].get('playerName') ?? '';
+          this.playerDetails = data[0];
+          this.playerName = data[1].get('playerName') ?? '';
 
           this.loadData();
 
-          const findOverview = this.playerOverviews.find(
-            (playerOverview) => playerOverview.nickname === this.playerName
+          const findDetails = this.playerDetails.find(
+            (details) => details.overview.nickname === this.playerName
           );
-          if (!findOverview) {
+          if (!findDetails) {
             this.store.dispatch(
-              loadPlayerOverviewByNickname({ nickname: this.playerName })
+              loadPlayerDetailsByNicknames({ nicknames: [this.playerName] })
             );
           }
         })
@@ -81,31 +79,12 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
 
   loadData() {
     this.registerSubscription(
-      this.playerOverviews$.subscribe((playerOverviews) => {
-        const findOverview = playerOverviews.find(
-          (playerOverview) => playerOverview.nickname === this.playerName
+      this.playerDetails$.subscribe((playerDetails) => {
+        const findDetails = playerDetails.find(
+          (details) => details.overview.nickname === this.playerName
         );
-        if (findOverview) {
-          this.playerOverviewData = findOverview;
-          this.playerId = findOverview.player_id;
-
-          const findStats = this.playerStats.find(
-            (playerStats) => playerStats.player_id === this.playerId
-          );
-          if (!findStats) {
-            this.store.dispatch(loadPlayerStatsByID({ id: this.playerId }));
-          }
-        }
-      })
-    );
-
-    this.registerSubscription(
-      this.playerStats$.subscribe((playerStats) => {
-        const findStats = playerStats.find(
-          (playerStats) => playerStats.player_id === this.playerId
-        );
-        if (findStats) {
-          this.playerStatsData = findStats;
+        if (findDetails) {
+          this.selectedPlayerDetails = findDetails;
         }
       })
     );

@@ -40,3 +40,13 @@ td img{
 .team .team-card table > tbody > tr > td {
   @apply pt-2 pb-2 text-lg border border-gray-700;
 }
+.details {
+  @apply flex items-center justify-center space-x-2;
+}
+.details svg {
+  height: 32px;
+  width: 32px;
+}
+a:hover {
+  color: var(--faceit-primary);
+}

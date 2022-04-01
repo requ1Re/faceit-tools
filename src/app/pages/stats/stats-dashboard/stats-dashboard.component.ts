@@ -4,9 +4,12 @@ import { faChevronRight, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
+import { App } from 'src/app/shared/models/App';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import {
+  loadPlayerDetailsByNicknameError,
+  loadPlayerDetailsByNicknames,
   loadPlayerOverviewByNickname,
   loadPlayerOverviewByNicknameError,
 } from 'src/app/shared/store/stats/stats.actions';
@@ -20,11 +23,14 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
   errorText = 'User could not be found. Please check you input and try again.';
   error = false;
 
+  playerDetails: App.Player.Details[] = [];
+
   username: string = '';
 
   faChevronRight = faChevronRight;
-
   faUser = faUser;
+
+  loading = false;
 
   constructor(
     private router: Router,
@@ -42,23 +48,23 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
     this.errorService.disableErrorDisplaying();
 
     this.registerSubscription(
-      this.statsState$.subscribe((statsState) => {
-        if (
-          statsState &&
-          statsState.playerOverviews &&
-          statsState.playerOverviews.find(
-            (playerOverview) => playerOverview.nickname === this.username
-          )
-        ) {
+      this.playerDetails$.subscribe((playerDetails) => {
+        this.playerDetails = playerDetails;
+
+        const find = this.playerDetails.find(
+          (details) => details.overview.nickname === this.username
+        );
+        if (find && this.loading) {
           this._navigateToStats();
         }
       })
     );
+
     this.registerSubscription(
       this.actions$
-        .pipe(ofType(loadPlayerOverviewByNicknameError))
-        .subscribe(() => {
-          this.error = true;
+        .pipe(ofType(loadPlayerDetailsByNicknameError))
+        .subscribe((payload) => {
+          this.error = payload.nickname === this.username;
         })
     );
   }
@@ -69,17 +75,18 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
   }
 
   navigateToStats() {
-    this.registerSubscription(
-      this.hasPlayerOverviewInStore(this.username).subscribe((b) => {
-        if (b) {
-          this._navigateToStats();
-        } else {
-          this.store.dispatch(
-            loadPlayerOverviewByNickname({ nickname: this.username })
-          );
-        }
-      })
+    this.loading = false;
+    const find = this.playerDetails.find(
+      (details) => details.overview.nickname === this.username
     );
+    if (find) {
+      this._navigateToStats();
+    } else {
+      this.loading = true;
+      this.store.dispatch(
+        loadPlayerDetailsByNicknames({ nicknames: [this.username] })
+      );
+    }
   }
 
   _navigateToStats() {

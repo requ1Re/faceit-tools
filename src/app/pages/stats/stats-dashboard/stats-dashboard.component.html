@@ -1,4 +1,4 @@
 <app-tool-input toolName="FACEIT Stats" [icon]="faUser"
   (onSubmit)="navigateToStats()" (onValueChange)="handleInput($event)"
-  placeholder="FACEIT User Name (Case sensitive)" [isErroneous]="error" [errorText]="errorText">
+  placeholder="FACEIT User Name (Case sensitive)" [isErroneous]="error" [errorText]="errorText" [disableSubmit]="loading">
 </app-tool-input>
