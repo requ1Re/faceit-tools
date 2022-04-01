@@ -6,6 +6,11 @@ export const loadPlayerOverviewByNickname = createAction(
   props<{ nickname: string }>()
 );
 
+export const loadPlayerOverviewsByNicknames = createAction(
+  '[Stats] Load Player Overviews by Nicknames',
+  props<{ nicknames: string[] }>()
+);
+
 export const loadPlayerOverviewByNicknameSuccess = createAction(
   '[Stats] Load Player Overview by Nickname Success',
   props<{ playerOverview: FaceIT.PlayerOverview.Player }>()
@@ -22,11 +27,17 @@ export const loadPlayerStatsByID = createAction(
   props<{ id: string }>()
 );
 
+export const loadPlayerStatsByIDs = createAction(
+  '[Stats] Load Player Stats by IDs',
+  props<{ ids: string[] }>()
+);
+
 export const loadPlayerStatsByIDSuccess = createAction(
   '[Stats] Load Player Stats by ID Success',
   props<{ playerStats: FaceIT.Player.PlayerStats }>()
 );
 
 export const loadPlayerStatsByIDError = createAction(
-  '[Stats] Load Player Stats by ID Error'
+  '[Stats] Load Player Stats by ID Error',
+  props<{ id: string }>()
 );

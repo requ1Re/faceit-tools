@@ -22,9 +22,9 @@ export abstract class BaseComponentWithStatsStore
   }
 
   ngOnInit(): void {
-    this.statsState$ = this.store.pipe(select(getStatsState));
-    this.playerOverviews$ = this.store.pipe(select(getPlayerOverviews));
-    this.playerStats$ = this.store.pipe(select(getPlayerStats));
+    this.statsState$ = this.store.select(getStatsState);
+    this.playerOverviews$ = this.store.select(getPlayerOverviews);
+    this.playerStats$ = this.store.select(getPlayerStats);
 
     this.init();
   }
