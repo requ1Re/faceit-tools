@@ -200,4 +200,138 @@ export namespace FaceIT {
       language: string;
     }
   }
+
+  /*
+  Player Match History (/players/{id}/history)
+  */
+  export namespace MatchHistory {
+    export interface Response {
+      items: Match[];
+      start: number;
+      end: number;
+      from: number;
+      to: number;
+    }
+
+    export interface Match {
+      match_id: string;
+      game_id: string;
+      region: string;
+      match_type: string;
+      game_mode: string;
+      max_players: number;
+      teams_size: number;
+      teams: Teams;
+      playing_players: string[];
+      competition_id: string;
+      competition_name: string;
+      competition_type: string;
+      organizer_id: string;
+      status: string;
+      started_at: number;
+      finished_at: number;
+      results: Results;
+      faceit_url: string;
+    }
+
+    export interface Results {
+      winner: string;
+      score: Score;
+    }
+
+    export interface Score {
+      faction2: number;
+      faction1: number;
+    }
+
+    export interface Teams {
+      faction1: Faction;
+      faction2: Faction;
+    }
+
+    export interface Faction {
+      team_id: string;
+      nickname: string;
+      avatar: string;
+      type: string;
+      players: Player[];
+    }
+
+    export interface Player {
+      player_id: string;
+      nickname: string;
+      avatar: string;
+      skill_level: number;
+      game_player_id: string;
+      game_player_name: string;
+      faceit_url: string;
+    }
+  }
+
+  /*
+  Match Stats (/matches/{id}/stats)
+  */
+  export namespace MatchStats {
+    export interface Response {
+      rounds: Maps[];
+    }
+
+    export interface Maps {
+      best_of: string;
+      competition_id: null;
+      game_id: string;
+      game_mode: string;
+      match_id: string;
+      match_round: string;
+      played: string;
+      round_stats: RoundStats;
+      teams: Team[];
+    }
+
+    export interface RoundStats {
+      Score: string;
+      Winner: string;
+      Region: string;
+      Map: string;
+      Rounds: string;
+    }
+
+    export interface Team {
+      team_id: string;
+      premade: boolean;
+      team_stats: TeamStats;
+      players: Player[];
+    }
+
+    export interface Player {
+      player_id: string;
+      nickname: string;
+      player_stats: PlayerStats;
+    }
+
+    export interface PlayerStats {
+      MVPs: string;
+      'K/R Ratio': string;
+      'K/D Ratio': string;
+      Headshots: string;
+      'Quadro Kills': string;
+      Kills: string;
+      Assists: string;
+      'Penta Kills': string;
+      'Headshots %': string;
+      Deaths: string;
+      Result: string;
+      'Triple Kills': string;
+    }
+
+    export interface TeamStats {
+      'Team Win': string;
+      'Team Headshots': string;
+      'Final Score': string;
+      'Overtime score': string;
+      'Second Half Score': string;
+      'First Half Score': string;
+      Team: string;
+    }
+  }
 }

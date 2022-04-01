@@ -52,3 +52,7 @@
   width: 16px;
   fill: white;
 }
+
+.history {
+  @apply w-full mt-5;
+}

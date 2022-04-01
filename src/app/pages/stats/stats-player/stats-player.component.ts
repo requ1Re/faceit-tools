@@ -4,10 +4,12 @@ import { faSteam } from '@fortawesome/free-brands-svg-icons';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, first } from 'rxjs';
+import { combineLatest, first, Observable } from 'rxjs';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { App } from 'src/app/shared/models/App';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
+import { PlayerMatchHistoryDetailed } from 'src/app/shared/models/PlayerMatchHistoryDetailed';
+import { ApiService } from 'src/app/shared/services/api.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { LogService } from 'src/app/shared/services/log.service';
 import {
@@ -35,12 +37,15 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
 
   selectedPlayerDetails: App.Player.Details;
 
+  matchHistory$: Observable<PlayerMatchHistoryDetailed[]>
+
   error = false;
 
   constructor(
     private route: ActivatedRoute,
     private errorService: ErrorService,
     private logService: LogService,
+    private apiService: ApiService,
     store: Store<StatsState>,
     actions$: Actions
   ) {
@@ -88,6 +93,7 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
         );
         if (findDetails) {
           this.selectedPlayerDetails = findDetails;
+          this.matchHistory$ = this.apiService.getPlayerMatchHistoryDetailed(this.selectedPlayerDetails.overview.player_id);
         }
       })
     );

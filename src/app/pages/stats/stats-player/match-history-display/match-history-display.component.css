@@ -1,0 +1,8 @@
+.container {
+  @apply p-2 flex flex-col;
+}
+h1 {
+  color: var(--faceit-primary);
+  border-color: var(--faceit-primary);
+  @apply text-2xl border-b-2;
+}

@@ -6,13 +6,15 @@ import { StatsComponent } from './stats.component';
 import { StatsDashboardComponent } from './stats-dashboard/stats-dashboard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StatsPlayerComponent } from './stats-player/stats-player.component';
+import { MatchHistoryDisplayComponent } from './stats-player/match-history-display/match-history-display.component';
 
 
 @NgModule({
   declarations: [
     StatsComponent,
     StatsDashboardComponent,
-    StatsPlayerComponent
+    StatsPlayerComponent,
+    MatchHistoryDisplayComponent
   ],
   imports: [
     CommonModule,
