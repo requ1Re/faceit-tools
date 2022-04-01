@@ -14,7 +14,7 @@
         <app-card>
           <div class="elo" *ngIf="selectedPlayerDetails.overview.games['csgo'].skill_level as level">
             <svg>
-              <use [attr.xlink:href]="'assets/img/icons/levels/' + level + '.svg#level' + level"></use>
+              <use [attr.xlink:href]="'#level' + level"></use>
             </svg>
             <span class="md:ml-2"
               [innerHTML]="getFormattedEloLong(level, selectedPlayerDetails.overview.games['csgo'].faceit_elo)"></span>

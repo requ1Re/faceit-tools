@@ -14,9 +14,10 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppStoreModule } from './shared/store/app-store.module';
+import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.component';
 
 @NgModule({
-  declarations: [AppComponent, ToolsOverviewComponent, NotFoundComponent],
+  declarations: [AppComponent, ToolsOverviewComponent, NotFoundComponent, SpriteWrapperComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
