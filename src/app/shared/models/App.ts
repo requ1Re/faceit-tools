@@ -1,10 +1,10 @@
 import { FaceIT } from "./FaceIT";
 
 export namespace App {
-  export namespace Stats {
-    export interface Player {
-      playerOverview: FaceIT.PlayerOverview.Player,
-      playerStats: FaceIT.Player.PlayerStats
+  export namespace Player {
+    export interface Details {
+      overview: FaceIT.PlayerOverview.Player;
+      stats: FaceIT.Player.PlayerStats;
     }
   }
 }

@@ -16,3 +16,8 @@ export const getPlayerOverviews = createSelector(
   statsState,
   (state: StatsState) => state.playerOverviews
 );
+
+export const getPlayerDetails = createSelector(
+  statsState,
+  (state: StatsState) => state.playerDetails
+);

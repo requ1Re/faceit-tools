@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { App } from '../../models/App';
 import { FaceIT } from '../../models/FaceIT';
 
 export const loadPlayerOverviewByNickname = createAction(
@@ -41,3 +42,20 @@ export const loadPlayerStatsByIDError = createAction(
   '[Stats] Load Player Stats by ID Error',
   props<{ id: string }>()
 );
+
+// playerDetails
+export const loadPlayerDetailsByNicknames = createAction(
+  '[Stats] Load Player Details by Nicknames',
+  props<{ nicknames: string[] }>()
+);
+
+export const loadPlayerDetailsByNicknameSuccess = createAction(
+  '[Stats] Load Player Details by Nickname Success',
+  props<{ playerDetails: App.Player.Details }>()
+);
+
+export const loadPlayerDetailsByNicknameError = createAction(
+  '[Stats] Load Player Details by Nickname Error',
+  props<{ nickname: string }>()
+);
+

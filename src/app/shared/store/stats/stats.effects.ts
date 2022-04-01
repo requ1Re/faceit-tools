@@ -1,18 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { concat, merge, of } from 'rxjs';
-import {
-  catchError,
-  concatMap,
-  exhaustMap,
-  flatMap,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
+import { merge, of } from 'rxjs';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import {
+  loadPlayerDetailsByNicknameError,
+  loadPlayerDetailsByNicknames,
+  loadPlayerDetailsByNicknameSuccess,
   loadPlayerOverviewByNickname,
   loadPlayerOverviewByNicknameError,
   loadPlayerOverviewByNicknameSuccess,
@@ -68,9 +62,30 @@ export class StatsEffects {
     )
   );
 
-  constructor(
-    private actions$: Actions,
-    private store: Store,
-    private apiService: ApiService
-  ) {}
+  loadPlayerDetailsByNicknames$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(loadPlayerDetailsByNicknames),
+      tap((action) => {
+        action.nicknames.forEach((nickname) =>
+          this.apiService.getPlayerOverviewByName(nickname).pipe(
+            map((overview) =>
+              this.apiService.getPlayerStats(overview.player_id).pipe(
+                map((stats) =>
+                  loadPlayerDetailsByNicknameSuccess({
+                    playerDetails: { overview, stats },
+                  })
+                ),
+                catchError(() =>
+                  of(loadPlayerDetailsByNicknameError({ nickname }))
+                )
+              )
+            ),
+            catchError(() => of(loadPlayerDetailsByNicknameError({ nickname })))
+          )
+        );
+      })
+    );
+  });
+
+  constructor(private actions$: Actions, private apiService: ApiService) {}
 }
