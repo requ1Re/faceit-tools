@@ -5,10 +5,9 @@ import { PlayerMatchHistoryDetailed } from 'src/app/shared/models/PlayerMatchHis
 @Component({
   selector: 'app-match-history-display',
   templateUrl: './match-history-display.component.html',
-  styleUrls: ['./match-history-display.component.css']
+  styleUrls: ['./match-history-display.component.css'],
 })
 export class MatchHistoryDisplayComponent implements OnInit {
-
   @Input()
   matches: PlayerMatchHistoryDetailed[];
 
@@ -17,55 +16,60 @@ export class MatchHistoryDisplayComponent implements OnInit {
 
   collapsedId = -1;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-
-  getBestOf(match: PlayerMatchHistoryDetailed){
+  getBestOf(match: PlayerMatchHistoryDetailed) {
     return match.stats.rounds.length;
   }
 
-  getDate(match: PlayerMatchHistoryDetailed){
+  getDate(match: PlayerMatchHistoryDetailed) {
     return match.history.finished_at;
   }
 
-  getMatchType(match: PlayerMatchHistoryDetailed){
+  getMatchType(match: PlayerMatchHistoryDetailed) {
     return match.history.game_mode;
   }
 
-  getScore(match: PlayerMatchHistoryDetailed){
-    return match.stats.rounds.map(r => this.getSingleRoundScore(r)).join(', ');
+  getScore(match: PlayerMatchHistoryDetailed) {
+    return match.stats.rounds
+      .map((r) => this.getSingleRoundScore(r))
+      .join(', ');
   }
 
-  getFormattedScore(match: PlayerMatchHistoryDetailed){
+  getFormattedScore(match: PlayerMatchHistoryDetailed) {
     let scores: string[] = [];
     match.stats.rounds.forEach((r) => {
       const s = r.round_stats.Score.split(' / ');
-      if(+s[0] > +s[1]){
-        scores.push(`<span class="text-green">${s[0]}</span> / <span class="text-red">${s[1]}</span>`);
-      }else{
-        scores.push(`<span class="text-red">${s[0]}</span> / <span class="text-green">${s[1]}</span>`);
+      if (+s[0] > +s[1]) {
+        scores.push(
+          `<span class="text-green">${s[0]}</span> / <span class="text-red">${s[1]}</span>`
+        );
+      } else {
+        scores.push(
+          `<span class="text-red">${s[0]}</span> / <span class="text-green">${s[1]}</span>`
+        );
       }
     });
     return scores.join(', ');
   }
 
-  getWinLossFormatted(match: PlayerMatchHistoryDetailed){
+  getWinLossFormatted(match: PlayerMatchHistoryDetailed) {
     let results: string[] = [];
     match.stats.rounds.forEach((r) => {
-      const winner = r.round_stats.Winner;
-      const playerTeam = r.teams[0].players.find(
-        (p) => p.player_id === this.selectedPlayerId
-      )
-        ? r.teams[0]
-        : r.teams[1];
+      const winnerTeamId = r.round_stats.Winner;
+      const winnerTeamIndex = r.teams.findIndex(
+        (t) => t.team_id === winnerTeamId
+      );
 
-        console.log(playerTeam.players.find((p) => p.player_id === this.selectedPlayerId)?.player_stats.Result)
+      const isWin =
+        r.teams[winnerTeamIndex].players.findIndex(
+          (p) => p.player_id === this.selectedPlayerId
+        ) > -1;
 
       results.push(
-        playerTeam.team_id === winner
+        isWin
           ? `<span class="text-green">WIN</span>`
           : `<span class="text-red">LOSS</span>`
       );
@@ -73,15 +77,17 @@ export class MatchHistoryDisplayComponent implements OnInit {
     return results.join(', ');
   }
 
-  getTeamPlayersSorted(players: FaceIT.MatchStats.Player[]){
-    return players.sort((a, b) => +b.player_stats.Kills - +a.player_stats.Kills);
+  getTeamPlayersSorted(players: FaceIT.MatchStats.Player[]) {
+    return players.sort(
+      (a, b) => +b.player_stats.Kills - +a.player_stats.Kills
+    );
   }
 
-  getSingleRoundScore(round: FaceIT.MatchStats.Maps){
+  getSingleRoundScore(round: FaceIT.MatchStats.Maps) {
     return round.round_stats.Score;
   }
 
-  getMaps(match: PlayerMatchHistoryDetailed){
+  getMaps(match: PlayerMatchHistoryDetailed) {
     return match.stats.rounds.map((r) => r.round_stats.Map).join(', ');
   }
 }

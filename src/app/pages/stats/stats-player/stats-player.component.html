@@ -61,7 +61,7 @@
     </div>
     <app-loading-spinner class="history" *ngIf="!(matchHistory$ | async)"></app-loading-spinner>
     <div class="history" *ngIf="(matchHistory$ | async) as matches">
-      <app-match-history-display [matches]="matches"></app-match-history-display>
+      <app-match-history-display [matches]="matches" [selectedPlayerId]="selectedPlayerDetails.overview.player_id"></app-match-history-display>
     </div>
   </div>
 </div>

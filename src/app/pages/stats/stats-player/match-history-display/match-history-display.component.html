@@ -21,8 +21,9 @@
             <td>{{ getMaps(match) }}</td>
           </tr>
           <ng-container *ngIf="collapsedId == i">
-            <tr class="collapsible" *ngFor="let round of match.stats.rounds">
+            <tr class="collapsible" *ngFor="let round of match.stats.rounds; index as roundIndex">
               <td colspan="5" class="collapsible-round">
+                Match {{ roundIndex+1 }}
                 <div class="collapsible-table-holder">
                   <table *ngFor="let team of round.teams">
                     <thead>
@@ -50,7 +51,6 @@
               </td>
             </tr>
           </ng-container>
-
         </ng-container>
       </tbody>
     </table>
