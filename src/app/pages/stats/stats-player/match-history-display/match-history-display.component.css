@@ -10,7 +10,7 @@ h1 {
   @apply mt-2 flex flex-col space-y-2;
 }
 .match {
-  @apply w-full bg-gray-800 text-white rounded p-2;
+  @apply w-full bg-gray-800 text-white rounded p-2 shadow;
 }
 .match-item {
   @apply grid grid-cols-5;
@@ -22,10 +22,10 @@ h1 {
   @apply flex flex-col;
 }
 .collapsible-table-holder {
-  @apply flex flex-row space-x-5;
+  @apply flex flex-col space-y-5 lg:space-y-0 lg:flex-row lg:space-x-5;
 }
 .collapsible-table-holder > table {
-  @apply w-1/2;
+  @apply w-full lg:w-1/2;
 }
 th {
   text-align: left;
