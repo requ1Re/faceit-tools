@@ -16,7 +16,7 @@ h1 {
   @apply w-full bg-gray-800 text-white rounded p-2 shadow;
 }
 .match-item {
-  @apply grid grid-cols-5 cursor-pointer;
+  @apply grid grid-cols-6 cursor-pointer;
 }
 .match-collapsible {
   @apply mt-5 flex flex-col bg-gray-900 p-2 rounded space-y-5;

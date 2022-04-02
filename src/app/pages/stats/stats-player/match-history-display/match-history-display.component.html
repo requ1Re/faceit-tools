@@ -7,11 +7,12 @@
   <ng-container *ngFor="let match of matches; index as i">
     <div class="match">
       <div class="match-item" (click)="collapsedId == i ? collapsedId = -1 : collapsedId = i">
-        <div>{{ (getDate(match) | amFromUnix) | amCalendar }}</div>
-        <div>{{ 'BO' + getBestOf(match) }} / {{ getMatchType(match) }}</div>
+        <div title="{{ (getDate(match) | amFromUnix) | amCalendar }}">{{ (getDate(match) | amFromUnix) | amTimeAgo }}</div>
+        <div>{{ getMatchType(match) }}{{ getBestOf(match) > 1 ? ' (BO' + getBestOf(match) + ')' : '' }}</div>
         <div [innerHTML]="getWinLossFormatted(match)"></div>
         <div [innerHTML]="getFormattedScore(match)"></div>
         <div>{{ getMaps(match) }}</div>
+        <div>{{ getSelectedPlayerStats(match) }}</div>
       </div>
       <ng-container *ngIf="collapsedId == i">
         <div class="match-collapsible">
@@ -29,8 +30,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="no-hover" *ngFor="let player of getTeamPlayersSorted(team.players)">
-                    <td [class.text-faceit]="player.player_id == selectedPlayerId">
+                  <tr class="no-hover" [class.text-faceit]="player.player_id == selectedPlayerId" *ngFor="let player of getTeamPlayersSorted(team.players)">
+                    <td>
                       <a [routerLink]="['../', player.nickname]">{{ player.nickname }}</a>
                     </td>
                     <td>{{ player.player_stats.Kills }}</td>

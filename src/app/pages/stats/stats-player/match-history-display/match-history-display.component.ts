@@ -88,6 +88,33 @@ export class MatchHistoryDisplayComponent implements OnInit {
   }
 
   getMaps(match: PlayerMatchHistoryDetailed) {
-    return match.stats.rounds.map((r) => r.round_stats.Map).join(', ');
+    return match.stats.rounds
+      .map((r) => r.round_stats.Map)
+      .map((m) => m.replace('de_', ''))
+      .map((m) => this.capitalizeFirstLetter(m))
+      .join(', ');
+  }
+
+  getSelectedPlayerStats(match: PlayerMatchHistoryDetailed) {
+    let stats: string[] = [];
+    match.stats.rounds.forEach((r) => {
+      const player = r.teams
+        .find((t) =>
+          t.players.find((p) => p.player_id === this.selectedPlayerId)
+        )
+        ?.players.find((p) => p.player_id === this.selectedPlayerId);
+
+      stats.push(
+        `${player?.player_stats.Kills ?? '?'}/${
+          player?.player_stats.Assists ?? '?'
+        }/${player?.player_stats.Deaths ?? '?'}`
+      );
+    });
+
+    return stats.join(', ');
+  }
+
+  capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }
