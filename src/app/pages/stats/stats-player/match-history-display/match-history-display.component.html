@@ -30,7 +30,9 @@
                 </thead>
                 <tbody>
                   <tr class="no-hover" *ngFor="let player of getTeamPlayersSorted(team.players)">
-                    <td>{{ player.nickname }}</td>
+                    <td [class.text-faceit]="player.player_id == selectedPlayerId">
+                      <a [routerLink]="['../', player.nickname]">{{ player.nickname }}</a>
+                    </td>
                     <td>{{ player.player_stats.Kills }}</td>
                     <td>{{ player.player_stats.Assists }}</td>
                     <td>{{ player.player_stats.Deaths }}</td>

@@ -25,3 +25,6 @@ html, body {
 .text-green {
   @apply text-green-600;
 }
+.text-faceit {
+  color: var(--faceit-primary);
+}

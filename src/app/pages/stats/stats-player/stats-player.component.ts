@@ -34,7 +34,7 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
   playerName = '';
   playerId = '';
 
-  selectedPlayerDetails: App.Player.Details;
+  selectedPlayerDetails: App.Player.Details|null;
 
   matchHistory$: Observable<PlayerMatchHistoryDetailed[]>
 
@@ -57,8 +57,8 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
         this.playerDetails$,
         this.route.paramMap,
       ])
-        .pipe(first())
         .subscribe((data) => {
+          this.selectedPlayerDetails = null;
           this.logService.log(this.pageName, 'Got combined data, calling loadData', data);
 
           this.playerDetails = data[0];
