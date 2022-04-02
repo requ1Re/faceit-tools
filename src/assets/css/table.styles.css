@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-tr:hover {
+tr:not(.no-hover):hover {
   @apply bg-gray-700;
 }
+
 tr.clickable {
   cursor: pointer;
 }

@@ -1,58 +1,48 @@
 <app-card>
-  <div class="container">
+  <div class="header">
     <h1>MATCH HISTORY</h1>
-    <table class="mt-1">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Match Type</th>
-          <th>Result</th>
-          <th>Score(s)</th>
-          <th>Map(s)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let match of matches; index as i" >
-          <tr class="h-10 clickable" (click)="collapsedId == i ? collapsedId = -1 : collapsedId = i">
-            <td>{{ (getDate(match) | amFromUnix) | amCalendar }}</td>
-            <td>{{ 'BO' + getBestOf(match) }} / {{ getMatchType(match) }}</td>
-            <td [innerHTML]="getWinLossFormatted(match)"></td>
-            <td [innerHTML]="getFormattedScore(match)"></td>
-            <td>{{ getMaps(match) }}</td>
-          </tr>
-          <ng-container *ngIf="collapsedId == i">
-            <tr class="collapsible" *ngFor="let round of match.stats.rounds; index as roundIndex">
-              <td colspan="5" class="collapsible-round">
-                Match {{ roundIndex+1 }}
-                <div class="collapsible-table-holder">
-                  <table *ngFor="let team of round.teams">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Kills</th>
-                        <th>Assists</th>
-                        <th>Deaths</th>
-                        <th>HS%</th>
-                        <th>MVP</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let player of getTeamPlayersSorted(team.players)">
-                        <td>{{ player.nickname }}</td>
-                        <td>{{ player.player_stats.Kills }}</td>
-                        <td>{{ player.player_stats.Assists }}</td>
-                        <td>{{ player.player_stats.Deaths }}</td>
-                        <td>{{ player.player_stats['Headshots %'] }}</td>
-                        <td>{{ player.player_stats.MVPs }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </td>
-            </tr>
-          </ng-container>
-        </ng-container>
-      </tbody>
-    </table>
   </div>
 </app-card>
+<div class="match-holder">
+  <ng-container *ngFor="let match of matches; index as i">
+    <div class="match">
+      <div class="match-item" (click)="collapsedId == i ? collapsedId = -1 : collapsedId = i">
+        <div>{{ (getDate(match) | amFromUnix) | amCalendar }}</div>
+        <div>{{ 'BO' + getBestOf(match) }} / {{ getMatchType(match) }}</div>
+        <div [innerHTML]="getWinLossFormatted(match)"></div>
+        <div [innerHTML]="getFormattedScore(match)"></div>
+        <div>{{ getMaps(match) }}</div>
+      </div>
+      <ng-container *ngIf="collapsedId == i">
+        <div class="match-collapsible">
+          <div class="collapsible-round" *ngFor="let round of match.stats.rounds; index as roundIndex">
+            <div class="collapsible-table-holder">
+              <table *ngFor="let team of round.teams">
+                <thead>
+                  <tr class="no-hover">
+                    <th>Name</th>
+                    <th>Kills</th>
+                    <th>Assists</th>
+                    <th>Deaths</th>
+                    <th>HS%</th>
+                    <th>MVP</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="no-hover" *ngFor="let player of getTeamPlayersSorted(team.players)">
+                    <td>{{ player.nickname }}</td>
+                    <td>{{ player.player_stats.Kills }}</td>
+                    <td>{{ player.player_stats.Assists }}</td>
+                    <td>{{ player.player_stats.Deaths }}</td>
+                    <td>{{ player.player_stats['Headshots %'] }}%</td>
+                    <td>{{ player.player_stats.MVPs }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
