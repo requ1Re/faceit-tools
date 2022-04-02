@@ -20,3 +20,6 @@
 .icon {
   color: var(--faceit-primary);
 }
+a:hover {
+  color: var(--faceit-primary);
+}

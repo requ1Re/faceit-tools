@@ -1,6 +1,5 @@
 .disclaimer {
-  @apply w-full mt-5 px-3 py-2 rounded text-white flex items-center justify-between;
-  background-color: var(--faceit-primary);
+  @apply w-full mt-5 px-3 py-2 rounded text-white flex items-center justify-between bg-gray-800;
 }
 .icon {
   @apply mr-2;
