@@ -7,6 +7,7 @@ import { StatsDashboardComponent } from './stats-dashboard/stats-dashboard.compo
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StatsPlayerComponent } from './stats-player/stats-player.component';
 import { MatchHistoryDisplayComponent } from './stats-player/match-history-display/match-history-display.component';
+import { MomentModule } from 'ngx-moment';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { MatchHistoryDisplayComponent } from './stats-player/match-history-displ
   imports: [
     CommonModule,
     StatsRoutingModule,
-    SharedModule
+    SharedModule,
+    MomentModule
   ]
 })
 export class StatsModule { }

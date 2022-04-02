@@ -6,3 +6,21 @@ h1 {
   border-color: var(--faceit-primary);
   @apply text-2xl border-b-2;
 }
+th {
+  text-align: left;
+}
+.collapsible {
+  @apply bg-gray-900 rounded;
+}
+.collapsible:hover {
+  @apply bg-gray-900;
+}
+.collapsible-round {
+
+}
+.collapsible-table-holder {
+  @apply w-full flex justify-evenly space-x-2;
+}
+.collapsible-table-holder > * {
+  @apply w-1/2;
+}

@@ -21,7 +21,7 @@ import { AlertComponent } from './components/alert/alert.component';
     EloDisplayComponent,
     StatDisplayComponent,
     LoadingSpinnerComponent,
-    AlertComponent
+    AlertComponent,
   ],
   imports: [
     CommonModule,

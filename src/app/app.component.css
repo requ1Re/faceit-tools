@@ -11,8 +11,9 @@
   z-index: 1;
   height: 100%;
 }
+.header-wrapper,
 .footer-wrapper {
-  z-index: 2;
+  z-index: 1000;
 }
 .error {
   @apply px-3 py-2 bg-red-600 text-white;

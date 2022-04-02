@@ -16,6 +16,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppStoreModule } from './shared/store/app-store.module';
 import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.component';
 import { LogService } from './shared/services/log.service';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [AppComponent, ToolsOverviewComponent, NotFoundComponent, SpriteWrapperComponent],
@@ -28,7 +29,8 @@ import { LogService } from './shared/services/log.service';
     AppStoreModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    MomentModule
   ],
   providers: [
     LogService,

@@ -59,7 +59,7 @@
         [value]="selectedPlayerDetails.stats.lifetime['Average Headshots %'] + '%'">
       </app-stat-display>
     </div>
-    <app-alert [icon]="faInfoCircle" class="w-full">Match History is coming soon</app-alert>
+    <app-loading-spinner class="history" *ngIf="!(matchHistory$ | async)"></app-loading-spinner>
     <div class="history" *ngIf="(matchHistory$ | async) as matches">
       <app-match-history-display [matches]="matches"></app-match-history-display>
     </div>

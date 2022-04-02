@@ -27,7 +27,6 @@ import { EloUtil } from 'src/app/shared/utils/EloUtil';
 export class StatsPlayerComponent extends BaseComponentWithStatsStore {
   pageName = 'StatsPlayer';
 
-  faInfoCircle = faInfoCircle;
   faSteam = faSteam;
 
   playerDetails: App.Player.Details[] = [];
