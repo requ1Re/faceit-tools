@@ -1,7 +1,7 @@
 h1 {
   color: var(--faceit-primary);
   border-color: var(--faceit-primary);
-  @apply text-2xl border-b-2 rounded-b;
+  @apply text-xl border-b-2 rounded-b;
 }
 .header > h1 {
   @apply px-2 pb-1;

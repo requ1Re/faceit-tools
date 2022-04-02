@@ -4,8 +4,8 @@
 .wrapper .name {
   color: var(--faceit-primary);
   border-color: var(--faceit-primary);
-  @apply text-2xl border-b-2;
+  @apply text-xl border-b-2;
 }
 .wrapper h1 {
-  @apply text-2xl;
+  @apply text-xl;
 }
