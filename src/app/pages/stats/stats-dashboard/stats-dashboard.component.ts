@@ -65,6 +65,7 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
         .pipe(ofType(loadPlayerDetailsByNicknameError))
         .subscribe((payload) => {
           this.error = payload.nickname === this.username;
+          this.loading = false;
         })
     );
   }
