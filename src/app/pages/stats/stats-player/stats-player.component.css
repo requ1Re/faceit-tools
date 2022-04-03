@@ -33,7 +33,7 @@
   @apply flex justify-center items-center w-full mt-5 space-x-2 lg:justify-start lg:w-auto lg:mt-0;
 }
 .social-btn {
-  @apply flex justify-center items-center p-2 w-10 h-10 rounded-full cursor-pointer bg-gray-800;
+  @apply flex justify-center items-center p-2 w-10 h-10 rounded-full cursor-pointer bg-gray-800 shadow;
 }
 .social-btn:hover {
   @apply bg-gray-700 rounded w-auto;
@@ -55,4 +55,20 @@
 
 .history {
   @apply w-full mt-5;
+}
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.10);
+}
+
+.text-shadow-md {
+  text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 15px 30px rgba(0,0,0,0.11), 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.text-shadow-none {
+  text-shadow: none;
 }

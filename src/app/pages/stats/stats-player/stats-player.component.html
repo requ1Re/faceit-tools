@@ -10,7 +10,7 @@
             <use [attr.xlink:href]="'assets/img/icons/flags/' + country + '.svg#flag-icons-' + country"></use>
           </svg>
         </div>
-        <h1>{{ selectedPlayerDetails.overview.nickname }}</h1>
+        <h1 class="text-shadow-md">{{ selectedPlayerDetails.overview.nickname }}</h1>
         <app-card>
           <div class="elo" *ngIf="selectedPlayerDetails.overview.games['csgo'].skill_level as level">
             <svg>
