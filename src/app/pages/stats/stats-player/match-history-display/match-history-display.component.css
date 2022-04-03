@@ -13,10 +13,16 @@ h1 {
   @apply mt-2 flex flex-col space-y-2;
 }
 .match {
-  @apply w-full bg-gray-800 text-white rounded p-2 shadow;
+  @apply w-full bg-gray-800 text-white rounded py-2 pl-2 pr-3 shadow;
 }
 .match-item {
-  @apply grid grid-cols-6 cursor-pointer;
+  @apply grid grid-flow-col auto-cols-fr cursor-pointer;
+}
+/* .match-item > *:not(:first-child):not(:last-child) {
+  @apply justify-self-center;
+} */
+.match-item > *:last-child {
+  @apply justify-self-end;
 }
 .match-collapsible {
   @apply mt-5 flex flex-col bg-gray-900 p-2 rounded space-y-5;

@@ -13,6 +13,12 @@
         <div [innerHTML]="getFormattedScore(match)"></div>
         <div>{{ getMaps(match) }}</div>
         <div>{{ getSelectedPlayerStats(match) }}</div>
+        <div>
+          <a [href]="match.history.faceit_url.replace('{lang}', 'en')"
+            target="_blank">
+            <fa-icon [icon]="faExternalLink"></fa-icon>
+          </a>
+        </div>
       </div>
       <ng-container *ngIf="collapsedId == i">
         <div class="match-collapsible">

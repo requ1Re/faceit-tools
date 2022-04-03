@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faExternalLink } from '@fortawesome/free-solid-svg-icons';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { PlayerMatchHistoryDetailed } from 'src/app/shared/models/PlayerMatchHistoryDetailed';
 
@@ -8,6 +9,9 @@ import { PlayerMatchHistoryDetailed } from 'src/app/shared/models/PlayerMatchHis
   styleUrls: ['./match-history-display.component.css'],
 })
 export class MatchHistoryDisplayComponent implements OnInit {
+
+  faExternalLink = faExternalLink;
+
   @Input()
   matches: PlayerMatchHistoryDetailed[];
 
