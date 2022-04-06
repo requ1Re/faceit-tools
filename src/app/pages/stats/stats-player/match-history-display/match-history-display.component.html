@@ -14,44 +14,47 @@
         <div>{{ getMaps(match) }}</div>
         <div>{{ getSelectedPlayerStats(match) }}</div>
         <div>
+          <a [routerLink]="['/tools/picker/match/', match.history.faceit_url.replace('https://www.faceit.com/{lang}/csgo/room/', '')]"
+            class="mr-2">
+            <fa-icon [icon]="faMapLocationDot"></fa-icon>
+          </a>
           <a [href]="match.history.faceit_url.replace('{lang}', 'en')"
             target="_blank">
             <fa-icon [icon]="faExternalLink"></fa-icon>
           </a>
         </div>
       </div>
-      <ng-container *ngIf="collapsedId == i">
-        <div class="match-collapsible">
-          <div class="collapsible-round" *ngFor="let round of match.stats.rounds; index as roundIndex">
-            <div class="collapsible-table-holder">
-              <table *ngFor="let team of round.teams">
-                <thead>
-                  <tr class="no-hover">
-                    <th>Name</th>
-                    <th>Kills</th>
-                    <th>Assists</th>
-                    <th>Deaths</th>
-                    <th>HS%</th>
-                    <th>MVP</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="no-hover" [class.text-faceit]="player.player_id == selectedPlayerId" *ngFor="let player of getTeamPlayersSorted(team.players)">
-                    <td>
-                      <a [routerLink]="['../', player.nickname]">{{ player.nickname }}</a>
-                    </td>
-                    <td>{{ player.player_stats.Kills }}</td>
-                    <td>{{ player.player_stats.Assists }}</td>
-                    <td>{{ player.player_stats.Deaths }}</td>
-                    <td>{{ player.player_stats['Headshots %'] }}%</td>
-                    <td>{{ player.player_stats.MVPs }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      <div class="match-collapsible" *ngIf="collapsedId == i">
+        <div class="collapsible-round" *ngFor="let round of match.stats.rounds; index as roundIndex">
+          <div class="w-full collapsible-map-name">{{ formatMapName(round.round_stats.Map) }}</div>
+          <div class="collapsible-table-holder">
+            <table *ngFor="let team of round.teams">
+              <thead>
+                <tr class="no-hover">
+                  <th>Name</th>
+                  <th>Kills</th>
+                  <th>Assists</th>
+                  <th>Deaths</th>
+                  <th>HS%</th>
+                  <th>MVP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="no-hover" [class.text-faceit]="player.player_id == selectedPlayerId" *ngFor="let player of getTeamPlayersSorted(team.players)">
+                  <td>
+                    <a [routerLink]="['../', player.nickname]">{{ player.nickname }}</a>
+                  </td>
+                  <td>{{ player.player_stats.Kills }}</td>
+                  <td>{{ player.player_stats.Assists }}</td>
+                  <td>{{ player.player_stats.Deaths }}</td>
+                  <td>{{ player.player_stats['Headshots %'] }}%</td>
+                  <td>{{ player.player_stats.MVPs }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </ng-container>
+      </div>
     </div>
   </ng-container>
 </div>

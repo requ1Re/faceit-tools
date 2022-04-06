@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faExternalLink } from '@fortawesome/free-solid-svg-icons';
+import { faExternalLink, faMapLocation, faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { PlayerMatchHistoryDetailed } from 'src/app/shared/models/PlayerMatchHistoryDetailed';
 
@@ -11,6 +11,7 @@ import { PlayerMatchHistoryDetailed } from 'src/app/shared/models/PlayerMatchHis
 export class MatchHistoryDisplayComponent implements OnInit {
 
   faExternalLink = faExternalLink;
+  faMapLocationDot = faMapLocationDot;
 
   @Input()
   matches: PlayerMatchHistoryDetailed[];
@@ -94,9 +95,12 @@ export class MatchHistoryDisplayComponent implements OnInit {
   getMaps(match: PlayerMatchHistoryDetailed) {
     return match.stats.rounds
       .map((r) => r.round_stats.Map)
-      .map((m) => m.replace('de_', ''))
-      .map((m) => this.capitalizeFirstLetter(m))
+      .map((m) => this.formatMapName(m))
       .join(', ');
+  }
+
+  formatMapName(mapName: string){
+    return this.capitalizeFirstLetter(mapName.replace('de_', ''));
   }
 
   getSelectedPlayerStats(match: PlayerMatchHistoryDetailed) {

@@ -1,6 +1,6 @@
 <div class="wrapper">
   <fa-icon [icon]="faToolbox" size="10x" class="icon col-span-4"></fa-icon>
-  <h1 class="col-span-4">requiRe's FACEIT Tools</h1>
+  <h1 class="col-span-4">FACEIT Tools</h1>
   <div class="tools">
     <app-card *ngFor="let tool of tools">
       <div class="tool-card" (click)="gotoTool(tool.id)" *ngIf="!tool.external">
@@ -8,8 +8,4 @@
       </div>
     </app-card>
   </div>
-  <app-alert class="mt-10" [icon]="faInfoCircle">
-    <span class="pr-5">Update 1 just dropped! Changelog: <a
-        href="https://blog.faceit-tools.app/feature-update-1/">https://blog.faceit-tools.app/feature-update-1/</a></span>
-  </app-alert>
 </div>

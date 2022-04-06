@@ -4,7 +4,7 @@ h1 {
 }
 .header {
   border-color: var(--faceit-primary);
-  @apply h-10 border-b-2 rounded-b flex items-center;
+  @apply h-10 border-b rounded-b flex items-center;
 }
 .header > h1 {
   @apply px-2;
@@ -13,7 +13,7 @@ h1 {
   @apply mt-2 flex flex-col space-y-2;
 }
 .match {
-  @apply w-full bg-gray-800 text-white rounded py-2 pl-2 pr-3 shadow;
+  @apply w-full bg-gray-800 text-white rounded p-2 shadow-lg;
 }
 .match-item {
   @apply grid grid-flow-col auto-cols-fr cursor-pointer;
@@ -35,6 +35,10 @@ h1 {
 }
 .collapsible-table-holder > table {
   @apply w-full lg:w-1/2;
+}
+.collapsible-map-name {
+  border-color: var(--faceit-primary);
+  @apply border-b;
 }
 th {
   text-align: left;

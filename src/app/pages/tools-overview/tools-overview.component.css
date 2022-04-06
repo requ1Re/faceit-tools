@@ -2,17 +2,21 @@
   @apply h-full flex flex-col justify-center items-center;
 }
 .tools {
-  @apply w-full mt-10 flex flex-row justify-center space-x-5;
+  @apply w-full flex flex-row justify-center items-center;
+}
+.tools > *:not(:last-child){
+  @apply mr-2;
 }
 .wrapper h1 {
-  @apply text-5xl text-white;
+  border-color: var(--faceit-primary);
+  @apply text-5xl text-white border-b-2 pb-3 mb-3;
 }
 .tool {
   @apply h-20 w-60;
 }
 .tool-card {
   cursor: pointer;
-  @apply p-5 text-center;
+  @apply px-3 py-2 text-center;
 }
 .tool-card:hover {
   @apply bg-gray-700 rounded;

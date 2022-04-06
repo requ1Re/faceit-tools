@@ -4,7 +4,7 @@
 .wrapper .name {
   color: var(--faceit-primary);
   border-color: var(--faceit-primary);
-  @apply text-xl border-b-2;
+  @apply text-xl border-b;
 }
 .wrapper h1 {
   @apply text-xl;
