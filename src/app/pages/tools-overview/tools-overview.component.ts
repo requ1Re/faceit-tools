@@ -17,7 +17,7 @@ export class ToolsOverviewComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    document.title = "requiRe's FACEIT Tools"
+    document.title = "FACEIT Tools"
   }
 
   gotoTool(toolId: number) {

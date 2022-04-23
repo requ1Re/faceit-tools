@@ -58,7 +58,7 @@
                       <svg>
                         <use [attr.xlink:href]="'#level' + details.overview.games['csgo'].skill_level"></use>
                       </svg>
-                      <a [routerLink]="['../../../stats/player/', player.name]">{{ player.name }}</a>
+                      <a [routerLink]="['../../../stats/', player.name]">{{ player.name }}</a>
                     </div>
                   </th>
                 </tr>
@@ -67,7 +67,8 @@
                 <tr *ngFor="let map of getMaps()">
                   <td>{{ map }}</td>
                   <td *ngFor="let playerStats of team.playerMapStats">
-                    <span class="text-xl" [style.color]="getBackgroundColor(getPlayerWinrateForMap(playerStats, map))">{{
+                    <span class="text-xl"
+                      [style.color]="getBackgroundColor(getPlayerWinrateForMap(playerStats, map))">{{
                       getPlayerWinrateForMap(playerStats, map) }}%</span><br>(<span class="text-green-500">{{
                       getPlayerWinsForMap(playerStats, map) }}</span> / <span class="text-red-500">{{
                       getPlayerLossesForMap(playerStats, map) }}</span> / {{ getPlayerMatchesForMap(playerStats, map)

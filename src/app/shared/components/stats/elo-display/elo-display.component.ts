@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class EloDisplayComponent implements OnInit {
 
   @Input()
-  elo: number = 2200;
+  elo: number = 800;
 
   constructor() { }
 

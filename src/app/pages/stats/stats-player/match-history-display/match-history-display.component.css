@@ -46,3 +46,9 @@ th {
 a:hover {
   color: var(--faceit-primary);
 }
+.more {
+  width: 100%;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}

@@ -18,7 +18,7 @@ export class AppComponent extends BaseComponent implements OnInit {
   title = 'FACEIT Tools';
 
   error = false;
-  errorText = "test";
+  errorText = "";
 
   ngOnInit(): void {
     document.title = this.title;

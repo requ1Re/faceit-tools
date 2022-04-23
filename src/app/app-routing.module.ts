@@ -4,13 +4,14 @@ import { NotFoundComponent } from './pages/system/not-found/not-found.component'
 import { ToolsOverviewComponent } from './pages/tools-overview/tools-overview.component';
 
 const routes: Routes = [
+  // Legacy
+  {
+    path: 'tools/:p',
+    redirectTo: ':p',
+  },
+  // New
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'tools',
-  },
-  {
-    path: 'tools',
     children: [
       {
         path: '',
@@ -37,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundComponent
+    component: NotFoundComponent,
   },
 ];
 

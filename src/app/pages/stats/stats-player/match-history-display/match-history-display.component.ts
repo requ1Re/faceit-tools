@@ -25,6 +25,8 @@ export class MatchHistoryDisplayComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  showMore = false;
+
   getBestOf(match: PlayerMatchHistoryDetailed) {
     return match.stats.rounds.length;
   }
@@ -124,5 +126,9 @@ export class MatchHistoryDisplayComponent implements OnInit {
 
   capitalizeFirstLetter(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  getMatchesSubset(){
+    return this.showMore ? this.matches : this.matches.slice(0, 10);
   }
 }

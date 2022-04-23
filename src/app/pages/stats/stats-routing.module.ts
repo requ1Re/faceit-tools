@@ -7,12 +7,12 @@ const routes: Routes = [
   { path: '', component: StatsDashboardComponent },
   // Legacy
   {
-    path: 'player/:playerId/:playerName',
-    redirectTo: 'player/:playerName',
+    path: 'player/:playerName',
+    redirectTo: ':playerName',
   },
   // New
   {
-    path: 'player/:playerName',
+    path: ':playerName',
     component: StatsPlayerComponent,
   },
 ];

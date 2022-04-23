@@ -4,7 +4,7 @@
   </div>
 </app-card>
 <div class="match-holder">
-  <ng-container *ngFor="let match of matches; index as i">
+  <ng-container *ngFor="let match of getMatchesSubset(); index as i">
     <div class="match">
       <div class="match-item" (click)="collapsedId == i ? collapsedId = -1 : collapsedId = i">
         <div title="{{ (getDate(match) | amFromUnix) | amCalendar }}">{{ (getDate(match) | amFromUnix) | amTimeAgo }}</div>
@@ -14,7 +14,7 @@
         <div>{{ getMaps(match) }}</div>
         <div>{{ getSelectedPlayerStats(match) }}</div>
         <div>
-          <a [routerLink]="['/tools/picker/match/', match.history.faceit_url.replace('https://www.faceit.com/{lang}/csgo/room/', '')]"
+          <a [routerLink]="['/picker/match/', match.history.faceit_url.replace('https://www.faceit.com/{lang}/csgo/room/', '')]"
             class="mr-2">
             <fa-icon [icon]="faMapLocationDot"></fa-icon>
           </a>
@@ -57,4 +57,5 @@
       </div>
     </div>
   </ng-container>
+  <a class="more" *ngIf="!showMore" (click)="showMore = true">Show more</a>
 </div>
