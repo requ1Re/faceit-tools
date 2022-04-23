@@ -1,4 +1,4 @@
-import { MapPool } from "./MapPool";
+import { ActiveDutyMap } from "./MapPool";
 
 export interface TeamMapStats {
   combinedMapStats: MapStats[];
@@ -19,7 +19,7 @@ export interface MapStats {
 }
 
 export function getDefaultMapStats(): MapStats[] {
-  return Object.values(MapPool).filter((v) => typeof v === "string").map((map) => {
+  return Object.values(ActiveDutyMap).filter((v) => typeof v === "string").map((map) => {
     return {
       name: map.toString(),
       matches: 0,

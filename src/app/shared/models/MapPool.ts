@@ -1,4 +1,4 @@
-export enum MapPool {
+export enum ActiveDutyMap {
   ANCIENT = "Ancient",
   DUST2 = "Dust2",
   INFERNO = "Inferno",

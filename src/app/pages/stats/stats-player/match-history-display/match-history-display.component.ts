@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { faExternalLink, faMapLocation, faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { PlayerMatchHistoryDetailed } from 'src/app/shared/models/PlayerMatchHistoryDetailed';
+import { StringUtil } from 'src/app/shared/utils/StringUtil';
 
 @Component({
   selector: 'app-match-history-display',
@@ -102,7 +103,9 @@ export class MatchHistoryDisplayComponent implements OnInit {
   }
 
   formatMapName(mapName: string){
-    return this.capitalizeFirstLetter(mapName.replace('de_', ''));
+    // remove de_, cs_ and workshop prefix from map name
+    const cleanedMapName = mapName.replace('de_', '').replace('cs_', '').replace(/workshop\/[0-9]+\/(.*)/, '$1');
+    return StringUtil.capitalizeFirstLetter(cleanedMapName);
   }
 
   getSelectedPlayerStats(match: PlayerMatchHistoryDetailed) {
@@ -122,10 +125,6 @@ export class MatchHistoryDisplayComponent implements OnInit {
     });
 
     return stats.join(', ');
-  }
-
-  capitalizeFirstLetter(str: string) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   getMatchesSubset(){

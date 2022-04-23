@@ -7,7 +7,7 @@ import { combineLatest, first } from 'rxjs';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { App } from 'src/app/shared/models/App';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
-import { MapPool } from 'src/app/shared/models/MapPool';
+import { ActiveDutyMap } from 'src/app/shared/models/MapPool';
 import {
   getDefaultMapStats,
   PlayerMapStats,
@@ -277,26 +277,26 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   }
 
   getMaps() {
-    return Object.values(MapPool).filter((v) => typeof v === 'string');
+    return Object.values(ActiveDutyMap).filter((v) => typeof v === 'string');
   }
 
-  getPlayerWinrateForMap(playerStats: PlayerMapStats, map: MapPool) {
+  getPlayerWinrateForMap(playerStats: PlayerMapStats, map: ActiveDutyMap) {
     return this.getPlayerStatsForMap(playerStats, map)?.rate ?? 0;
   }
 
-  getPlayerLossesForMap(playerStats: PlayerMapStats, map: MapPool) {
+  getPlayerLossesForMap(playerStats: PlayerMapStats, map: ActiveDutyMap) {
     return this.getPlayerStatsForMap(playerStats, map)?.losses ?? 0;
   }
 
-  getPlayerWinsForMap(playerStats: PlayerMapStats, map: MapPool) {
+  getPlayerWinsForMap(playerStats: PlayerMapStats, map: ActiveDutyMap) {
     return this.getPlayerStatsForMap(playerStats, map)?.wins ?? 0;
   }
 
-  getPlayerMatchesForMap(playerStats: PlayerMapStats, map: MapPool) {
+  getPlayerMatchesForMap(playerStats: PlayerMapStats, map: ActiveDutyMap) {
     return this.getPlayerStatsForMap(playerStats, map)?.matches ?? 0;
   }
 
-  getPlayerStatsForMap(playerStats: PlayerMapStats, map: MapPool) {
+  getPlayerStatsForMap(playerStats: PlayerMapStats, map: ActiveDutyMap) {
     return playerStats.mapStats.find((s) => s.name === map.toString());
   }
 
