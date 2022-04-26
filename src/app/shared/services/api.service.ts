@@ -13,6 +13,8 @@ export class ApiService {
   readonly FACEIT_API_KEY = environment['FACEIT_API_KEY'];
   readonly BACKEND_API_URL = environment['API_URL'];
 
+  readonly MATCH_COUNT = 30;
+
   readonly HEADERS = {
     Authorization: 'Bearer ' + this.FACEIT_API_KEY,
   };
@@ -55,7 +57,7 @@ export class ApiService {
   // }
 
 
-  getPlayerMatchHistoryDetailed(playerId: string, matchCount = 20): Observable<PlayerMatchHistoryDetailed[]> {
+  getPlayerMatchHistoryDetailed(playerId: string, matchCount = this.MATCH_COUNT): Observable<PlayerMatchHistoryDetailed[]> {
     this.logService.log('API', 'getPlayerMatchHistoryDetailed for', playerId);
     return this.getPlayerMatchHistory(playerId, matchCount).pipe(
       // i.started_at !== i.finished_at -> matches that started and ended at the same time throw 404
@@ -74,7 +76,7 @@ export class ApiService {
     );
   }
 
-  getPlayerMatchHistory(playerId: string, matchCount = 20) {
+  getPlayerMatchHistory(playerId: string, matchCount = this.MATCH_COUNT) {
     return this.http.get<FaceIT.MatchHistory.Response>(
       'https://open.faceit.com/data/v4/players/' + playerId + '/history?game=csgo&offset=0&limit=' + matchCount,
       { headers: this.HEADERS }
