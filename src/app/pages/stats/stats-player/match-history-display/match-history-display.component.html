@@ -1,9 +1,22 @@
 <app-card>
   <div class="header">
     <h1>MATCH HISTORY</h1>
+    <h3>({{ showMore ? matches.length : matchCountDefault }} of {{ matches.length }})</h3>
   </div>
 </app-card>
 <div class="match-holder">
+  <div class="match">
+    <div class="match-item" style="cursor: default">
+      <div>Date</div>
+      <div>Mode</div>
+      <div>Result</div>
+      <div>Score</div>
+      <div>Map</div>
+      <div>Player Stats</div>
+      <div></div>
+    </div>
+  </div>
+
   <ng-container *ngFor="let match of getMatchesSubset(); index as i">
     <div class="match">
       <div class="match-item" (click)="collapsedId == i ? collapsedId = -1 : collapsedId = i">
@@ -57,5 +70,5 @@
       </div>
     </div>
   </ng-container>
-  <a class="more" *ngIf="!showMore" (click)="showMore = true">Show more</a>
+  <a class="more" *ngIf="!showMore" (click)="showMore = true">Show {{ matches.length - matchCountDefault }} more</a>
 </div>

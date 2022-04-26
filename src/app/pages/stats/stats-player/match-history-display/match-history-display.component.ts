@@ -26,6 +26,7 @@ export class MatchHistoryDisplayComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  matchCountDefault = 10;
   showMore = false;
 
   getBestOf(match: PlayerMatchHistoryDetailed) {
@@ -128,6 +129,6 @@ export class MatchHistoryDisplayComponent implements OnInit {
   }
 
   getMatchesSubset(){
-    return this.showMore ? this.matches : this.matches.slice(0, 10);
+    return this.showMore ? this.matches : this.matches.slice(0, this.matchCountDefault);
   }
 }
