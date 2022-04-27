@@ -5,12 +5,16 @@
     <div class="input">
       <input type="text" [placeholder]="placeholder" [value]="_value" (keyup.enter)="submit()"
         (input)="handleInput($event)">
-      <button class="w-12 hover:bg-gray-700 hover:rounded-tr hover:rounded-br" (click)="submit()" [disabled]="disableSubmit">
+
+        <button *ngIf="!disableSubmit" class="w-12 hover:bg-gray-700 hover:rounded-tr hover:rounded-br" (click)="submit()"
+        [disabled]="disableSubmit">
         <fa-icon [icon]="faChevronRight"></fa-icon>
       </button>
+      <button *ngIf="disableSubmit" class="w-12"
+        [disabled]="disableSubmit">
+        <app-loading-spinner></app-loading-spinner>
+      </button>
     </div>
-    <div class="alert" *ngIf="isErroneous" [innerHTML]="errorText">
-
-    </div>
+    <div class="alert" *ngIf="isErroneous" [innerHTML]="errorText"></div>
   </app-card>
 </div>
