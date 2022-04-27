@@ -27,3 +27,6 @@
 a:hover {
   color: var(--faceit-primary);
 }
+.footer-wrapper {
+  @apply mt-5;
+}

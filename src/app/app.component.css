@@ -1,5 +1,5 @@
 .wrapper {
-  @apply h-auto md:h-full;
+  height: 100%;
   width: 100%;
 
   display: flex;
@@ -9,10 +9,9 @@
 .page-wrapper {
   overflow: auto;
   z-index: 1;
-  height: 100%;
+  flex: 1;
 }
-.header-wrapper,
-.footer-wrapper {
+.header-wrapper {
   z-index: 1000;
 }
 .error {
