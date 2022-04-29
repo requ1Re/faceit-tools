@@ -118,7 +118,7 @@ export class AccountFinderDashboardComponent extends BaseComponent implements On
       this.registerSubscription(
         this.api.findFACEITAccountBySteamID(steamId).subscribe({
           next: (data) => {
-            this.router.navigate(['stats', 'player', data.nickname], { relativeTo: this.route });
+            this.router.navigate(['...', 'stats', 'player', data.nickname], { relativeTo: this.route });
           },
           error: (e) => {
             this.errorText = "No FACEIT Account belonging to the specified Steam Account could be found.";
