@@ -4,6 +4,7 @@ import { faAddressBook, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { lastValueFrom } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/components/base/base';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { BrowserService } from 'src/app/shared/services/browser.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
 
 enum SteamInputType {
@@ -41,10 +42,10 @@ export class AccountFinderDashboardComponent extends BaseComponent implements On
   faChevronRight = faChevronRight;
   faAddressBook = faAddressBook;
 
-  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private errorService: ErrorService) { super(); }
+  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private errorService: ErrorService, private browserService: BrowserService) { super(); }
 
   ngOnInit(): void {
-    document.title = "FACEIT Tools - Account Finder";
+    this.browserService.getDocument().title = "FACEIT Tools - Account Finder";
     this.errorService.disableErrorDisplaying();
   }
 
