@@ -21,7 +21,7 @@ import { MomentModule } from 'ngx-moment';
 @NgModule({
   declarations: [AppComponent, ToolsOverviewComponent, NotFoundComponent, SpriteWrapperComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     AppRoutingModule,
     SharedModule,

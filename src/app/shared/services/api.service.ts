@@ -11,7 +11,6 @@ import { LogService } from './log.service';
 @Injectable()
 export class ApiService {
   readonly FACEIT_API_KEY = environment['FACEIT_API_KEY'];
-  readonly BACKEND_API_URL = environment['API_URL'];
 
   readonly MATCH_COUNT = 30;
 
@@ -92,7 +91,7 @@ export class ApiService {
 
   resolveVanityURL(vanityURL: string){
     return this.http.get<Backend.ResolveVanityURLResponse>(
-      `${this.BACKEND_API_URL}/resolve/${vanityURL}`
+      `api/resolve/${vanityURL}`
     );
   }
 

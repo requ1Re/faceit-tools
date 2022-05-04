@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { App } from 'src/app/shared/models/App';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { BrowserService } from 'src/app/shared/services/browser.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import {
   loadPlayerDetailsByNicknameError,
@@ -38,13 +39,13 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
     private api: ApiService,
     private errorService: ErrorService,
     store: Store<StatsState>,
-    actions$: Actions
+    actions$: Actions, private browserService: BrowserService
   ) {
     super(store, actions$);
   }
 
   init() {
-    document.title = 'FACEIT Tools - Statistics';
+    this.browserService.getDocument().title = 'FACEIT Tools - Statistics';
     this.errorService.disableErrorDisplaying();
 
     this.registerSubscription(

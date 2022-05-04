@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faInfoCircle, faToolbox } from '@fortawesome/free-solid-svg-icons';
+import { BrowserService } from 'src/app/shared/services/browser.service';
 import { Config, ConfigUtil } from 'src/app/shared/utils/ConfigUtil';
 
 @Component({
@@ -14,10 +15,10 @@ export class ToolsOverviewComponent implements OnInit {
   faToolbox = faToolbox;
   faInfoCircle = faInfoCircle;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute, private browserService: BrowserService) {}
 
   ngOnInit(): void {
-    document.title = "FACEIT Tools"
+    this.browserService.getDocument().title = "FACEIT Tools"
   }
 
   gotoTool(toolId: number) {

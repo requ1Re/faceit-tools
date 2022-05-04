@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faChevronRight, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
+import { BrowserService } from 'src/app/shared/services/browser.service';
 
 @Component({
   templateUrl: './picker-dashboard.component.html',
@@ -19,10 +20,10 @@ export class PickerDashboardComponent implements OnInit {
 
   faMapMarkedAlt = faMapMarkedAlt;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute, private browserService: BrowserService) {}
 
   ngOnInit(): void {
-    document.title = "FACEIT Tools - Map Picker"
+    this.browserService.getDocument().title = "FACEIT Tools - Map Picker"
   }
 
   handleInput(val: string) {

@@ -11,6 +11,7 @@ import { EloDisplayComponent } from './components/stats/elo-display/elo-display.
 import { StatDisplayComponent } from './components/stats/stat-display/stat-display.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { BrowserService } from './services/browser.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AlertComponent } from './components/alert/alert.component';
     AlertComponent
   ],
   providers: [
-    ApiService
+    ApiService,
+    BrowserService
   ]
 })
 export class SharedModule { }

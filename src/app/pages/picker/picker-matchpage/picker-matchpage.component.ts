@@ -14,6 +14,7 @@ import {
   TeamMapStats,
 } from 'src/app/shared/models/MapStats';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { BrowserService } from 'src/app/shared/services/browser.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { LogService } from 'src/app/shared/services/log.service';
 import { loadPlayerDetailsByNicknames, loadPlayerStatsByIDs } from 'src/app/shared/store/stats/stats.actions';
@@ -46,7 +47,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     private errorService: ErrorService,
     private logService: LogService,
     store: Store<StatsState>,
-    actions$: Actions
+    actions$: Actions, private browserService: BrowserService
   ) {
     super(store, actions$);
   }
@@ -91,7 +92,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
 
   handleMatchroomData(data: FaceIT.Match.Matchroom) {
     this.matchRoomData = data;
-    document.title = `Map Picker - ${data.teams.faction1.name} vs. ${data.teams.faction2.name}`;
+    this.browserService.getDocument().title = `Map Picker - ${data.teams.faction1.name} vs. ${data.teams.faction2.name}`;
 
     let nicknamesToLoad = [];
     for (let teamIndex = 0; teamIndex < this.teamMapStats.length; teamIndex++) {
