@@ -1,7 +1,4 @@
 <app-tool-input toolName="FACEIT Stats" [icon]="faUser"
   (onSubmit)="navigateToStats()" (onValueChange)="handleInput($event)"
-  placeholder="FACEIT User Name (Case sensitive)" [isErroneous]="error" [errorText]="errorText" [disableSubmit]="loading">
-  <button class="mt-5" (click)="search()">
-    Search for player
-  </button>
+  placeholder="FACEIT User Name" [isErroneous]="error" [errorText]="errorText" [disableSubmit]="loading">
 </app-tool-input>

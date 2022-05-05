@@ -22,7 +22,8 @@ import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
   styleUrls: ['./stats-dashboard.component.css'],
 })
 export class StatsDashboardComponent extends BaseComponentWithStatsStore {
-  errorText = 'User could not be found. Please check you input and try again. Alternatively, you can search for a FACEIT player using the button below.';
+  errorText =
+    'User could not be found. Please check you input and try again. Alternatively, you can search for a FACEIT player using the button below.';
   error = false;
 
   playerDetails: App.Player.Details[] = [];
@@ -40,8 +41,9 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
     private api: ApiService,
     private errorService: ErrorService,
     store: Store<StatsState>,
-    actions$: Actions, private browserService: BrowserService,
-    private dialog: MatDialog,
+    actions$: Actions,
+    private browserService: BrowserService,
+    private dialog: MatDialog
   ) {
     super(store, actions$);
   }
@@ -67,10 +69,13 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
       this.actions$
         .pipe(ofType(loadPlayerDetailsByNicknameError))
         .subscribe((payload) => {
-          this.error = payload.nickname === this.username;
+          // this.error = payload.nickname === this.username;
           this.loading = false;
 
-          const data: PlayerSelectDialogData = { value: this.username, instantSearch: true };
+          const data: PlayerSelectDialogData = {
+            value: this.username,
+            instantSearch: true,
+          };
           this.search(data);
         })
     );
@@ -102,7 +107,7 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
     });
   }
 
-  search(data?: PlayerSelectDialogData){
+  search(data?: PlayerSelectDialogData) {
     let dialogRef = this.dialog.open(PlayerSelectDialogComponent, {
       data,
       height: '80%',
