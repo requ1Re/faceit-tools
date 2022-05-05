@@ -46,9 +46,12 @@ export class PickerCustomComponent
     this.registerSubscription(
       dialogRef.afterClosed().subscribe((result: FaceIT.Search.Item | null) => {
         if (result) {
-          this.teams[teamId] = this.teams[teamId].filter(
-            (item) => item.player_id !== result.player_id
-          );
+          for(let teamIndex = 0; teamIndex < this.teams.length; teamIndex++){
+            this.teams[teamIndex] = this.teams[teamIndex].filter(
+              (item) => item.player_id !== result.player_id
+            );
+          }
+
           if (!this.teams[teamId][index]) {
             this.teams[teamId].push(result);
           } else {
