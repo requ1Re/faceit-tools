@@ -25,5 +25,6 @@
   </div>
 </div>
 <div class="w-full text-center mt-5">
-  <button (click)="continue()" [disabled]="!canContinue()">Continue</button>
+  <h3 *ngIf="!canContinue()" class="text-white">Add atleast 1 player per team to continue.</h3>
+  <button (click)="continue()" *ngIf="canContinue()">Continue</button>
 </div>
