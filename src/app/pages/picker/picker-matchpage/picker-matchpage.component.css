@@ -5,7 +5,7 @@
   @apply flex justify-center mb-5;
 }
 .detail-button {
-  @apply flex justify-center mt-5;
+  @apply flex justify-center gap-2 mt-5;
 }
 .page-title {
   @apply text-4xl text-white text-center;

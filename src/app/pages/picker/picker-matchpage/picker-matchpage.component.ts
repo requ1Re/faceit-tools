@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { faArrowLeft, faList } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faArrowLeft, faEdit, faList } from '@fortawesome/free-solid-svg-icons';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, first } from 'rxjs';
@@ -19,7 +19,6 @@ import { ErrorService } from 'src/app/shared/services/error.service';
 import { LogService } from 'src/app/shared/services/log.service';
 import { loadPlayerDetailsByNicknames } from 'src/app/shared/store/stats/stats.actions';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
-import { PickerCustomPlayer } from '../picker-custom/picker-custom.component';
 
 @Component({
   templateUrl: './picker-matchpage.component.html',
@@ -30,14 +29,12 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
 
   faArrowLeft = faArrowLeft;
   faList = faList;
+  faEdit = faEdit;
 
   matchId = '';
   matchRoomData: FaceIT.Match.Matchroom;
   customMatchRoom: boolean = false;
-  customTeams: {
-      nickname: string;
-      playerId: string;
-  }[][];
+  customTeams: FaceIT.Search.Item[][];
 
   competitionName = "Custom";
   teamNames = ["Team 1", "Team 2"];
@@ -58,7 +55,8 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     private errorService: ErrorService,
     private logService: LogService,
     store: Store<StatsState>,
-    actions$: Actions, private browserService: BrowserService
+    actions$: Actions, private browserService: BrowserService,
+    private router: Router,
   ) {
     super(store, actions$);
   }
@@ -81,7 +79,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
         const matchId = data[1].get('matchId');
         const customData = data[1].get('customDataBase64');
         if(customData){
-          this.handleMatchroomDataCustom(JSON.parse(atob(customData)) as PickerCustomPlayer[][])
+          this.handleMatchroomDataCustom(JSON.parse(atob(customData)) as FaceIT.Search.Item[][])
         }else if(matchId){
           this.matchId = matchId;
           this.loadMatchRoom();
@@ -147,7 +145,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   }
 
 
-  handleMatchroomDataCustom(teams: PickerCustomPlayer[][]) {
+  handleMatchroomDataCustom(teams: FaceIT.Search.Item[][]) {
     this.customMatchRoom = true;
     this.customTeams = teams;
     this.browserService.getDocument().title = `Map Picker - Custom`;
@@ -156,7 +154,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     for (let teamIndex = 0; teamIndex < teams.length; teamIndex++) {
       teams[teamIndex].forEach((name) => {
         const find = this.playerDetails.find(
-          (stats) => stats.overview.player_id === name.playerId
+          (stats) => stats.overview.player_id === name.player_id
         );
         if (!find) {
           nicknamesToLoad.push(name.nickname);
@@ -188,7 +186,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
             details.stats,
             this.customTeams.findIndex((teams) =>
               teams.find(
-                (item) => item.playerId === details.overview.player_id
+                (item) => item.player_id === details.overview.player_id
               )
             )
           );
@@ -314,10 +312,10 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   getPlayerNameById(playerId: string) {
     if (this.customMatchRoom) {
       const findTeam1 = this.customTeams[0].find(
-        (player) => player.playerId === playerId
+        (player) => player.player_id === playerId
       );
       const findTeam2 = this.customTeams[1].find(
-        (player) => player.playerId === playerId
+        (player) => player.player_id === playerId
       );
       return findTeam1
         ? findTeam1.nickname
@@ -393,5 +391,9 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
 
   getPlayerDetailsByName(playerName: string){
     return this.playerDetails.find((details) => details.overview.nickname === playerName);
+  }
+
+  editCustomTeams(){
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 }

@@ -32,7 +32,16 @@ export class PickerCustomComponent
     super(store, actions$);
   }
 
-  init() {}
+  init() {
+    this.route.paramMap.subscribe(params => {
+      if(params){
+        const customData = params.get('customDataBase64');
+        if(customData){
+          this.teams = JSON.parse(atob(customData)) as FaceIT.Search.Item[][];
+        }
+      }
+    })
+  }
 
   selectPlayer(teamId: number, index: number) {
     const data: PlayerSelectDialogData = { value: '', instantSearch: false };
@@ -67,17 +76,11 @@ export class PickerCustomComponent
   }
 
   continue(){
-    const data: PickerCustomPlayer[][] = this.teams.map((t) => t.map(i => ({ nickname: i.nickname, playerId: i.player_id })))
-    const json = JSON.stringify(data);
-    this.router.navigate([btoa(json)], {relativeTo: this.route});
+    const json = JSON.stringify(this.teams);
+    this.router.navigate(['/picker/custom', btoa(json)]);
   }
 
   canContinue(){
     return this.teams[0].length >= 1 && this.teams[1].length >= 1;
   }
-}
-
-export interface PickerCustomPlayer {
-  nickname: string;
-  playerId: string;
 }
