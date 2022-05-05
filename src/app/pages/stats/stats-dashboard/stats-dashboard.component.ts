@@ -108,6 +108,8 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
   }
 
   search(data?: PlayerSelectDialogData) {
+    if(data?.value.trim() === '') return;
+
     let dialogRef = this.dialog.open(PlayerSelectDialogComponent, {
       data,
       height: '80%',

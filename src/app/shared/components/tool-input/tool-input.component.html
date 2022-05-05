@@ -6,11 +6,11 @@
       <input type="text" [placeholder]="placeholder" [value]="_value" (keyup.enter)="submit()"
         (input)="handleInput($event)">
 
-        <button *ngIf="!disableSubmit" class="w-12 hover:bg-gray-700 hover:rounded-tr hover:rounded-br" (click)="submit()"
+        <button *ngIf="!disableSubmit" class="w-12 hover:bg-gray-700 hover:rounded-tr hover:rounded-br shadow-none" (click)="submit()"
         [disabled]="disableSubmit">
         <fa-icon [icon]="faChevronRight"></fa-icon>
       </button>
-      <button *ngIf="disableSubmit" class="w-12"
+      <button *ngIf="disableSubmit" class="w-12 shadow-none"
         [disabled]="disableSubmit">
         <app-loading-spinner></app-loading-spinner>
       </button>
