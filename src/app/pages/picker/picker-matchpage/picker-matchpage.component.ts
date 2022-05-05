@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest, first } from 'rxjs';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { App } from 'src/app/shared/models/App';
+import { CustomMapPickerMatchPlayer } from 'src/app/shared/models/CustomMapPickerMatch';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { ActiveDutyMap } from 'src/app/shared/models/MapPool';
 import {
@@ -34,7 +35,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   matchId = '';
   matchRoomData: FaceIT.Match.Matchroom;
   customMatchRoom: boolean = false;
-  customTeams: FaceIT.Search.Item[][];
+  customTeams: CustomMapPickerMatchPlayer[][];
 
   competitionName = "Custom";
   teamNames = ["Team 1", "Team 2"];
@@ -79,7 +80,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
         const matchId = data[1].get('matchId');
         const customData = data[1].get('customDataBase64');
         if(customData){
-          this.handleMatchroomDataCustom(JSON.parse(atob(customData)) as FaceIT.Search.Item[][])
+          this.handleMatchroomDataCustom(JSON.parse(atob(customData)) as CustomMapPickerMatchPlayer[][])
         }else if(matchId){
           this.matchId = matchId;
           this.loadMatchRoom();
@@ -145,7 +146,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   }
 
 
-  handleMatchroomDataCustom(teams: FaceIT.Search.Item[][]) {
+  handleMatchroomDataCustom(teams: CustomMapPickerMatchPlayer[][]) {
     this.customMatchRoom = true;
     this.customTeams = teams;
     this.browserService.getDocument().title = `Map Picker - Custom`;
@@ -154,7 +155,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     for (let teamIndex = 0; teamIndex < teams.length; teamIndex++) {
       teams[teamIndex].forEach((name) => {
         const find = this.playerDetails.find(
-          (stats) => stats.overview.player_id === name.player_id
+          (stats) => stats.overview.player_id === name.playerId
         );
         if (!find) {
           nicknamesToLoad.push(name.nickname);
@@ -186,7 +187,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
             details.stats,
             this.customTeams.findIndex((teams) =>
               teams.find(
-                (item) => item.player_id === details.overview.player_id
+                (item) => item.playerId === details.overview.player_id
               )
             )
           );
@@ -312,10 +313,10 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   getPlayerNameById(playerId: string) {
     if (this.customMatchRoom) {
       const findTeam1 = this.customTeams[0].find(
-        (player) => player.player_id === playerId
+        (player) => player.playerId === playerId
       );
       const findTeam2 = this.customTeams[1].find(
-        (player) => player.player_id === playerId
+        (player) => player.playerId === playerId
       );
       return findTeam1
         ? findTeam1.nickname

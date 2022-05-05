@@ -6,6 +6,7 @@ import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { PlayerSelectDialogComponent, PlayerSelectDialogData } from 'src/app/shared/components/player-select-dialog/player-select-dialog.component';
+import { CustomMapPickerMatchPlayer } from 'src/app/shared/models/CustomMapPickerMatch';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
 
@@ -20,7 +21,7 @@ export class PickerCustomComponent
 {
   faUser = faUser;
 
-  teams: FaceIT.Search.Item[][] = [[], []]; // array of array of search items o.O
+  teams: CustomMapPickerMatchPlayer[][] = [[], []];
 
   constructor(
     private dialog: MatDialog,
@@ -33,14 +34,14 @@ export class PickerCustomComponent
   }
 
   init() {
-    this.route.paramMap.subscribe(params => {
-      if(params){
+    this.route.paramMap.subscribe((params) => {
+      if (params) {
         const customData = params.get('customDataBase64');
-        if(customData){
-          this.teams = JSON.parse(atob(customData)) as FaceIT.Search.Item[][];
+        if (customData) {
+          this.teams = JSON.parse(atob(customData)) as CustomMapPickerMatchPlayer[][];
         }
       }
-    })
+    });
   }
 
   selectPlayer(teamId: number, index: number) {
@@ -57,14 +58,26 @@ export class PickerCustomComponent
         if (result) {
           for(let teamIndex = 0; teamIndex < this.teams.length; teamIndex++){
             this.teams[teamIndex] = this.teams[teamIndex].filter(
-              (item) => item.player_id !== result.player_id
+              (item) => item.playerId !== result.player_id
             );
           }
 
           if (!this.teams[teamId][index]) {
-            this.teams[teamId].push(result);
+            this.teams[teamId].push({
+              nickname: result.nickname,
+              playerId: result.player_id,
+              avatar: result.avatar,
+              skillLevel: +(result.games.find(g => g.name === "csgo")?.skill_level ?? 1),
+              country: result.country
+            });
           } else {
-            this.teams[teamId][index] = result;
+            this.teams[teamId][index] = {
+              nickname: result.nickname,
+              playerId: result.player_id,
+              avatar: result.avatar,
+              skillLevel: +(result.games.find(g => g.name === "csgo")?.skill_level ?? 1),
+              country: result.country
+            };
           }
         }
       })
@@ -76,7 +89,16 @@ export class PickerCustomComponent
   }
 
   continue(){
-    const json = JSON.stringify(this.teams);
+    const data: CustomMapPickerMatchPlayer[][] = this.teams.map((team) =>
+      team.map((item) => ({
+        nickname: item.nickname,
+        playerId: item.playerId,
+        avatar: item.avatar,
+        skillLevel: item.skillLevel,
+        country: item.country
+      }))
+    );
+    const json = JSON.stringify(data);
     this.router.navigate(['/picker/custom', btoa(json)]);
   }
 
