@@ -1,16 +1,18 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardComponent } from './components/card/card.component';
+import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ApiService } from './services/api.service';
+import { AlertComponent } from './components/alert/alert.component';
+import { CardComponent } from './components/card/card.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
-import { RouterModule } from '@angular/router';
-import { ToolInputComponent } from './components/tool-input/tool-input.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { PlayerSelectDialogComponent } from './components/player-select-dialog/player-select-dialog.component';
 import { EloDisplayComponent } from './components/stats/elo-display/elo-display.component';
 import { StatDisplayComponent } from './components/stats/stat-display/stat-display.component';
-import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
-import { AlertComponent } from './components/alert/alert.component';
+import { ToolInputComponent } from './components/tool-input/tool-input.component';
+import { ApiService } from './services/api.service';
 import { BrowserService } from './services/browser.service';
 
 @NgModule({
@@ -23,11 +25,13 @@ import { BrowserService } from './services/browser.service';
     StatDisplayComponent,
     LoadingSpinnerComponent,
     AlertComponent,
+    PlayerSelectDialogComponent,
   ],
   imports: [
     CommonModule,
     FontAwesomeModule,
-    RouterModule
+    RouterModule,
+    MatDialogModule
   ],
   exports: [
     CardComponent,

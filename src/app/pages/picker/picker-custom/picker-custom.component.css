@@ -1,0 +1,34 @@
+.teams {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  @apply mt-5 mb-5;
+}
+.team {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.team h1 {
+  @apply text-xl text-white text-center;
+}
+.team .player {
+  @apply bg-gray-800 rounded-lg shadow-lg text-white px-3 py-2 inline-flex items-center;
+  height: 65px;
+  width: 300px;
+}
+.team .player .profile-img {
+  @apply object-cover h-10 rounded-lg mr-3 shadow;
+}
+.team .player .icons {
+  @apply ml-auto inline-flex items-center gap-3;
+}
+.team .player .icons > * {
+  @apply object-cover h-8 w-8;
+}
+.team .player {
+  cursor: pointer;
+}
+.team .player:hover {
+  @apply bg-gray-700;
+}

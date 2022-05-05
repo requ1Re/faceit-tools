@@ -1,0 +1,26 @@
+<h1 class="text-3xl text-white text-center mt-5">Map Picker - Custom Teams</h1>
+<div class="teams">
+  <div class="team" *ngFor="let team of teams; index as teamIndex">
+    <h1>Team {{ teamIndex+1 }}</h1>
+    <ng-container *ngFor="let playerIndex of [0,1,2,3,4]">
+      <div class="player not-selected" *ngIf="teams[teamIndex][playerIndex] === undefined" (click)="selectPlayer(teamIndex, playerIndex)">
+        <img src="/assets/img/steam_default.png" alt="Default Avatar" class="profile-img">
+        <span>No player selected</span>
+      </div>
+      <div class="player selected" *ngIf="teams[teamIndex][playerIndex] as player" (click)="selectPlayer(teamIndex, playerIndex)">
+        <img [src]="player.avatar == '' ? '/assets/img/steam_default.png' : player.avatar" alt="Avatar" class="profile-img">
+        <span>{{ player.nickname }}</span>
+        <div class="icons">
+          <svg>
+            <use
+              [attr.xlink:href]="'assets/img/icons/flags/' + player.country.toLowerCase() + '.svg#flag-icons-' + player.country.toLowerCase()">
+            </use>
+          </svg>
+          <svg>
+            <use [attr.xlink:href]="'#level' + getSkillLevel(player)"></use>
+          </svg>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

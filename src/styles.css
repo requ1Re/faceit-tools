@@ -28,3 +28,16 @@ html, body {
 .text-faceit {
   color: var(--faceit-primary);
 }
+
+
+button {
+  @apply text-white p-2 bg-gray-800 hover:bg-gray-700 w-fit rounded shadow-lg;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+  @apply bg-gray-900 rounded-lg;
+}
+.backdrop {
+  @apply bg-gray-800 bg-opacity-75;
+}

@@ -17,6 +17,7 @@ import { AppStoreModule } from './shared/store/app-store.module';
 import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.component';
 import { LogService } from './shared/services/log.service';
 import { MomentModule } from 'ngx-moment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, ToolsOverviewComponent, NotFoundComponent, SpriteWrapperComponent],
@@ -30,7 +31,8 @@ import { MomentModule } from 'ngx-moment';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
-    MomentModule
+    MomentModule,
+    BrowserAnimationsModule
   ],
   providers: [
     LogService,

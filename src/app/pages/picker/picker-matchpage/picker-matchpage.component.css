@@ -7,9 +7,6 @@
 .detail-button {
   @apply flex justify-center mt-5;
 }
-button {
-  @apply text-white p-2 bg-gray-800 hover:bg-gray-700 w-fit rounded shadow-lg;
-}
 .page-title {
   @apply text-4xl text-white text-center;
 }

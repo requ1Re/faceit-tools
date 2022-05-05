@@ -1,0 +1,39 @@
+<div class="wrapper">
+  <div class="header">
+    <p>Search FACEIT Player</p>
+  </div>
+  <div class="content">
+    <app-card class="w-full px-5 md:px-0 md:w-2/4">
+      <div class="input">
+        <input type="text" placeholder="FACEIT Username" [value]="_value" (keyup.enter)="submit()"
+          (input)="handleInput($event)">
+
+        <button *ngIf="!disableSubmit" class="w-12 shadow-none hover:bg-gray-700 hover:rounded-tr hover:rounded-br"
+          (click)="submit()" [disabled]="disableSubmit">
+          <fa-icon [icon]="faSearch"></fa-icon>
+        </button>
+        <button *ngIf="disableSubmit" class="w-12 shadow-none" [disabled]="disableSubmit">
+          <app-loading-spinner></app-loading-spinner>
+        </button>
+      </div>
+      <div class="alert" *ngIf="isErroneous" [innerHTML]="errorText"></div>
+    </app-card>
+    <div class="players">
+      <div class="player" *ngFor="let player of players" (click)="selectPlayer(player)">
+        <img [src]="player.avatar == '' ? '/assets/img/steam_default.png' : player.avatar" alt="Avatar"
+          class="profile-img">
+        <span>{{ player.nickname }}</span>
+        <div class="icons">
+          <svg>
+            <use
+              [attr.xlink:href]="'assets/img/icons/flags/' + player.country.toLowerCase() + '.svg#flag-icons-' + player.country.toLowerCase()">
+            </use>
+          </svg>
+          <svg>
+            <use [attr.xlink:href]="'#level' + getSkillLevel(player)"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

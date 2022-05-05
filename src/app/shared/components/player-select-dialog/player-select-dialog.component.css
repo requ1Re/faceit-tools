@@ -1,0 +1,39 @@
+.input {
+  @apply flex justify-between;
+}
+input {
+  @apply text-lg w-full p-5;
+  background: none;
+}
+input:focus {
+  outline: none;
+}
+.alert {
+  @apply bg-red-600 p-2 rounded-bl rounded-br;
+}
+.header {
+  height: 50px;
+  width: 100%;
+  @apply bg-gray-800 flex items-center px-3 text-white shadow sticky top-0;
+}
+.content {
+  @apply p-3;
+}
+
+.players {
+  @apply flex flex-col gap-2 mt-3;
+}
+.players .player {
+  @apply bg-gray-800 rounded-lg shadow-lg text-white px-3 py-2 inline-flex items-center cursor-pointer;
+  height: 65px;
+  width: 100%;
+}
+.players .player .profile-img {
+  @apply object-cover h-10 rounded-lg mr-3 shadow;
+}
+.players .player .icons {
+  @apply ml-auto inline-flex items-center gap-3;
+}
+.players .player .icons > * {
+  @apply object-cover h-8 w-8;
+}

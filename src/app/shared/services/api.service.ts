@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, combineLatest, concat, concatMap, from, map, merge, mergeMap, Observable, of, switchMap, toArray } from 'rxjs';
+import { combineLatest, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { App } from '../models/App';
 import { Backend } from '../models/Backend';
@@ -98,6 +98,13 @@ export class ApiService {
   findFACEITAccountBySteamID(steamId: string){
     return this.http.get<FaceIT.PlayerOverview.Player>(
       'https://open.faceit.com/data/v4/players?game_player_id=' + steamId + '&game=csgo',
+      { headers: this.HEADERS }
+    );
+  }
+
+  searchFACEITAccountsByString(search: string){
+    return this.http.get<FaceIT.Search.Result>(
+      'https://open.faceit.com/data/v4/search/players?nickname=' + search + '&game=csgo&offset=0&limit=20',
       { headers: this.HEADERS }
     );
   }
