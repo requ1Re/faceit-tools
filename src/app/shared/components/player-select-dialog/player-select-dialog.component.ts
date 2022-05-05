@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FaceIT } from '../../models/FaceIT';
 import { ApiService } from '../../services/api.service';
@@ -16,7 +16,8 @@ export class PlayerSelectDialogComponent
 {
   constructor(
     private apiService: ApiService,
-    public dialogRef: MatDialogRef<PlayerSelectDialogComponent>
+    public dialogRef: MatDialogRef<PlayerSelectDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: PlayerSelectDialogData
   ) {
     super();
   }
@@ -29,7 +30,12 @@ export class PlayerSelectDialogComponent
 
   players: FaceIT.Search.Item[] = [];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.data.instantSearch){
+      this._value = this.data.value;
+      this.submit();
+    }
+  }
 
   handleInput(event: any) {
     const val = event.target.value ?? '';
@@ -62,4 +68,9 @@ export class PlayerSelectDialogComponent
   selectPlayer(player: FaceIT.Search.Item){
     this.dialogRef.close(player);
   }
+}
+
+export interface PlayerSelectDialogData {
+  value: string,
+  instantSearch: boolean
 }

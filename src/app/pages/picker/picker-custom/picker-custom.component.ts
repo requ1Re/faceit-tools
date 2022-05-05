@@ -4,7 +4,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
-import { PlayerSelectDialogComponent } from 'src/app/shared/components/player-select-dialog/player-select-dialog.component';
+import { PlayerSelectDialogComponent, PlayerSelectDialogData } from 'src/app/shared/components/player-select-dialog/player-select-dialog.component';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
 
@@ -32,7 +32,9 @@ export class PickerCustomComponent
   init() {}
 
   selectPlayer(teamId: number, index: number) {
+    const data: PlayerSelectDialogData = { value: '', instantSearch: false };
     let dialogRef = this.dialog.open(PlayerSelectDialogComponent, {
+      data,
       height: '80%',
       width: '600px',
       backdropClass: 'backdrop',

@@ -28,6 +28,9 @@ input:focus {
   height: 65px;
   width: 100%;
 }
+.players .player:hover {
+  @apply bg-gray-700;
+}
 .players .player .profile-img {
   @apply object-cover h-10 rounded-lg mr-3 shadow;
 }
