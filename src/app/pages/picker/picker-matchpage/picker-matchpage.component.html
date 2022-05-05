@@ -1,8 +1,8 @@
-<app-loading-spinner *ngIf="!matchRoomData && !error"></app-loading-spinner>
+<app-loading-spinner *ngIf="(!matchRoomData && !customMatchRoom) && !error"></app-loading-spinner>
 
-<div class="wrapper" *ngIf="matchRoomData">
+<div class="wrapper" *ngIf="matchRoomData || customMatchRoom">
   <h1 class="page-title">
-    {{ matchRoomData.competition_name}} / {{ getTeamName(0) }} vs. {{ getTeamName(1) }}
+    {{ competitionName }} / {{ teamNames[0] }} vs. {{ teamNames[1] }}
   </h1>
   <div class="detail-button">
     <button (click)="toggleDetailedView()">
@@ -11,8 +11,8 @@
   </div>
   <div class="page" *ngIf="!detailedView; else detailedViewTemplate">
     <div class="team" *ngFor="let team of teamMapStats; index as i">
-      <img [src]="getTeamAvatar(getTeam(i))" class="ml-auto mr-auto rounded-full h-12 w-12">
-      <h1>{{ getTeamName(i) }}</h1>
+      <img [src]="teamAvatars[i]" class="ml-auto mr-auto rounded-full h-12 w-12">
+      <h1>{{ teamNames[i] }}</h1>
       <app-card>
         <div class="team-card">
           <table>
@@ -45,8 +45,8 @@
   <ng-template #detailedViewTemplate>
     <div class="page">
       <div class="team" *ngFor="let team of teamMapStats; index as i">
-        <img [src]="getTeamAvatar(getTeam(i))" class="ml-auto mr-auto rounded-full h-12 w-12">
-        <h1>{{ getTeamName(i) }}</h1>
+        <img [src]="teamAvatars[i]" class="ml-auto mr-auto rounded-full h-12 w-12">
+        <h1>{{ teamNames[i] }}</h1>
         <app-card>
           <div class="team-card">
             <table>

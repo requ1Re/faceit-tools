@@ -33,6 +33,9 @@ html, body {
 button {
   @apply text-white p-2 bg-gray-800 hover:bg-gray-700 w-fit rounded shadow-lg;
 }
+button:disabled {
+  @apply hover:bg-gray-800 cursor-not-allowed;
+}
 
 .mat-dialog-container {
   padding: 0 !important;

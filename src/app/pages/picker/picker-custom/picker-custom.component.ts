@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -24,7 +25,9 @@ export class PickerCustomComponent
   constructor(
     private dialog: MatDialog,
     store: Store<StatsState>,
-    actions$: Actions
+    actions$: Actions,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     super(store, actions$);
   }
@@ -59,4 +62,19 @@ export class PickerCustomComponent
   getSkillLevel(player: FaceIT.Search.Item) {
     return player.games.find((g) => g.name === 'csgo')?.skill_level ?? 1;
   }
+
+  continue(){
+    const data: PickerCustomPlayer[][] = this.teams.map((t) => t.map(i => ({ nickname: i.nickname, playerId: i.player_id })))
+    const json = JSON.stringify(data);
+    this.router.navigate([btoa(json)], {relativeTo: this.route});
+  }
+
+  canContinue(){
+    return this.teams[0].length >= 1 && this.teams[1].length >= 1;
+  }
+}
+
+export interface PickerCustomPlayer {
+  nickname: string;
+  playerId: string;
 }

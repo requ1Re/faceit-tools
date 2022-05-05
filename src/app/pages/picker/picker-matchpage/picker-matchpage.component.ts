@@ -11,14 +11,15 @@ import { ActiveDutyMap } from 'src/app/shared/models/MapPool';
 import {
   getDefaultMapStats,
   PlayerMapStats,
-  TeamMapStats,
+  TeamMapStats
 } from 'src/app/shared/models/MapStats';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { BrowserService } from 'src/app/shared/services/browser.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { LogService } from 'src/app/shared/services/log.service';
-import { loadPlayerDetailsByNicknames, loadPlayerStatsByIDs } from 'src/app/shared/store/stats/stats.actions';
+import { loadPlayerDetailsByNicknames } from 'src/app/shared/store/stats/stats.actions';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
+import { PickerCustomPlayer } from '../picker-custom/picker-custom.component';
 
 @Component({
   templateUrl: './picker-matchpage.component.html',
@@ -32,6 +33,16 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
 
   matchId = '';
   matchRoomData: FaceIT.Match.Matchroom;
+  customMatchRoom: boolean = false;
+  customTeams: {
+      nickname: string;
+      playerId: string;
+  }[][];
+
+  competitionName = "Custom";
+  teamNames = ["Team 1", "Team 2"];
+  teamAvatars = ["/assets/img/steam_default.png", "/assets/img/steam_default.png"];
+
 
   playerDetails: App.Player.Details[] = [];
 
@@ -67,8 +78,14 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
       combineLatest([this.playerDetails$, this.route.paramMap]).pipe(first()).subscribe(data => {
         this.logService.log(this.pageName, "Got combined data, calling loadMatchRoom", data);
         this.playerDetails = data[0];
-        this.matchId = data[1].get('matchId') ?? '';
-        this.loadMatchRoom();
+        const matchId = data[1].get('matchId');
+        const customData = data[1].get('customDataBase64');
+        if(customData){
+          this.handleMatchroomDataCustom(JSON.parse(atob(customData)) as PickerCustomPlayer[][])
+        }else if(matchId){
+          this.matchId = matchId;
+          this.loadMatchRoom();
+        }
       })
     );
 
@@ -92,6 +109,10 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
 
   handleMatchroomData(data: FaceIT.Match.Matchroom) {
     this.matchRoomData = data;
+    this.competitionName = data.competition_name;
+    this.teamNames = [data.teams.faction1.name, data.teams.faction2.name];
+    this.teamAvatars = [data.teams.faction1.avatar, data.teams.faction2.avatar];
+
     this.browserService.getDocument().title = `Map Picker - ${data.teams.faction1.name} vs. ${data.teams.faction2.name}`;
 
     let nicknamesToLoad = [];
@@ -123,6 +144,61 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     )
 
     this.store.dispatch(loadPlayerDetailsByNicknames({nicknames: nicknamesToLoad}));
+  }
+
+
+  handleMatchroomDataCustom(teams: PickerCustomPlayer[][]) {
+    this.customMatchRoom = true;
+    this.customTeams = teams;
+    this.browserService.getDocument().title = `Map Picker - Custom`;
+
+    let nicknamesToLoad: string[] = [];
+    for (let teamIndex = 0; teamIndex < teams.length; teamIndex++) {
+      teams[teamIndex].forEach((name) => {
+        const find = this.playerDetails.find(
+          (stats) => stats.overview.player_id === name.playerId
+        );
+        if (!find) {
+          nicknamesToLoad.push(name.nickname);
+        } else {
+          this.logService.log(
+            this.pageName,
+            'Got playerDetails from store for',
+            name
+          );
+          this.handlePlayerStats(find.stats, teamIndex);
+        }
+      });
+    }
+
+    this.registerSubscription(
+      this.playerDetails$.subscribe((playerDetails) => {
+        const diff = playerDetails.filter(
+          (item) => this.playerDetails.indexOf(item) < 0
+        );
+        this.playerDetails = playerDetails;
+
+        diff.forEach((details) => {
+          this.logService.log(
+            this.pageName,
+            'Got playerStats from API for',
+            details.overview.player_id
+          );
+          this.handlePlayerStats(
+            details.stats,
+            this.customTeams.findIndex((teams) =>
+              teams.find(
+                (item) => item.playerId === details.overview.player_id
+              )
+            )
+          );
+        });
+      })
+    );
+
+    this.store.dispatch(
+      loadPlayerDetailsByNicknames({ nicknames: nicknamesToLoad })
+    );
   }
 
   handlePlayerStats(data: FaceIT.Player.PlayerStats, teamId: number) {
@@ -236,17 +312,31 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     return Math.round((number + Number.EPSILON) * 100) / 100;
   }
   getPlayerNameById(playerId: string) {
-    const findTeam1 = this.matchRoomData.teams.faction1.roster.find(
-      (player) => player.player_id === playerId
-    );
-    const findTeam2 = this.matchRoomData.teams.faction2.roster.find(
-      (player) => player.player_id === playerId
-    );
-    return findTeam1
-      ? findTeam1.nickname
-      : findTeam2
-      ? findTeam2.nickname
-      : null;
+    if (this.customMatchRoom) {
+      const findTeam1 = this.customTeams[0].find(
+        (player) => player.playerId === playerId
+      );
+      const findTeam2 = this.customTeams[1].find(
+        (player) => player.playerId === playerId
+      );
+      return findTeam1
+        ? findTeam1.nickname
+        : findTeam2
+        ? findTeam2.nickname
+        : null;
+    } else {
+      const findTeam1 = this.matchRoomData.teams.faction1.roster.find(
+        (player) => player.player_id === playerId
+      );
+      const findTeam2 = this.matchRoomData.teams.faction2.roster.find(
+        (player) => player.player_id === playerId
+      );
+      return findTeam1
+        ? findTeam1.nickname
+        : findTeam2
+        ? findTeam2.nickname
+        : null;
+    }
   }
 
   getTeamIdByPlayerId(playerId: string){
