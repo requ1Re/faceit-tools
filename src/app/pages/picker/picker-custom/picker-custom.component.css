@@ -1,8 +1,5 @@
 .teams {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  @apply mt-5 mb-5;
+  @apply flex flex-col md:flex-row items-center md:items-start md:justify-center gap-12 mt-5 mb-5;
 }
 .team {
   display: flex;
