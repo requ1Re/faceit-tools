@@ -45,6 +45,11 @@ export class PickerCustomComponent
   }
 
   selectPlayer(teamId: number, index: number) {
+    if(this.teams[teamId][index]){
+      this.teams[teamId].splice(index, 1);
+      return;
+    }
+
     const data: PlayerSelectDialogData = { value: '', instantSearch: false };
     let dialogRef = this.dialog.open(PlayerSelectDialogComponent, {
       data,
@@ -62,23 +67,13 @@ export class PickerCustomComponent
             );
           }
 
-          if (!this.teams[teamId][index]) {
-            this.teams[teamId].push({
-              nickname: result.nickname,
-              playerId: result.player_id,
-              avatar: result.avatar,
-              skillLevel: +(result.games.find(g => g.name === "csgo")?.skill_level ?? 1),
-              country: result.country
-            });
-          } else {
-            this.teams[teamId][index] = {
-              nickname: result.nickname,
-              playerId: result.player_id,
-              avatar: result.avatar,
-              skillLevel: +(result.games.find(g => g.name === "csgo")?.skill_level ?? 1),
-              country: result.country
-            };
-          }
+          this.teams[teamId].push({
+            nickname: result.nickname,
+            playerId: result.player_id,
+            avatar: result.avatar,
+            skillLevel: +(result.games.find(g => g.name === "csgo")?.skill_level ?? 1),
+            country: result.country
+          });
         }
       })
     );
