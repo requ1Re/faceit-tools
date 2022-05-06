@@ -15,9 +15,10 @@ export class PlayerSelectDialogService {
   ) {
     let dialogRef = this.dialog.open(PlayerSelectDialogComponent, {
       data,
-      height: '80%',
-      width: '600px',
-      backdropClass: 'backdrop',
+      height: 'auto',
+      maxHeight: '80vh',
+      width: '400px',
+      backdropClass: 'backdrop'
     });
 
     dialogRef.afterClosed().subscribe((result) => {
