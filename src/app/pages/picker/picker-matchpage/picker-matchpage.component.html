@@ -11,6 +11,9 @@
     <button (click)="editCustomTeams()" *ngIf="customMatchRoom">
       <fa-icon [icon]="faEdit"></fa-icon> Edit Custom Teams
     </button>
+    <button (click)="editNormalTeams()" *ngIf="!customMatchRoom">
+      <fa-icon [icon]="faEdit"></fa-icon> Create Custom Match Room
+    </button>
   </div>
   <div class="page" *ngIf="!detailedView; else detailedViewTemplate">
     <div class="team" *ngFor="let team of teamMapStats; index as i">

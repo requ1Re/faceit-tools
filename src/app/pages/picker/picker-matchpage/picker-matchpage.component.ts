@@ -408,6 +408,26 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     );
   }
 
+  editNormalTeams() {
+    const data: CustomMapPickerMatchPlayer[][] = [
+      this.matchRoomData.teams.faction1.roster.map((player) => ({
+        nickname: player.nickname,
+        avatar: player.avatar,
+        playerId: player.player_id,
+        skillLevel: player.game_skill_level,
+        country: this.playerDetails.find((_p) => _p.overview.player_id === player.player_id)?.overview.country ?? 'XX'
+      })),
+      this.matchRoomData.teams.faction2.roster.map((player) => ({
+        nickname: player.nickname,
+        avatar: player.avatar,
+        playerId: player.player_id,
+        skillLevel: player.game_skill_level,
+        country: this.playerDetails.find((_p) => _p.overview.player_id === player.player_id)?.overview.country ?? 'XX'
+      }))
+    ];
+    this.router.navigate(['picker', 'custom', btoa(JSON.stringify(data))]);
+  }
+
   editCustomTeams() {
     const data: CustomMapPickerMatchPlayer[][] = this.customTeams.map((team) =>
       team
