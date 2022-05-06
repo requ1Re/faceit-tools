@@ -84,17 +84,10 @@ export class PickerCustomComponent
   }
 
   continue(){
-    const data: CustomMapPickerMatchPlayer[][] = this.teams.map((team) =>
-      team.map((item) => ({
-        nickname: item.nickname,
-        playerId: item.playerId,
-        avatar: item.avatar,
-        skillLevel: item.skillLevel,
-        country: item.country
-      }))
+    const data: string[][] = this.teams.map((team) =>
+      team.map((item) => item.nickname)
     );
-    const json = JSON.stringify(data);
-    this.router.navigate(['/picker/custom', btoa(json)]);
+    this.router.navigate(['/picker/match/custom/', ...data.map((d) => d.join(','))]);
   }
 
   canContinue(){

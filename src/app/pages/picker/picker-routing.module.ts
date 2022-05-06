@@ -10,8 +10,8 @@ const routes: Routes = [
     component: PickerDashboardComponent,
   },
   { path: 'custom', component: PickerCustomComponent },
-  { path: 'custom/:customDataBase64/edit', component: PickerCustomComponent },
-  { path: 'custom/:customDataBase64', component: PickerMatchpageComponent },
+  { path: 'custom/:customDataBase64', component: PickerCustomComponent },
+  { path: 'match/custom/:team1Str/:team2Str', component: PickerMatchpageComponent },
   { path: 'match/:matchId', component: PickerMatchpageComponent },
 ];
 
