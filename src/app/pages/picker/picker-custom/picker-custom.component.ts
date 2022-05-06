@@ -5,9 +5,10 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
-import { PlayerSelectDialogComponent, PlayerSelectDialogData } from 'src/app/shared/components/player-select-dialog/player-select-dialog.component';
+import { PlayerSelectDialogData } from 'src/app/shared/components/player-select-dialog/player-select-dialog.component';
 import { CustomMapPickerMatchPlayer } from 'src/app/shared/models/CustomMapPickerMatch';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
+import { PlayerSelectDialogService } from 'src/app/shared/services/player-select-dialog.service';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
 
 @Component({
@@ -28,7 +29,8 @@ export class PickerCustomComponent
     store: Store<StatsState>,
     actions$: Actions,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private playerSelectDialogService: PlayerSelectDialogService
   ) {
     super(store, actions$);
   }
@@ -51,32 +53,23 @@ export class PickerCustomComponent
     }
 
     const data: PlayerSelectDialogData = { value: '', instantSearch: false };
-    let dialogRef = this.dialog.open(PlayerSelectDialogComponent, {
-      data,
-      height: '80%',
-      width: '600px',
-      backdropClass: 'backdrop',
-    });
-
-    this.registerSubscription(
-      dialogRef.afterClosed().subscribe((result: FaceIT.Search.Item | null) => {
-        if (result) {
-          for(let teamIndex = 0; teamIndex < this.teams.length; teamIndex++){
-            this.teams[teamIndex] = this.teams[teamIndex].filter(
-              (item) => item.playerId !== result.player_id
-            );
-          }
-
-          this.teams[teamId].push({
-            nickname: result.nickname,
-            playerId: result.player_id,
-            avatar: result.avatar,
-            skillLevel: +(result.games.find(g => g.name === "csgo")?.skill_level ?? 1),
-            country: result.country
-          });
+    this.playerSelectDialogService.open((result) => {
+      if (result) {
+        for(let teamIndex = 0; teamIndex < this.teams.length; teamIndex++){
+          this.teams[teamIndex] = this.teams[teamIndex].filter(
+            (item) => item.playerId !== result.player_id
+          );
         }
-      })
-    );
+
+        this.teams[teamId].push({
+          nickname: result.nickname,
+          playerId: result.player_id,
+          avatar: result.avatar,
+          skillLevel: +(result.games.find(g => g.name === "csgo")?.skill_level ?? 1),
+          country: result.country
+        });
+      }
+    }, data);
   }
 
   getSkillLevel(player: FaceIT.Search.Item) {

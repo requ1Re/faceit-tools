@@ -5,12 +5,12 @@ import { faChevronRight, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
-import { PlayerSelectDialogComponent, PlayerSelectDialogData } from 'src/app/shared/components/player-select-dialog/player-select-dialog.component';
+import { PlayerSelectDialogData } from 'src/app/shared/components/player-select-dialog/player-select-dialog.component';
 import { App } from 'src/app/shared/models/App';
-import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { BrowserService } from 'src/app/shared/services/browser.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
+import { PlayerSelectDialogService } from 'src/app/shared/services/player-select-dialog.service';
 import {
   loadPlayerDetailsByNicknameError,
   loadPlayerDetailsByNicknames
@@ -43,7 +43,8 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
     store: Store<StatsState>,
     actions$: Actions,
     private browserService: BrowserService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private playerSelectDialogService: PlayerSelectDialogService
   ) {
     super(store, actions$);
   }
@@ -108,22 +109,13 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
   }
 
   search(data?: PlayerSelectDialogData) {
-    if(data?.value.trim() === '') return;
+    if (data?.value.trim() === '') return;
 
-    let dialogRef = this.dialog.open(PlayerSelectDialogComponent, {
-      data,
-      height: '80%',
-      width: '600px',
-      backdropClass: 'backdrop',
-    });
-
-    this.registerSubscription(
-      dialogRef.afterClosed().subscribe((result: FaceIT.Search.Item | null) => {
-        if (result) {
-          this.username = result.nickname;
-          this._navigateToStats();
-        }
-      })
-    );
+    this.playerSelectDialogService.open((result) => {
+      if (result) {
+        this.username = result.nickname;
+        this._navigateToStats();
+      }
+    }, data);
   }
 }
