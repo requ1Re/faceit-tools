@@ -443,7 +443,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
             nickname: player,
             playerId: p.overview.player_id,
             avatar: p.overview.avatar,
-            country: p.overview.avatar,
+            country: p.overview.country,
             skillLevel: p.overview.games['csgo'].skill_level,
           };
         })
