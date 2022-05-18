@@ -1,14 +1,14 @@
-import 'zone.js/dist/zone-node';
-
+import { APP_BASE_HREF } from '@angular/common';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
-import { join } from 'path';
-
-import { AppServerModule } from './src/main.server';
-import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import { join } from 'path';
 import { resolveSteamVanity } from 'server/resolve';
-import "universal-dotenv/register"
+import "universal-dotenv/register";
+import 'zone.js/dist/zone-node';
+import { AppServerModule } from './src/main.server';
+
+
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -60,7 +60,7 @@ function run(): void {
 
   // Start up the Node server
   const server = app();
-  server.listen(port, () => {
+  server.listen(+port, '127.0.0.1', () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }
@@ -76,3 +76,4 @@ if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
 }
 
 export * from './src/main.server';
+
