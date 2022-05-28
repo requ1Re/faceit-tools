@@ -8,7 +8,7 @@ import { BaseComponent } from '../base/base';
 @Component({
   selector: 'app-player-select-dialog',
   templateUrl: './player-select-dialog.component.html',
-  styleUrls: ['./player-select-dialog.component.css'],
+  styleUrls: ['./player-select-dialog.component.scss'],
 })
 export class PlayerSelectDialogComponent
   extends BaseComponent

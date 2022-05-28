@@ -5,7 +5,7 @@ import { BrowserService } from 'src/app/shared/services/browser.service';
 
 @Component({
   templateUrl: './picker-dashboard.component.html',
-  styleUrls: ['./picker-dashboard.component.css'],
+  styleUrls: ['./picker-dashboard.component.scss'],
 })
 export class PickerDashboardComponent implements OnInit {
   readonly INPUT_MIN_LENGTH = 32;

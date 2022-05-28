@@ -19,7 +19,7 @@ import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
 
 @Component({
   templateUrl: './stats-dashboard.component.html',
-  styleUrls: ['./stats-dashboard.component.css'],
+  styleUrls: ['./stats-dashboard.component.scss'],
 })
 export class StatsDashboardComponent extends BaseComponentWithStatsStore {
   errorText =

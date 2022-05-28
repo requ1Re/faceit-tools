@@ -23,7 +23,7 @@ import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
 
 @Component({
   templateUrl: './picker-matchpage.component.html',
-  styleUrls: ['./picker-matchpage.component.css'],
+  styleUrls: ['./picker-matchpage.component.scss'],
 })
 export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   pageName = 'PickerMatchpage';

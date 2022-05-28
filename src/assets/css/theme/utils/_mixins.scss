@@ -1,0 +1,28 @@
+@mixin default-corners {
+  border-radius: 3px;
+}
+@mixin default-margins {
+  margin: 10px;
+}
+@mixin default-paddings {
+  padding: 15px;
+}
+
+$breakpoints: (
+    sm: 640px,
+    md: 768px,
+    lg: 1024px,
+    xl: 1280px,
+    2xl: 1536px,
+    3xl: 1920px,
+);
+
+@mixin mediaQuery($breakpoint) {
+    @each $breakpoints, $size in $breakpoints {
+        @if $breakpoint==$breakpoints {
+            @media screen and (min-width: $size) {
+                @content;
+            }
+        }
+    }
+}

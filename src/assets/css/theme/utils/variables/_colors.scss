@@ -1,0 +1,12 @@
+@use "sass:color";
+
+$bg-primary: #FF5500;
+$bg-dark-900: rgb(24 24 27);
+$bg-dark-800: color.scale($bg-dark-900, $lightness: -10%);
+$bg-dark-700: color.scale($bg-dark-800, $lightness: -10%);
+$bg-dark-600: color.scale($bg-dark-700, $lightness: -10%);
+$bg-dark-500: color.scale($bg-dark-600, $lightness: -10%);
+$bg-dark-400: color.scale($bg-dark-500, $lightness: -10%);
+$bg-dark-300: color.scale($bg-dark-400, $lightness: -10%);
+$bg-dark-200: color.scale($bg-dark-300, $lightness: -10%);
+$bg-dark-100: color.scale($bg-dark-200, $lightness: -10%);

@@ -7,7 +7,7 @@ import { StringUtil } from 'src/app/shared/utils/StringUtil';
 @Component({
   selector: 'app-match-history-display',
   templateUrl: './match-history-display.component.html',
-  styleUrls: ['./match-history-display.component.css'],
+  styleUrls: ['./match-history-display.component.scss'],
 })
 export class MatchHistoryDisplayComponent implements OnInit {
 

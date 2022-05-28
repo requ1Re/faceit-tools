@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-elo-display',
   templateUrl: './elo-display.component.html',
-  styleUrls: ['./elo-display.component.css']
+  styleUrls: ['./elo-display.component.scss']
 })
 export class EloDisplayComponent implements OnInit {
 

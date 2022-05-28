@@ -22,7 +22,7 @@ import { EloUtil } from 'src/app/shared/utils/EloUtil';
 
 @Component({
   templateUrl: './stats-player.component.html',
-  styleUrls: ['./stats-player.component.css'],
+  styleUrls: ['./stats-player.component.scss'],
 })
 export class StatsPlayerComponent extends BaseComponentWithStatsStore {
   pageName = 'StatsPlayer';

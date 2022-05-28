@@ -4,7 +4,7 @@ import { faChevronRight, IconDefinition } from '@fortawesome/free-solid-svg-icon
 @Component({
   selector: 'app-tool-input',
   templateUrl: './tool-input.component.html',
-  styleUrls: ['./tool-input.component.css']
+  styleUrls: ['./tool-input.component.scss']
 })
 export class ToolInputComponent implements OnInit {
   @Input()

@@ -16,7 +16,7 @@ enum SteamInputType {
 
 @Component({
   templateUrl: './account-finder-dashboard.component.html',
-  styleUrls: ['./account-finder-dashboard.component.css']
+  styleUrls: ['./account-finder-dashboard.component.scss']
 })
 export class AccountFinderDashboardComponent extends BaseComponent implements OnInit {
   /*

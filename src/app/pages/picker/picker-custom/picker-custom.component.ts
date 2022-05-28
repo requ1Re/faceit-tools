@@ -14,7 +14,7 @@ import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
 @Component({
   selector: 'app-picker-custom',
   templateUrl: './picker-custom.component.html',
-  styleUrls: ['./picker-custom.component.css'],
+  styleUrls: ['./picker-custom.component.scss'],
 })
 export class PickerCustomComponent
   extends BaseComponentWithStatsStore

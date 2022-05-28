@@ -6,7 +6,7 @@ import { Config, ConfigUtil } from 'src/app/shared/utils/ConfigUtil';
 
 @Component({
   templateUrl: './tools-overview.component.html',
-  styleUrls: ['./tools-overview.component.css'],
+  styleUrls: ['./tools-overview.component.scss'],
 })
 export class ToolsOverviewComponent implements OnInit {
 
