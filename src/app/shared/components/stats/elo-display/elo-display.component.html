@@ -1,4 +1,4 @@
-<app-card>
+<div class="card no-padding elo-display">
   <div class="flex w-full">
     <div class="rank-display-part-1">
       <div class="flex">
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="line-wrapper">
-        <div [style.width]="getPercentageTo2000Elo() + '%'" class="line rounded-bl"></div>
+        <div [style.width]="getPercentageTo2000Elo() + '%'" class="line rounded-bl-lg"></div>
       </div>
     </div>
     <div class="rank-display-part-2">
@@ -68,7 +68,7 @@
         </svg>
         <div class="rank-text">2001 – ∞</div>
       </div>
-      <div style="width: 100%; height: 4px;" class="line-wrapper rounded-br" [class.line]="elo > 2000"></div>
+      <div style="width: 100%; height: 4px;" class="line-wrapper rounded-br-lg" [class.line]="elo > 2000"></div>
     </div>
   </div>
-</app-card>
+</div>

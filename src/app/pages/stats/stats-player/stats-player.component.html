@@ -11,7 +11,7 @@
           </svg>
         </div>
         <h1 class="text-shadow-md">{{ selectedPlayerDetails.overview.nickname }}</h1>
-        <app-card>
+        <div class="card no-padding">
           <div class="elo" *ngIf="selectedPlayerDetails.overview.games['csgo'].skill_level as level">
             <svg>
               <use [attr.xlink:href]="'#level' + level"></use>
@@ -19,16 +19,16 @@
             <span class="md:ml-2"
               [innerHTML]="getFormattedEloLong(level, selectedPlayerDetails.overview.games['csgo'].faceit_elo)"></span>
           </div>
-        </app-card>
+        </div>
         <div class="socials" style="margin-left: auto">
-          <a class="social-btn faceit-btn" [href]="selectedPlayerDetails.overview.faceit_url.replace('{lang}', 'en')"
+          <a class="btn social-btn faceit-btn" [href]="selectedPlayerDetails.overview.faceit_url.replace('{lang}', 'en')"
             target="_blank">
             <svg class="icon">
               <use xlink:href="assets/img/icons/faceit.svg#Layer_1"></use>
             </svg>
             <span class="text">View Profile on FACEIT</span>
           </a>
-          <a class="social-btn"
+          <a class="btn social-btn"
             [href]="'https://steamcommunity.com/profiles/' + selectedPlayerDetails.overview.steam_id_64"
             target="_blank">
             <fa-icon class="icon" [icon]="faSteam"></fa-icon>

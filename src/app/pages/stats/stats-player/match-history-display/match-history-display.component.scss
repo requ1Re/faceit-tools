@@ -1,31 +1,34 @@
+@import '../../../../../assets/css/theme/base';
+
 h1 {
-  color: var(--faceit-primary);
+  color: $color-tertiary;
   @apply text-xl;
 }
-.header {
-  border-color: var(--faceit-primary);
-  @apply h-10 border-b rounded-b flex items-center;
+.match-history-header {
+  border-color: $color-tertiary;
+  width: 100%;
+  @apply h-10 border-b rounded-lg flex items-center;
 }
-.header > h1 {
+.match-history-header > h1 {
   @apply px-2;
 }
 .match-holder {
   @apply mt-2 flex flex-col space-y-2;
 }
 .match {
-  @apply w-full bg-gray-800 text-white rounded p-2 shadow-lg;
+  @apply w-full text-white rounded-lg p-2 shadow-lg;
+  background-color: $color-secondary;
 }
 .match-item {
   @apply grid grid-flow-col auto-cols-fr cursor-pointer;
 }
-/* .match-item > *:not(:first-child):not(:last-child) {
-  @apply justify-self-center;
-} */
 .match-item > *:last-child {
   @apply justify-self-end;
 }
 .match-collapsible {
-  @apply mt-5 flex flex-col bg-gray-900 p-2 rounded space-y-5;
+  @apply mt-5 flex flex-col p-2 rounded-lg space-y-5;
+
+  background-color: $color-primary;
 }
 .collapsible-round {
   @apply flex flex-col;
@@ -37,14 +40,14 @@ h1 {
   @apply w-full lg:w-1/2;
 }
 .collapsible-map-name {
-  border-color: var(--faceit-primary);
+  border-color: $color-tertiary;
   @apply border-b;
 }
 th {
   text-align: left;
 }
 a:hover {
-  color: var(--faceit-primary);
+  color: $color-tertiary;
 }
 .more {
   width: 100%;

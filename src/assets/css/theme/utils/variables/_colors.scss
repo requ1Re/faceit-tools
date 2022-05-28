@@ -1,4 +1,4 @@
-$faceit-primary: #FF5500;
+$color-tertiary: #FF5500;
 
 // https://tailwindcss.com/docs/background-color
 $bg-white: rgb(255 255 255);
@@ -52,3 +52,25 @@ $bg-stone-600: rgb(87 83 78);
 $bg-stone-700: rgb(68 64 60);
 $bg-stone-800: rgb(41 37 36);
 $bg-stone-900: rgb(28 25 23);
+
+
+$bg-theme-900: $bg-gray-900;
+$bg-theme-800: $bg-gray-800;
+$bg-theme-700: $bg-gray-700;
+$bg-theme-600: $bg-gray-600;
+$bg-theme-500: $bg-gray-500;
+$bg-theme-400: $bg-gray-400;
+$bg-theme-300: $bg-gray-300;
+$bg-theme-200: $bg-gray-200;
+$bg-theme-100: $bg-gray-100;
+$bg-theme-50: $bg-gray-50;
+
+$color-primary: #222831;
+$color-secondary: #393E46;
+$color-secondary-light: lighten(#393E46, 10%);
+$color-tertiary: #FF5500;
+$color-text: #EEEEEE;
+
+$color-success: #28A745;
+$color-warning: #FFC107;
+$color-danger: #DC3545;

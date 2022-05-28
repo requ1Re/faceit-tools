@@ -1,22 +1,37 @@
+@import '../../../../assets/css/theme/base';
+
 .page {
-  @apply h-full flex flex-col items-center justify-center;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 h1 {
-  @apply text-5xl text-white;
+  font-size: 3rem;
+  color: $color-text;
 }
 .icon {
-  color: var(--faceit-primary)
+  color: $color-tertiary
 }
 .input {
-  @apply flex justify-between;
+  display: flex;
+  justify-content: space-between;
 }
 input {
-  @apply text-lg w-full p-5;
+  font-size: 1.125rem;
+  width: 100%;
+  padding: 20px;
   background: none;
 }
 input:focus {
   outline: none;
 }
 .alert {
-  @apply bg-red-600 p-2 rounded-bl rounded-br;
+  @include rounded-bl;
+  @include rounded-br;
+
+  padding: 8px;
+  background-color: $color-danger;
 }

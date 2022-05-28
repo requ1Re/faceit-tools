@@ -1,9 +1,9 @@
 <div class="wrapper">
-  <div class="header">
+  <div class="dialog-header">
     <p>Search FACEIT Player</p>
   </div>
   <div class="content">
-    <app-card class="w-full px-5 md:px-0 md:w-2/4">
+    <div class="card no-padding input-card">
       <div class="input">
         <input type="text" placeholder="FACEIT Username" [value]="_value" (keyup.enter)="submit()"
           (input)="handleInput($event)">
@@ -17,7 +17,7 @@
         </button>
       </div>
       <div class="alert" *ngIf="isErroneous" [innerHTML]="errorText"></div>
-    </app-card>
+    </div>
     <div class="players">
       <div class="player" *ngFor="let player of players" (click)="selectPlayer(player)">
         <img [src]="player.avatar == '' ? '/assets/img/steam_default.png' : player.avatar" alt="Avatar"

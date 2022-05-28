@@ -1,9 +1,11 @@
+@import '../../../../../assets/css/theme/base';
+
 .wrapper {
   @apply p-2 flex flex-col justify-center text-white;
 }
 .wrapper .name {
-  color: var(--faceit-primary);
-  border-color: var(--faceit-primary);
+  color: $color-tertiary;
+  border-color: $color-tertiary;
   @apply text-xl border-b;
 }
 .wrapper h1 {

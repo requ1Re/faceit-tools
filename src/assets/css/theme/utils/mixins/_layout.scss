@@ -1,6 +1,19 @@
 @mixin default-corners {
   border-radius: 8px;
 }
+@mixin rounded-tl {
+  border-top-left-radius: 8px;
+}
+@mixin rounded-tr {
+  border-top-right-radius: 8px;
+}
+@mixin rounded-bl {
+  border-bottom-left-radius: 8px;
+}
+@mixin rounded-br {
+  border-bottom-right-radius: 8px;
+}
+
 @mixin default-margins {
   margin: 10px;
 }

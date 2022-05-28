@@ -1,3 +1,5 @@
+@import '../assets/css/theme/base';
+
 .wrapper {
   height: 100%;
   width: 100%;
@@ -15,5 +17,10 @@
   z-index: 1000;
 }
 .error {
-  @apply px-3 py-2 bg-red-600 text-white;
+  @include default-corners;
+  @include default-margins;
+  @include default-paddings;
+
+  background-color: $color-danger;
+  color: $color-text;
 }

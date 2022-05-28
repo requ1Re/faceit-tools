@@ -1,7 +1,11 @@
 .card {
-  background-color: $bg-gray-800;
+  background-color: $color-secondary;
   color: whitesmoke;
   @extend .shadow-lg;
   @include default-corners;
   @include default-paddings;
+
+  &.no-padding {
+    padding: 0;
+  }
 }
