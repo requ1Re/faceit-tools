@@ -1,0 +1,19 @@
+@mixin btn-style {
+  @include default-corners;
+  padding: 10px 15px 10px 15px;
+  background-color: $bg-gray-800;
+  color: whitesmoke;
+  cursor: pointer;
+
+  @extend .shadow-lg;
+
+  &:hover {
+    background-color: $bg-gray-700;
+  }
+}
+
+
+.btn,
+button {
+  @include btn-style;
+}

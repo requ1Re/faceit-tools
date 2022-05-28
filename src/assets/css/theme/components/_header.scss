@@ -1,0 +1,72 @@
+.header {
+  color: white;
+  background-color: $bg-gray-800;
+
+  @extend .shadow-lg;
+
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0 10px 0 10px;
+
+  & .title {
+    @extend .text-lg;
+    margin-top: 12px;
+  }
+
+  & .nav {
+    margin-left: 12px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    row-gap: 5px;
+
+    margin-top: 12px;
+
+    & a {
+      cursor: pointer;
+    }
+
+    & .nav-item {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      height: 2.5rem;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      border-bottom-width: 2px;
+      border-color: transparent;
+
+      & .active,
+      &:hover {
+        color: var(--faceit-primary);
+        border-bottom: 2px solid var(--faceit-primary);
+      }
+    }
+  }
+
+  @include mediaQuery('md') {
+    flex-direction: row;
+    height: 48px;
+
+    & .title {
+      margin-top: 0;
+    }
+
+    & .nav {
+      margin-top: 0;
+
+      & .nav-item {
+        height: 100%;
+      }
+    }
+  }
+}
+
+.icon {
+  color: $faceit-primary;
+}

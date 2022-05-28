@@ -1,11 +1,11 @@
 @mixin default-corners {
-  border-radius: 3px;
+  border-radius: 8px;
 }
 @mixin default-margins {
   margin: 10px;
 }
 @mixin default-paddings {
-  padding: 15px;
+  padding: 10px 15px 10px 15px;
 }
 
 $breakpoints: (
