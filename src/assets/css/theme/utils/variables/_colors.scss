@@ -65,9 +65,9 @@ $bg-theme-200: $bg-gray-200;
 $bg-theme-100: $bg-gray-100;
 $bg-theme-50: $bg-gray-50;
 
-$color-primary: #222831;
-$color-secondary: #393E46;
-$color-secondary-light: lighten(#393E46, 10%);
+$color-primary: $bg-gray-900;
+$color-secondary: $bg-gray-800;
+$color-secondary-light: lighten($color-secondary, 10%);
 $color-tertiary: #FF5500;
 $color-text: #EEEEEE;
 
