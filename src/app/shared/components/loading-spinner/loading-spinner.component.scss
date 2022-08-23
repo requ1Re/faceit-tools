@@ -1,6 +1,8 @@
+@import '../../../../assets/css/theme/base';
+
 .wrapper {
   @apply h-full w-full flex justify-center items-center;
 }
 .wrapper svg {
-  fill: var(--faceit-primary)
+  fill: $color-tertiary
 }

@@ -1,18 +1,11 @@
-@use 'assets/css/theme/base';
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --faceit-primary: #FF5500;
-  --faceit-primary-white: #EBEFF3;
-  --faceit-secondary: #E14A00;
-}
+@import 'assets/css/theme/base';
 
 html {
-  @apply bg-gray-900;
+  background-color: $color-primary;
 }
 html, body {
   height: 100%;
@@ -20,36 +13,29 @@ html, body {
 }
 
 .text-red {
-  @apply text-red-600;
+  color: rgb(220 38 38 / 1);
 }
 .text-green {
-  @apply text-green-600;
+  color: rgb(22 163 74 / 1);
 }
 .text-faceit {
-  color: var(--faceit-primary);
-}
-
-
-button {
-  @apply text-white p-2 bg-gray-800 hover:bg-gray-700 w-fit rounded shadow-lg;
-}
-button:disabled {
-  @apply hover:bg-gray-800 cursor-not-allowed;
+  color: $color-tertiary;
 }
 
 .mat-dialog-container {
   padding: 0 !important;
-  @apply bg-gray-900 rounded-lg;
+  background-color: $color-primary;
+  border-radius: 8px !important;
 }
 .backdrop {
-  @apply bg-gray-800 bg-opacity-75;
+  background-color: rgba($color-primary, 0.75);
 }
 
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
   scrollbar-width: auto;
-  scrollbar-color: #374151 #1f2937;
+  scrollbar-color: $color-secondary $color-primary;
 }
 
 /* Chrome, Edge, and Safari */
@@ -58,11 +44,11 @@ button:disabled {
 }
 
 *::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: $color-primary;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #374151;
-  border-radius: 10px;
-  border: 0px solid #ffffff;
+  background-color: $color-secondary;
+  border-radius: 8px;
+  border: 0px solid $color-secondary;
 }

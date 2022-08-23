@@ -1,21 +1,19 @@
 <div class="page">
   <fa-icon [icon]="icon" size="10x" class="icon col-span-4"></fa-icon>
   <h1 class="mb-5 mt-5">{{ toolName }}</h1>
-  <app-card class="w-full px-5 md:px-0 md:w-2/4">
+  <div class="card no-padding w-full px-5 md:px-0 md:w-2/4">
     <div class="input">
       <input type="text" [placeholder]="placeholder" [value]="_value" (keyup.enter)="submit()"
         (input)="handleInput($event)">
 
-        <button *ngIf="!disableSubmit" class="w-12 hover:bg-gray-700 hover:rounded-tr hover:rounded-br shadow-none" (click)="submit()"
-        [disabled]="disableSubmit">
+      <button *ngIf="!disableSubmit" class="w-12 shadow-none" (click)="submit()" [disabled]="disableSubmit">
         <fa-icon [icon]="faChevronRight"></fa-icon>
       </button>
-      <button *ngIf="disableSubmit" class="w-12 shadow-none"
-        [disabled]="disableSubmit">
+      <button *ngIf="disableSubmit" class="w-12 shadow-none" [disabled]="disableSubmit">
         <app-loading-spinner></app-loading-spinner>
       </button>
     </div>
     <div class="alert" *ngIf="isErroneous" [innerHTML]="errorText"></div>
-  </app-card>
+  </div>
   <ng-content></ng-content>
 </div>

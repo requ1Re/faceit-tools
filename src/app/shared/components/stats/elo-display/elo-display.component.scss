@@ -1,3 +1,9 @@
+@import '../../../../../assets/css/theme/base';
+
+.elo-display {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 .rank-display-part-1 {
   width: 92%;
 }
@@ -26,5 +32,5 @@
 }
 .line {
   height: 100%;
-  background: var(--faceit-primary);
+  background: $color-tertiary;
 }

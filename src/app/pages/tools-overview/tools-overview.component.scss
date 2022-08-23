@@ -1,3 +1,5 @@
+@import '../../../assets/css/theme/base';
+
 .wrapper {
   @apply h-full flex flex-col justify-center items-center;
 }
@@ -8,7 +10,7 @@
   @apply mr-2;
 }
 .wrapper h1 {
-  border-color: var(--faceit-primary);
+  border-color: $color-tertiary;
   @apply text-5xl text-white border-b-2 pb-3 mb-3;
 }
 .tool {
@@ -22,10 +24,10 @@
   @apply bg-gray-700 rounded;
 }
 .icon {
-  color: var(--faceit-primary);
+  color: $color-tertiary;
 }
 a:hover {
-  color: var(--faceit-primary);
+  color: $color-tertiary;
 }
 .footer-wrapper {
   @apply mt-5;

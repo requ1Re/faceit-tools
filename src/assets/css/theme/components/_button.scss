@@ -1,14 +1,22 @@
 @mixin btn-style {
   @include default-corners;
-  padding: 10px 15px 10px 15px;
-  background-color: $bg-gray-800;
+  padding: 15px 20px 15px 20px;
+  background-color: $color-secondary;
   color: whitesmoke;
   cursor: pointer;
 
   @extend .shadow-lg;
 
   &:hover {
-    background-color: $bg-gray-700;
+    background-color: $color-secondary-light;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: $color-secondary;
+    }
   }
 }
 
