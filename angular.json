@@ -20,6 +20,9 @@
 				"build": {
 					"builder": "@angular-builders/custom-webpack:browser",
 					"options": {
+            "allowedCommonJsDependencies": [
+              "moment"
+            ],
 						"outputPath": "dist/faceit-map-picker/browser",
 						"index": "src/index.html",
 						"main": "src/main.ts",
