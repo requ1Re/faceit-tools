@@ -1,23 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ToolsOverviewComponent } from './pages/tools-overview/tools-overview.component';
 import { NotFoundComponent } from './pages/system/not-found/not-found.component';
+import { ToolsOverviewComponent } from './pages/tools-overview/tools-overview.component';
 import { ErrorInterceptor } from './shared/services/error.interceptor';
 import { ErrorService } from './shared/services/error.service';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { LogService } from './shared/services/log.service';
+import { SharedModule } from './shared/shared.module';
 import { AppStoreModule } from './shared/store/app-store.module';
 import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.component';
-import { LogService } from './shared/services/log.service';
-import { MomentModule } from 'ngx-moment';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, ToolsOverviewComponent, NotFoundComponent, SpriteWrapperComponent],
@@ -31,8 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
-    MomentModule,
-    BrowserAnimationsModule
+    // BrowserAnimationsModule
   ],
   providers: [
     LogService,

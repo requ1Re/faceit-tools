@@ -18,7 +18,7 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:browser",
+					"builder": "@angular-builders/custom-webpack:browser",
 					"options": {
 						"outputPath": "dist/faceit-map-picker/browser",
 						"index": "src/index.html",
@@ -33,7 +33,11 @@
 							"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
 							"src/styles.scss"
 						],
-						"scripts": []
+						"scripts": [],
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js",
+              "replaceDuplicatePlugins": true
+            }
 					},
 					"configurations": {
 						"production": {
@@ -41,7 +45,7 @@
 								{
 									"type": "initial",
 									"maximumWarning": "500kb",
-									"maximumError": "1mb"
+									"maximumError": "750kb"
 								},
 								{
 									"type": "anyComponentStyle",
@@ -69,8 +73,11 @@
 					"defaultConfiguration": "production"
 				},
 				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
-					"configurations": {
+					"builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "faceit-map-picker:build"
+          },
+          "configurations": {
 						"production": {
 							"browserTarget": "faceit-map-picker:build:production"
 						},

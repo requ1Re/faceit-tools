@@ -1,14 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { StatsRoutingModule } from './stats-routing.module';
-import { StatsComponent } from './stats.component';
-import { StatsDashboardComponent } from './stats-dashboard/stats-dashboard.component';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { StatsPlayerComponent } from './stats-player/stats-player.component';
-import { MatchHistoryDisplayComponent } from './stats-player/match-history-display/match-history-display.component';
+import { NgModule } from '@angular/core';
 import { MomentModule } from 'ngx-moment';
 
+import { SharedModule } from 'src/app/shared/shared.module';
+import { StatsDashboardComponent } from './stats-dashboard/stats-dashboard.component';
+import { MatchHistoryDisplayComponent } from './stats-player/match-history-display/match-history-display.component';
+import { StatsPlayerComponent } from './stats-player/stats-player.component';
+import { StatsRoutingModule } from './stats-routing.module';
+import { StatsComponent } from './stats.component';
 
 @NgModule({
   declarations: [
