@@ -1,0 +1,44 @@
+@import '../../../../../assets/css/theme/utils/variables/colors';
+@import '../../../../../assets/css/theme/utils/mixins/all';
+
+.team {
+  width: 100%;
+  height: 100%;
+  margin-top: 1.25rem;
+
+  @include mediaQuery('md') {
+    margin-top: 0;
+  }
+
+  & h1 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    margin-bottom: 1.25rem;
+    color: rgb(255 255 255 / 1);
+    text-align: center;
+  }
+
+  & .team-card {
+    & table {
+      width: 100%;
+      text-align: center;
+
+      & > thead > tr > th {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 20px;
+        border-width: 1px;
+        border-color: rgb(55 65 81 / 1);
+        border-bottom-width: 2px;
+      }
+
+      & > tbody > tr > td {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 18px;
+        border-width: 1px;
+        border-color: rgb(55 65 81 / 1);
+      }
+    }
+  }
+}

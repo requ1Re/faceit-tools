@@ -10,9 +10,7 @@ import { CustomMapPickerMatchPlayer } from 'src/app/shared/models/CustomMapPicke
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { ActiveDutyMap } from 'src/app/shared/models/MapPool';
 import {
-  getDefaultMapStats,
-  PlayerMapStats,
-  TeamMapStats
+  getDefaultMapStats, TeamMapStats
 } from 'src/app/shared/models/MapStats';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { BrowserService } from 'src/app/shared/services/browser.service';
@@ -362,50 +360,8 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
       : this.matchRoomData.teams.faction2;
   }
 
-  getTeamName(teamId: number) {
-    return teamId === 0 ? this.getTeam(teamId).name : this.getTeam(teamId).name;
-  }
-
-  getMapPreview(map: string) {
-    return 'assets/img/previews/de_' + map.toLowerCase() + '.jpg';
-  }
-
-  getTeamAvatar(team: FaceIT.Match.Faction) {
-    return team.avatar ? team.avatar : 'assets/img/steam_default.png';
-  }
-
-  getBackgroundColor(winRate: number) {
-    return winRate >= 50 ? 'rgb(34, 197, 94)' : 'rgb(239, 68, 68)';
-  }
-
   getMaps() {
     return Object.values(ActiveDutyMap).filter((v) => typeof v === 'string');
-  }
-
-  getPlayerWinrateForMap(playerStats: PlayerMapStats, map: ActiveDutyMap) {
-    return this.getPlayerStatsForMap(playerStats, map)?.rate ?? 0;
-  }
-
-  getPlayerLossesForMap(playerStats: PlayerMapStats, map: ActiveDutyMap) {
-    return this.getPlayerStatsForMap(playerStats, map)?.losses ?? 0;
-  }
-
-  getPlayerWinsForMap(playerStats: PlayerMapStats, map: ActiveDutyMap) {
-    return this.getPlayerStatsForMap(playerStats, map)?.wins ?? 0;
-  }
-
-  getPlayerMatchesForMap(playerStats: PlayerMapStats, map: ActiveDutyMap) {
-    return this.getPlayerStatsForMap(playerStats, map)?.matches ?? 0;
-  }
-
-  getPlayerStatsForMap(playerStats: PlayerMapStats, map: ActiveDutyMap) {
-    return playerStats.mapStats.find((s) => s.name === map.toString());
-  }
-
-  getPlayerDetailsByName(playerName: string) {
-    return this.playerDetails.find(
-      (details) => details.overview.nickname === playerName
-    );
   }
 
   editNormalTeams() {

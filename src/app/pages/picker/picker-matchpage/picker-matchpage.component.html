@@ -16,76 +16,18 @@
     </button>
   </div>
   <div class="page" *ngIf="!detailedView; else detailedViewTemplate">
-    <div class="team" *ngFor="let team of teamMapStats; index as i">
-      <img [src]="teamAvatars[i]" class="ml-auto mr-auto rounded-full h-12 w-12">
-      <h1>{{ teamNames[i] }}</h1>
-      <app-card>
-        <div class="team-card">
-          <table>
-            <thead>
-              <tr>
-                <th>Map</th>
-                <th>Map Name</th>
-                <th>Wins / Losses / Matches</th>
-                <th>Winrate *</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let stats of team.combinedMapStats">
-                <td><img [src]="getMapPreview(stats.name)" [alt]="stats.name" class="object-contain h-12"></td>
-                <td>{{ stats.name }}</td>
-                <td><span class="text-green-500">{{ stats.wins }}</span> / <span class="text-red-500">{{ stats.losses
-                    }}</span> / {{ stats.matches }}</td>
-                <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ getRoundedNumber(stats.rate) }}%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </app-card>
-    </div>
-    <p class="text-gray-400 text-center md:col-span-2">
+    <app-picker-table class="picker-table" [teamName]="teamNames[0]" [teamAvatar]="teamAvatars[0]" [teamMapStats]="teamMapStats[0]"></app-picker-table>
+    <app-picker-table class="picker-table" [teamName]="teamNames[1]" [teamAvatar]="teamAvatars[1]" [teamMapStats]="teamMapStats[1]"></app-picker-table>
+
+    <p class="text-gray-400 text-center md:col-span-2" style="width: 100%">
       * Winrate is calculated using the weighted winrate of each player on a team.<br>
       Each player's influence on the winrate is weighted by played matches. Less played matches = less influence.<br>
       This should be the most accurate possible way of representing a team's winrate on a specific map.</p>
   </div>
   <ng-template #detailedViewTemplate>
     <div class="page">
-      <div class="team" *ngFor="let team of teamMapStats; index as i">
-        <img [src]="teamAvatars[i]" class="ml-auto mr-auto rounded-full h-12 w-12">
-        <h1>{{ teamNames[i] }}</h1>
-        <app-card>
-          <div class="team-card">
-            <table>
-              <thead>
-                <tr>
-                  <th>Map</th>
-                  <th *ngFor="let player of team.playerMapStats">
-                    <div *ngIf="getPlayerDetailsByName(player.name) as details" class="details">
-                      <svg>
-                        <use [attr.xlink:href]="'#level' + details.overview.games['csgo'].skill_level"></use>
-                      </svg>
-                      <a [routerLink]="['../../../stats/', player.name]">{{ player.name }}</a>
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let map of getMaps()">
-                  <td>{{ map }}</td>
-                  <td *ngFor="let playerStats of team.playerMapStats">
-                    <span class="text-xl"
-                      [style.color]="getBackgroundColor(getPlayerWinrateForMap(playerStats, map))">{{
-                      getPlayerWinrateForMap(playerStats, map) }}%</span><br>(<span class="text-green-500">{{
-                      getPlayerWinsForMap(playerStats, map) }}</span> / <span class="text-red-500">{{
-                      getPlayerLossesForMap(playerStats, map) }}</span> / {{ getPlayerMatchesForMap(playerStats, map)
-                    }})
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </app-card>
-      </div>
+      <app-picker-table-detailed class="picker-table" [teamName]="teamNames[0]" [teamAvatar]="teamAvatars[0]" [teamMapStats]="teamMapStats[0]"></app-picker-table-detailed>
+      <app-picker-table-detailed class="picker-table" [teamName]="teamNames[1]" [teamAvatar]="teamAvatars[1]" [teamMapStats]="teamMapStats[1]"></app-picker-table-detailed>
     </div>
   </ng-template>
 </div>
