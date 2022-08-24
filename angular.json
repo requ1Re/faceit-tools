@@ -171,6 +171,5 @@
 				}
 			}
 		}
-	},
-	"defaultProject": "faceit-map-picker"
+  }
 }
