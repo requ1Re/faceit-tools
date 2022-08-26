@@ -1,5 +1,10 @@
 # STAGE 1: Build
-FROM node:14-alpine as builder
+FROM node:14-bullseye as builder
+RUN \
+  apt-get update \
+  && apt-get -y install gettext-base \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp
 ADD package.json ./package.json
@@ -10,10 +15,17 @@ RUN npm ci
 
 ADD . .
 
+RUN envsubst < .env.example > .env
+
 RUN npm run build:ssr
 
 # STAGE 2: Run the server
-FROM node:14-alpine
+FROM node:14-bullseye
+RUN \
+  apt-get update \
+  && apt-get -y install gettext-base \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 # From "builder" stage, copy over dist
 WORKDIR /tmp
