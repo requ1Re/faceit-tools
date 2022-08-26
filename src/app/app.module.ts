@@ -18,7 +18,12 @@ import { AppStoreModule } from './shared/store/app-store.module';
 import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.component';
 
 @NgModule({
-  declarations: [AppComponent, ToolsOverviewComponent, NotFoundComponent, SpriteWrapperComponent],
+  declarations: [
+    AppComponent,
+    ToolsOverviewComponent,
+    NotFoundComponent,
+    SpriteWrapperComponent,
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
@@ -35,6 +40,7 @@ import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.componen
     LogService,
     ErrorService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: 'FACEIT_API_KEY', useValue: environment.FACEIT_API_KEY },
   ],
   bootstrap: [AppComponent],
 })

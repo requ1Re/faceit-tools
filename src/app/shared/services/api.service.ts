@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { combineLatest, map, mergeMap, Observable, of, switchMap } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { App } from '../models/App';
 import { Backend } from '../models/Backend';
 import { FaceIT } from '../models/FaceIT';
@@ -10,7 +9,7 @@ import { LogService } from './log.service';
 
 @Injectable()
 export class ApiService {
-  readonly FACEIT_API_KEY = environment['FACEIT_API_KEY'];
+  constructor(@Inject('FACEIT_API_KEY') private FACEIT_API_KEY: string, private http: HttpClient, private logService: LogService) {}
 
   readonly MATCH_COUNT = 30;
 
@@ -18,7 +17,6 @@ export class ApiService {
     Authorization: 'Bearer ' + this.FACEIT_API_KEY,
   };
 
-  constructor(private http: HttpClient, private logService: LogService) {}
 
   getMatchRoom(matchRoomId: string) {
     return this.http.get<FaceIT.Match.Matchroom>(
