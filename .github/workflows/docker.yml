@@ -3,7 +3,7 @@ name: Update Docker Images
 on: push
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME_FRONTEND: requ1Re/faceit-tools
+  IMAGE_NAME_FRONTEND: requ1Re/faceit_tools
 
 jobs:
   build-and-push-frontend:
