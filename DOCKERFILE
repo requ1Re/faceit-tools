@@ -1,12 +1,5 @@
-
-# Set Global arg
-ARG ENV=dev
-
 # STAGE 1: Build
 FROM node:14-alpine as builder
-
-# For using the global arg in this build stage
-ARG ENV
 
 WORKDIR /tmp
 ADD package.json ./package.json
@@ -16,14 +9,10 @@ RUN npm ci
 
 ADD . .
 
-RUN npm run build:ssr:$ENV
+RUN npm run build:ssr
 
 # STAGE 2: Run the server
 FROM node:14-alpine
-
-# For using the global arg in this build stage
-ARG ENV
-ENV ENV=$ENV
 
 # From "builder" stage, copy over dist
 WORKDIR /tmp
