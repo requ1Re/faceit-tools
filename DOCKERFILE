@@ -1,19 +1,36 @@
-### Stage: 1 ###
-FROM node:14-alpine as Build
-WORKDIR /app
-COPY ./package.json ./package-lock.json /app/
-RUN npm install
-COPY . /app
-#This will create dist/ and dist-server/ folders in docker
-RUN npm run build:ssr
 
-### Stage: 2 ###
+# Set Global arg
+ARG ENV=dev
+
+# STAGE 1: Build
+FROM node:14-alpine as builder
+
+# For using the global arg in this build stage
+ARG ENV
+
+WORKDIR /tmp
+ADD package.json ./package.json
+ADD package-lock.json ./package-lock.json
+
+RUN npm ci
+
+ADD . .
+
+RUN npm run build:ssr:$ENV
+
+# STAGE 2: Run the server
 FROM node:14-alpine
-WORKDIR /app
-COPY --from=Build /app/package.json /app
-COPY --from=Build /app/dist /app/dist
-COPY --from=Build /app/dist/server /app/dist-server
 
-EXPOSE 4000
+# For using the global arg in this build stage
+ARG ENV
+ENV ENV=$ENV
 
-CMD ["npm", "run", "serve:ssr"]
+# From "builder" stage, copy over dist
+WORKDIR /tmp
+
+ADD package.json ./package.json
+COPY --from=builder /tmp/dist /tmp/dist
+
+EXPOSE 8080
+
+ENTRYPOINT npm run serve:ssr
