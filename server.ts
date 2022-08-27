@@ -13,7 +13,7 @@ import { AppServerModule } from './src/main.server';
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/faceit-map-picker/browser');
+  const distFolder = join(process.cwd(), 'dist/faceit-tools/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html'))
     ? 'index.original.html'
     : 'index';
@@ -60,8 +60,8 @@ function run(): void {
 
   // Start up the Node server
   const server = app();
-  server.listen(+port, '127.0.0.1', () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
+  server.listen(+port, '0.0.0.0', () => {
+    console.log(`Node Express server listening on http://0.0.0.0:${port}`);
   });
 }
 

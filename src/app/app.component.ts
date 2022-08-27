@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, INJECTOR, Injector, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { BaseComponent } from './shared/components/base/base';
@@ -35,6 +34,6 @@ export class AppComponent extends BaseComponent implements OnInit {
         this.errorService.enableErrorDisplaying();
         this.errorService.hideError();
       }
-    }))
+    }));
   }
 }
