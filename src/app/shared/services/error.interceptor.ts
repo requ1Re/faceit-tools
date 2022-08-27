@@ -1,4 +1,4 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpResponse, HttpHeaderResponse, HttpProgressEvent, HttpSentEvent, HttpUserEvent } from "@angular/common/http";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, map, Observable, throwError } from "rxjs";
 import { ErrorService } from "./error.service";
@@ -15,7 +15,9 @@ export class ErrorInterceptor implements HttpInterceptor {
       map((res) => {
         return res;
       }),
-      catchError((error: HttpErrorResponse) => {
+      catchError((error) => {
+        if(!error.error) return throwError(() => {});
+
         let errorMsg = '';
         if (error.error instanceof ErrorEvent) {
           console.log('Client-Side Error');

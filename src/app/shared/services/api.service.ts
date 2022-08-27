@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { combineLatest, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import { App } from '../models/App';
 import { Backend } from '../models/Backend';
@@ -9,28 +9,19 @@ import { LogService } from './log.service';
 
 @Injectable()
 export class ApiService {
-  constructor(@Inject('FACEIT_API_KEY') private FACEIT_API_KEY: string, private http: HttpClient, private logService: LogService) {
-    console.log('FACEIT_API_KEY', FACEIT_API_KEY);
-  }
+  constructor(private http: HttpClient, private logService: LogService) {}
 
   readonly MATCH_COUNT = 30;
 
-  readonly HEADERS = {
-    Authorization: 'Bearer ' + this.FACEIT_API_KEY,
-  };
-
-
   getMatchRoom(matchRoomId: string) {
     return this.http.get<FaceIT.Match.Matchroom>(
-      'https://open.faceit.com/data/v4/matches/' + matchRoomId,
-      { headers: this.HEADERS }
+      'https://open.faceit.com/data/v4/matches/' + matchRoomId
     );
   }
 
   getMatchRoomStats(matchRoomId: string){
     return this.http.get<FaceIT.MatchStats.Response>(
-      'https://open.faceit.com/data/v4/matches/' + matchRoomId + '/stats',
-      { headers: this.HEADERS }
+      'https://open.faceit.com/data/v4/matches/' + matchRoomId + '/stats'
     );
   }
 
@@ -70,22 +61,19 @@ export class ApiService {
 
   getPlayerStats(playerId: string) {
     return this.http.get<FaceIT.Player.PlayerStats>(
-      'https://open.faceit.com/data/v4/players/' + playerId + '/stats/csgo',
-      { headers: this.HEADERS }
+      'https://open.faceit.com/data/v4/players/' + playerId + '/stats/csgo'
     );
   }
 
   getPlayerMatchHistory(playerId: string, matchCount = this.MATCH_COUNT) {
     return this.http.get<FaceIT.MatchHistory.Response>(
-      'https://open.faceit.com/data/v4/players/' + playerId + '/history?game=csgo&offset=0&limit=' + matchCount,
-      { headers: this.HEADERS }
+      'https://open.faceit.com/data/v4/players/' + playerId + '/history?game=csgo&offset=0&limit=' + matchCount
     );
   }
 
   getPlayerOverviewByName(playerName: string){
     return this.http.get<FaceIT.PlayerOverview.Player>(
-      'https://open.faceit.com/data/v4/players?nickname=' + playerName + '&game=csgo',
-      { headers: this.HEADERS }
+      'https://open.faceit.com/data/v4/players?nickname=' + playerName + '&game=csgo'
     );
   }
 
@@ -97,15 +85,13 @@ export class ApiService {
 
   findFACEITAccountBySteamID(steamId: string){
     return this.http.get<FaceIT.PlayerOverview.Player>(
-      'https://open.faceit.com/data/v4/players?game_player_id=' + steamId + '&game=csgo',
-      { headers: this.HEADERS }
+      'https://open.faceit.com/data/v4/players?game_player_id=' + steamId + '&game=csgo'
     );
   }
 
   searchFACEITAccountsByString(search: string){
     return this.http.get<FaceIT.Search.Result>(
-      'https://open.faceit.com/data/v4/search/players?nickname=' + search + '&game=csgo&offset=0&limit=20',
-      { headers: this.HEADERS }
+      'https://open.faceit.com/data/v4/search/players?nickname=' + search + '&game=csgo&offset=0&limit=20'
     );
   }
 }

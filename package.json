@@ -1,5 +1,5 @@
 {
-  "name": "faceit-map-picker",
+  "name": "faceit-tools",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,10 +8,10 @@
     "config": "ts-node ./scripts/setenv.ts",
     "start": "npm run config -- --environment=dev && ng serve",
     "build": "npm run config -- --environment=prod && ng build",
-    "dev:ssr": "ng run faceit-map-picker:serve-ssr",
-    "serve:ssr": "node dist/faceit-map-picker/server/main.js",
-    "build:ssr": "ng build && ng run faceit-map-picker:server",
-    "prerender": "ng run faceit-map-picker:prerender"
+    "dev:ssr": "ng run faceit-tools:serve-ssr",
+    "serve:ssr": "node dist/faceit-tools/server/main.js",
+    "build:ssr": "ng build && ng run faceit-tools:server",
+    "prerender": "ng run faceit-tools:prerender"
   },
   "private": true,
   "dependencies": {

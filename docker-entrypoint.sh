@@ -1,4 +1,8 @@
 #!/bin/sh
-envsubst < .env.example > .env
-envsubst < dist/faceit-map-picker/browser/assets/env.template.js > dist/faceit-map-picker/browser/assets/env.js
-node dist/faceit-map-picker/server/main.js
+echo "FACEIT_API_KEY: $FACEIT_API_KEY"
+
+envsubst < dist/faceit-tools/browser/assets/env.template.json > dist/faceit-tools/browser/assets/env.json
+
+node -v
+
+npm run serve:ssr

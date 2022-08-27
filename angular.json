@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"faceit-map-picker": {
+		"faceit-tools": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:application": {
@@ -23,7 +23,7 @@
             "allowedCommonJsDependencies": [
               "moment"
             ],
-						"outputPath": "dist/faceit-map-picker/browser",
+						"outputPath": "dist/faceit-tools/browser",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
@@ -78,14 +78,14 @@
 				"serve": {
 					"builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "faceit-map-picker:build"
+            "browserTarget": "faceit-tools:build"
           },
           "configurations": {
 						"production": {
-							"browserTarget": "faceit-map-picker:build:production"
+							"browserTarget": "faceit-tools:build:production"
 						},
 						"development": {
-							"browserTarget": "faceit-map-picker:build:development"
+							"browserTarget": "faceit-tools:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -93,7 +93,7 @@
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "faceit-map-picker:build"
+						"browserTarget": "faceit-tools:build"
 					}
 				},
 				"test": {
@@ -117,7 +117,7 @@
 				"server": {
 					"builder": "@angular-devkit/build-angular:server",
 					"options": {
-						"outputPath": "dist/faceit-map-picker/server",
+						"outputPath": "dist/faceit-tools/server",
 						"main": "server.ts",
 						"tsConfig": "tsconfig.server.json"
 					},
@@ -143,12 +143,12 @@
 					"builder": "@nguniversal/builders:ssr-dev-server",
 					"configurations": {
 						"development": {
-							"browserTarget": "faceit-map-picker:build:development",
-							"serverTarget": "faceit-map-picker:server:development"
+							"browserTarget": "faceit-tools:build:development",
+							"serverTarget": "faceit-tools:server:development"
 						},
 						"production": {
-							"browserTarget": "faceit-map-picker:build:production",
-							"serverTarget": "faceit-map-picker:server:production"
+							"browserTarget": "faceit-tools:build:production",
+							"serverTarget": "faceit-tools:server:production"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -162,12 +162,12 @@
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "faceit-map-picker:build:production",
-							"serverTarget": "faceit-map-picker:server:production"
+							"browserTarget": "faceit-tools:build:production",
+							"serverTarget": "faceit-tools:server:production"
 						},
 						"development": {
-							"browserTarget": "faceit-map-picker:build:development",
-							"serverTarget": "faceit-map-picker:server:development"
+							"browserTarget": "faceit-tools:build:development",
+							"serverTarget": "faceit-tools:server:development"
 						}
 					},
 					"defaultConfiguration": "production"
