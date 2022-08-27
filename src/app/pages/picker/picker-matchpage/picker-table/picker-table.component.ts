@@ -16,6 +16,9 @@ export class PickerTableComponent implements OnInit {
   @Input()
   teamMapStats: TeamMapStats;
 
+  @Input()
+  reverse = false;
+
   constructor() { }
 
   ngOnInit(): void {

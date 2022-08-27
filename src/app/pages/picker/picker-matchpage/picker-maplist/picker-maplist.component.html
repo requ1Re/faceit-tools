@@ -1,0 +1,16 @@
+<app-card style="align-self: flex-end;">
+  <div class="maps">
+    <table>
+      <thead>
+        <tr>
+          <th>Maps</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let map of getMaps()" style="width: 100%">
+          <td>{{ map }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-card>

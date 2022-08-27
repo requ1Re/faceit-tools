@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PickerCustomComponent } from './picker-custom/picker-custom.component';
 import { PickerTableComponent } from './picker-matchpage/picker-table/picker-table.component';
 import { PickerTableDetailedComponent } from './picker-matchpage/picker-table-detailed/picker-table-detailed.component';
+import { PickerMaplistComponent } from './picker-matchpage/picker-maplist/picker-maplist.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PickerTableDetailedComponent } from './picker-matchpage/picker-table-de
     PickerMatchpageComponent,
     PickerCustomComponent,
     PickerTableComponent,
-    PickerTableDetailedComponent
+    PickerTableDetailedComponent,
+    PickerMaplistComponent
   ],
   imports: [
     CommonModule,

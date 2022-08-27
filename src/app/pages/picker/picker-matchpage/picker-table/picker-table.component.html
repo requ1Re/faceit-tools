@@ -3,22 +3,33 @@
   <h1>{{ teamName }}</h1>
   <app-card>
     <div class="team-card">
-      <table>
+      <table *ngIf="!reverse">
         <thead>
           <tr>
-            <th>Map</th>
-            <th>Map Name</th>
             <th>Wins / Losses / Matches</th>
             <th>Winrate *</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let stats of teamMapStats.combinedMapStats">
-            <td><img [src]="getMapPreview(stats.name)" [alt]="stats.name" class="object-contain h-12"></td>
-            <td>{{ stats.name }}</td>
             <td><span class="text-green-500">{{ stats.wins }}</span> / <span class="text-red-500">{{ stats.losses
                 }}</span> / {{ stats.matches }}</td>
             <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ getRoundedNumber(stats.rate) }}%</td>
+          </tr>
+        </tbody>
+      </table>
+      <table *ngIf="reverse">
+        <thead>
+          <tr>
+            <th>Winrate *</th>
+            <th>Wins / Losses / Matches</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stats of teamMapStats.combinedMapStats">
+            <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ getRoundedNumber(stats.rate) }}%</td>
+            <td><span class="text-green-500">{{ stats.wins }}</span> / <span class="text-red-500">{{ stats.losses
+                }}</span> / {{ stats.matches }}</td>
           </tr>
         </tbody>
       </table>

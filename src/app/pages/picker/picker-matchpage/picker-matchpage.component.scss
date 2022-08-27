@@ -33,6 +33,11 @@
     & .picker-table {
       flex: 1;
     }
+    & .secondary-maplist {
+      @include mediaQuery('md'){
+        display: none;
+      }
+    }
   }
 
   a:hover {

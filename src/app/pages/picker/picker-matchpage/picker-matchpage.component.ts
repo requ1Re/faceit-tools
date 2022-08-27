@@ -314,7 +314,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     }
   }
 
-  sortMapStats(sortByWinrate = true) {
+  sortMapStats(sortByWinrate = false) {
     if (sortByWinrate) {
       this.teamMapStats[0].combinedMapStats.sort((a, b) => b.rate - a.rate);
       this.teamMapStats[1].combinedMapStats.sort((a, b) => b.rate - a.rate);

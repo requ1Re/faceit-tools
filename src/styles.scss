@@ -6,6 +6,16 @@
 
 html {
   background-color: $color-primary;
+  background-image: url('assets/img/previews/de_inferno.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+body {
+  background-color: rgba(17, 24, 39, 0.8);
+  @include mediaQuery('md') {
+    backdrop-filter: blur(5px);
+  }
 }
 html, body {
   height: 100%;

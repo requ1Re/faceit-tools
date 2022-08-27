@@ -17,7 +17,9 @@
   </div>
   <div class="page" *ngIf="!detailedView; else detailedViewTemplate">
     <app-picker-table class="picker-table" [teamName]="teamNames[0]" [teamAvatar]="teamAvatars[0]" [teamMapStats]="teamMapStats[0]"></app-picker-table>
-    <app-picker-table class="picker-table" [teamName]="teamNames[1]" [teamAvatar]="teamAvatars[1]" [teamMapStats]="teamMapStats[1]"></app-picker-table>
+    <app-picker-maplist style="align-self: flex-end;"></app-picker-maplist>
+    <app-picker-maplist style="align-self: flex-end;" class="secondary-maplist"></app-picker-maplist>
+    <app-picker-table class="picker-table" [reverse]="true" [teamName]="teamNames[1]" [teamAvatar]="teamAvatars[1]" [teamMapStats]="teamMapStats[1]"></app-picker-table>
 
     <p class="text-gray-400 text-center md:col-span-2" style="width: 100%">
       * Winrate is calculated using the weighted winrate of each player on a team.<br>
