@@ -13,6 +13,7 @@ ADD package.json ./package.json
 ENV NODE_ENV=production
 RUN npm install
 RUN npm install --save-dev webpack
+RUN npm i -D @angular-builders/custom-webpack
 RUN npm install -g @angular/cli@14
 
 ADD . .
