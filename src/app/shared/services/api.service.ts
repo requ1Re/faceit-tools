@@ -9,7 +9,9 @@ import { LogService } from './log.service';
 
 @Injectable()
 export class ApiService {
-  constructor(@Inject('FACEIT_API_KEY') private FACEIT_API_KEY: string, private http: HttpClient, private logService: LogService) {}
+  constructor(@Inject('FACEIT_API_KEY') private FACEIT_API_KEY: string, private http: HttpClient, private logService: LogService) {
+    console.log('FACEIT_API_KEY', FACEIT_API_KEY);
+  }
 
   readonly MATCH_COUNT = 30;
 
