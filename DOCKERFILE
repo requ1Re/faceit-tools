@@ -1,5 +1,5 @@
 # STAGE 1: Build
-FROM node:16
+FROM node:14-slim
 RUN \
   apt-get update \
   && apt-get -y install gettext-base \
@@ -7,13 +7,10 @@ RUN \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-ADD package.json ./package.json
-# ADD package-lock.json ./package-lock.json
+COPY ./package.json ./package-lock.json /app/
 
-ENV NODE_ENV=production
 RUN npm install
 RUN npm install --save-dev webpack
-RUN npm i -D @angular-builders/custom-webpack
 RUN npm install -g @angular/cli@14
 
 ADD . .
