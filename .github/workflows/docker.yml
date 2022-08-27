@@ -1,6 +1,9 @@
-name: Update Docker Images
+name: Update Docker Image
 
-on: push
+on: 
+  push:
+    branches:
+      - main
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME_FRONTEND: requ1re/faceit-tools
