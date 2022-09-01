@@ -330,7 +330,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
 
   toggleDetailedView() {
     this.detailedView = !this.detailedView;
-    this.sortMapStats(!this.detailedView);
+    // this.sortMapStats(!this.detailedView);
   }
 
   /*
