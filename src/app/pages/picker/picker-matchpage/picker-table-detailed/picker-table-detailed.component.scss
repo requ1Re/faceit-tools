@@ -23,21 +23,16 @@
       width: 100%;
       text-align: center;
 
-      & > thead > tr > th {
-        padding-top: 8px;
-        padding-bottom: 8px;
-        font-size: 20px;
-        border-width: 1px;
-        border-color: rgb(55 65 81 / 1);
-        border-bottom-width: 2px;
-      }
+      & .map {
+        padding: 0;
+        background-size: cover;
+        background-position: center;
 
-      & > tbody > tr > td {
-        padding-top: 8px;
-        padding-bottom: 8px;
-        font-size: 18px;
-        border-width: 1px;
-        border-color: rgb(55 65 81 / 1);
+        & .map-text {
+          background-color: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(2px);
+          padding: 2px;
+        }
       }
     }
   }
@@ -53,4 +48,9 @@
     justify-content: center;
     gap: 8px;
   }
+}
+
+
+a:hover {
+  color: $color-tertiary;
 }

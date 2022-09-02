@@ -1,7 +1,7 @@
 <div class="team">
   <img [src]="teamAvatar" class="ml-auto mr-auto rounded-full h-12 w-12">
   <h1>{{ teamName }}</h1>
-  <app-card>
+  <app-card [noPadding]="true">
     <div class="team-card">
       <table *ngIf="!reverse">
         <thead>
@@ -14,7 +14,7 @@
           <tr *ngFor="let stats of teamMapStats.combinedMapStats">
             <td><span class="text-green-500">{{ stats.wins }}</span> / <span class="text-red-500">{{ stats.losses
                 }}</span> / {{ stats.matches }}</td>
-            <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ getRoundedNumber(stats.rate) }}%</td>
+            <td class="winrate" [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ getRoundedNumber(stats.rate) }}%</td>
           </tr>
         </tbody>
       </table>
@@ -27,7 +27,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let stats of teamMapStats.combinedMapStats">
-            <td [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ getRoundedNumber(stats.rate) }}%</td>
+            <td class="winrate" [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ getRoundedNumber(stats.rate) }}%</td>
             <td><span class="text-green-500">{{ stats.wins }}</span> / <span class="text-red-500">{{ stats.losses
                 }}</span> / {{ stats.matches }}</td>
           </tr>

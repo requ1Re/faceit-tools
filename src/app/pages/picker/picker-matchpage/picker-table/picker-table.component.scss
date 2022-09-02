@@ -23,21 +23,8 @@
       width: 100%;
       text-align: center;
 
-      & > thead > tr > th {
-        padding-top: 8px;
-        padding-bottom: 8px;
-        font-size: 20px;
-        border-width: 1px;
-        border-color: rgb(55 65 81 / 1);
-        border-bottom-width: 2px;
-      }
-
-      & > tbody > tr > td {
-        padding-top: 8px;
-        padding-bottom: 8px;
-        font-size: 18px;
-        border-width: 1px;
-        border-color: rgb(55 65 81 / 1);
+      & .winrate {
+        color: $color-primary;
       }
     }
   }

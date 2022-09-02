@@ -1,11 +1,12 @@
 .card {
   background-color: $color-secondary;
   color: whitesmoke;
-  @extend .shadow-lg;
+  @extend .drop-shadow-xl;
   @include default-corners;
   @include default-paddings;
 
   &.no-padding {
     padding: 0;
+    overflow: hidden;
   }
 }

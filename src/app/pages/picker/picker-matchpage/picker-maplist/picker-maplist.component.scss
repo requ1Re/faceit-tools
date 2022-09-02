@@ -1,3 +1,5 @@
+@import '../../../../../assets/css/theme/utils/variables/colors';
+
 .maps {
   width: 100px;
 
@@ -9,22 +11,14 @@
   & table {
     width: 100%;
     text-align: center;
+  }
 
-    & > thead > tr > th {
-      padding-top: 8px;
-      padding-bottom: 8px;
-      font-size: 20px;
-      border-width: 1px;
-      border-color: rgb(55 65 81 / 1);
-      border-bottom-width: 2px;
-    }
+  & .map {
+    background-size: 100% 100%;
 
-    & > tbody > tr > td {
-      padding-top: 8px;
-      padding-bottom: 8px;
-      font-size: 18px;
-      border-width: 1px;
-      border-color: rgb(55 65 81 / 1);
+    & .map-text {
+      background-color: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(1px);
     }
   }
 }

@@ -77,4 +77,8 @@ export class PickerTableDetailedComponent extends BaseComponentWithStatsStore {
   getMaps() {
     return Object.values(ActiveDutyMap).filter((v) => typeof v === 'string');
   }
+
+  getMapPreviewStyle(map: ActiveDutyMap){
+    return `url('assets/img/previews/de_${map.toLowerCase()}.jpg')`;
+  }
 }
