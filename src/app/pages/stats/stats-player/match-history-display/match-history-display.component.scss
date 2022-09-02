@@ -3,56 +3,104 @@
 
 h1 {
   color: $color-tertiary;
-  @apply text-xl;
+  font-size: 20px;
+  line-height: 28px;
 }
+
 .match-history-header {
   border-color: $color-tertiary;
   width: 100%;
-  @apply h-10 border-b rounded-lg flex items-center;
-}
-.match-history-header > h1 {
-  @apply px-2;
-}
-.match-holder {
-  @apply mt-2 flex flex-col space-y-2;
-}
-.match {
-  @apply w-full text-white rounded-lg p-2 shadow-lg;
-  background-color: $color-secondary;
-}
-.match-item {
-  @apply grid grid-flow-col auto-cols-fr cursor-pointer;
-}
-.match-item > *:last-child {
-  @apply justify-self-end;
-}
-.match-collapsible {
-  @apply mt-5 flex flex-col p-2 rounded-lg space-y-5;
+  height: 40px;
+  border-bottom-width: 1px;
+  display: flex;
+  align-items: center;
 
-  background-color: $color-primary;
+  @include default-corners;
+
+  & > h1 {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
-.collapsible-round {
-  @apply flex flex-col;
-}
-.collapsible-table-holder {
-  @apply flex flex-col space-y-5 lg:space-y-0 lg:flex-row lg:space-x-5;
-}
-.collapsible-table-holder > table {
-  @apply w-full lg:w-1/2;
-}
-.collapsible-map-name {
-  border-color: $color-tertiary;
-  @apply border-b;
-}
-th {
-  text-align: left;
-}
-a:hover {
-  color: $color-tertiary;
-}
-.more {
-  width: 100%;
-  color: white;
-  text-align: center;
-  cursor: pointer;
+
+.match-holder {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  & .match {
+    width: 100%;
+    color: white;
+    padding: 8px;
+    background-color: $color-secondary;
+
+    @include default-corners;
+    @extend .drop-shadow-lg;
+
+    & .match-item {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+      cursor: pointer;
+
+      & > *:last-child {
+        justify-self: end;
+      }
+    }
+
+    & .match-collapsible {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      gap: 5px;
+      background-color: $color-primary;
+      @include default-corners;
+
+      & .collapsible-round {
+        display: flex;
+        flex-direction: column;
+
+        & .collapsible-map-name {
+          border-color: $color-tertiary;
+          border-bottom-width: 1px;
+        }
+
+        & .collapsible-table-holder {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          @include mediaQuery('lg') {
+            flex-direction: row;
+          }
+
+          & > table {
+            width: 100%;
+            text-align: center;
+
+            @include mediaQuery('lg') {
+              width: 50%;
+            }
+
+            & th {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  & a:hover {
+    color: $color-tertiary;
+
+    &.more {
+      width: 100%;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
 }
