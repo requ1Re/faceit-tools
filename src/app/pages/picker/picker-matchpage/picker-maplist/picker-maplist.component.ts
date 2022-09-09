@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActiveDutyMap } from 'src/app/shared/models/MapPool';
+import { BrowserService } from 'src/app/shared/services/browser.service';
 
 @Component({
   selector: 'app-picker-maplist',
@@ -8,9 +9,12 @@ import { ActiveDutyMap } from 'src/app/shared/models/MapPool';
 })
 export class PickerMaplistComponent implements OnInit {
 
-  constructor() { }
+  enableBackdropFilter = false;
+
+  constructor(private browserService: BrowserService) { }
 
   ngOnInit(): void {
+    this._enableBackdropFilter();
   }
 
   getMaps() {
@@ -19,5 +23,9 @@ export class PickerMaplistComponent implements OnInit {
 
   getMapPreviewStyle(map: ActiveDutyMap){
     return `url('assets/img/previews/de_${map.toLowerCase()}.jpg')`;
+  }
+
+  async _enableBackdropFilter(){
+    this.enableBackdropFilter = await this.browserService.isUsingHardwareAcceleration()
   }
 }

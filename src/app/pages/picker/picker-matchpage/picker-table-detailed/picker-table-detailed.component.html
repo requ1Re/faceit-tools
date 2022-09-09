@@ -19,7 +19,8 @@
         </thead>
         <tbody>
           <tr *ngFor="let map of getMaps()">
-            <td [style.backgroundImage]="getMapPreviewStyle(map)" class="map"><span class="map-text">{{ map }}</span></td>
+            <td [style.backgroundImage]="getMapPreviewStyle(map)" class="map"><span class="map-text"
+                [class.backdrop-filter-sm]="enableBackdropFilter">{{ map }}</span></td>
             <td *ngFor="let playerStats of teamMapStats.playerMapStats">
               <span class="text-xl" [style.color]="getBackgroundColor(getPlayerWinrateForMap(playerStats, map))">{{
                 getPlayerWinrateForMap(playerStats, map) }}%</span><br>(<span class="text-green-500">{{

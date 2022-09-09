@@ -40,7 +40,6 @@
     gap: 8px;
     color: $color-text;
     padding: 20px;
-    backdrop-filter: blur(4px);
     background-color: rgba($color-secondary, 0.5);
 
     @include mediaQuery('md') {

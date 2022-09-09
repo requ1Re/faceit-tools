@@ -7,6 +7,7 @@ import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stat
 import { App } from 'src/app/shared/models/App';
 import { ActiveDutyMap } from 'src/app/shared/models/MapPool';
 import { PlayerMapStats, TeamMapStats } from 'src/app/shared/models/MapStats';
+import { BrowserService } from 'src/app/shared/services/browser.service';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
 
 @Component({
@@ -15,6 +16,8 @@ import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
   styleUrls: ['./picker-table-detailed.component.scss']
 })
 export class PickerTableDetailedComponent extends BaseComponentWithStatsStore {
+  enableBackdropFilter = false;
+
   @Input()
   teamAvatar: string;
 
@@ -28,6 +31,7 @@ export class PickerTableDetailedComponent extends BaseComponentWithStatsStore {
 
   constructor(
     private route: ActivatedRoute,
+    private browserService: BrowserService,
     store: Store<StatsState>,
     actions$: Actions
   ) {
@@ -42,6 +46,8 @@ export class PickerTableDetailedComponent extends BaseComponentWithStatsStore {
           this.playerDetails = data[0];
         })
     );
+
+    this._enableBackdropFilter();
   }
 
   getPlayerWinrateForMap(playerStats: PlayerMapStats, map: ActiveDutyMap) {
@@ -80,5 +86,9 @@ export class PickerTableDetailedComponent extends BaseComponentWithStatsStore {
 
   getMapPreviewStyle(map: ActiveDutyMap){
     return `url('assets/img/previews/de_${map.toLowerCase()}.jpg')`;
+  }
+
+  async _enableBackdropFilter(){
+    this.enableBackdropFilter = await this.browserService.isUsingHardwareAcceleration()
   }
 }

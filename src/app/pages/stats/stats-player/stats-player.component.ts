@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faSteam } from '@fortawesome/free-brands-svg-icons';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, first, Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { App } from 'src/app/shared/models/App';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { PlayerMatchHistoryDetailed } from 'src/app/shared/models/PlayerMatchHistoryDetailed';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { BrowserService } from 'src/app/shared/services/browser.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { LogService } from 'src/app/shared/services/log.service';
 import {
-  loadPlayerDetailsByNicknames,
-  loadPlayerOverviewByNickname,
-  loadPlayerStatsByID,
+  loadPlayerDetailsByNicknames
 } from 'src/app/shared/store/stats/stats.actions';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
 import { EloUtil } from 'src/app/shared/utils/EloUtil';
@@ -25,6 +23,8 @@ import { EloUtil } from 'src/app/shared/utils/EloUtil';
   styleUrls: ['./stats-player.component.scss'],
 })
 export class StatsPlayerComponent extends BaseComponentWithStatsStore {
+  enableBackdropFilter = false;
+
   pageName = 'StatsPlayer';
 
   faSteam = faSteam;
@@ -45,6 +45,7 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
     private errorService: ErrorService,
     private logService: LogService,
     private apiService: ApiService,
+    private browserService: BrowserService,
     store: Store<StatsState>,
     actions$: Actions
   ) {
@@ -82,6 +83,7 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
         this.error = errorObj.error;
       })
     );
+    this._enableBackdropFilter();
   }
 
   loadData() {
@@ -119,5 +121,9 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
     }</span> / <span class="text-green">↑ +${
       neededElo.nextLevel ? neededElo.nextLevel : '&infin;'
     }</span>)`;
+  }
+
+  async _enableBackdropFilter(){
+    this.enableBackdropFilter = await this.browserService.isUsingHardwareAcceleration()
   }
 }

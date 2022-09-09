@@ -8,7 +8,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let map of getMaps()" style="width: 100%" [style.backgroundImage]="getMapPreviewStyle(map)" class="map">
-          <td class="map-text">{{ map }}</td>
+          <td class="map-text" [class.backdrop-filter-sm]="enableBackdropFilter">{{ map }}</td>
         </tr>
       </tbody>
     </table>

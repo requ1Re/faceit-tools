@@ -34,6 +34,7 @@
     "@ngrx/effects": "^14.2.0",
     "@ngrx/store": "^14.2.0",
     "@nguniversal/express-engine": "^14.1.0",
+    "detect-gpu": "^4.0.38",
     "express": "^4.15.2",
     "moment": "^2.29.4",
     "ngx-moment": "^6.0.2",

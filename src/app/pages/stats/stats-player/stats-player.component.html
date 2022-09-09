@@ -3,7 +3,7 @@
 <div class="wrapper" *ngIf="selectedPlayerDetails">
   <div class="page">
     <div class="head" [style.backgroundImage]="'url(\'' + selectedPlayerDetails.overview.cover_image +'\')'">
-      <div class="content">
+      <div class="content" [class.backdrop-filter]="enableBackdropFilter">
         <img [src]="getProfilePicture(selectedPlayerDetails.overview)" class="avatar" alt="Avatar">
         <div class="country" *ngIf="selectedPlayerDetails.overview.country.toLowerCase() as country">
           <svg>
