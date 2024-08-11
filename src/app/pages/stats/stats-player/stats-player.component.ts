@@ -17,10 +17,26 @@ import {
 } from 'src/app/shared/store/stats/stats.actions';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
 import { EloUtil } from 'src/app/shared/utils/EloUtil';
+import { MatchHistoryDisplayComponent } from './match-history-display/match-history-display.component';
+import { StatDisplayComponent } from '../../../shared/components/stats/stat-display/stat-display.component';
+import { EloDisplayComponent } from '../../../shared/components/stats/elo-display/elo-display.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
-  templateUrl: './stats-player.component.html',
-  styleUrls: ['./stats-player.component.scss'],
+    templateUrl: './stats-player.component.html',
+    styleUrls: ['./stats-player.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        LoadingSpinnerComponent,
+        FaIconComponent,
+        EloDisplayComponent,
+        StatDisplayComponent,
+        MatchHistoryDisplayComponent,
+        AsyncPipe,
+    ],
 })
 export class StatsPlayerComponent extends BaseComponentWithStatsStore {
   enableBackdropFilter = false;

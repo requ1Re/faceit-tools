@@ -8,8 +8,8 @@ describe('EloDisplayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EloDisplayComponent ]
-    })
+    imports: [EloDisplayComponent]
+})
     .compileComponents();
   });
 

@@ -6,6 +6,7 @@ import { BaseComponent } from 'src/app/shared/components/base/base';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { BrowserService } from 'src/app/shared/services/browser.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
+import { ToolInputComponent } from '../../../shared/components/tool-input/tool-input.component';
 
 enum SteamInputType {
   ACCOUNT_NAME,
@@ -15,8 +16,10 @@ enum SteamInputType {
 }
 
 @Component({
-  templateUrl: './account-finder-dashboard.component.html',
-  styleUrls: ['./account-finder-dashboard.component.scss']
+    templateUrl: './account-finder-dashboard.component.html',
+    styleUrls: ['./account-finder-dashboard.component.scss'],
+    standalone: true,
+    imports: [ToolInputComponent]
 })
 export class AccountFinderDashboardComponent extends BaseComponent implements OnInit {
   /*

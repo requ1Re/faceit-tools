@@ -16,10 +16,13 @@ import {
   loadPlayerDetailsByNicknames
 } from 'src/app/shared/store/stats/stats.actions';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
+import { ToolInputComponent } from '../../../shared/components/tool-input/tool-input.component';
 
 @Component({
-  templateUrl: './stats-dashboard.component.html',
-  styleUrls: ['./stats-dashboard.component.scss'],
+    templateUrl: './stats-dashboard.component.html',
+    styleUrls: ['./stats-dashboard.component.scss'],
+    standalone: true,
+    imports: [ToolInputComponent],
 })
 export class StatsDashboardComponent extends BaseComponentWithStatsStore {
   errorText =

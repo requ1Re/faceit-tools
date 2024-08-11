@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { NotFoundComponent } from './pages/system/not-found/not-found.component';
 import { ToolsOverviewComponent } from './pages/tools-overview/tools-overview.component';
 
-const routes: Routes = [
+export const APP_ROUTES: Routes = [
   // Legacy
   {
     path: 'tools/:p',
@@ -20,19 +19,19 @@ const routes: Routes = [
       {
         path: 'picker',
         loadChildren: () =>
-          import('./pages/picker/picker.module').then((m) => m.PickerModule),
+          import('./pages/picker/picker.routes').then((m) => m.PICKER_ROUTES),
       },
       {
         path: 'finder',
         loadChildren: () =>
-          import('./pages/account-finder/account-finder.module').then(
-            (m) => m.AccountFinderModule
+          import('./pages/account-finder/account-finder.routes').then(
+            (m) => m.ACCOUNT_FINDER_ROUTES
           ),
       },
       {
         path: 'stats',
         loadChildren: () =>
-          import('./pages/stats/stats.module').then((m) => m.StatsModule),
+          import('./pages/stats/stats.routes').then((m) => m.STATS_ROUTES),
       },
     ],
   },
@@ -41,11 +40,3 @@ const routes: Routes = [
     component: NotFoundComponent,
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
