@@ -5,13 +5,13 @@
     "ng": "ng",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "config": "ts-node ./scripts/setenv.ts",
-    "start": "npm run config -- --environment=dev && ng serve",
-    "build": "npm run config -- --environment=prod && ng build",
+    "start": "ng serve",
+    "build": "ng build",
     "dev:ssr": "ng run faceit-tools:serve-ssr",
     "serve:ssr": "node dist/faceit-tools/server/main.js",
     "build:ssr": "ng build && ng run faceit-tools:server",
-    "prerender": "ng run faceit-tools:prerender"
+    "prerender": "ng run faceit-tools:prerender",
+    "dev": "nodemon --watch src/ -e ts,html,scss --exec 'npm run build:ssr && npm run serve:ssr'"
   },
   "private": true,
   "dependencies": {
