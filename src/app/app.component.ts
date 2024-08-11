@@ -1,12 +1,12 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { BaseComponent } from './shared/components/base/base';
+import { HeaderComponent } from './shared/components/header/header.component';
 import { BrowserService } from './shared/services/browser.service';
 import { ErrorService } from './shared/services/error.service';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { NgIf } from '@angular/common';
-import { HeaderComponent } from './shared/components/header/header.component';
 import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.component';
 
 @Component({
@@ -19,8 +19,11 @@ import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.componen
         HeaderComponent,
         NgIf,
         FaIconComponent,
-        RouterOutlet,
+        RouterOutlet
     ],
+    providers: [
+      BrowserService
+    ]
 })
 export class AppComponent extends BaseComponent implements OnInit {
   constructor(
