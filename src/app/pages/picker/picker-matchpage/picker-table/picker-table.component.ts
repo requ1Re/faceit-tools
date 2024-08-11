@@ -27,7 +27,7 @@ export class PickerTableComponent implements OnInit {
 
 
   getMapPreview(map: string) {
-    return 'assets/img/previews/de_' + map.toLowerCase() + '.jpg';
+    return 'assets/img/previews/de_' + map.toLowerCase() + '.jpeg';
   }
 
   getBackgroundColor(winRate: number) {
