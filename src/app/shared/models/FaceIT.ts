@@ -91,7 +91,7 @@ export namespace FaceIT {
   }
 
   /*
-  Player Stats (/players/{id}/stats/csgo)
+  Player Stats (/players/{id}/stats/cs2)
   */
   export namespace Player {
     export interface PlayerStats {
