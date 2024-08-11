@@ -1,14 +1,26 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { BaseComponent } from './shared/components/base/base';
 import { BrowserService } from './shared/services/browser.service';
 import { ErrorService } from './shared/services/error.service';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgIf } from '@angular/common';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: true,
+    imports: [
+        SpriteWrapperComponent,
+        HeaderComponent,
+        NgIf,
+        FaIconComponent,
+        RouterOutlet,
+    ],
 })
 export class AppComponent extends BaseComponent implements OnInit {
   constructor(
