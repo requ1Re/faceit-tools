@@ -11,13 +11,13 @@ COPY ./package.json ./package-lock.json /app/
 
 RUN npm install
 RUN npm install --save-dev webpack
-RUN npm install -g @angular/cli@14
+RUN npm install -g @angular/cli@18
 
 ADD . .
 
 RUN envsubst < .env.example > .env
 
-RUN npm run build:ssr
+RUN npm run build
 
 EXPOSE 4000
 
