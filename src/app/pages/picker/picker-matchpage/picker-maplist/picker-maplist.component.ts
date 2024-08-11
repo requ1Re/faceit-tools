@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActiveDutyMap } from 'src/app/shared/models/MapPool';
 import { BrowserService } from 'src/app/shared/services/browser.service';
+import { NgFor } from '@angular/common';
+import { CardComponent } from '../../../../shared/components/card/card.component';
 
 @Component({
-  selector: 'app-picker-maplist',
-  templateUrl: './picker-maplist.component.html',
-  styleUrls: ['./picker-maplist.component.scss']
+    selector: 'app-picker-maplist',
+    templateUrl: './picker-maplist.component.html',
+    styleUrls: ['./picker-maplist.component.scss'],
+    standalone: true,
+    imports: [CardComponent, NgFor]
 })
 export class PickerMaplistComponent implements OnInit {
 
@@ -22,7 +26,7 @@ export class PickerMaplistComponent implements OnInit {
   }
 
   getMapPreviewStyle(map: ActiveDutyMap){
-    return `url('assets/img/previews/de_${map.toLowerCase()}.jpg')`;
+    return `url('assets/img/previews/de_${map.toLowerCase()}.jpeg')`;
   }
 
   async _enableBackdropFilter(){

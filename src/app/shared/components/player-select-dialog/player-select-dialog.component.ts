@@ -1,14 +1,24 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FaceIT } from '../../models/FaceIT';
 import { ApiService } from '../../services/api.service';
 import { BaseComponent } from '../base/base';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-player-select-dialog',
-  templateUrl: './player-select-dialog.component.html',
-  styleUrls: ['./player-select-dialog.component.scss'],
+    selector: 'app-player-select-dialog',
+    templateUrl: './player-select-dialog.component.html',
+    styleUrls: ['./player-select-dialog.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        FaIconComponent,
+        LoadingSpinnerComponent,
+        NgFor,
+    ],
 })
 export class PlayerSelectDialogComponent
   extends BaseComponent
@@ -62,7 +72,7 @@ export class PlayerSelectDialogComponent
   }
 
   getSkillLevel(player: FaceIT.Search.Item){
-    return player.games.find((g) => g.name === "csgo")?.skill_level ?? 1;
+    return player.games.find((g) => g.name === "cs2")?.skill_level ?? 1;
   }
 
   selectPlayer(player: FaceIT.Search.Item){

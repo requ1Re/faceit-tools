@@ -8,8 +8,8 @@ describe('AccountFinderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccountFinderComponent ]
-    })
+    imports: [AccountFinderComponent]
+})
     .compileComponents();
   });
 

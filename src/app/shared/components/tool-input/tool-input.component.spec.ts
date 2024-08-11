@@ -8,8 +8,8 @@ describe('ToolInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ToolInputComponent ]
-    })
+    imports: [ToolInputComponent]
+})
     .compileComponents();
   });
 

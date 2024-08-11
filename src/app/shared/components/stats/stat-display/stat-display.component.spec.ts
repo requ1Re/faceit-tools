@@ -8,8 +8,8 @@ describe('StatDisplayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StatDisplayComponent ]
-    })
+    imports: [StatDisplayComponent]
+})
     .compileComponents();
   });
 

@@ -10,7 +10,7 @@
             <th *ngFor="let player of teamMapStats.playerMapStats">
               <div *ngIf="getPlayerDetailsByName(player.name) as details" class="details">
                 <svg>
-                  <use [attr.xlink:href]="'#level' + details.overview.games['csgo'].skill_level"></use>
+                  <use [attr.xlink:href]="'#level' + details.overview.games['cs2'].skill_level"></use>
                 </svg>
                 <a [routerLink]="['/stats/', player.name]">{{ player.name }}</a>
               </div>

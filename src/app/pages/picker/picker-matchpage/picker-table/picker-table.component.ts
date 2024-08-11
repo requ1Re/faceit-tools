@@ -1,10 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TeamMapStats } from 'src/app/shared/models/MapStats';
+import { NgIf, NgFor } from '@angular/common';
+import { CardComponent } from '../../../../shared/components/card/card.component';
 
 @Component({
-  selector: 'app-picker-table',
-  templateUrl: './picker-table.component.html',
-  styleUrls: ['./picker-table.component.scss']
+    selector: 'app-picker-table',
+    templateUrl: './picker-table.component.html',
+    styleUrls: ['./picker-table.component.scss'],
+    standalone: true,
+    imports: [CardComponent, NgIf, NgFor]
 })
 export class PickerTableComponent implements OnInit {
   @Input()
@@ -27,7 +31,7 @@ export class PickerTableComponent implements OnInit {
 
 
   getMapPreview(map: string) {
-    return 'assets/img/previews/de_' + map.toLowerCase() + '.jpg';
+    return 'assets/img/previews/de_' + map.toLowerCase() + '.jpeg';
   }
 
   getBackgroundColor(winRate: number) {

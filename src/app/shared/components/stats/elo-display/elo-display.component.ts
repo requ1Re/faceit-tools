@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-elo-display',
-  templateUrl: './elo-display.component.html',
-  styleUrls: ['./elo-display.component.scss']
+    selector: 'app-elo-display',
+    templateUrl: './elo-display.component.html',
+    styleUrls: ['./elo-display.component.scss'],
+    standalone: true
 })
 export class EloDisplayComponent implements OnInit {
 
@@ -15,8 +16,8 @@ export class EloDisplayComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getPercentageTo2000Elo(){
-    const percent = this.elo / 2000 * 100;
+  getPercentageToLevel10(){
+    const percent = this.elo / 2001 * 100;
     return percent > 100 ? 100 : percent;
   }
 }

@@ -61,19 +61,19 @@ export class ApiService {
 
   getPlayerStats(playerId: string) {
     return this.http.get<FaceIT.Player.PlayerStats>(
-      'https://open.faceit.com/data/v4/players/' + playerId + '/stats/csgo'
+      'https://open.faceit.com/data/v4/players/' + playerId + '/stats/cs2'
     );
   }
 
   getPlayerMatchHistory(playerId: string, matchCount = this.MATCH_COUNT) {
     return this.http.get<FaceIT.MatchHistory.Response>(
-      'https://open.faceit.com/data/v4/players/' + playerId + '/history?game=csgo&offset=0&limit=' + matchCount
+      'https://open.faceit.com/data/v4/players/' + playerId + '/history?game=cs2&offset=0&limit=' + matchCount
     );
   }
 
   getPlayerOverviewByName(playerName: string){
     return this.http.get<FaceIT.PlayerOverview.Player>(
-      'https://open.faceit.com/data/v4/players?nickname=' + playerName + '&game=csgo'
+      'https://open.faceit.com/data/v4/players?nickname=' + playerName + '&game=cs2'
     );
   }
 
@@ -85,13 +85,13 @@ export class ApiService {
 
   findFACEITAccountBySteamID(steamId: string){
     return this.http.get<FaceIT.PlayerOverview.Player>(
-      'https://open.faceit.com/data/v4/players?game_player_id=' + steamId + '&game=csgo'
+      'https://open.faceit.com/data/v4/players?game_player_id=' + steamId + '&game=cs2'
     );
   }
 
   searchFACEITAccountsByString(search: string){
     return this.http.get<FaceIT.Search.Result>(
-      'https://open.faceit.com/data/v4/search/players?nickname=' + search + '&game=csgo&offset=0&limit=20'
+      'https://open.faceit.com/data/v4/search/players?nickname=' + search + '&game=cs2&offset=0&limit=20'
     );
   }
 }

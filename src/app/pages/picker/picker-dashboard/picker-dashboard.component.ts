@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { faChevronRight, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 import { BrowserService } from 'src/app/shared/services/browser.service';
+import { ToolInputComponent } from '../../../shared/components/tool-input/tool-input.component';
 
 @Component({
-  templateUrl: './picker-dashboard.component.html',
-  styleUrls: ['./picker-dashboard.component.scss'],
+    templateUrl: './picker-dashboard.component.html',
+    styleUrls: ['./picker-dashboard.component.scss'],
+    standalone: true,
+    imports: [ToolInputComponent, RouterLink],
 })
 export class PickerDashboardComponent implements OnInit {
   readonly INPUT_MIN_LENGTH = 32;
-  readonly FACEIT_MATCH_PAGE_REGEX = /https\:\/\/www.faceit.com\/(.*)\/csgo\/room\//i;
+  readonly FACEIT_MATCH_PAGE_REGEX = /https\:\/\/www.faceit.com\/(.*)\/cs2\/room\//i;
 
-  errorText = "Invalid match URL. <br><br>URL must match https://www.faceit.com/[language]/csgo/room/[matchId]"
+  errorText = "Invalid match URL. <br><br>URL must match https://www.faceit.com/[language]/cs2/room/[matchId]"
   error = false;
 
   matchURL: string = '';

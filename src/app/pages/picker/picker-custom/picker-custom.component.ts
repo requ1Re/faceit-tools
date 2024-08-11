@@ -10,11 +10,14 @@ import { CustomMapPickerMatchPlayer } from 'src/app/shared/models/CustomMapPicke
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { PlayerSelectDialogService } from 'src/app/shared/services/player-select-dialog.service';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-picker-custom',
-  templateUrl: './picker-custom.component.html',
-  styleUrls: ['./picker-custom.component.scss'],
+    selector: 'app-picker-custom',
+    templateUrl: './picker-custom.component.html',
+    styleUrls: ['./picker-custom.component.scss'],
+    standalone: true,
+    imports: [NgFor, NgIf],
 })
 export class PickerCustomComponent
   extends BaseComponentWithStatsStore
@@ -65,7 +68,7 @@ export class PickerCustomComponent
           nickname: result.nickname,
           playerId: result.player_id,
           avatar: result.avatar,
-          skillLevel: +(result.games.find(g => g.name === "csgo")?.skill_level ?? 1),
+          skillLevel: +(result.games.find(g => g.name === "cs2")?.skill_level ?? 1),
           country: result.country
         });
       }
@@ -73,7 +76,7 @@ export class PickerCustomComponent
   }
 
   getSkillLevel(player: FaceIT.Search.Item) {
-    return player.games.find((g) => g.name === 'csgo')?.skill_level ?? 1;
+    return player.games.find((g) => g.name === 'cs2')?.skill_level ?? 1;
   }
 
   continue(){

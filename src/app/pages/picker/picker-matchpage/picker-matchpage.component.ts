@@ -18,10 +18,25 @@ import { ErrorService } from 'src/app/shared/services/error.service';
 import { LogService } from 'src/app/shared/services/log.service';
 import { loadPlayerDetailsByNicknames } from 'src/app/shared/store/stats/stats.actions';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
+import { PickerTableDetailedComponent } from './picker-table-detailed/picker-table-detailed.component';
+import { PickerMaplistComponent } from './picker-maplist/picker-maplist.component';
+import { PickerTableComponent } from './picker-table/picker-table.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  templateUrl: './picker-matchpage.component.html',
-  styleUrls: ['./picker-matchpage.component.scss'],
+    templateUrl: './picker-matchpage.component.html',
+    styleUrls: ['./picker-matchpage.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        LoadingSpinnerComponent,
+        FaIconComponent,
+        PickerTableComponent,
+        PickerMaplistComponent,
+        PickerTableDetailedComponent,
+    ],
 })
 export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   pageName = 'PickerMatchpage';
@@ -400,7 +415,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
             playerId: p.overview.player_id,
             avatar: p.overview.avatar,
             country: p.overview.country,
-            skillLevel: p.overview.games['csgo'].skill_level,
+            skillLevel: p.overview.games['cs2'].skill_level,
           };
         })
     );

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faAddressBook, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { lastValueFrom } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/components/base/base';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { BrowserService } from 'src/app/shared/services/browser.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
+import { ToolInputComponent } from '../../../shared/components/tool-input/tool-input.component';
 
 enum SteamInputType {
   ACCOUNT_NAME,
@@ -15,14 +16,16 @@ enum SteamInputType {
 }
 
 @Component({
-  templateUrl: './account-finder-dashboard.component.html',
-  styleUrls: ['./account-finder-dashboard.component.scss']
+    templateUrl: './account-finder-dashboard.component.html',
+    styleUrls: ['./account-finder-dashboard.component.scss'],
+    standalone: true,
+    imports: [ToolInputComponent]
 })
 export class AccountFinderDashboardComponent extends BaseComponent implements OnInit {
   /*
   Notes:
   - Resolve Vanity URL: http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=[key]&vanityurl=[strippedVanityURL]
-  - Find FACEIT User by SteamID: https://open.faceit.com/data/v4/players?game=csgo&game_player_id=[STEAMID]
+  - Find FACEIT User by SteamID: https://open.faceit.com/data/v4/players?game=cs2&game_player_id=[STEAMID]
   */
 
 

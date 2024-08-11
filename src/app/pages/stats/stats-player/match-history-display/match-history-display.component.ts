@@ -3,11 +3,23 @@ import { faExternalLink, faMapLocation, faMapLocationDot } from '@fortawesome/fr
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { PlayerMatchHistoryDetailed } from 'src/app/shared/models/PlayerMatchHistoryDetailed';
 import { StringUtil } from 'src/app/shared/utils/StringUtil';
+import { MomentModule } from 'ngx-moment';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { RouterLink } from '@angular/router';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-match-history-display',
-  templateUrl: './match-history-display.component.html',
-  styleUrls: ['./match-history-display.component.scss'],
+    selector: 'app-match-history-display',
+    templateUrl: './match-history-display.component.html',
+    styleUrls: ['./match-history-display.component.scss'],
+    standalone: true,
+    imports: [
+        NgFor,
+        RouterLink,
+        FaIconComponent,
+        NgIf,
+        MomentModule,
+    ],
 })
 export class MatchHistoryDisplayComponent implements OnInit {
 
