@@ -26,10 +26,12 @@ export namespace FaceIT {
 
     export enum Game {
       CSGO = 'csgo',
+      CS2 = 'cs2'
     }
 
     export enum Membership {
       CSGO = 'csgo',
+      CS2 = 'cs2',
       FREE = 'free',
       PREMIUM = 'premium',
     }
@@ -91,7 +93,7 @@ export namespace FaceIT {
   }
 
   /*
-  Player Stats (/players/{id}/stats/csgo)
+  Player Stats (/players/{id}/stats/cs2)
   */
   export namespace Player {
     export interface PlayerStats {
@@ -158,7 +160,7 @@ export namespace FaceIT {
   }
 
   /*
-  Player Stats (/players/?nickname={nickname}&game=csgo)
+  Player Stats (/players/?nickname={nickname}&game=cs2)
   */
   export namespace PlayerOverview {
     export interface Player {

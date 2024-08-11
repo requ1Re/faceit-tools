@@ -400,7 +400,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
             playerId: p.overview.player_id,
             avatar: p.overview.avatar,
             country: p.overview.country,
-            skillLevel: p.overview.games['csgo'].skill_level,
+            skillLevel: p.overview.games['cs2'].skill_level,
           };
         })
     );

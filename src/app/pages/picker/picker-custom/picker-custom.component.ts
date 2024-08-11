@@ -65,7 +65,7 @@ export class PickerCustomComponent
           nickname: result.nickname,
           playerId: result.player_id,
           avatar: result.avatar,
-          skillLevel: +(result.games.find(g => g.name === "csgo")?.skill_level ?? 1),
+          skillLevel: +(result.games.find(g => g.name === "cs2")?.skill_level ?? 1),
           country: result.country
         });
       }
@@ -73,7 +73,7 @@ export class PickerCustomComponent
   }
 
   getSkillLevel(player: FaceIT.Search.Item) {
-    return player.games.find((g) => g.name === 'csgo')?.skill_level ?? 1;
+    return player.games.find((g) => g.name === 'cs2')?.skill_level ?? 1;
   }
 
   continue(){

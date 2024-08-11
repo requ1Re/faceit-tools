@@ -22,7 +22,7 @@ export class PickerMaplistComponent implements OnInit {
   }
 
   getMapPreviewStyle(map: ActiveDutyMap){
-    return `url('assets/img/previews/de_${map.toLowerCase()}.jpg')`;
+    return `url('assets/img/previews/de_${map.toLowerCase()}.jpeg')`;
   }
 
   async _enableBackdropFilter(){

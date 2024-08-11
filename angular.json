@@ -92,8 +92,8 @@
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
-					"options": {
-						"browserTarget": "faceit-tools:build"
+          "options": {
+            "buildTarget": "faceit-tools:build"
 					}
 				},
 				"test": {
@@ -134,13 +134,15 @@
 						"development": {
 							"optimization": false,
 							"sourceMap": true,
-							"extractLicenses": false
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false
 						}
 					},
 					"defaultConfiguration": "production"
 				},
 				"serve-ssr": {
-					"builder": "@nguniversal/builders:ssr-dev-server",
+					"builder": "@angular-devkit/build-angular:ssr-dev-server",
 					"configurations": {
 						"development": {
 							"browserTarget": "faceit-tools:build:development",
@@ -154,7 +156,7 @@
 					"defaultConfiguration": "development"
 				},
 				"prerender": {
-					"builder": "@nguniversal/builders:prerender",
+					"builder": "@angular-devkit/build-angular:prerender",
 					"options": {
 						"routes": [
 							"/"
