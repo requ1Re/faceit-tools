@@ -8,14 +8,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
-  declarations: [
-    AccountFinderComponent,
-    AccountFinderDashboardComponent
-  ],
-  imports: [
-    CommonModule,
-    AccountFinderRoutingModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        AccountFinderRoutingModule,
+        SharedModule,
+        AccountFinderComponent,
+        AccountFinderDashboardComponent
+    ]
 })
 export class AccountFinderModule { }

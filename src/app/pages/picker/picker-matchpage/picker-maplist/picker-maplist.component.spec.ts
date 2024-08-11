@@ -8,8 +8,8 @@ describe('PickerMaplistComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PickerMaplistComponent ]
-    })
+    imports: [PickerMaplistComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(PickerMaplistComponent);

@@ -8,8 +8,8 @@ describe('PlayerSelectDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlayerSelectDialogComponent ]
-    })
+    imports: [PlayerSelectDialogComponent]
+})
     .compileComponents();
   });
 

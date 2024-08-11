@@ -10,11 +10,14 @@ import { CustomMapPickerMatchPlayer } from 'src/app/shared/models/CustomMapPicke
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { PlayerSelectDialogService } from 'src/app/shared/services/player-select-dialog.service';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-picker-custom',
-  templateUrl: './picker-custom.component.html',
-  styleUrls: ['./picker-custom.component.scss'],
+    selector: 'app-picker-custom',
+    templateUrl: './picker-custom.component.html',
+    styleUrls: ['./picker-custom.component.scss'],
+    standalone: true,
+    imports: [NgFor, NgIf],
 })
 export class PickerCustomComponent
   extends BaseComponentWithStatsStore

@@ -4,11 +4,21 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FaceIT } from '../../models/FaceIT';
 import { ApiService } from '../../services/api.service';
 import { BaseComponent } from '../base/base';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-player-select-dialog',
-  templateUrl: './player-select-dialog.component.html',
-  styleUrls: ['./player-select-dialog.component.scss'],
+    selector: 'app-player-select-dialog',
+    templateUrl: './player-select-dialog.component.html',
+    styleUrls: ['./player-select-dialog.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        FaIconComponent,
+        LoadingSpinnerComponent,
+        NgFor,
+    ],
 })
 export class PlayerSelectDialogComponent
   extends BaseComponent

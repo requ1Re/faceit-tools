@@ -16,37 +16,35 @@ import { ApiService } from './services/api.service';
 import { BrowserService } from './services/browser.service';
 
 @NgModule({
-  declarations: [
-    CardComponent,
-    FooterComponent,
-    HeaderComponent,
-    ToolInputComponent,
-    EloDisplayComponent,
-    StatDisplayComponent,
-    LoadingSpinnerComponent,
-    AlertComponent,
-    PlayerSelectDialogComponent,
-  ],
-  imports: [
-    CommonModule,
-    FontAwesomeModule,
-    RouterModule,
-    MatDialogModule
-  ],
-  exports: [
-    CardComponent,
-    FontAwesomeModule,
-    FooterComponent,
-    HeaderComponent,
-    ToolInputComponent,
-    EloDisplayComponent,
-    StatDisplayComponent,
-    LoadingSpinnerComponent,
-    AlertComponent
-  ],
-  providers: [
-    ApiService,
-    BrowserService
-  ]
+    imports: [
+        CommonModule,
+        FontAwesomeModule,
+        RouterModule,
+        MatDialogModule,
+        CardComponent,
+        FooterComponent,
+        HeaderComponent,
+        ToolInputComponent,
+        EloDisplayComponent,
+        StatDisplayComponent,
+        LoadingSpinnerComponent,
+        AlertComponent,
+        PlayerSelectDialogComponent
+    ],
+    exports: [
+        CardComponent,
+        FontAwesomeModule,
+        FooterComponent,
+        HeaderComponent,
+        ToolInputComponent,
+        EloDisplayComponent,
+        StatDisplayComponent,
+        LoadingSpinnerComponent,
+        AlertComponent
+    ],
+    providers: [
+        ApiService,
+        BrowserService
+    ]
 })
 export class SharedModule { }

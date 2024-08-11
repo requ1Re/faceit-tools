@@ -19,12 +19,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppStoreModule } from './shared/store/app-store.module';
 import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.component';
 
-@NgModule({ declarations: [
-        AppComponent,
-        ToolsOverviewComponent,
-        NotFoundComponent,
-        SpriteWrapperComponent,
-    ],
+@NgModule({ declarations: [AppComponent],
     bootstrap: [AppComponent], imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }),
         AppRoutingModule,
         SharedModule,
@@ -33,7 +28,9 @@ import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.componen
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
         StoreDevtoolsModule.instrument(),
-        BrowserAnimationsModule], providers: [
+        BrowserAnimationsModule, ToolsOverviewComponent,
+        NotFoundComponent,
+        SpriteWrapperComponent], providers: [
         LogService,
         ErrorService,
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

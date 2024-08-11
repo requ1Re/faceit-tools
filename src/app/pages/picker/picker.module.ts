@@ -13,19 +13,17 @@ import { PickerMaplistComponent } from './picker-matchpage/picker-maplist/picker
 
 
 @NgModule({
-  declarations: [
-    PickerComponent,
-    PickerDashboardComponent,
-    PickerMatchpageComponent,
-    PickerCustomComponent,
-    PickerTableComponent,
-    PickerTableDetailedComponent,
-    PickerMaplistComponent
-  ],
-  imports: [
-    CommonModule,
-    PickerRoutingModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        PickerRoutingModule,
+        SharedModule,
+        PickerComponent,
+        PickerDashboardComponent,
+        PickerMatchpageComponent,
+        PickerCustomComponent,
+        PickerTableComponent,
+        PickerTableDetailedComponent,
+        PickerMaplistComponent
+    ]
 })
 export class PickerModule { }

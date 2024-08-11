@@ -8,8 +8,8 @@ describe('PickerTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PickerTableComponent ]
-    })
+    imports: [PickerTableComponent]
+})
     .compileComponents();
   });
 

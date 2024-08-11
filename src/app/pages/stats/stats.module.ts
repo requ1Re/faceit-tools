@@ -10,17 +10,15 @@ import { StatsRoutingModule } from './stats-routing.module';
 import { StatsComponent } from './stats.component';
 
 @NgModule({
-  declarations: [
-    StatsComponent,
-    StatsDashboardComponent,
-    StatsPlayerComponent,
-    MatchHistoryDisplayComponent
-  ],
-  imports: [
-    CommonModule,
-    StatsRoutingModule,
-    SharedModule,
-    MomentModule
-  ]
+    imports: [
+        CommonModule,
+        StatsRoutingModule,
+        SharedModule,
+        MomentModule,
+        StatsComponent,
+        StatsDashboardComponent,
+        StatsPlayerComponent,
+        MatchHistoryDisplayComponent
+    ]
 })
 export class StatsModule { }
