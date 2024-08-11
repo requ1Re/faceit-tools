@@ -12,12 +12,12 @@
         </div>
         <h1 class="text-shadow-md">{{ selectedPlayerDetails.overview.nickname }}</h1>
         <div class="card no-padding">
-          <div class="elo" *ngIf="selectedPlayerDetails.overview.games['csgo'].skill_level as level">
+          <div class="elo" *ngIf="selectedPlayerDetails.overview.games['cs2'].skill_level as level">
             <svg>
               <use [attr.xlink:href]="'#level' + level"></use>
             </svg>
             <span class="md:ml-2"
-              [innerHTML]="getFormattedEloLong(level, selectedPlayerDetails.overview.games['csgo'].faceit_elo)"></span>
+              [innerHTML]="getFormattedEloLong(level, selectedPlayerDetails.overview.games['cs2'].faceit_elo)"></span>
           </div>
         </div>
         <div class="socials" style="margin-left: auto">
@@ -37,12 +37,12 @@
         </div>
       </div>
     </div>
-    <app-elo-display class="w-full hidden lg:block" [elo]="selectedPlayerDetails.overview.games['csgo'].faceit_elo">
+    <app-elo-display class="w-full hidden lg:block" [elo]="selectedPlayerDetails.overview.games['cs2'].faceit_elo">
     </app-elo-display>
 
     <div class="stats">
       <app-stat-display name="LEVEL"
-        [value]="selectedPlayerDetails.overview.games['csgo'].skill_level + ' (' + selectedPlayerDetails.overview.games['csgo'].faceit_elo + ')'">
+        [value]="selectedPlayerDetails.overview.games['cs2'].skill_level + ' (' + selectedPlayerDetails.overview.games['cs2'].faceit_elo + ')'">
       </app-stat-display>
       <app-stat-display name="MATCHES" [value]="selectedPlayerDetails.stats.lifetime.Matches"></app-stat-display>
       <app-stat-display name="WIN RATE" [value]="selectedPlayerDetails.stats.lifetime['Win Rate %'] + '%'">

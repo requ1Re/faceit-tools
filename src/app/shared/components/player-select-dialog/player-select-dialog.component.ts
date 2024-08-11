@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FaceIT } from '../../models/FaceIT';
 import { ApiService } from '../../services/api.service';
@@ -62,7 +62,7 @@ export class PlayerSelectDialogComponent
   }
 
   getSkillLevel(player: FaceIT.Search.Item){
-    return player.games.find((g) => g.name === "csgo")?.skill_level ?? 1;
+    return player.games.find((g) => g.name === "cs2")?.skill_level ?? 1;
   }
 
   selectPlayer(player: FaceIT.Search.Item){

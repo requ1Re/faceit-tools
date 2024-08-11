@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faAddressBook, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { lastValueFrom } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/components/base/base';
@@ -22,7 +22,7 @@ export class AccountFinderDashboardComponent extends BaseComponent implements On
   /*
   Notes:
   - Resolve Vanity URL: http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=[key]&vanityurl=[strippedVanityURL]
-  - Find FACEIT User by SteamID: https://open.faceit.com/data/v4/players?game=csgo&game_player_id=[STEAMID]
+  - Find FACEIT User by SteamID: https://open.faceit.com/data/v4/players?game=cs2&game_player_id=[STEAMID]
   */
 
 
