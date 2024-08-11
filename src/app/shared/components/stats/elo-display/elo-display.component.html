@@ -2,63 +2,63 @@
   <div class="flex w-full">
     <div class="rank-display-part-1">
       <div class="flex">
-        <div class="rank-wrapper" style="width: 40%">
+        <div class="rank-wrapper" style="width: 25%">
           <svg class="rank">
             <use xlink:href="#level1"></use>
           </svg>
-          <div class="rank-text">1 – 800</div>
+          <div class="rank-text">1 – 500</div>
         </div>
-        <div class="rank-wrapper" style="width: 7.5%">
+        <div class="rank-wrapper" style="width: 12.5%">
           <svg class="rank">
             <use xlink:href="#level2"></use>
           </svg>
-          <div class="rank-text">801 – 950</div>
+          <div class="rank-text">501 – 750</div>
         </div>
         <div class="rank-wrapper" style="width: 7.5%">
           <svg class="rank">
             <use xlink:href="#level3"></use>
           </svg>
-          <div class="rank-text">951 – 1100</div>
+          <div class="rank-text">751 – 900</div>
         </div>
         <div class="rank-wrapper" style="width: 7.5%">
           <svg class="rank">
             <use xlink:href="#level4"></use>
           </svg>
-          <div class="rank-text">1101 – 1250</div>
+          <div class="rank-text">901 – 1050</div>
         </div>
         <div class="rank-wrapper" style="width: 7.5%">
           <svg class="rank">
             <use xlink:href="#level5"></use>
           </svg>
-          <div class="rank-text">1251 – 1400</div>
+          <div class="rank-text">1051 – 1200</div>
         </div>
         <div class="rank-wrapper" style="width: 7.5%">
           <svg class="rank">
             <use xlink:href="#level6"></use>
           </svg>
-          <div class="rank-text">1401 – 1550</div>
+          <div class="rank-text">1201 – 1350</div>
         </div>
         <div class="rank-wrapper" style="width: 7.5%">
           <svg class="rank">
             <use xlink:href="#level7"></use>
           </svg>
-          <div class="rank-text">1551 – 1700</div>
+          <div class="rank-text">1351 – 1500</div>
         </div>
-        <div class="rank-wrapper" style="width: 7.5%">
+        <div class="rank-wrapper" style="width: 12.5%">
           <svg class="rank">
             <use xlink:href="#level8"></use>
           </svg>
-          <div class="rank-text">1701 – 1850</div>
+          <div class="rank-text">1501 – 1750</div>
         </div>
-        <div class="rank-wrapper" style="width: 7.5%">
+        <div class="rank-wrapper" style="width: 12.5%">
           <svg class="rank">
             <use xlink:href="#level9"></use>
           </svg>
-          <div class="rank-text">1851 – 2000</div>
+          <div class="rank-text">1751 – 2000</div>
         </div>
       </div>
       <div class="line-wrapper">
-        <div [style.width]="getPercentageTo2000Elo() + '%'" class="line rounded-bl-lg"></div>
+        <div [style.width]="getPercentageToLevel10() + '%'" class="line rounded-bl-lg"></div>
       </div>
     </div>
     <div class="rank-display-part-2">
@@ -66,7 +66,7 @@
         <svg class="rank">
           <use xlink:href="#level10"></use>
         </svg>
-        <div class="rank-text">2001 – ∞</div>
+        <div class="rank-text">2001+</div>
       </div>
       <div style="width: 100%; height: 4px;" class="line-wrapper rounded-br-lg" [class.line]="elo > 2000"></div>
     </div>
