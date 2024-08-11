@@ -1,5 +1,5 @@
 # STAGE 1: Build
-FROM --platform=$TARGETPLATFORM node:14-slim
+FROM --platform=$TARGETPLATFORM node:21-slim
 RUN \
   apt-get update \
   && apt-get -y install gettext-base \
