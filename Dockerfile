@@ -1,25 +1,19 @@
 # STAGE 1: Build
-FROM --platform=$TARGETPLATFORM node:20
-RUN \
-  apt-get update \
-  && apt-get -y install gettext-base \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+FROM --platform=$TARGETPLATFORM node:20 as build
 
 WORKDIR /app
-COPY ./package.json ./package-lock.json /app/
 
-RUN npm install
-RUN npm install --save-dev webpack
 RUN npm install -g @angular/cli@18
+
+COPY ./package.json ./package-lock.json /app/
+RUN npm ci
 
 ADD . .
 
-RUN envsubst < .env.example > .env
-
-RUN npm install
 RUN npm run build
 
-EXPOSE 4200
+FROM nginx:latest
 
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+COPY --from=build app/dist/faceit-tools /usr/share/nginx/html
+
+EXPOSE 80

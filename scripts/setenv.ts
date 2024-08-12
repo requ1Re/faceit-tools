@@ -13,8 +13,8 @@ const targetPath = isProduction
 const environmentFileContent = `
 export const environment = {
    production: ${isProduction},
-   API_URL: "${process.env['API_URL']}",
-   FACEIT_API_KEY: "${process.env['FACEIT_API_KEY']}"
+   API_URL: "${process.env['API_URL'] ?? ''}",
+   FACEIT_API_KEY: "${process.env['FACEIT_API_KEY'] ?? ''}"
 };
 `;
 // write the content to the respective file

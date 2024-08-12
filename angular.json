@@ -23,7 +23,7 @@
             "allowedCommonJsDependencies": [
               "moment"
             ],
-						"outputPath": "dist/faceit-tools/browser",
+						"outputPath": "dist/faceit-tools",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
