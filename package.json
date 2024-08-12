@@ -7,7 +7,8 @@
     "test": "ng test",
     "config": "ts-node ./scripts/setenv.ts",
     "start": "npm run config -- --environment=dev && ng serve",
-    "build": "npm run config -- --environment=prod && ng build"
+    "build": "npm run config -- --environment=prod && ng build",
+    "test-docker": "chmod +x test-docker.sh && ./test-docker.sh"
   },
   "private": true,
   "dependencies": {
