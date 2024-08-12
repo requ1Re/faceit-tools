@@ -2,60 +2,14 @@
   <div class="flex w-full">
     <div class="rank-display-part-1">
       <div class="flex">
-        <div class="rank-wrapper" style="width: 25%">
-          <svg class="rank">
-            <use xlink:href="#level1"></use>
-          </svg>
-          <div class="rank-text">1 – 500</div>
-        </div>
-        <div class="rank-wrapper" style="width: 12.5%">
-          <svg class="rank">
-            <use xlink:href="#level2"></use>
-          </svg>
-          <div class="rank-text">501 – 750</div>
-        </div>
-        <div class="rank-wrapper" style="width: 7.5%">
-          <svg class="rank">
-            <use xlink:href="#level3"></use>
-          </svg>
-          <div class="rank-text">751 – 900</div>
-        </div>
-        <div class="rank-wrapper" style="width: 7.5%">
-          <svg class="rank">
-            <use xlink:href="#level4"></use>
-          </svg>
-          <div class="rank-text">901 – 1050</div>
-        </div>
-        <div class="rank-wrapper" style="width: 7.5%">
-          <svg class="rank">
-            <use xlink:href="#level5"></use>
-          </svg>
-          <div class="rank-text">1051 – 1200</div>
-        </div>
-        <div class="rank-wrapper" style="width: 7.5%">
-          <svg class="rank">
-            <use xlink:href="#level6"></use>
-          </svg>
-          <div class="rank-text">1201 – 1350</div>
-        </div>
-        <div class="rank-wrapper" style="width: 7.5%">
-          <svg class="rank">
-            <use xlink:href="#level7"></use>
-          </svg>
-          <div class="rank-text">1351 – 1500</div>
-        </div>
-        <div class="rank-wrapper" style="width: 12.5%">
-          <svg class="rank">
-            <use xlink:href="#level8"></use>
-          </svg>
-          <div class="rank-text">1501 – 1750</div>
-        </div>
-        <div class="rank-wrapper" style="width: 12.5%">
-          <svg class="rank">
-            <use xlink:href="#level9"></use>
-          </svg>
-          <div class="rank-text">1751 – 2000</div>
-        </div>
+        @for (item of getElos().slice(0, -1); track $index; let first = $first) {
+          <div class="rank-wrapper" [style.width]="calculatePercentage(item, first)">
+            <svg class="rank">
+              <use [attr.xlink:href]="'#level' + item.level"></use>
+            </svg>
+            <div class="rank-text">{{item.from}} – {{item.to}}</div>
+          </div>
+        }
       </div>
       <div class="line-wrapper">
         <div [style.width]="getPercentageToLevel10() + '%'" class="line rounded-bl-lg"></div>

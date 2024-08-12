@@ -1,5 +1,7 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faSteam } from '@fortawesome/free-brands-svg-icons';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -12,31 +14,27 @@ import { ApiService } from 'src/app/shared/services/api.service';
 import { BrowserService } from 'src/app/shared/services/browser.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { LogService } from 'src/app/shared/services/log.service';
-import {
-  loadPlayerDetailsByNicknames
-} from 'src/app/shared/store/stats/stats.actions';
+import { loadPlayerDetailsByNicknames } from 'src/app/shared/store/stats/stats.actions';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
 import { EloUtil } from 'src/app/shared/utils/EloUtil';
-import { MatchHistoryDisplayComponent } from './match-history-display/match-history-display.component';
-import { StatDisplayComponent } from '../../../shared/components/stats/stat-display/stat-display.component';
-import { EloDisplayComponent } from '../../../shared/components/stats/elo-display/elo-display.component';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { EloDisplayComponent } from '../../../shared/components/stats/elo-display/elo-display.component';
+import { StatDisplayComponent } from '../../../shared/components/stats/stat-display/stat-display.component';
+import { MatchHistoryDisplayComponent } from './match-history-display/match-history-display.component';
 
 @Component({
-    templateUrl: './stats-player.component.html',
-    styleUrls: ['./stats-player.component.scss'],
-    standalone: true,
-    imports: [
-        NgIf,
-        LoadingSpinnerComponent,
-        FaIconComponent,
-        EloDisplayComponent,
-        StatDisplayComponent,
-        MatchHistoryDisplayComponent,
-        AsyncPipe,
-    ],
+  templateUrl: './stats-player.component.html',
+  styleUrls: ['./stats-player.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    LoadingSpinnerComponent,
+    FaIconComponent,
+    EloDisplayComponent,
+    StatDisplayComponent,
+    MatchHistoryDisplayComponent,
+    AsyncPipe,
+  ],
 })
 export class StatsPlayerComponent extends BaseComponentWithStatsStore {
   enableBackdropFilter = false;
@@ -50,9 +48,9 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
   playerName = '';
   playerId = '';
 
-  selectedPlayerDetails: App.Player.Details|null;
+  selectedPlayerDetails: App.Player.Details | null;
 
-  matchHistory$: Observable<PlayerMatchHistoryDetailed[]>
+  matchHistory$: Observable<PlayerMatchHistoryDetailed[]>;
 
   error = false;
 
@@ -70,13 +68,14 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
 
   init() {
     this.registerSubscription(
-      combineLatest([
-        this.playerDetails$,
-        this.route.paramMap,
-      ])
-        .subscribe((data) => {
+      combineLatest([this.playerDetails$, this.route.paramMap]).subscribe(
+        (data) => {
           this.selectedPlayerDetails = null;
-          this.logService.log(this.pageName, 'Got combined data, calling loadData', data);
+          this.logService.log(
+            this.pageName,
+            'Got combined data, calling loadData',
+            data
+          );
 
           this.playerDetails = data[0];
           this.playerName = data[1].get('playerName') ?? '';
@@ -91,7 +90,8 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
               loadPlayerDetailsByNicknames({ nicknames: [this.playerName] })
             );
           }
-        })
+        }
+      )
     );
 
     this.registerSubscription(
@@ -110,7 +110,9 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
         );
         if (findDetails) {
           this.selectedPlayerDetails = findDetails;
-          this.matchHistory$ = this.apiService.getPlayerMatchHistoryDetailed(this.selectedPlayerDetails.overview.player_id);
+          this.matchHistory$ = this.apiService.getPlayerMatchHistoryDetailed(
+            this.selectedPlayerDetails.overview.player_id
+          );
         }
       })
     );
@@ -139,7 +141,8 @@ export class StatsPlayerComponent extends BaseComponentWithStatsStore {
     }</span>)`;
   }
 
-  async _enableBackdropFilter(){
-    this.enableBackdropFilter = await this.browserService.isUsingHardwareAcceleration()
+  async _enableBackdropFilter() {
+    this.enableBackdropFilter =
+      await this.browserService.isUsingHardwareAcceleration();
   }
 }

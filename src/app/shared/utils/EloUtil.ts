@@ -5,50 +5,51 @@ export interface LevelElo {
 }
 
 export class EloUtil {
+  // Reference: https://support.faceit.com/hc/en-us/articles/10525200579740-FACEIT-CS2-Elo-and-skill-levels
   static readonly LEVEL_ELO: LevelElo[] = [
     {
       level: 1,
-      from: 1,
-      to: 800,
+      from: 100,
+      to: 500,
     },
     {
       level: 2,
-      from: 801,
-      to: 950,
+      from: 501,
+      to: 750,
     },
     {
       level: 3,
-      from: 951,
-      to: 1100,
+      from: 751,
+      to: 900,
     },
     {
       level: 4,
-      from: 1101,
-      to: 1250,
+      from: 901,
+      to: 1050,
     },
     {
       level: 5,
-      from: 1251,
-      to: 1400,
+      from: 1051,
+      to: 1200,
     },
     {
       level: 6,
-      from: 1401,
-      to: 1550,
+      from: 1201,
+      to: 1350,
     },
     {
       level: 7,
-      from: 1551,
-      to: 1700,
+      from: 1351,
+      to: 1530,
     },
     {
       level: 8,
-      from: 1701,
-      to: 1850,
+      from: 1531,
+      to: 1750,
     },
     {
       level: 9,
-      from: 1851,
+      from: 1751,
       to: 2000,
     },
     {
@@ -68,7 +69,6 @@ export class EloUtil {
   }
 
   static getPlusMinusEloForNextLevel(level: number, elo: number) {
-    const range = this.getEloRangeForLevel(level);
     let previousLevel = undefined;
     let nextLevel = undefined;
 
