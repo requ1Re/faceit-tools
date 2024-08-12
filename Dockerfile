@@ -17,11 +17,8 @@ ADD . .
 
 RUN envsubst < .env.example > .env
 
-RUN npm run build:ssr
+RUN npm run build
 
-EXPOSE 4000
+EXPOSE 4200
 
-RUN chmod +x docker-entrypoint.sh
-
-# ENTRYPOINT docker-entrypoint.sh
-CMD ["./docker-entrypoint.sh"]
+CMD ["ng", "serve", "--host", "0.0.0.0"]

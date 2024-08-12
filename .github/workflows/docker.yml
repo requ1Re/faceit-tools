@@ -1,10 +1,10 @@
 name: Update Docker Image
 
-on: 
+on:
   push:
     branches:
       - main
-      - multi-platform-test
+      - django-api
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME_FRONTEND: requ1re/faceit-tools
@@ -33,7 +33,7 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}
-        
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -46,6 +46,6 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}:${{ github.ref_name == 'main' && 'latest' || github.ref_name }}
 
           labels: ${{ steps.meta.outputs.labels }}

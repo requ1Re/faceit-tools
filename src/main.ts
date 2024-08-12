@@ -30,13 +30,10 @@ if (environment.production) {
 function bootstrap() {
   bootstrapApplication(AppComponent, {
     providers: [
-      provideStore({stats: statsReducer}),
+      provideStore({ stats: statsReducer }),
       provideEffects([StatsEffects]),
       provideStoreDevtools(),
-      importProvidersFrom(
-        BrowserModule.withServerTransition({ appId: 'serverApp' }),
-        FontAwesomeModule
-      ),
+      importProvidersFrom(BrowserModule, FontAwesomeModule),
       LogService,
       ErrorService,
       ApiService,
@@ -48,7 +45,7 @@ function bootstrap() {
       },
       provideHttpClient(withInterceptorsFromDi()),
       provideAnimations(),
-      provideRouter(APP_ROUTES)
+      provideRouter(APP_ROUTES),
     ],
   }).catch((err) => console.error(err));
 }
