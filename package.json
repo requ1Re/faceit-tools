@@ -62,5 +62,8 @@
     "typescript": "~5.5.4",
     "webpack-bundle-analyzer": "^4.10.2",
     "yargs": "^17.7.2"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
   }
 }

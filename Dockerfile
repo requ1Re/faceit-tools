@@ -1,5 +1,5 @@
 # STAGE 1: Build
-FROM --platform=$TARGETPLATFORM node:20-slim
+FROM --platform=$TARGETPLATFORM node:20
 RUN \
   apt-get update \
   && apt-get -y install gettext-base \
@@ -17,6 +17,7 @@ ADD . .
 
 RUN envsubst < .env.example > .env
 
+RUN npm install
 RUN npm run build
 
 EXPOSE 4200
