@@ -79,7 +79,7 @@ export class ApiService {
 
   resolveVanityURL(vanityURL: string){
     return this.http.get<Backend.ResolveVanityURLResponse>(
-      `api/resolve/${vanityURL}`
+      `api/resolve.php?query=${vanityURL}`
     );
   }
 

@@ -1,20 +1,19 @@
 # STAGE 1: Build
-FROM --platform=$TARGETPLATFORM node:20 as build
+FROM node:20 AS build
 
+COPY . /app/
 WORKDIR /app
 
 RUN npm install -g @angular/cli@18
-
-COPY ./package.json ./package-lock.json ./nginx.conf /app/
 RUN npm ci
-
-ADD . .
-
 RUN npm run build
 
-FROM nginx:latest
+# STAGE 2: Deploy
+FROM trafex/php-nginx:latest AS deploy
 
-COPY --from=build app/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build app/dist/faceit-tools /usr/share/nginx/html
+COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/.env /usr/share/nginx/.env
+COPY --from=build /app/dist/faceit-tools /usr/share/nginx/html
+COPY --from=build /app/public/api /usr/share/nginx/html/api
 
-EXPOSE 80
+EXPOSE 8080

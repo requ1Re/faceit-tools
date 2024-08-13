@@ -8,7 +8,8 @@
     "config": "ts-node ./scripts/setenv.ts",
     "start": "npm run config -- --environment=dev && ng serve",
     "build": "npm run config -- --environment=prod && ng build",
-    "test-docker": "chmod +x test-docker.sh && ./test-docker.sh"
+    "run-docker": "chmod +x run-docker.sh && ./run-docker.sh",
+    "api": "php -S localhost:8000 -t public/api"
   },
   "private": true,
   "dependencies": {
