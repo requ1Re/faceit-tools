@@ -1,7 +1,11 @@
 <?php
+$env = parse_ini_file('../../.env');
+header('Access-Control-Allow-Origin: '.$env["CORS_FRONTEND_BASE_DOMAIN"]);
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept');
+
 header('Content-Type: application/json; charset=utf-8');
 
-$env = parse_ini_file('../../.env');
 $apiKey = $env["STEAM_WEB_API_KEY"];
 
 $query = $_GET['query'];

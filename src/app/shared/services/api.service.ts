@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { combineLatest, map, mergeMap, Observable, of, switchMap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { App } from '../models/App';
 import { Backend } from '../models/Backend';
 import { FaceIT } from '../models/FaceIT';
@@ -79,7 +80,7 @@ export class ApiService {
 
   resolveVanityURL(vanityURL: string){
     return this.http.get<Backend.ResolveVanityURLResponse>(
-      `api/resolve.php?query=${vanityURL}`
+      `${environment.API_URL}/resolve.php?query=${vanityURL}`
     );
   }
 
