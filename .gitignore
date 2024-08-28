@@ -45,3 +45,4 @@ Thumbs.db
 .env
 env.js
 src/assets/env.json
+src/environments/environment.ts
