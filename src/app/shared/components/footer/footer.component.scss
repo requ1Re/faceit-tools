@@ -1,0 +1,12 @@
+@import '../../../../assets/css/theme/utils/variables/colors';
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  & a:hover {
+    color: $color-tertiary;
+  }
+}

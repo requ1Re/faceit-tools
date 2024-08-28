@@ -5,8 +5,7 @@
 }
 .wrapper .name {
   color: $color-tertiary;
-  border-color: $color-tertiary;
-  @apply text-xl border-b;
+  @apply text-xl ;
 }
 .wrapper h1 {
   @apply text-xl;

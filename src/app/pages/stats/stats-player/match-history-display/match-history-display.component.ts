@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { faExternalLink, faMapLocation, faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { NgFor, NgIf } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faExternalLink, faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { MomentModule } from 'ngx-moment';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { PlayerMatchHistoryDetailed } from 'src/app/shared/models/PlayerMatchHistoryDetailed';
 import { StringUtil } from 'src/app/shared/utils/StringUtil';
-import { MomentModule } from 'ngx-moment';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { RouterLink } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-match-history-display',
@@ -21,7 +21,7 @@ import { NgFor, NgIf } from '@angular/common';
         MomentModule,
     ],
 })
-export class MatchHistoryDisplayComponent implements OnInit {
+export class MatchHistoryDisplayComponent {
 
   faExternalLink = faExternalLink;
   faMapLocationDot = faMapLocationDot;
@@ -33,10 +33,6 @@ export class MatchHistoryDisplayComponent implements OnInit {
   selectedPlayerId: string;
 
   collapsedId = -1;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   matchCountDefault = 10;
   showMore = false;

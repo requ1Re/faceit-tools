@@ -21,18 +21,24 @@
           </div>
         </div>
         <div class="socials" style="margin-left: auto">
+          <a class="btn social-btn"
+            [href]="'https://steamcommunity.com/profiles/' + selectedPlayerDetails.overview.steam_id_64"
+            target="_blank">
+            <fa-icon class="icon" [icon]="faSteam"></fa-icon>
+            <span class="text">Steam</span>
+          </a>
+          <a class="btn social-btn leetify-btn"
+            [href]="'https://leetify.com/public/profile/' + selectedPlayerDetails.overview.steam_id_64"
+            target="_blank">
+            <img src="assets/img/icons/leetify.png" alt="Leetify icon" class="icon">
+            <span class="text">Leetify</span>
+          </a>
           <a class="btn social-btn faceit-btn" [href]="selectedPlayerDetails.overview.faceit_url.replace('{lang}', 'en')"
             target="_blank">
             <svg class="icon">
               <use xlink:href="assets/img/icons/faceit.svg#Layer_1"></use>
             </svg>
-            <span class="text">View Profile on FACEIT</span>
-          </a>
-          <a class="btn social-btn"
-            [href]="'https://steamcommunity.com/profiles/' + selectedPlayerDetails.overview.steam_id_64"
-            target="_blank">
-            <fa-icon class="icon" [icon]="faSteam"></fa-icon>
-            <span class="text">View Profile on Steam</span>
+            <span class="text">FACEIT</span>
           </a>
         </div>
       </div>
@@ -41,27 +47,18 @@
     </app-elo-display>
 
     <div class="stats">
-      <app-stat-display name="LEVEL"
-        [value]="selectedPlayerDetails.overview.games['cs2'].skill_level + ' (' + selectedPlayerDetails.overview.games['cs2'].faceit_elo + ')'">
-      </app-stat-display>
-      <app-stat-display name="MATCHES" [value]="selectedPlayerDetails.stats.lifetime.Matches"></app-stat-display>
-      <app-stat-display name="WIN RATE" [value]="selectedPlayerDetails.stats.lifetime['Win Rate %'] + '%'">
-      </app-stat-display>
-      <app-stat-display name="AVG. K/D" [value]="selectedPlayerDetails.stats.lifetime['Average K/D Ratio']">
-      </app-stat-display>
-      <app-stat-display name="RECENT RESULTS" [valueHTML]="getRecentResults(selectedPlayerDetails.stats)">
-      </app-stat-display>
-      <app-stat-display name="CURRENT WIN STREAK" [value]="selectedPlayerDetails.stats.lifetime['Current Win Streak']">
-      </app-stat-display>
-      <app-stat-display name="LONGEST WIN STREAK" [value]="selectedPlayerDetails.stats.lifetime['Longest Win Streak']">
-      </app-stat-display>
-      <app-stat-display name="AVG. HEADSHOT"
-        [value]="selectedPlayerDetails.stats.lifetime['Average Headshots %'] + '%'">
-      </app-stat-display>
+      <app-stat-display name="LEVEL" [value]="selectedPlayerDetails.overview.games['cs2'].skill_level + ' (' + selectedPlayerDetails.overview.games['cs2'].faceit_elo + ')'" />
+      <app-stat-display name="MATCHES" [value]="selectedPlayerDetails.stats.lifetime.Matches" />
+      <app-stat-display name="WIN RATE" [value]="selectedPlayerDetails.stats.lifetime['Win Rate %'] + '%'" />
+      <app-stat-display name="AVG. K/D" [value]="selectedPlayerDetails.stats.lifetime['Average K/D Ratio']" />
+      <app-stat-display name="RECENT RESULTS" [valueHTML]="getRecentResults(selectedPlayerDetails.stats)" />
+      <app-stat-display name="CURRENT WIN STREAK" [value]="selectedPlayerDetails.stats.lifetime['Current Win Streak']" />
+      <app-stat-display name="LONGEST WIN STREAK" [value]="selectedPlayerDetails.stats.lifetime['Longest Win Streak']" />
+      <app-stat-display name="AVG. HEADSHOT" [value]="selectedPlayerDetails.stats.lifetime['Average Headshots %'] + '%'" />
     </div>
-    <app-loading-spinner class="history" *ngIf="!(matchHistory$ | async)"></app-loading-spinner>
+    <app-loading-spinner class="history" *ngIf="!(matchHistory$ | async)" />
     <div class="history" *ngIf="(matchHistory$ | async) as matches">
-      <app-match-history-display [matches]="matches" [selectedPlayerId]="selectedPlayerDetails.overview.player_id"></app-match-history-display>
+      <app-match-history-display [matches]="matches" [selectedPlayerId]="selectedPlayerDetails.overview.player_id" />
     </div>
   </div>
 </div>

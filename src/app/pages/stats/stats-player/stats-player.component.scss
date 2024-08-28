@@ -86,7 +86,7 @@
     background-color: $color-secondary-light;
   }
   & .icon {
-    @apply md:mr-1;
+    @apply md:mr-2;
   }
   & .text {
     @apply hidden md:inline-block;
@@ -102,7 +102,12 @@
 .faceit-btn svg {
   height: 16px;
   width: 16px;
-  fill: white;
+  fill: $color-tertiary;
+}
+
+.leetify-btn img {
+  height: 16px;
+  width: 16px;
 }
 
 .history {
