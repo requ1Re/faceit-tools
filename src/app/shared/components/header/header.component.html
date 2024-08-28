@@ -8,10 +8,10 @@
   <div class="nav">
     <ng-template ngFor let-tool [ngForOf]="tools">
       <a [routerLink]="tool.route" routerLinkActive="active" class="nav-item" *ngIf="!tool.external">
-        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon> <span class="hidden md:block">{{ tool.name }}</span>
+        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon> <span class="hidden md:block">{{ tool.i18nKey | translate }}</span>
       </a>
       <a [href]="tool.route" class="nav-item" *ngIf="tool.external" target="_blank">
-        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon> <span class="hidden md:block">{{ tool.name }}</span>
+        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon> <span class="hidden md:block">{{ tool.i18nKey | translate }}</span>
       </a>
     </ng-template>
   </div>

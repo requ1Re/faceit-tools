@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { faChevronRight, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { BrowserService } from 'src/app/shared/services/browser.service';
 import { ToolInputComponent } from '../../../shared/components/tool-input/tool-input.component';
 
@@ -8,13 +9,13 @@ import { ToolInputComponent } from '../../../shared/components/tool-input/tool-i
     templateUrl: './picker-dashboard.component.html',
     styleUrls: ['./picker-dashboard.component.scss'],
     standalone: true,
-    imports: [ToolInputComponent, RouterLink],
+    imports: [ToolInputComponent, RouterLink, TranslateModule],
 })
 export class PickerDashboardComponent implements OnInit {
   readonly INPUT_MIN_LENGTH = 32;
   readonly FACEIT_MATCH_PAGE_REGEX = /https\:\/\/www.faceit.com\/(.*)\/cs2\/room\//i;
 
-  errorText = "Invalid match URL. <br><br>URL must match https://www.faceit.com/[language]/cs2/room/[matchId]"
+  errorText = this.translateService.instant('errors.input.map_picker.invalid_url');
   error = false;
 
   matchURL: string = '';
@@ -23,7 +24,7 @@ export class PickerDashboardComponent implements OnInit {
 
   faMapMarkedAlt = faMapMarkedAlt;
 
-  constructor(private router: Router, private route: ActivatedRoute, private browserService: BrowserService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private browserService: BrowserService, private translateService: TranslateService) {}
 
   ngOnInit(): void {
     this.browserService.getDocument().title = "FACEIT Tools - Map Picker"

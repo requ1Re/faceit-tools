@@ -46,3 +46,4 @@ Thumbs.db
 env.js
 src/assets/env.json
 src/environments/environment.ts
+src/assets/i18n/project.babel

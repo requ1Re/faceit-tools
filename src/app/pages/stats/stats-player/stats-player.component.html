@@ -52,14 +52,24 @@
     </app-elo-display>
 
     <div class="stats">
-      <app-stat-display name="RECENT RESULTS" [valueHTML]="getRecentResults(selectedPlayerDetails.stats)" />
-      <app-stat-display name="MATCHES" [value]="selectedPlayerDetails.stats.lifetime.Matches" />
-      <app-stat-display name="WIN RATE" [value]="selectedPlayerDetails.stats.lifetime['Win Rate %'] + '%'" />
       <app-stat-display
-        name="LONGEST STREAK"
-        [value]="selectedPlayerDetails.stats.lifetime['Longest Win Streak'] + ' wins'" />
-      <app-stat-display name="AVG. K/D" [value]="selectedPlayerDetails.stats.lifetime['Average K/D Ratio']" />
-      <app-stat-display name="AVG. HS%" [value]="selectedPlayerDetails.stats.lifetime['Average Headshots %'] + '%'" />
+        [name]="'tools.stats.profile_page.recent_results' | translate"
+        [valueHTML]="getRecentResults(selectedPlayerDetails.stats)" />
+      <app-stat-display
+        [name]="'tools.stats.profile_page.matches' | translate"
+        [value]="selectedPlayerDetails.stats.lifetime.Matches" />
+      <app-stat-display
+        [name]="'tools.stats.profile_page.win_rate' | translate"
+        [value]="selectedPlayerDetails.stats.lifetime['Win Rate %'] + '%'" />
+      <app-stat-display
+        [name]="'tools.stats.profile_page.longest_streak' | translate"
+        [value]="selectedPlayerDetails.stats.lifetime['Longest Win Streak']" />
+      <app-stat-display
+        [name]="'tools.stats.profile_page.avg_kd' | translate"
+        [value]="selectedPlayerDetails.stats.lifetime['Average K/D Ratio']" />
+      <app-stat-display
+        [name]="'tools.stats.profile_page.avg_hs' | translate"
+        [value]="selectedPlayerDetails.stats.lifetime['Average Headshots %'] + '%'" />
     </div>
     <app-loading-spinner class="history" *ngIf="!(matchHistory$ | async)" />
     <div class="history" *ngIf="matchHistory$ | async as matches">

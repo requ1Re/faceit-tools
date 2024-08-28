@@ -5,6 +5,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft, faEdit, faList } from '@fortawesome/free-solid-svg-icons';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { combineLatest, first } from 'rxjs';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { App } from 'src/app/shared/models/App';
@@ -34,6 +35,8 @@ import { PickerTableComponent } from './picker-table/picker-table.component';
     PickerTableComponent,
     PickerMaplistComponent,
     PickerTableDetailedComponent,
+    TranslateModule,
+
   ],
 })
 export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
@@ -48,7 +51,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   customMatchRoom: boolean = false;
   customTeams: string[][];
 
-  competitionName = 'Custom Match';
+  competitionName = this.translateService.instant('tools.map_picker.custom_teams.title');
   teamNames = ['Team 1', 'Team 2'];
   teamAvatars = ['/assets/img/steam_default.png', '/assets/img/steam_default.png'];
 
@@ -69,6 +72,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     actions$: Actions,
     private browserService: BrowserService,
     private router: Router,
+    private translateService: TranslateService
   ) {
     super(store, actions$);
   }

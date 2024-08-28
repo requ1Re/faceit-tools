@@ -1,23 +1,24 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { PlayerSelectDialogData } from 'src/app/shared/components/player-select-dialog/player-select-dialog.component';
 import { CustomMapPickerMatchPlayer } from 'src/app/shared/models/CustomMapPickerMatch';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { PlayerSelectDialogService } from 'src/app/shared/services/player-select-dialog.service';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
-import { NgFor, NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-picker-custom',
     templateUrl: './picker-custom.component.html',
     styleUrls: ['./picker-custom.component.scss'],
     standalone: true,
-    imports: [NgFor, NgIf],
+    imports: [NgFor, NgIf, TranslateModule],
 })
 export class PickerCustomComponent
   extends BaseComponentWithStatsStore

@@ -1,7 +1,9 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 import { combineLatest, first } from 'rxjs';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { App } from 'src/app/shared/models/App';
@@ -9,7 +11,6 @@ import { ActiveDutyMap } from 'src/app/shared/models/MapPool';
 import { PlayerMapStats, TeamMapStats } from 'src/app/shared/models/MapStats';
 import { BrowserService } from 'src/app/shared/services/browser.service';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
-import { NgFor, NgIf } from '@angular/common';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 
 @Component({
@@ -17,7 +18,7 @@ import { CardComponent } from '../../../../shared/components/card/card.component
     templateUrl: './picker-table-detailed.component.html',
     styleUrls: ['./picker-table-detailed.component.scss'],
     standalone: true,
-    imports: [CardComponent, NgFor, NgIf, RouterLink]
+    imports: [CardComponent, NgFor, NgIf, RouterLink, TranslateModule]
 })
 export class PickerTableDetailedComponent extends BaseComponentWithStatsStore {
   enableBackdropFilter = false;

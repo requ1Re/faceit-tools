@@ -1,4 +1,4 @@
-<app-tool-input toolName="FACEIT Map Picker" [icon]="faMapMarkedAlt" (onSubmit)="navigateToMatch()"
+<app-tool-input [toolName]="'tools.map_picker.name' | translate" [icon]="faMapMarkedAlt" (onSubmit)="navigateToMatch()"
   (onValueChange)="handleInput($event)" placeholder="Match URL" [isErroneous]="error" [errorText]="errorText">
-  <button class="mt-5" routerLink="custom">Custom Teams</button>
+  <button class="mt-5" routerLink="custom">{{ 'tools.map_picker.custom_teams.title' | translate }}</button>
 </app-tool-input>

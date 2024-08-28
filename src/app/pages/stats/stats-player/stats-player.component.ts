@@ -5,6 +5,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faSteam } from '@fortawesome/free-brands-svg-icons';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 import { combineLatest, Observable } from 'rxjs';
 import { BaseComponentWithStatsStore } from 'src/app/shared/components/base-stats-store/base-stats-store';
 import { App } from 'src/app/shared/models/App';
@@ -34,6 +35,7 @@ import { MatchHistoryDisplayComponent } from './match-history-display/match-hist
     StatDisplayComponent,
     MatchHistoryDisplayComponent,
     AsyncPipe,
+    TranslateModule
   ],
 })
 export class StatsPlayerComponent extends BaseComponentWithStatsStore {

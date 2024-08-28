@@ -4,7 +4,7 @@
   <div class="tools">
     <ng-container *ngFor="let tool of tools">
       <div class="btn" (click)="gotoTool(tool.id)" *ngIf="!tool.external">
-        {{ tool.name }}
+        {{ tool.i18nKey | translate }}
       </div>
     </ng-container>
   </div>

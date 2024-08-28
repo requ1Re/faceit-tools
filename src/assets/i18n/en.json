@@ -1,0 +1,101 @@
+{
+	"common": {
+		"buttons": {
+			"continue": "Continue"
+		},
+		"labels": {
+			"map": "Map"
+		}
+	},
+	"dashboard": {
+		"footer": "This page is not endorsed by or affiliated with FACEIT. All data on this page is fetched directly from FACEIT and Steam, we do not keep any records."
+	},
+	"errors": {
+		"input": {
+			"account_finder": {
+				"faceit_not_found": "No FACEIT Account belonging to the specified Steam Account could be found.",
+				"steam_not_found": "Steam Account could not be found."
+			},
+			"map_picker": {
+				"invalid_url": "Invalid match URL. <br><br>URL must match https://www.faceit.com/[language]/cs2/room/[matchId]"
+			},
+			"stats": {
+				"user_not_found": "User could not be found. Please check you input and try again. Alternatively, you can search for a FACEIT player using the button below."
+			}
+		}
+	},
+	"tools": {
+		"account_finder": {
+			"input_hint": {
+				"account": "Steam Name/Profile URL/Vanity URL"
+			},
+			"name": "Account Finder"
+		},
+		"map_picker": {
+			"custom_teams": {
+				"add_player_to_continue": "Add atleast 1 player per team to continue.",
+				"no_player_selected": "No player selected",
+				"title": "Custom Teams"
+			},
+			"input_hint": {
+				"match_url": "Match URL"
+			},
+			"match_page": {
+				"buttons": {
+					"create_custom_match": "Create Custom Match Room",
+					"detail_view": {
+						"hide": "Hide detailed view",
+						"show": "Show detailed view"
+					},
+					"edit_custom_teams": "Edit Custom Teams"
+				},
+				"footer_weighted_average": "* Winrate is calculated using the weighted winrate of each player on a team.<br/>\nEach player's influence on the winrate is weighted by played matches. Less played matches = less influence.<br/>\nThis should be the most accurate possible way of representing a team's winrate on a specific map.",
+				"table": {
+					"win_rate": "Winrate *",
+					"wins_losses_matches": "Wins / Losses / Matches"
+				}
+			},
+			"name": "Map Picker"
+		},
+		"stats": {
+			"input_hint": {
+				"faceit_user_name": "FACEIT User Name"
+			},
+			"name": "Stats",
+			"profile_page": {
+				"avg_hs": "Avg. HS%",
+				"avg_kd": "Avg. K/D",
+				"longest_streak": "Longest Streak",
+				"match_history": {
+					"footer": "Show {{ num }} more results",
+					"table": {
+						"details": {
+							"assists": "Assists",
+							"deaths": "Deaths",
+							"hs": "HS%",
+							"kills": "Kills",
+							"mvp": "MVP",
+							"name": "Name"
+						},
+						"header": {
+							"date": "Date",
+							"mode": "Mode",
+							"player_stats": "Player Stats",
+							"result": "Result",
+							"score": "Score"
+						},
+						"result": {
+							"lose": "Lose",
+							"win": "Win"
+						}
+					},
+					"title": "Match History",
+					"title_sub": "{{ num1 }} of {{ num2 }}"
+				},
+				"matches": "Matches",
+				"recent_results": "Recent Results",
+				"win_rate": "Win Rate"
+			}
+		}
+	}
+}

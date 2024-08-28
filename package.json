@@ -30,6 +30,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@ngrx/effects": "^18.0.2",
     "@ngrx/store": "^18.0.2",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "@types/node": "^22.2.0",
     "detect-gpu": "^5.0.43",
     "moment": "^2.30.1",

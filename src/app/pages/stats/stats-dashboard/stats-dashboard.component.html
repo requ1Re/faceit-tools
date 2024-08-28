@@ -1,4 +1,4 @@
-<app-tool-input toolName="FACEIT Stats" [icon]="faUser"
+<app-tool-input [toolName]="'tools.stats.name' | translate" [icon]="faUser"
   (onSubmit)="navigateToStats()" (onValueChange)="handleInput($event)"
-  placeholder="FACEIT User Name" [isErroneous]="error" [errorText]="errorText" [disableSubmit]="loading">
+  [placeholder]="'tools.stats.input_hint.faceit_user_name' | translate" [isErroneous]="error" [errorText]="errorText" [disableSubmit]="loading">
 </app-tool-input>

@@ -3,6 +3,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from './shared/components/base/base';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { BrowserService } from './shared/services/browser.service';
@@ -19,7 +20,8 @@ import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.componen
         HeaderComponent,
         NgIf,
         FaIconComponent,
-        RouterOutlet
+        RouterOutlet,
+        TranslateModule
     ],
     providers: [
       BrowserService
@@ -30,8 +32,11 @@ export class AppComponent extends BaseComponent implements OnInit {
     private errorService: ErrorService,
     private router: Router,
     private browserService: BrowserService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    translate: TranslateService
   ) {
+    translate.setDefaultLang('en');
+    translate.use(localStorage.getItem('locale') ?? 'en');
     super();
   }
 

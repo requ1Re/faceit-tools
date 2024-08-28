@@ -1,5 +1,5 @@
+import { NgIf, UpperCasePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { NgIf } from '@angular/common';
 import { CardComponent } from '../../card/card.component';
 
 @Component({
@@ -7,7 +7,7 @@ import { CardComponent } from '../../card/card.component';
     templateUrl: './stat-display.component.html',
     styleUrls: ['./stat-display.component.scss'],
     standalone: true,
-    imports: [CardComponent, NgIf]
+    imports: [CardComponent, NgIf, UpperCasePipe]
 })
 export class StatDisplayComponent implements OnInit {
 

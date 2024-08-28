@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faAddressBook, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { lastValueFrom } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/components/base/base';
 import { ApiService } from 'src/app/shared/services/api.service';
@@ -19,7 +20,7 @@ enum SteamInputType {
     templateUrl: './account-finder-dashboard.component.html',
     styleUrls: ['./account-finder-dashboard.component.scss'],
     standalone: true,
-    imports: [ToolInputComponent]
+    imports: [ToolInputComponent, TranslateModule]
 })
 export class AccountFinderDashboardComponent extends BaseComponent implements OnInit {
   /*
@@ -34,7 +35,7 @@ export class AccountFinderDashboardComponent extends BaseComponent implements On
   readonly REGEX_STEAM_ID = /7656[0-9]{13}/
 
   error = false;
-  errorText = "FACEIT Account could not be found.";
+  errorText = "";
 
   loading = false;
 
@@ -45,7 +46,7 @@ export class AccountFinderDashboardComponent extends BaseComponent implements On
   faChevronRight = faChevronRight;
   faAddressBook = faAddressBook;
 
-  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private errorService: ErrorService, private browserService: BrowserService) { super(); }
+  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private errorService: ErrorService, private browserService: BrowserService, private translateService: TranslateService) { super(); }
 
   ngOnInit(): void {
     this.browserService.getDocument().title = "FACEIT Tools - Account Finder";
@@ -122,16 +123,16 @@ export class AccountFinderDashboardComponent extends BaseComponent implements On
       this.registerSubscription(
         this.api.findFACEITAccountBySteamID(steamId).subscribe({
           next: (data) => {
-            this.router.navigate(['/', 'stats', 'player', data.nickname], { relativeTo: this.route });
+            this.router.navigate(['/', 'stats', data.nickname], { relativeTo: this.route });
           },
           error: (e) => {
-            this.errorText = "No FACEIT Account belonging to the specified Steam Account could be found.";
+            this.errorText = this.translateService.instant('errors.input.account_finder.faceit_not_found');
             this.error = true;
           },
         })
       );
     }else{
-      this.errorText = "Steam Account could not be found.";
+      this.errorText = this.translateService.instant('errors.input.account_finder.steam_not_found');
       this.error = true;
     }
   }

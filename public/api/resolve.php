@@ -15,7 +15,10 @@ $response = file_get_contents($url);
 $obj = json_decode($response, true);
 $resObj = (object) [
   'success' => $obj["response"]["success"] === 1,
-  'steamId' => $obj["response"]["steamid"]
 ];
+
+if(isset($obj["response"]["steamid"])){
+  $resObj->steamId = $obj["response"]["steamid"];
+}
 
 echo json_encode($resObj);

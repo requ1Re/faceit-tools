@@ -1,18 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 import { App } from '../../models/App';
-import { FaceIT } from '../../models/FaceIT';
-import {
-  loadPlayerDetailsByNicknameSuccess,
-  loadPlayerOverviewByNicknameSuccess,
-  loadPlayerStatsByIDSuccess,
-} from './stats.actions';
+import { loadPlayerDetailsByNicknameSuccess } from './stats.actions';
 
 export interface StatsState {
   playerDetails: App.Player.Details[];
 }
 
 export const initialState: StatsState = {
-  playerDetails: []
+  playerDetails: [],
 };
 
 export const statsReducer = createReducer(
@@ -20,5 +15,5 @@ export const statsReducer = createReducer(
   on(loadPlayerDetailsByNicknameSuccess, (state, { playerDetails }) => ({
     ...state,
     playerDetails: [...state.playerDetails, playerDetails],
-  }))
+  })),
 );

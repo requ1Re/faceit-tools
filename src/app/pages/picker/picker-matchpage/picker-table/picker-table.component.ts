@@ -1,14 +1,15 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { TeamMapStats } from 'src/app/shared/models/MapStats';
-import { NgIf, NgFor } from '@angular/common';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 
 @Component({
-    selector: 'app-picker-table',
-    templateUrl: './picker-table.component.html',
-    styleUrls: ['./picker-table.component.scss'],
-    standalone: true,
-    imports: [CardComponent, NgIf, NgFor]
+  selector: 'app-picker-table',
+  templateUrl: './picker-table.component.html',
+  styleUrls: ['./picker-table.component.scss'],
+  standalone: true,
+  imports: [CardComponent, NgIf, NgFor, TranslateModule],
 })
 export class PickerTableComponent implements OnInit {
   @Input()
@@ -23,12 +24,9 @@ export class PickerTableComponent implements OnInit {
   @Input()
   reverse = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
-
+  ngOnInit(): void {}
 
   getMapPreview(map: string) {
     return 'assets/img/previews/de_' + map.toLowerCase() + '.jpeg';

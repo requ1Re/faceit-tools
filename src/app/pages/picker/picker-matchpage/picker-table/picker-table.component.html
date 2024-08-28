@@ -1,35 +1,43 @@
 <div class="team">
-  <img [src]="teamAvatar" class="ml-auto mr-auto rounded-full h-12 w-12">
+  <img [src]="teamAvatar" class="ml-auto mr-auto rounded-full h-12 w-12" />
   <h1>{{ teamName }}</h1>
   <app-card [noPadding]="true">
     <div class="team-card">
       <table *ngIf="!reverse">
         <thead>
           <tr>
-            <th>Wins / Losses / Matches</th>
-            <th>Winrate *</th>
+            <th>{{ 'tools.map_picker.match_page.table.wins_losses_matches' | translate }}</th>
+            <th>{{ 'tools.map_picker.match_page.table.win_rate' | translate }}</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let stats of teamMapStats.combinedMapStats">
-            <td><span class="text-green-500">{{ stats.wins }}</span> / <span class="text-red-500">{{ stats.losses
-                }}</span> / {{ stats.matches }}</td>
-            <td class="winrate" [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ getRoundedNumber(stats.rate) }}%</td>
+            <td>
+              <span class="text-green-500">{{ stats.wins }}</span> /
+              <span class="text-red-500">{{ stats.losses }}</span> / {{ stats.matches }}
+            </td>
+            <td class="winrate" [style.backgroundColor]="getBackgroundColor(stats.rate)">
+              {{ getRoundedNumber(stats.rate) }}%
+            </td>
           </tr>
         </tbody>
       </table>
       <table *ngIf="reverse">
         <thead>
           <tr>
-            <th>Winrate *</th>
-            <th>Wins / Losses / Matches</th>
+            <th>{{ 'tools.map_picker.match_page.table.win_rate' | translate }}</th>
+            <th>{{ 'tools.map_picker.match_page.table.wins_losses_matches' | translate }}</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let stats of teamMapStats.combinedMapStats">
-            <td class="winrate" [style.backgroundColor]="getBackgroundColor(stats.rate)">{{ getRoundedNumber(stats.rate) }}%</td>
-            <td><span class="text-green-500">{{ stats.wins }}</span> / <span class="text-red-500">{{ stats.losses
-                }}</span> / {{ stats.matches }}</td>
+            <td class="winrate" [style.backgroundColor]="getBackgroundColor(stats.rate)">
+              {{ getRoundedNumber(stats.rate) }}%
+            </td>
+            <td>
+              <span class="text-green-500">{{ stats.wins }}</span> /
+              <span class="text-red-500">{{ stats.losses }}</span> / {{ stats.matches }}
+            </td>
           </tr>
         </tbody>
       </table>

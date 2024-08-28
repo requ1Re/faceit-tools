@@ -1,11 +1,11 @@
-<h1 class="text-3xl text-white text-center mt-5">Map Picker - Custom Teams</h1>
+<h1 class="text-3xl text-white text-center mt-5">{{ 'tools.map_picker.name' | translate }} - {{ 'tools.map_picker.custom_teams.title' | translate }}</h1>
 <div class="teams">
   <div class="team" *ngFor="let team of teams; index as teamIndex">
     <h1>Team {{ teamIndex+1 }}</h1>
     <ng-container *ngFor="let playerIndex of [0,1,2,3,4]">
       <div class="player not-selected" *ngIf="teams[teamIndex][playerIndex] === undefined" (click)="selectPlayer(teamIndex, playerIndex)">
         <img src="/assets/img/steam_default.png" alt="Default Avatar" class="profile-img">
-        <span>No player selected</span>
+        <span>{{ 'tools.map_picker.custom_teams.no_player_selected' | translate }}</span>
       </div>
       <div class="player selected" *ngIf="teams[teamIndex][playerIndex] as player" (click)="selectPlayer(teamIndex, playerIndex)">
         <img [src]="player.avatar == '' ? '/assets/img/steam_default.png' : player.avatar" alt="Avatar" class="profile-img">
@@ -25,6 +25,6 @@
   </div>
 </div>
 <div class="w-full text-center mt-5">
-  <h3 *ngIf="!canContinue()" class="text-white">Add atleast 1 player per team to continue.</h3>
-  <button (click)="continue()" *ngIf="canContinue()">Continue</button>
+  <h3 *ngIf="!canContinue()" class="text-white">{{ 'tools.map_picker.custom_teams.add_player_to_continue' | translate }}</h3>
+  <button (click)="continue()" *ngIf="canContinue()">{{ 'common.buttons.continue' | translate }}</button>
 </div>

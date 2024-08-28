@@ -6,7 +6,7 @@
       <table>
         <thead>
           <tr>
-            <th>Map</th>
+            <th>{{ 'common.labels.map' | translate }}</th>
             <th *ngFor="let player of teamMapStats.playerMapStats">
               <div *ngIf="getPlayerDetailsByName(player.name) as details" class="details">
                 <svg>

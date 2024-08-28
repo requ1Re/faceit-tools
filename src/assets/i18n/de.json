@@ -1,0 +1,101 @@
+{
+	"common": {
+		"buttons": {
+			"continue": "Weiter"
+		},
+		"labels": {
+			"map": "Karte"
+		}
+	},
+	"dashboard": {
+		"footer": "Diese Seite wird nicht von FACEIT betrieben, unterstützt und ist auch nicht anderweitig mit FACEIT verbunden. Alle Daten auf dieser Seite werden direkt von FACEIT und Steam bezogen, wir führen keine eigene Aufzeichnungen."
+	},
+	"errors": {
+		"input": {
+			"account_finder": {
+				"faceit_not_found": "Es konnte kein FACEIT-Konto gefunden werden, das zu dem angegebenen Steam-Konto gehört.",
+				"steam_not_found": "Steam-Konto konnte nicht gefunden werden."
+			},
+			"map_picker": {
+				"invalid_url": "Ungültige URL. <br><br>Die URL muss dem Format \"https://www.faceit.com/[language]/cs2/room/[matchId]\" entsprechen."
+			},
+			"stats": {
+				"user_not_found": "Der Benutzer konnte nicht gefunden werden. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut. Alternativ können Sie auch über die Schaltfläche unten nach einem FACEIT-Spieler suchen."
+			}
+		}
+	},
+	"tools": {
+		"account_finder": {
+			"input_hint": {
+				"account": "Steam Name/Profil URL/\"Vanity\" URL"
+			},
+			"name": "Account Finder"
+		},
+		"map_picker": {
+			"custom_teams": {
+				"add_player_to_continue": "Füge mindestens 1 Spieler pro Team hinzu, um fortzufahren.",
+				"no_player_selected": "Kein Spieler ausgewählt",
+				"title": "Benutzerdefinierte Teams"
+			},
+			"input_hint": {
+				"match_url": "Match URL"
+			},
+			"match_page": {
+				"buttons": {
+					"create_custom_match": "Benutzerdefinierten Matchraum erstellen",
+					"detail_view": {
+						"hide": "Detaillierte Ansicht ausblenden",
+						"show": "Detaillierte Ansicht anzeigen"
+					},
+					"edit_custom_teams": "Benutzerdefinierte Teams bearbeiten"
+				},
+				"footer_weighted_average": "* Die Siegquote wird anhand der gewichteten Siegquote jedes Spielers eines Teams berechnet.<br/>\nDer Einfluss jedes Spielers auf die Siegquote wird nach den gespielten Spielen gewichtet. Weniger gespielte Spiele = weniger Einfluss.<br/>\nDies sollte die genaueste Möglichkeit sein, die Siegquote eines Teams auf einer bestimmten Karte darzustellen.",
+				"table": {
+					"win_rate": "Siegrate *",
+					"wins_losses_matches": "Siege / Niederlagen / Spiele"
+				}
+			},
+			"name": "Map Picker"
+		},
+		"stats": {
+			"input_hint": {
+				"faceit_user_name": "FACEIT Nutzername"
+			},
+			"name": "Statistiken",
+			"profile_page": {
+				"avg_hs": "⌀ HS%",
+				"avg_kd": "⌀ K/D",
+				"longest_streak": "Längste Serie",
+				"match_history": {
+					"footer": "Zeige {{ num }} weitere Ergebnisse",
+					"table": {
+						"details": {
+							"assists": "Assists",
+							"deaths": "Tode",
+							"hs": "HS%",
+							"kills": "Kills",
+							"mvp": "MVP",
+							"name": "Name"
+						},
+						"header": {
+							"date": "Datum",
+							"mode": "Modus",
+							"player_stats": "Spielerstatistik",
+							"result": "Ergebnis",
+							"score": "Spielstand"
+						},
+						"result": {
+							"lose": "Niederlage",
+							"win": "Sieg"
+						}
+					},
+					"title": "Spielverlauf",
+					"title_sub": "{{ num1 }} von {{ num2 }}"
+				},
+				"matches": "Spiele",
+				"recent_results": "Letzte Ergebnisse",
+				"win_rate": "Gewinnrate"
+			}
+		}
+	}
+}

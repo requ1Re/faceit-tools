@@ -1,18 +1,24 @@
 <div class="card no-padding">
   <div class="match-history-header">
-    <h1>MATCH HISTORY</h1>
-    <h3>({{ showMore ? matches.length : matchCountDefault }} of {{ matches.length }})</h3>
+    <h1>{{ 'tools.stats.profile_page.match_history.title' | translate | uppercase }}</h1>
+    <h3>
+      ({{
+        'tools.stats.profile_page.match_history.title_sub'
+          | translate: { num1: showMore ? matches.length : matchCountDefault, num2: matches.length }
+      }})
+    </h3>
   </div>
 </div>
 <div class="match-holder">
   <div class="match">
     <div class="match-item" style="cursor: default">
-      <div>Date</div>
-      <div>Mode</div>
-      <div>Result</div>
-      <div>Score</div>
-      <div>Map</div>
-      <div>Player Stats</div>
+      @let i18nPrefix = 'tools.stats.profile_page.match_history.table.header';
+      <div>{{ i18nPrefix + '.date' | translate }}</div>
+      <div>{{ i18nPrefix + '.mode' | translate }}</div>
+      <div>{{ i18nPrefix + '.result' | translate }}</div>
+      <div>{{ i18nPrefix + '.score' | translate }}</div>
+      <div>{{ 'common.labels.map' | translate }}</div>
+      <div>{{ i18nPrefix + '.player_stats' | translate }}</div>
       <div></div>
     </div>
   </div>
@@ -47,12 +53,13 @@
             <table *ngFor="let team of round.teams">
               <thead>
                 <tr class="no-hover">
-                  <th>Name</th>
-                  <th>Kills</th>
-                  <th>Assists</th>
-                  <th>Deaths</th>
-                  <th>HS%</th>
-                  <th>MVP</th>
+                  @let i18nPrefix = 'tools.stats.profile_page.match_history.table.details';
+                  <th>{{ i18nPrefix + '.name' | translate }}</th>
+                  <th>{{ i18nPrefix + '.kills' | translate }}</th>
+                  <th>{{ i18nPrefix + '.assists' | translate }}</th>
+                  <th>{{ i18nPrefix + '.deaths' | translate }}</th>
+                  <th>{{ i18nPrefix + '.hs' | translate }}</th>
+                  <th>{{ i18nPrefix + '.mvp' | translate }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -76,5 +83,5 @@
       </div>
     </div>
   </ng-container>
-  <a class="more" *ngIf="!showMore" (click)="showMore = true">Show {{ matches.length - matchCountDefault }} more</a>
+  <a class="more" *ngIf="!showMore" (click)="showMore = true">{{ 'tools.stats.profile_page.match_history.footer' | translate:{num: matches.length - matchCountDefault} }}</a>
 </div>

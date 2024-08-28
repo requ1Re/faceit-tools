@@ -1,35 +1,50 @@
-<app-loading-spinner *ngIf="(!matchRoomData && !customMatchRoom) && !error"></app-loading-spinner>
+<app-loading-spinner *ngIf="!matchRoomData && !customMatchRoom && !error"></app-loading-spinner>
 
 <div class="wrapper" *ngIf="matchRoomData || customMatchRoom">
-  <h1 class="page-title">
-    {{ competitionName }} / {{ teamNames[0] }} vs. {{ teamNames[1] }}
-  </h1>
+  <h1 class="page-title">{{ competitionName }} / {{ teamNames[0] }} vs. {{ teamNames[1] }}</h1>
   <div class="detail-button">
     <button (click)="toggleDetailedView()">
-      <fa-icon [icon]="faList"></fa-icon> {{ detailedView ? 'Hide' : 'Show' }} detailed view
+      <fa-icon [icon]="faList"></fa-icon>
+      {{
+        'tools.map_picker.match_page.buttons.detail_view.' + (detailedView ? 'hide' : 'show') | translate
+      }}
     </button>
     <button (click)="editCustomTeams()" *ngIf="customMatchRoom">
-      <fa-icon [icon]="faEdit"></fa-icon> Edit Custom Teams
+      <fa-icon [icon]="faEdit"></fa-icon> {{ 'tools.map_picker.match_page.buttons.edit_custom_teams' | translate }}
     </button>
     <button (click)="editNormalTeams()" *ngIf="!customMatchRoom">
-      <fa-icon [icon]="faEdit"></fa-icon> Create Custom Match Room
+      <fa-icon [icon]="faEdit"></fa-icon> {{ 'tools.map_picker.match_page.buttons.create_custom_match' | translate }}
     </button>
   </div>
   <div class="page" *ngIf="!detailedView; else detailedViewTemplate">
-    <app-picker-table class="picker-table" [teamName]="teamNames[0]" [teamAvatar]="teamAvatars[0]" [teamMapStats]="teamMapStats[0]"></app-picker-table>
-    <app-picker-maplist style="align-self: flex-end;"></app-picker-maplist>
-    <app-picker-maplist style="align-self: flex-end;" class="secondary-maplist"></app-picker-maplist>
-    <app-picker-table class="picker-table" [reverse]="true" [teamName]="teamNames[1]" [teamAvatar]="teamAvatars[1]" [teamMapStats]="teamMapStats[1]"></app-picker-table>
+    <app-picker-table
+      class="picker-table"
+      [teamName]="teamNames[0]"
+      [teamAvatar]="teamAvatars[0]"
+      [teamMapStats]="teamMapStats[0]"></app-picker-table>
+    <app-picker-maplist style="align-self: flex-end"></app-picker-maplist>
+    <app-picker-maplist style="align-self: flex-end" class="secondary-maplist"></app-picker-maplist>
+    <app-picker-table
+      class="picker-table"
+      [reverse]="true"
+      [teamName]="teamNames[1]"
+      [teamAvatar]="teamAvatars[1]"
+      [teamMapStats]="teamMapStats[1]"></app-picker-table>
 
-    <p class="text-gray-400 text-center md:col-span-2" style="width: 100%">
-      * Winrate is calculated using the weighted winrate of each player on a team.<br>
-      Each player's influence on the winrate is weighted by played matches. Less played matches = less influence.<br>
-      This should be the most accurate possible way of representing a team's winrate on a specific map.</p>
+    <p class="text-gray-400 text-center md:col-span-2" style="width: 100%" [innerHTML]="'tools.map_picker.match_page.footer_weighted_average' | translate"></p>
   </div>
   <ng-template #detailedViewTemplate>
     <div class="page">
-      <app-picker-table-detailed class="picker-table" [teamName]="teamNames[0]" [teamAvatar]="teamAvatars[0]" [teamMapStats]="teamMapStats[0]"></app-picker-table-detailed>
-      <app-picker-table-detailed class="picker-table" [teamName]="teamNames[1]" [teamAvatar]="teamAvatars[1]" [teamMapStats]="teamMapStats[1]"></app-picker-table-detailed>
+      <app-picker-table-detailed
+        class="picker-table"
+        [teamName]="teamNames[0]"
+        [teamAvatar]="teamAvatars[0]"
+        [teamMapStats]="teamMapStats[0]"></app-picker-table-detailed>
+      <app-picker-table-detailed
+        class="picker-table"
+        [teamName]="teamNames[1]"
+        [teamAvatar]="teamAvatars[1]"
+        [teamMapStats]="teamMapStats[1]"></app-picker-table-detailed>
     </div>
   </ng-template>
 </div>

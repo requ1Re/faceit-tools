@@ -1,28 +1,22 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faExternalLink, faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MomentModule } from 'ngx-moment';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { PlayerMatchHistoryDetailed } from 'src/app/shared/models/PlayerMatchHistoryDetailed';
 import { StringUtil } from 'src/app/shared/utils/StringUtil';
 
 @Component({
-    selector: 'app-match-history-display',
-    templateUrl: './match-history-display.component.html',
-    styleUrls: ['./match-history-display.component.scss'],
-    standalone: true,
-    imports: [
-        NgFor,
-        RouterLink,
-        FaIconComponent,
-        NgIf,
-        MomentModule,
-    ],
+  selector: 'app-match-history-display',
+  templateUrl: './match-history-display.component.html',
+  styleUrls: ['./match-history-display.component.scss'],
+  standalone: true,
+  imports: [NgFor, RouterLink, FaIconComponent, NgIf, MomentModule, TranslateModule, UpperCasePipe],
 })
 export class MatchHistoryDisplayComponent {
-
   faExternalLink = faExternalLink;
   faMapLocationDot = faMapLocationDot;
 
@@ -37,6 +31,8 @@ export class MatchHistoryDisplayComponent {
   matchCountDefault = 10;
   showMore = false;
 
+  constructor(private translateService: TranslateService){}
+
   getBestOf(match: PlayerMatchHistoryDetailed) {
     return match.stats.rounds.length;
   }
@@ -50,9 +46,7 @@ export class MatchHistoryDisplayComponent {
   }
 
   getScore(match: PlayerMatchHistoryDetailed) {
-    return match.stats.rounds
-      .map((r) => this.getSingleRoundScore(r))
-      .join(', ');
+    return match.stats.rounds.map((r) => this.getSingleRoundScore(r)).join(', ');
   }
 
   getFormattedScore(match: PlayerMatchHistoryDetailed) {
@@ -60,13 +54,9 @@ export class MatchHistoryDisplayComponent {
     match.stats.rounds.forEach((r) => {
       const s = r.round_stats.Score.split(' / ');
       if (+s[0] > +s[1]) {
-        scores.push(
-          `<span class="text-green">${s[0]}</span> / <span class="text-red">${s[1]}</span>`
-        );
+        scores.push(`<span class="text-green">${s[0]}</span> / <span class="text-red">${s[1]}</span>`);
       } else {
-        scores.push(
-          `<span class="text-red">${s[0]}</span> / <span class="text-green">${s[1]}</span>`
-        );
+        scores.push(`<span class="text-red">${s[0]}</span> / <span class="text-green">${s[1]}</span>`);
       }
     });
     return scores.join(', ');
@@ -76,28 +66,19 @@ export class MatchHistoryDisplayComponent {
     let results: string[] = [];
     match.stats.rounds.forEach((r) => {
       const winnerTeamId = r.round_stats.Winner;
-      const winnerTeamIndex = r.teams.findIndex(
-        (t) => t.team_id === winnerTeamId
-      );
+      const winnerTeamIndex = r.teams.findIndex((t) => t.team_id === winnerTeamId);
 
-      const isWin =
-        r.teams[winnerTeamIndex].players.findIndex(
-          (p) => p.player_id === this.selectedPlayerId
-        ) > -1;
+      const isWin = r.teams[winnerTeamIndex].players.findIndex((p) => p.player_id === this.selectedPlayerId) > -1;
 
-      results.push(
-        isWin
-          ? `<span class="text-green">WIN</span>`
-          : `<span class="text-red">LOSS</span>`
-      );
+      const winTranslated = this.translateService.instant('tools.stats.profile_page.match_history.table.result.win');
+      const loseTranslated = this.translateService.instant('tools.stats.profile_page.match_history.table.result.lose');
+      results.push(isWin ? `<span class="text-green">${winTranslated}</span>` : `<span class="text-red">${loseTranslated}</span>`);
     });
     return results.join(', ');
   }
 
   getTeamPlayersSorted(players: FaceIT.MatchStats.Player[]) {
-    return players.sort(
-      (a, b) => +b.player_stats.Kills - +a.player_stats.Kills
-    );
+    return players.sort((a, b) => +b.player_stats.Kills - +a.player_stats.Kills);
   }
 
   getSingleRoundScore(round: FaceIT.MatchStats.Maps) {
@@ -111,9 +92,12 @@ export class MatchHistoryDisplayComponent {
       .join(', ');
   }
 
-  formatMapName(mapName: string){
+  formatMapName(mapName: string) {
     // remove de_, cs_ and workshop prefix from map name
-    const cleanedMapName = mapName.replace('de_', '').replace('cs_', '').replace(/workshop\/[0-9]+\/(.*)/, '$1');
+    const cleanedMapName = mapName
+      .replace('de_', '')
+      .replace('cs_', '')
+      .replace(/workshop\/[0-9]+\/(.*)/, '$1');
     return StringUtil.capitalizeFirstLetter(cleanedMapName);
   }
 
@@ -121,22 +105,20 @@ export class MatchHistoryDisplayComponent {
     let stats: string[] = [];
     match.stats.rounds.forEach((r) => {
       const player = r.teams
-        .find((t) =>
-          t.players.find((p) => p.player_id === this.selectedPlayerId)
-        )
+        .find((t) => t.players.find((p) => p.player_id === this.selectedPlayerId))
         ?.players.find((p) => p.player_id === this.selectedPlayerId);
 
       stats.push(
         `${player?.player_stats.Kills ?? '?'}/${
           player?.player_stats.Assists ?? '?'
-        }/${player?.player_stats.Deaths ?? '?'}`
+        }/${player?.player_stats.Deaths ?? '?'}`,
       );
     });
 
     return stats.join(', ');
   }
 
-  getMatchesSubset(){
+  getMatchesSubset() {
     return this.showMore ? this.matches : this.matches.slice(0, this.matchCountDefault);
   }
 }
