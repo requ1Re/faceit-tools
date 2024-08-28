@@ -3,6 +3,11 @@
 		"buttons": {
 			"continue": "Continue"
 		},
+		"dialog": {
+			"player_select": {
+				"title": "Search FACEIT Player"
+			}
+		},
 		"labels": {
 			"map": "Map"
 		},

@@ -3,6 +3,11 @@
 		"buttons": {
 			"continue": "Weiter"
 		},
+		"dialog": {
+			"player_select": {
+				"title": "FACEIT Spieler suchen"
+			}
+		},
 		"labels": {
 			"map": "Karte"
 		},

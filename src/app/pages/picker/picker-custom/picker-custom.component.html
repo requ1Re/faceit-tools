@@ -31,10 +31,9 @@
   }
 </div>
 <div class="w-full text-center mt-5">
-  @if (!canContinue()) {
-    <h3 class="text-white">{{ 'tools.map_picker.custom_teams.add_player_to_continue' | translate }}</h3>
-  }
   @if (canContinue()) {
     <button (click)="continue()">{{ 'common.buttons.continue' | translate }}</button>
+  } @else {
+    <h3 class="text-white">{{ 'tools.map_picker.custom_teams.add_player_to_continue' | translate }}</h3>
   }
 </div>
