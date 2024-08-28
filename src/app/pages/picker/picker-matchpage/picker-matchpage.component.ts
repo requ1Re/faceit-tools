@@ -1,5 +1,7 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft, faEdit, faList } from '@fortawesome/free-solid-svg-icons';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -9,34 +11,30 @@ import { App } from 'src/app/shared/models/App';
 import { CustomMapPickerMatchPlayer } from 'src/app/shared/models/CustomMapPickerMatch';
 import { FaceIT } from 'src/app/shared/models/FaceIT';
 import { ActiveDutyMap } from 'src/app/shared/models/MapPool';
-import {
-  getDefaultMapStats, TeamMapStats
-} from 'src/app/shared/models/MapStats';
+import { getDefaultMapStats, TeamMapStats } from 'src/app/shared/models/MapStats';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { BrowserService } from 'src/app/shared/services/browser.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { LogService } from 'src/app/shared/services/log.service';
 import { loadPlayerDetailsByNicknames } from 'src/app/shared/store/stats/stats.actions';
 import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
-import { PickerTableDetailedComponent } from './picker-table-detailed/picker-table-detailed.component';
-import { PickerMaplistComponent } from './picker-maplist/picker-maplist.component';
-import { PickerTableComponent } from './picker-table/picker-table.component';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
-import { NgIf } from '@angular/common';
+import { PickerMaplistComponent } from './picker-maplist/picker-maplist.component';
+import { PickerTableDetailedComponent } from './picker-table-detailed/picker-table-detailed.component';
+import { PickerTableComponent } from './picker-table/picker-table.component';
 
 @Component({
-    templateUrl: './picker-matchpage.component.html',
-    styleUrls: ['./picker-matchpage.component.scss'],
-    standalone: true,
-    imports: [
-        NgIf,
-        LoadingSpinnerComponent,
-        FaIconComponent,
-        PickerTableComponent,
-        PickerMaplistComponent,
-        PickerTableDetailedComponent,
-    ],
+  templateUrl: './picker-matchpage.component.html',
+  styleUrls: ['./picker-matchpage.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    LoadingSpinnerComponent,
+    FaIconComponent,
+    PickerTableComponent,
+    PickerMaplistComponent,
+    PickerTableDetailedComponent,
+  ],
 })
 export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   pageName = 'PickerMatchpage';
@@ -52,10 +50,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
 
   competitionName = 'Custom Match';
   teamNames = ['Team 1', 'Team 2'];
-  teamAvatars = [
-    '/assets/img/steam_default.png',
-    '/assets/img/steam_default.png',
-  ];
+  teamAvatars = ['/assets/img/steam_default.png', '/assets/img/steam_default.png'];
 
   playerDetails: App.Player.Details[] = [];
 
@@ -73,7 +68,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     store: Store<StatsState>,
     actions$: Actions,
     private browserService: BrowserService,
-    private router: Router
+    private router: Router,
   ) {
     super(store, actions$);
   }
@@ -92,32 +87,25 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
       combineLatest([this.playerDetails$, this.route.paramMap])
         .pipe(first())
         .subscribe((data) => {
-          this.logService.log(
-            this.pageName,
-            'Got combined data, calling loadMatchRoom',
-            data
-          );
+          this.logService.log(this.pageName, 'Got combined data, calling loadMatchRoom', data);
           this.playerDetails = data[0];
           const matchId = data[1].get('matchId');
           const team1Str = data[1].get('team1Str');
           const team2Str = data[1].get('team2Str');
 
           if (team1Str && team2Str) {
-            this.handleMatchroomDataCustom([
-              team1Str.split(','),
-              team2Str.split(','),
-            ]);
+            this.handleMatchroomDataCustom([team1Str.split(','), team2Str.split(',')]);
           } else if (matchId) {
             this.matchId = matchId;
             this.loadMatchRoom();
           }
-        })
+        }),
     );
 
     this.registerSubscription(
       this.errorService.errorObj.subscribe((errorObj) => {
         this.error = errorObj.error;
-      })
+      }),
     );
   }
 
@@ -127,7 +115,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
         if (data) {
           this.handleMatchroomData(data);
         }
-      })
+      }),
     );
   }
 
@@ -145,17 +133,11 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
       for (let playerIndex = 0; playerIndex < roster.length; playerIndex++) {
         const player = roster[playerIndex];
 
-        const find = this.playerDetails.find(
-          (stats) => stats.overview.player_id === player.player_id
-        );
+        const find = this.playerDetails.find((stats) => stats.overview.player_id === player.player_id);
         if (!find) {
           nicknamesToLoad.push(player.nickname);
         } else {
-          this.logService.log(
-            this.pageName,
-            'Got playerDetails from store for',
-            player.player_id
-          );
+          this.logService.log(this.pageName, 'Got playerDetails from store for', player.player_id);
           this.handlePlayerStats(find.stats, teamIndex);
         }
       }
@@ -163,28 +145,17 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
 
     this.registerSubscription(
       this.playerDetails$.subscribe((playerDetails) => {
-        const diff = playerDetails.filter(
-          (item) => this.playerDetails.indexOf(item) < 0
-        );
+        const diff = playerDetails.filter((item) => this.playerDetails.indexOf(item) < 0);
         this.playerDetails = playerDetails;
 
         diff.forEach((details) => {
-          this.logService.log(
-            this.pageName,
-            'Got playerStats from API for',
-            details.overview.player_id
-          );
-          this.handlePlayerStats(
-            details.stats,
-            this.getTeamIdByPlayerId(details.overview.player_id)
-          );
+          this.logService.log(this.pageName, 'Got playerStats from API for', details.overview.player_id);
+          this.handlePlayerStats(details.stats, this.getTeamIdByPlayerId(details.overview.player_id));
         });
-      })
+      }),
     );
 
-    this.store.dispatch(
-      loadPlayerDetailsByNicknames({ nicknames: nicknamesToLoad })
-    );
+    this.store.dispatch(loadPlayerDetailsByNicknames({ nicknames: nicknamesToLoad }));
   }
 
   handleMatchroomDataCustom(teams: string[][]) {
@@ -192,25 +163,16 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     this.customTeams = teams;
     this.browserService.getDocument().title = `Map Picker - Custom`;
 
-    this.teamNames = [
-      'team_' + teams[0][0],
-      'team_' + teams[1][0],
-    ];
+    this.teamNames = ['team_' + teams[0][0], 'team_' + teams[1][0]];
 
     let nicknamesToLoad: string[] = [];
     for (let teamIndex = 0; teamIndex < teams.length; teamIndex++) {
       teams[teamIndex].forEach((name) => {
-        const find = this.playerDetails.find(
-          (stats) => stats.overview.nickname === name
-        );
+        const find = this.playerDetails.find((stats) => stats.overview.nickname === name);
         if (!find) {
           nicknamesToLoad.push(name);
         } else {
-          this.logService.log(
-            this.pageName,
-            'Got playerDetails from store for',
-            name
-          );
+          this.logService.log(this.pageName, 'Got playerDetails from store for', name);
           this.handlePlayerStats(find.stats, teamIndex);
         }
       });
@@ -218,36 +180,24 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
 
     this.registerSubscription(
       this.playerDetails$.subscribe((playerDetails) => {
-        const diff = playerDetails.filter(
-          (item) => this.playerDetails.indexOf(item) < 0
-        );
+        const diff = playerDetails.filter((item) => this.playerDetails.indexOf(item) < 0);
         this.playerDetails = playerDetails;
 
         diff.forEach((details) => {
-          this.logService.log(
-            this.pageName,
-            'Got playerStats from API for',
-            details.overview.player_id
-          );
+          this.logService.log(this.pageName, 'Got playerStats from API for', details.overview.player_id);
           this.handlePlayerStats(
             details.stats,
-            this.customTeams.findIndex((teams) =>
-              teams.find((item) => item === details.overview.nickname)
-            )
+            this.customTeams.findIndex((teams) => teams.find((item) => item === details.overview.nickname)),
           );
         });
-      })
+      }),
     );
 
-    this.store.dispatch(
-      loadPlayerDetailsByNicknames({ nicknames: nicknamesToLoad })
-    );
+    this.store.dispatch(loadPlayerDetailsByNicknames({ nicknames: nicknamesToLoad }));
   }
 
   handlePlayerStats(data: FaceIT.Player.PlayerStats, teamId: number) {
-    const mapStatsSegments = data.segments.filter(
-      (s) => s.mode === '5v5' && s.type === 'Map'
-    );
+    const mapStatsSegments = data.segments.filter((s) => s.mode === '5v5' && s.type === 'Map');
 
     const mapStats = this.teamMapStats[teamId];
     const combinedMapStats = mapStats.combinedMapStats;
@@ -262,9 +212,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
       const mapStatsSegment = mapStatsSegments[i];
 
       const combinedMapStat = combinedMapStats.find(
-        (m) =>
-          m.name.toUpperCase() ===
-          mapStatsSegment.label.replace('de_', '').toUpperCase() // remove de_ from Mapname and compare in uppercase
+        (m) => m.name.toUpperCase() === mapStatsSegment.label.replace('de_', '').toUpperCase(), // remove de_ from Mapname and compare in uppercase
       );
 
       if (combinedMapStat) {
@@ -272,19 +220,14 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
         combinedMapStat.wins += +mapStatsSegment.stats.Wins;
         combinedMapStat.losses = combinedMapStat.matches - combinedMapStat.wins;
 
-        combinedMapStat.rate =
-          Math.round(
-            (combinedMapStat.wins / combinedMapStat.matches) * 100 * 100
-          ) / 100;
+        combinedMapStat.rate = Math.round((combinedMapStat.wins / combinedMapStat.matches) * 100 * 100) / 100;
 
         mapStats.playerMapStats[playerIndex].mapStats.push({
           name: combinedMapStat.name,
           matches: +mapStatsSegment.stats.Matches,
           losses: +mapStatsSegment.stats.Matches - +mapStatsSegment.stats.Wins,
           wins: +mapStatsSegment.stats.Wins,
-          rate: this.getRoundedNumber(
-            (+mapStatsSegment.stats.Wins / +mapStatsSegment.stats.Matches) * 100
-          ),
+          rate: this.getRoundedNumber((+mapStatsSegment.stats.Wins / +mapStatsSegment.stats.Matches) * 100),
         });
       }
 
@@ -303,25 +246,17 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
         let mapSumWeight = 0;
         let mapSum = 0;
 
-        for (
-          let playerIndex = 0;
-          playerIndex < team.playerMapStats.length;
-          playerIndex++
-        ) {
+        for (let playerIndex = 0; playerIndex < team.playerMapStats.length; playerIndex++) {
           const playerStats = team.playerMapStats[playerIndex];
 
-          const playerStatsForMap = playerStats.mapStats.find(
-            (m) => m.name === map
-          );
+          const playerStatsForMap = playerStats.mapStats.find((m) => m.name === map);
           if (playerStatsForMap) {
             mapSumWeight += playerStatsForMap.rate * playerStatsForMap.matches;
             mapSum += playerStatsForMap.matches;
           }
         }
 
-        const teamStatsForMap = team.combinedMapStats.find(
-          (m) => m.name === map
-        );
+        const teamStatsForMap = team.combinedMapStats.find((m) => m.name === map);
         if (teamStatsForMap) {
           teamStatsForMap.rate = mapSumWeight / mapSum;
         }
@@ -334,12 +269,8 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
       this.teamMapStats[0].combinedMapStats.sort((a, b) => b.rate - a.rate);
       this.teamMapStats[1].combinedMapStats.sort((a, b) => b.rate - a.rate);
     } else {
-      this.teamMapStats[0].combinedMapStats.sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
-      this.teamMapStats[1].combinedMapStats.sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
+      this.teamMapStats[0].combinedMapStats.sort((a, b) => a.name.localeCompare(b.name));
+      this.teamMapStats[1].combinedMapStats.sort((a, b) => a.name.localeCompare(b.name));
     }
   }
 
@@ -355,24 +286,16 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
     return Math.round((number + Number.EPSILON) * 100) / 100;
   }
   getPlayerNameById(playerId: string) {
-    const find = this.playerDetails.find(
-      (player) => player.overview.player_id === playerId
-    );
+    const find = this.playerDetails.find((player) => player.overview.player_id === playerId);
     return find?.overview.nickname ?? null;
   }
 
   getTeamIdByPlayerId(playerId: string) {
-    return this.matchRoomData.teams.faction1.roster.find(
-      (player) => player.player_id === playerId
-    )
-      ? 0
-      : 1;
+    return this.matchRoomData.teams.faction1.roster.find((player) => player.player_id === playerId) ? 0 : 1;
   }
 
   getTeam(teamId: number) {
-    return teamId === 0
-      ? this.matchRoomData.teams.faction1
-      : this.matchRoomData.teams.faction2;
+    return teamId === 0 ? this.matchRoomData.teams.faction1 : this.matchRoomData.teams.faction2;
   }
 
   getMaps() {
@@ -386,15 +309,15 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
         avatar: player.avatar,
         playerId: player.player_id,
         skillLevel: player.game_skill_level,
-        country: this.playerDetails.find((_p) => _p.overview.player_id === player.player_id)?.overview.country ?? 'XX'
+        country: this.playerDetails.find((_p) => _p.overview.player_id === player.player_id)?.overview.country ?? 'XX',
       })),
       this.matchRoomData.teams.faction2.roster.map((player) => ({
         nickname: player.nickname,
         avatar: player.avatar,
         playerId: player.player_id,
         skillLevel: player.game_skill_level,
-        country: this.playerDetails.find((_p) => _p.overview.player_id === player.player_id)?.overview.country ?? 'XX'
-      }))
+        country: this.playerDetails.find((_p) => _p.overview.player_id === player.player_id)?.overview.country ?? 'XX',
+      })),
     ];
     this.router.navigate(['picker', 'custom', btoa(JSON.stringify(data))]);
   }
@@ -402,13 +325,9 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   editCustomTeams() {
     const data: CustomMapPickerMatchPlayer[][] = this.customTeams.map((team) =>
       team
-        .filter((player) =>
-          this.playerDetails.find((_p) => _p.overview.nickname === player)
-        )
+        .filter((player) => this.playerDetails.find((_p) => _p.overview.nickname === player))
         .map((player) => {
-          const p = this.playerDetails.find(
-            (_p) => _p.overview.nickname === player
-          )!;
+          const p = this.playerDetails.find((_p) => _p.overview.nickname === player)!;
 
           return {
             nickname: player,
@@ -417,7 +336,7 @@ export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
             country: p.overview.country,
             skillLevel: p.overview.games['cs2'].skill_level,
           };
-        })
+        }),
     );
     this.router.navigate(['picker', 'custom', btoa(JSON.stringify(data))]);
   }

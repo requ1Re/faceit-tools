@@ -72,8 +72,7 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
     this.registerSubscription(
       this.actions$
         .pipe(ofType(loadPlayerDetailsByNicknameError))
-        .subscribe((payload) => {
-          // this.error = payload.nickname === this.username;
+        .subscribe(() => {
           this.loading = false;
 
           const data: PlayerSelectDialogData = {
@@ -106,7 +105,7 @@ export class StatsDashboardComponent extends BaseComponentWithStatsStore {
   }
 
   _navigateToStats() {
-    this.router.navigate(['player', this.username], {
+    this.router.navigate([this.username], {
       relativeTo: this.route,
     });
   }

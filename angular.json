@@ -36,6 +36,13 @@
 							"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
 							"src/styles.scss"
 						],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/css/theme",
+                "src/assets/css/theme/components",
+                "src/assets/css/theme/utils"
+              ]
+            },
 						"scripts": [],
             "customWebpackConfig": {
               "path": "./custom-webpack.config.js",
