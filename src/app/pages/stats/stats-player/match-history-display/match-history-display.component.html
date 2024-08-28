@@ -19,20 +19,23 @@
 
   <ng-container *ngFor="let match of getMatchesSubset(); index as i">
     <div class="match">
-      <div class="match-item" (click)="collapsedId == i ? collapsedId = -1 : collapsedId = i">
-        <div title="{{ (getDate(match) | amFromUnix) | amCalendar }}">{{ (getDate(match) | amFromUnix) | amTimeAgo }}</div>
+      <div class="match-item" (click)="collapsedId == i ? (collapsedId = -1) : (collapsedId = i)">
+        <div title="{{ getDate(match) | amFromUnix | amCalendar }}">{{ getDate(match) | amFromUnix | amTimeAgo }}</div>
         <div>{{ getMatchType(match) }}{{ getBestOf(match) > 1 ? ' (BO' + getBestOf(match) + ')' : '' }}</div>
         <div [innerHTML]="getWinLossFormatted(match)"></div>
         <div [innerHTML]="getFormattedScore(match)"></div>
         <div>{{ getMaps(match) }}</div>
         <div>{{ getSelectedPlayerStats(match) }}</div>
         <div>
-          <a [routerLink]="['/picker/match/', match.history.faceit_url.replace('https://www.faceit.com/{lang}/cs2/room/', '')]"
+          <a
+            [routerLink]="[
+              '/picker/match/',
+              match.history.faceit_url.replace('https://www.faceit.com/{lang}/cs2/room/', ''),
+            ]"
             class="mr-2">
             <fa-icon [icon]="faMapLocationDot"></fa-icon>
           </a>
-          <a [href]="match.history.faceit_url.replace('{lang}', 'en')"
-            target="_blank">
+          <a [href]="match.history.faceit_url.replace('{lang}', 'en')" target="_blank">
             <fa-icon [icon]="faExternalLink"></fa-icon>
           </a>
         </div>
@@ -53,7 +56,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="no-hover" [class.text-faceit]="player.player_id == selectedPlayerId" *ngFor="let player of getTeamPlayersSorted(team.players)">
+                <tr
+                  class="no-hover"
+                  [class.text-faceit]="player.player_id == selectedPlayerId"
+                  *ngFor="let player of getTeamPlayersSorted(team.players)">
                   <td>
                     <a [routerLink]="['../', player.nickname]">{{ player.nickname }}</a>
                   </td>

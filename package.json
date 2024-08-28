@@ -59,6 +59,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "moment-locales-webpack-plugin": "^1.2.0",
     "postcss": "^8.4.41",
+    "prettier": "3.3.3",
     "schematics-scss-migrate": "^2.3.17",
     "tailwindcss": "^3.4.9",
     "typescript": "~5.5.4",

@@ -4,12 +4,6 @@ import { StatsPlayerComponent } from './stats-player/stats-player.component';
 
 export const STATS_ROUTES: Routes = [
   { path: '', component: StatsDashboardComponent },
-  // Legacy
-  {
-    path: 'player/:playerName',
-    redirectTo: ':playerName',
-  },
-  // New
   {
     path: ':playerName',
     component: StatsPlayerComponent,
