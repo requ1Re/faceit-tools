@@ -5,6 +5,11 @@
 		},
 		"labels": {
 			"map": "Karte"
+		},
+		"language": {
+			"de": "Deutsch",
+			"en": "Englisch",
+			"label": "Sprache"
 		}
 	},
 	"dashboard": {

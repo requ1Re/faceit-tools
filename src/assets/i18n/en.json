@@ -5,6 +5,11 @@
 		},
 		"labels": {
 			"map": "Map"
+		},
+		"language": {
+			"de": "German",
+			"en": "English",
+			"label": "Language"
 		}
 	},
 	"dashboard": {

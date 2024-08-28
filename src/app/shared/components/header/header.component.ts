@@ -1,8 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faToolbox } from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faChevronDown, faChevronUp, faToolbox } from '@fortawesome/free-solid-svg-icons';
 import { TranslateModule } from '@ngx-translate/core';
 import { Config, ConfigUtil } from '../../utils/ConfigUtil';
 
@@ -11,12 +11,27 @@ import { Config, ConfigUtil } from '../../utils/ConfigUtil';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [RouterLink, FaIconComponent, NgFor, NgIf, RouterLinkActive, TranslateModule],
+  imports: [RouterLink, FaIconComponent, NgFor, NgIf, RouterLinkActive, TranslateModule, FontAwesomeModule],
 })
 export class HeaderComponent {
   tools: Config.Tool[] = ConfigUtil.CONFIG.tools;
 
+  languages = ConfigUtil.LANGUAGES;
+
   faToolbox = faToolbox;
+  faChevronDown = faChevronDown;
+  faChevronUp = faChevronUp;
+
+  showDropdown = false;
 
   constructor() {}
+
+  currentLanguage(){
+    return localStorage.getItem('locale') ?? 'en';
+  }
+
+  changeLocale(locale: string){
+    localStorage.setItem('locale', locale);
+    window.location.reload();
+  }
 }

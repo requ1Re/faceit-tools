@@ -1,0 +1,35 @@
+@import 'variables/colors';
+
+.dropdown-button {
+  background-color: $color-primary;
+  color: $color-text;
+}
+.dropdown-content {
+  position: absolute;
+  right: 0px;
+  z-index: 10;
+  margin-top: 8px;
+  width: 224px;
+  transform-origin: top right;
+  background-color: $color-secondary;
+  color: $color-text;
+
+  & a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    & svg {
+      height: 32px;
+      width: 32px;
+    }
+
+    &:hover {
+      color: $color-tertiary;
+    }
+
+    &.active {
+      color: $color-tertiary;
+    }
+  }
+}

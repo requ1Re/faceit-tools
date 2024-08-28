@@ -1,18 +1,65 @@
 <div class="navbar">
   <div class="title">
-    <a routerLink="/" class="flex items-center cursor-pointer">
+    <a routerLink="/">
       <fa-icon [icon]="faToolbox" class="icon mr-2"></fa-icon>
-      FACEIT Tools
     </a>
   </div>
-  <div class="nav">
+  <div class="nav w-full flex justify-between">
     <ng-template ngFor let-tool [ngForOf]="tools">
       <a [routerLink]="tool.route" routerLinkActive="active" class="nav-item" *ngIf="!tool.external">
-        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon> <span class="hidden md:block">{{ tool.i18nKey | translate }}</span>
+        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon>
+        <span class="hidden md:block">{{ tool.i18nKey | translate }}</span>
       </a>
       <a [href]="tool.route" class="nav-item" *ngIf="tool.external" target="_blank">
-        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon> <span class="hidden md:block">{{ tool.i18nKey | translate }}</span>
+        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon>
+        <span class="hidden md:block">{{ tool.i18nKey | translate }}</span>
       </a>
     </ng-template>
+    <div class="ml-auto relative inline-block text-left">
+      <div>
+        <button
+          type="button"
+          class="dropdown-button inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold shadow-sm"
+          id="menu-button"
+          aria-expanded="true"
+          aria-haspopup="true"
+          (click)="showDropdown = !showDropdown">
+          {{ 'common.language.label' | translate }}
+
+          @if (showDropdown) {
+            <fa-icon class="-mr-1 h-5 w-5 text-gray-400" [icon]="faChevronUp" />
+          } @else {
+            <fa-icon class="-mr-1 h-5 w-5 text-gray-400" [icon]="faChevronDown" />
+          }
+        </button>
+      </div>
+      @if (showDropdown) {
+        <div
+          class="dropdown-content rounded-lg shadow-lg"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="menu-button"
+          tabindex="-1">
+          @for (language of languages; track $index) {
+            <a
+              href="javascript:void(0)"
+              (click)="changeLocale(language.lang)"
+              class="block px-4 py-2 text-sm"
+              role="menuitem"
+              tabindex="-1"
+              id="menu-item-0"
+              [class.active]="currentLanguage() == language.lang">
+              <svg>
+                <use
+                  [attr.xlink:href]="
+                    'assets/img/icons/flags/' + language.flag + '.svg#flag-icons-' + language.flag
+                  "></use>
+              </svg>
+              {{ 'common.language.' + language.lang | translate }}
+            </a>
+          }
+        </div>
+      }
+    </div>
   </div>
 </div>
