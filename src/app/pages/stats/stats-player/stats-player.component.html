@@ -2,9 +2,9 @@
 
 <div class="wrapper" *ngIf="selectedPlayerDetails">
   <div class="page">
-    <div class="head" [style.backgroundImage]="'url(\'' + selectedPlayerDetails.overview.cover_image +'\')'">
+    <div class="head" [style.backgroundImage]="'url(\'' + selectedPlayerDetails.overview.cover_image + '\')'">
       <div class="content" [class.backdrop-filter]="enableBackdropFilter">
-        <img [src]="getProfilePicture(selectedPlayerDetails.overview)" class="avatar" alt="Avatar">
+        <img [src]="getProfilePicture(selectedPlayerDetails.overview)" class="avatar" alt="Avatar" />
         <div class="country" *ngIf="selectedPlayerDetails.overview.country.toLowerCase() as country">
           <svg>
             <use [attr.xlink:href]="'assets/img/icons/flags/' + country + '.svg#flag-icons-' + country"></use>
@@ -16,24 +16,29 @@
             <svg>
               <use [attr.xlink:href]="'#level' + level"></use>
             </svg>
-            <span class="md:ml-2"
+            <span
+              class="md:ml-2"
               [innerHTML]="getFormattedEloLong(level, selectedPlayerDetails.overview.games['cs2'].faceit_elo)"></span>
           </div>
         </div>
         <div class="socials" style="margin-left: auto">
-          <a class="btn social-btn"
+          <a
+            class="btn social-btn"
             [href]="'https://steamcommunity.com/profiles/' + selectedPlayerDetails.overview.steam_id_64"
             target="_blank">
             <fa-icon class="icon" [icon]="faSteam"></fa-icon>
             <span class="text">Steam</span>
           </a>
-          <a class="btn social-btn leetify-btn"
+          <a
+            class="btn social-btn leetify-btn"
             [href]="'https://leetify.com/public/profile/' + selectedPlayerDetails.overview.steam_id_64"
             target="_blank">
-            <img src="assets/img/icons/leetify.png" alt="Leetify icon" class="icon">
+            <img src="assets/img/icons/leetify.png" alt="Leetify icon" class="icon" />
             <span class="text">Leetify</span>
           </a>
-          <a class="btn social-btn faceit-btn" [href]="selectedPlayerDetails.overview.faceit_url.replace('{lang}', 'en')"
+          <a
+            class="btn social-btn faceit-btn"
+            [href]="selectedPlayerDetails.overview.faceit_url.replace('{lang}', 'en')"
             target="_blank">
             <svg class="icon">
               <use xlink:href="assets/img/icons/faceit.svg#Layer_1"></use>
@@ -47,17 +52,17 @@
     </app-elo-display>
 
     <div class="stats">
-      <app-stat-display name="LEVEL" [value]="selectedPlayerDetails.overview.games['cs2'].skill_level + ' (' + selectedPlayerDetails.overview.games['cs2'].faceit_elo + ')'" />
+      <app-stat-display name="RECENT RESULTS" [valueHTML]="getRecentResults(selectedPlayerDetails.stats)" />
       <app-stat-display name="MATCHES" [value]="selectedPlayerDetails.stats.lifetime.Matches" />
       <app-stat-display name="WIN RATE" [value]="selectedPlayerDetails.stats.lifetime['Win Rate %'] + '%'" />
+      <app-stat-display
+        name="LONGEST STREAK"
+        [value]="selectedPlayerDetails.stats.lifetime['Longest Win Streak'] + ' wins'" />
       <app-stat-display name="AVG. K/D" [value]="selectedPlayerDetails.stats.lifetime['Average K/D Ratio']" />
-      <app-stat-display name="RECENT RESULTS" [valueHTML]="getRecentResults(selectedPlayerDetails.stats)" />
-      <app-stat-display name="CURRENT WIN STREAK" [value]="selectedPlayerDetails.stats.lifetime['Current Win Streak']" />
-      <app-stat-display name="LONGEST WIN STREAK" [value]="selectedPlayerDetails.stats.lifetime['Longest Win Streak']" />
-      <app-stat-display name="AVG. HEADSHOT" [value]="selectedPlayerDetails.stats.lifetime['Average Headshots %'] + '%'" />
+      <app-stat-display name="AVG. HS%" [value]="selectedPlayerDetails.stats.lifetime['Average Headshots %'] + '%'" />
     </div>
     <app-loading-spinner class="history" *ngIf="!(matchHistory$ | async)" />
-    <div class="history" *ngIf="(matchHistory$ | async) as matches">
+    <div class="history" *ngIf="matchHistory$ | async as matches">
       <app-match-history-display [matches]="matches" [selectedPlayerId]="selectedPlayerDetails.overview.player_id" />
     </div>
   </div>

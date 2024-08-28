@@ -1,12 +1,20 @@
 @import 'variables/colors';
 
 .wrapper {
-  @apply p-2 flex flex-col justify-center text-white;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
 }
+
 .wrapper .name {
   color: $color-tertiary;
-  @apply text-xl ;
+  font-size: 18px;
+  line-height: 26px;
 }
+
 .wrapper h1 {
-  @apply text-xl;
+  font-size: 18px;
+  line-height: 26px;
 }
