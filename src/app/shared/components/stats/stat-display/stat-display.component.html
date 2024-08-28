@@ -1,7 +1,11 @@
 <app-card [noPadding]="true">
   <div class="wrapper">
     <div class="name">{{ name | uppercase }}</div>
-    <h1 *ngIf="value">{{ value }}</h1>
-    <h1 *ngIf="valueHTML" [innerHTML]="valueHTML"></h1>
+    @if (value) {
+      <h1>{{ value }}</h1>
+    }
+    @if (valueHTML) {
+      <h1 [innerHTML]="valueHTML"></h1>
+    }
   </div>
 </app-card>

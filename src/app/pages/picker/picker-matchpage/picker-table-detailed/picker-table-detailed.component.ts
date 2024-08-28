@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Actions } from '@ngrx/effects';
@@ -18,7 +18,7 @@ import { CardComponent } from '../../../../shared/components/card/card.component
     templateUrl: './picker-table-detailed.component.html',
     styleUrls: ['./picker-table-detailed.component.scss'],
     standalone: true,
-    imports: [CardComponent, NgFor, NgIf, RouterLink, TranslateModule]
+    imports: [CardComponent, RouterLink, TranslateModule]
 })
 export class PickerTableDetailedComponent extends BaseComponentWithStatsStore {
   enableBackdropFilter = false;

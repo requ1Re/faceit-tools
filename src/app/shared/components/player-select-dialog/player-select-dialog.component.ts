@@ -6,7 +6,7 @@ import { ApiService } from '../../services/api.service';
 import { BaseComponent } from '../base/base';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { NgIf, NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'app-player-select-dialog',
@@ -14,11 +14,9 @@ import { NgIf, NgFor } from '@angular/common';
     styleUrls: ['./player-select-dialog.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
-        FaIconComponent,
-        LoadingSpinnerComponent,
-        NgFor,
-    ],
+    FaIconComponent,
+    LoadingSpinnerComponent
+],
 })
 export class PlayerSelectDialogComponent
   extends BaseComponent

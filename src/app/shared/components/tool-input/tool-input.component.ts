@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faChevronRight, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
-import { NgIf } from '@angular/common';
+
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -9,7 +9,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
     templateUrl: './tool-input.component.html',
     styleUrls: ['./tool-input.component.scss'],
     standalone: true,
-    imports: [FaIconComponent, NgIf, LoadingSpinnerComponent]
+    imports: [FaIconComponent, LoadingSpinnerComponent]
 })
 export class ToolInputComponent implements OnInit {
   @Input()

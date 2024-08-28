@@ -1,4 +1,4 @@
-import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -14,7 +14,7 @@ import { StringUtil } from 'src/app/shared/utils/StringUtil';
   templateUrl: './match-history-display.component.html',
   styleUrls: ['./match-history-display.component.scss'],
   standalone: true,
-  imports: [NgFor, RouterLink, FaIconComponent, NgIf, MomentModule, TranslateModule, UpperCasePipe],
+  imports: [RouterLink, FaIconComponent, MomentModule, TranslateModule, UpperCasePipe],
 })
 export class MatchHistoryDisplayComponent {
   faExternalLink = faExternalLink;

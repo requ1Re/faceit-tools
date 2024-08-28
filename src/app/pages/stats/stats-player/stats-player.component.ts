@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -28,7 +28,6 @@ import { MatchHistoryDisplayComponent } from './match-history-display/match-hist
   styleUrls: ['./stats-player.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     LoadingSpinnerComponent,
     FaIconComponent,
     EloDisplayComponent,
@@ -36,7 +35,7 @@ import { MatchHistoryDisplayComponent } from './match-history-display/match-hist
     MatchHistoryDisplayComponent,
     AsyncPipe,
     TranslateModule
-  ],
+],
 })
 export class StatsPlayerComponent extends BaseComponentWithStatsStore {
   enableBackdropFilter = false;

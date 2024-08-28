@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -29,15 +29,13 @@ import { PickerTableComponent } from './picker-table/picker-table.component';
   styleUrls: ['./picker-matchpage.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     LoadingSpinnerComponent,
     FaIconComponent,
     PickerTableComponent,
     PickerMaplistComponent,
     PickerTableDetailedComponent,
-    TranslateModule,
-
-  ],
+    TranslateModule
+],
 })
 export class PickerMatchpageComponent extends BaseComponentWithStatsStore {
   pageName = 'PickerMatchpage';

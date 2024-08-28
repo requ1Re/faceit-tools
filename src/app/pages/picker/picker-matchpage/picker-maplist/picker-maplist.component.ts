@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActiveDutyMap } from 'src/app/shared/models/MapPool';
 import { BrowserService } from 'src/app/shared/services/browser.service';
-import { NgFor } from '@angular/common';
+
 import { CardComponent } from '../../../../shared/components/card/card.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { CardComponent } from '../../../../shared/components/card/card.component
     templateUrl: './picker-maplist.component.html',
     styleUrls: ['./picker-maplist.component.scss'],
     standalone: true,
-    imports: [CardComponent, NgFor]
+    imports: [CardComponent]
 })
 export class PickerMaplistComponent implements OnInit {
 

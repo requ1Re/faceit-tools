@@ -2,11 +2,13 @@
   <fa-icon [icon]="faToolbox" size="10x" class="icon col-span-4"></fa-icon>
   <h1 class="col-span-4">FACEIT Tools</h1>
   <div class="tools">
-    <ng-container *ngFor="let tool of tools">
-      <div class="btn" (click)="gotoTool(tool.id)" *ngIf="!tool.external">
-        {{ tool.i18nKey | translate }}
-      </div>
-    </ng-container>
+    @for (tool of tools; track tool) {
+      @if (!tool.external) {
+        <div class="btn" (click)="gotoTool(tool.id)">
+          {{ tool.i18nKey | translate }}
+        </div>
+      }
+    }
   </div>
   <div class="footer-wrapper">
     <app-footer></app-footer>

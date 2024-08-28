@@ -1,5 +1,5 @@
 <div class="team">
-  <img [src]="teamAvatar" class="ml-auto mr-auto rounded-full h-12 w-12">
+  <img [src]="teamAvatar" class="ml-auto mr-auto rounded-full h-12 w-12" />
   <h1>{{ teamName }}</h1>
   <app-card [noPadding]="true">
     <div class="team-card">
@@ -7,28 +7,39 @@
         <thead>
           <tr>
             <th>{{ 'common.labels.map' | translate }}</th>
-            <th *ngFor="let player of teamMapStats.playerMapStats">
-              <div *ngIf="getPlayerDetailsByName(player.name) as details" class="details">
-                <svg>
-                  <use [attr.xlink:href]="'#level' + details.overview.games['cs2'].skill_level"></use>
-                </svg>
-                <a [routerLink]="['/stats/', player.name]">{{ player.name }}</a>
-              </div>
-            </th>
+            @for (player of teamMapStats.playerMapStats; track $index) {
+              <th>
+                @if (getPlayerDetailsByName(player.name); as details) {
+                  <div class="details">
+                    <svg>
+                      <use [attr.xlink:href]="'#level' + details.overview.games['cs2'].skill_level"></use>
+                    </svg>
+                    <a [routerLink]="['/stats/', player.name]">{{ player.name }}</a>
+                  </div>
+                }
+              </th>
+            }
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let map of getMaps()">
-            <td [style.backgroundImage]="getMapPreviewStyle(map)" class="map"><span class="map-text"
-                [class.backdrop-filter-sm]="enableBackdropFilter">{{ map }}</span></td>
-            <td *ngFor="let playerStats of teamMapStats.playerMapStats">
-              <span class="text-xl" [style.color]="getBackgroundColor(getPlayerWinrateForMap(playerStats, map))">{{
-                getPlayerWinrateForMap(playerStats, map) }}%</span><br>(<span class="text-green-500">{{
-                getPlayerWinsForMap(playerStats, map) }}</span> / <span class="text-red-500">{{
-                getPlayerLossesForMap(playerStats, map) }}</span> / {{ getPlayerMatchesForMap(playerStats, map)
-              }})
-            </td>
-          </tr>
+          @for (map of getMaps(); track $index) {
+            <tr>
+              <td [style.backgroundImage]="getMapPreviewStyle(map)" class="map">
+                <span class="map-text" [class.backdrop-filter-sm]="enableBackdropFilter">{{ map }}</span>
+              </td>
+              @for (playerStats of teamMapStats.playerMapStats; track $index) {
+                <td>
+                  <span class="text-xl" [style.color]="getBackgroundColor(getPlayerWinrateForMap(playerStats, map))">
+                    {{ getPlayerWinrateForMap(playerStats, map) }}%
+                  </span>
+                  <br />
+                  (<span class="text-green-500">{{ getPlayerWinsForMap(playerStats, map) }}</span> /
+                  <span class="text-red-500">{{ getPlayerLossesForMap(playerStats, map) }}</span> /
+                  {{ getPlayerMatchesForMap(playerStats, map) }})
+                </td>
+              }
+            </tr>
+          }
         </tbody>
       </table>
     </div>

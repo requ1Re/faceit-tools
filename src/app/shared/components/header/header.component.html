@@ -5,16 +5,20 @@
     </a>
   </div>
   <div class="nav w-full flex justify-between">
-    <ng-template ngFor let-tool [ngForOf]="tools">
-      <a [routerLink]="tool.route" routerLinkActive="active" class="nav-item" *ngIf="!tool.external">
-        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon>
-        <span class="hidden md:block">{{ tool.i18nKey | translate }}</span>
-      </a>
-      <a [href]="tool.route" class="nav-item" *ngIf="tool.external" target="_blank">
-        <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon>
-        <span class="hidden md:block">{{ tool.i18nKey | translate }}</span>
-      </a>
-    </ng-template>
+    @for (tool of tools; track $index) {
+      @if (!tool.external) {
+        <a [routerLink]="tool.route" routerLinkActive="active" class="nav-item">
+          <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon>
+          <span class="hidden md:block">{{ tool.i18nKey | translate }}</span>
+        </a>
+      }
+      @if (tool.external) {
+        <a [href]="tool.route" class="nav-item" target="_blank">
+          <fa-icon [icon]="tool.icon" class="md:mr-2"></fa-icon>
+          <span class="hidden md:block">{{ tool.i18nKey | translate }}</span>
+        </a>
+      }
+    }
     <div class="ml-auto relative inline-block text-left">
       <div>
         <button

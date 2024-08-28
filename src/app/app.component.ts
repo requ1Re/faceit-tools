@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -16,13 +16,12 @@ import { SpriteWrapperComponent } from './sprite-wrapper/sprite-wrapper.componen
     styleUrls: ['./app.component.scss'],
     standalone: true,
     imports: [
-        SpriteWrapperComponent,
-        HeaderComponent,
-        NgIf,
-        FaIconComponent,
-        RouterOutlet,
-        TranslateModule
-    ],
+    SpriteWrapperComponent,
+    HeaderComponent,
+    FaIconComponent,
+    RouterOutlet,
+    TranslateModule
+],
     providers: [
       BrowserService
     ]

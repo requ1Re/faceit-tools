@@ -1,4 +1,4 @@
-<app-card style="align-self: flex-end;" [noPadding]="true">
+<app-card style="align-self: flex-end" [noPadding]="true">
   <div class="maps">
     <table>
       <thead>
@@ -7,9 +7,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let map of getMaps()" style="width: 100%" [style.backgroundImage]="getMapPreviewStyle(map)" class="map">
-          <td class="map-text" [class.backdrop-filter-sm]="enableBackdropFilter">{{ map }}</td>
-        </tr>
+        @for (map of getMaps(); track $index) {
+          <tr style="width: 100%" [style.backgroundImage]="getMapPreviewStyle(map)" class="map">
+            <td class="map-text" [class.backdrop-filter-sm]="enableBackdropFilter">{{ map }}</td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>

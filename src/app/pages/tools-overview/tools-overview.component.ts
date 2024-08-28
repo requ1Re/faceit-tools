@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -12,7 +12,7 @@ import { FooterComponent } from '../../shared/components/footer/footer.component
   templateUrl: './tools-overview.component.html',
   styleUrls: ['./tools-overview.component.scss'],
   standalone: true,
-  imports: [FaIconComponent, NgFor, NgIf, FooterComponent, TranslateModule],
+  imports: [FaIconComponent, FooterComponent, TranslateModule],
 })
 export class ToolsOverviewComponent implements OnInit {
   tools: Config.Tool[] = ConfigUtil.CONFIG.tools;

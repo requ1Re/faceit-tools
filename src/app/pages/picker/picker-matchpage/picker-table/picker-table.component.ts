@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { TeamMapStats } from 'src/app/shared/models/MapStats';
@@ -9,7 +9,7 @@ import { CardComponent } from '../../../../shared/components/card/card.component
   templateUrl: './picker-table.component.html',
   styleUrls: ['./picker-table.component.scss'],
   standalone: true,
-  imports: [CardComponent, NgIf, NgFor, TranslateModule],
+  imports: [CardComponent, TranslateModule],
 })
 export class PickerTableComponent implements OnInit {
   @Input()

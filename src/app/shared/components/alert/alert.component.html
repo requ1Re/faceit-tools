@@ -1,4 +1,6 @@
-<div class="disclaimer" *ngIf="showDisclaimer">
-  <div><fa-icon [icon]="icon" class="icon"></fa-icon> <ng-content></ng-content></div>
-  <div class="close" (click)="showDisclaimer = false"><fa-icon [icon]="faTimes"></fa-icon></div>
-</div>
+@if (showDisclaimer) {
+  <div class="disclaimer">
+    <div><fa-icon [icon]="icon" class="icon"></fa-icon> <ng-content></ng-content></div>
+    <div class="close" (click)="showDisclaimer = false"><fa-icon [icon]="faTimes"></fa-icon></div>
+  </div>
+}

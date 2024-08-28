@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +18,7 @@ import { StatsState } from 'src/app/shared/store/stats/stats.reducer';
     templateUrl: './picker-custom.component.html',
     styleUrls: ['./picker-custom.component.scss'],
     standalone: true,
-    imports: [NgFor, NgIf, TranslateModule],
+    imports: [TranslateModule],
 })
 export class PickerCustomComponent
   extends BaseComponentWithStatsStore

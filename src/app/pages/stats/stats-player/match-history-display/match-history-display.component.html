@@ -3,8 +3,8 @@
     <h1>{{ 'tools.stats.profile_page.match_history.title' | translate | uppercase }}</h1>
     <h3>
       ({{
-        'tools.stats.profile_page.match_history.title_sub'
-          | translate: { num1: showMore ? matches.length : matchCountDefault, num2: matches.length }
+      'tools.stats.profile_page.match_history.title_sub'
+      | translate: { num1: showMore ? matches.length : matchCountDefault, num2: matches.length }
       }})
     </h3>
   </div>
@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <ng-container *ngFor="let match of getMatchesSubset(); index as i">
+  @for (match of getMatchesSubset(); track match; let i = $index) {
     <div class="match">
       <div class="match-item" (click)="collapsedId == i ? (collapsedId = -1) : (collapsedId = i)">
         <div title="{{ getDate(match) | amFromUnix | amCalendar }}">{{ getDate(match) | amFromUnix | amTimeAgo }}</div>
@@ -46,42 +46,52 @@
           </a>
         </div>
       </div>
-      <div class="match-collapsible" *ngIf="collapsedId == i">
-        <div class="collapsible-round" *ngFor="let round of match.stats.rounds; index as roundIndex">
-          <div class="w-full collapsible-map-name">{{ formatMapName(round.round_stats.Map) }}</div>
-          <div class="collapsible-table-holder">
-            <table *ngFor="let team of round.teams">
-              <thead>
-                <tr class="no-hover">
-                  @let i18nPrefix = 'tools.stats.profile_page.match_history.table.details';
-                  <th>{{ i18nPrefix + '.name' | translate }}</th>
-                  <th>{{ i18nPrefix + '.kills' | translate }}</th>
-                  <th>{{ i18nPrefix + '.assists' | translate }}</th>
-                  <th>{{ i18nPrefix + '.deaths' | translate }}</th>
-                  <th>{{ i18nPrefix + '.hs' | translate }}</th>
-                  <th>{{ i18nPrefix + '.mvp' | translate }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  class="no-hover"
-                  [class.text-faceit]="player.player_id == selectedPlayerId"
-                  *ngFor="let player of getTeamPlayersSorted(team.players)">
-                  <td>
-                    <a [routerLink]="['../', player.nickname]">{{ player.nickname }}</a>
-                  </td>
-                  <td>{{ player.player_stats.Kills }}</td>
-                  <td>{{ player.player_stats.Assists }}</td>
-                  <td>{{ player.player_stats.Deaths }}</td>
-                  <td>{{ player.player_stats['Headshots %'] }}%</td>
-                  <td>{{ player.player_stats.MVPs }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      @if (collapsedId == i) {
+        <div class="match-collapsible">
+          @for (round of match.stats.rounds; track round; let roundIndex = $index) {
+            <div class="collapsible-round">
+              <div class="w-full collapsible-map-name">{{ formatMapName(round.round_stats.Map) }}</div>
+              <div class="collapsible-table-holder">
+                @for (team of round.teams; track team) {
+                  <table>
+                    <thead>
+                      <tr class="no-hover">
+                        @let i18nPrefix = 'tools.stats.profile_page.match_history.table.details';
+                        <th>{{ i18nPrefix + '.name' | translate }}</th>
+                        <th>{{ i18nPrefix + '.kills' | translate }}</th>
+                        <th>{{ i18nPrefix + '.assists' | translate }}</th>
+                        <th>{{ i18nPrefix + '.deaths' | translate }}</th>
+                        <th>{{ i18nPrefix + '.hs' | translate }}</th>
+                        <th>{{ i18nPrefix + '.mvp' | translate }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (player of getTeamPlayersSorted(team.players); track player) {
+                        <tr
+                          class="no-hover"
+                          [class.text-faceit]="player.player_id == selectedPlayerId"
+                          >
+                          <td>
+                            <a [routerLink]="['../', player.nickname]">{{ player.nickname }}</a>
+                          </td>
+                          <td>{{ player.player_stats.Kills }}</td>
+                          <td>{{ player.player_stats.Assists }}</td>
+                          <td>{{ player.player_stats.Deaths }}</td>
+                          <td>{{ player.player_stats['Headshots %'] }}%</td>
+                          <td>{{ player.player_stats.MVPs }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                }
+              </div>
+            </div>
+          }
         </div>
-      </div>
+      }
     </div>
-  </ng-container>
-  <a class="more" *ngIf="!showMore" (click)="showMore = true">{{ 'tools.stats.profile_page.match_history.footer' | translate:{num: matches.length - matchCountDefault} }}</a>
+  }
+  @if (!showMore) {
+    <a class="more" (click)="showMore = true">{{ 'tools.stats.profile_page.match_history.footer' | translate:{num: matches.length - matchCountDefault} }}</a>
+  }
 </div>

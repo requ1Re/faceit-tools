@@ -1,30 +1,40 @@
 <h1 class="text-3xl text-white text-center mt-5">{{ 'tools.map_picker.name' | translate }} - {{ 'tools.map_picker.custom_teams.title' | translate }}</h1>
 <div class="teams">
-  <div class="team" *ngFor="let team of teams; index as teamIndex">
-    <h1>Team {{ teamIndex+1 }}</h1>
-    <ng-container *ngFor="let playerIndex of [0,1,2,3,4]">
-      <div class="player not-selected" *ngIf="teams[teamIndex][playerIndex] === undefined" (click)="selectPlayer(teamIndex, playerIndex)">
-        <img src="/assets/img/steam_default.png" alt="Default Avatar" class="profile-img">
-        <span>{{ 'tools.map_picker.custom_teams.no_player_selected' | translate }}</span>
-      </div>
-      <div class="player selected" *ngIf="teams[teamIndex][playerIndex] as player" (click)="selectPlayer(teamIndex, playerIndex)">
-        <img [src]="player.avatar == '' ? '/assets/img/steam_default.png' : player.avatar" alt="Avatar" class="profile-img">
-        <span>{{ player.nickname }}</span>
-        <div class="icons">
-          <svg>
-            <use
-              [attr.xlink:href]="'assets/img/icons/flags/' + player.country.toLowerCase() + '.svg#flag-icons-' + player.country.toLowerCase()">
-            </use>
-          </svg>
-          <svg>
-            <use [attr.xlink:href]="'#level' + player.skillLevel"></use>
-          </svg>
-        </div>
-      </div>
-    </ng-container>
-  </div>
+  @for (team of teams; track team; let teamIndex = $index) {
+    <div class="team">
+      <h1>Team {{ teamIndex+1 }}</h1>
+      @for (playerIndex of [0,1,2,3,4]; track playerIndex) {
+        @if (teams[teamIndex][playerIndex] === undefined) {
+          <div class="player not-selected" (click)="selectPlayer(teamIndex, playerIndex)">
+            <img src="/assets/img/steam_default.png" alt="Default Avatar" class="profile-img">
+            <span>{{ 'tools.map_picker.custom_teams.no_player_selected' | translate }}</span>
+          </div>
+        }
+        @if (teams[teamIndex][playerIndex]; as player) {
+          <div class="player selected" (click)="selectPlayer(teamIndex, playerIndex)">
+            <img [src]="player.avatar == '' ? '/assets/img/steam_default.png' : player.avatar" alt="Avatar" class="profile-img">
+            <span>{{ player.nickname }}</span>
+            <div class="icons">
+              <svg>
+                <use
+                  [attr.xlink:href]="'assets/img/icons/flags/' + player.country.toLowerCase() + '.svg#flag-icons-' + player.country.toLowerCase()">
+                </use>
+              </svg>
+              <svg>
+                <use [attr.xlink:href]="'#level' + player.skillLevel"></use>
+              </svg>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  }
 </div>
 <div class="w-full text-center mt-5">
-  <h3 *ngIf="!canContinue()" class="text-white">{{ 'tools.map_picker.custom_teams.add_player_to_continue' | translate }}</h3>
-  <button (click)="continue()" *ngIf="canContinue()">{{ 'common.buttons.continue' | translate }}</button>
+  @if (!canContinue()) {
+    <h3 class="text-white">{{ 'tools.map_picker.custom_teams.add_player_to_continue' | translate }}</h3>
+  }
+  @if (canContinue()) {
+    <button (click)="continue()">{{ 'common.buttons.continue' | translate }}</button>
+  }
 </div>

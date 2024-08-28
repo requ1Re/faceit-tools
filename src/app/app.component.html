@@ -2,9 +2,11 @@
 <div class="wrapper">
   <div class="header-wrapper">
     <app-header></app-header>
-    <div class="error" *ngIf="error">
-      <fa-icon [icon]="faExclamationTriangle" class="mr-2"></fa-icon> <span [innerHTML]="errorText"></span>
-    </div>
+    @if (error) {
+      <div class="error">
+        <fa-icon [icon]="faExclamationTriangle" class="mr-2"></fa-icon> <span [innerHTML]="errorText"></span>
+      </div>
+    }
   </div>
   <div class="page-wrapper">
     <router-outlet></router-outlet>

@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -11,7 +11,7 @@ import { Config, ConfigUtil } from '../../utils/ConfigUtil';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [RouterLink, FaIconComponent, NgFor, NgIf, RouterLinkActive, TranslateModule, FontAwesomeModule],
+  imports: [RouterLink, FaIconComponent, RouterLinkActive, TranslateModule, FontAwesomeModule],
 })
 export class HeaderComponent {
   tools: Config.Tool[] = ConfigUtil.CONFIG.tools;
