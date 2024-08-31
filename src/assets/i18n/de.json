@@ -103,7 +103,7 @@
 					"title_sub": "{{ num1 }} von {{ num2 }}"
 				},
 				"matches": "Spiele",
-				"recent_results": "Letzte Ergebnisse",
+				"recent_results": "Verlauf",
 				"win_rate": "Gewinnrate"
 			}
 		}

@@ -1,3 +1,6 @@
 {
     "files.eol": "\r\n",
+    "i18n-ally.localesPaths": [
+        "src/assets/i18n"
+    ],
 }
